@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.0",
-    "signature": "51594616db5a50c2a5bfc22e085c6e9e53bac082"
+    "signature": "a4c3768663dfa221f14593efdd96359bbf7489fc"
   },
   "compilationOptions": {
     "defines": [
@@ -27,6 +27,7 @@
           "Microsoft.AspNetCore.All": "2.0.8",
           "Microsoft.EntityFrameworkCore.SqlServer": "2.0.3",
           "Microsoft.NETCore.App": "2.0.0",
+          "RiotApi.NET": "1.4.4",
           "Swashbuckle.AspNetCore.Swagger": "2.4.0",
           "Swashbuckle.AspNetCore.SwaggerGen": "2.4.0",
           "Swashbuckle.AspNetCore.SwaggerUI": "2.4.0"
@@ -2430,6 +2431,14 @@
         },
         "compile": {
           "lib/netstandard1.0/Remotion.Linq.dll": {}
+        }
+      },
+      "RiotApi.NET/1.4.4": {
+        "runtime": {
+          "lib/net452/RiotApi.Net.RestClient.dll": {}
+        },
+        "compile": {
+          "lib/net452/RiotApi.Net.RestClient.dll": {}
         }
       },
       "runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {
@@ -5236,6 +5245,13 @@
       "sha512": "sha512-IJn0BqkvwEDpP+2qjvci7n4/a9f7DhKESLWb2/uG4xQh3rTkGTBUz69bI4IivCoKkTFAqjXxYDZw2K/npohjsw==",
       "path": "remotion.linq/2.1.1",
       "hashPath": "remotion.linq.2.1.1.nupkg.sha512"
+    },
+    "RiotApi.NET/1.4.4": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-7jjtzUz8Mba/6A+VgKHVffFsV/qQvtSqKhuNxC2/SjeK+T+fQq9SPckLhzHXNyFc6SuU1ThnMusgfUnqM5St6A==",
+      "path": "riotapi.net/1.4.4",
+      "hashPath": "riotapi.net.1.4.4.nupkg.sha512"
     },
     "runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {
       "type": "package",

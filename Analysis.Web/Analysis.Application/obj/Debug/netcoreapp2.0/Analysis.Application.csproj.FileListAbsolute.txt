@@ -4,3 +4,6 @@ C:\Users\Ingas\Desktop\My project\LoL_team_analysis\Analysis.Web\Analysis.Applic
 C:\Users\Ingas\Desktop\My project\LoL_team_analysis\Analysis.Web\Analysis.Application\obj\Debug\netcoreapp2.0\Analysis.Application.AssemblyInfoInputs.cache
 C:\Users\Ingas\Desktop\My project\LoL_team_analysis\Analysis.Web\Analysis.Application\obj\Debug\netcoreapp2.0\Analysis.Application.AssemblyInfo.cs
 C:\Users\Ingas\Desktop\My project\LoL_team_analysis\Analysis.Web\Analysis.Application\obj\Debug\netcoreapp2.0\Analysis.Application.csprojResolveAssemblyReference.cache
+C:\Users\Ingas\Desktop\My project\LoL_team_analysis\Analysis.Web\Analysis.Application\bin\Debug\netcoreapp2.0\Analysis.Application.pdb
+C:\Users\Ingas\Desktop\My project\LoL_team_analysis\Analysis.Web\Analysis.Application\obj\Debug\netcoreapp2.0\Analysis.Application.dll
+C:\Users\Ingas\Desktop\My project\LoL_team_analysis\Analysis.Web\Analysis.Application\obj\Debug\netcoreapp2.0\Analysis.Application.pdb

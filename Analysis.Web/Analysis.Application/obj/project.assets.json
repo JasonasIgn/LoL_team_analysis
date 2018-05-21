@@ -843,15 +843,6 @@
           "lib/netstandard1.0/Remotion.Linq.dll": {}
         }
       },
-      "RiotApi.NET/1.4.4": {
-        "type": "package",
-        "compile": {
-          "lib/net452/RiotApi.Net.RestClient.dll": {}
-        },
-        "runtime": {
-          "lib/net452/RiotApi.Net.RestClient.dll": {}
-        }
-      },
       "runtime.native.System/4.0.0": {
         "type": "package",
         "dependencies": {
@@ -3148,17 +3139,6 @@
         "lib/portable-net45+win+wpa81+wp80/Remotion.Linq.xml",
         "remotion.linq.2.1.1.nupkg.sha512",
         "remotion.linq.nuspec"
-      ]
-    },
-    "RiotApi.NET/1.4.4": {
-      "sha512": "7jjtzUz8Mba/6A+VgKHVffFsV/qQvtSqKhuNxC2/SjeK+T+fQq9SPckLhzHXNyFc6SuU1ThnMusgfUnqM5St6A==",
-      "type": "package",
-      "path": "riotapi.net/1.4.4",
-      "files": [
-        "lib/net452/RiotApi.Net.RestClient.dll",
-        "lib/net452/RiotApi.Net.RestClient.xml",
-        "riotapi.net.1.4.4.nupkg.sha512",
-        "riotapi.net.nuspec"
       ]
     },
     "runtime.native.System/4.0.0": {
@@ -6770,7 +6750,6 @@
       "AutoMapper.Extensions.Microsoft.DependencyInjection >= 3.2.0",
       "Microsoft.EntityFrameworkCore.SqlServer >= 2.0.3",
       "Microsoft.NETCore.App >= 2.0.0",
-      "RiotApi.NET >= 1.4.4",
       "Swashbuckle.AspNetCore.Swagger >= 2.4.0"
     ]
   },
@@ -6829,10 +6808,6 @@
             "version": "[2.0.0, )",
             "autoReferenced": true
           },
-          "RiotApi.NET": {
-            "target": "Package",
-            "version": "[1.4.4, )"
-          },
           "Swashbuckle.AspNetCore.Swagger": {
             "target": "Package",
             "version": "[2.4.0, )"
@@ -6845,17 +6820,5 @@
         "warn": true
       }
     }
-  },
-  "logs": [
-    {
-      "code": "NU1701",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Package 'RiotApi.NET 1.4.4' was restored using '.NETFramework,Version=v4.6.1' instead of the project target framework '.NETCoreApp,Version=v2.0'. This package may not be fully compatible with your project.",
-      "libraryId": "RiotApi.NET",
-      "targetGraphs": [
-        ".NETCoreApp,Version=v2.0"
-      ]
-    }
-  ]
+  }
 }
