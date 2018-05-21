@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.0",
-    "signature": "b93c48e66bca0ea049d1fdb829eb898676778464"
+    "signature": "2cf217002a523be264e6f2b4b7f2f9f3f613246d"
   },
   "compilationOptions": {},
   "targets": {
@@ -10,7 +10,6 @@
         "dependencies": {
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "3.2.0",
           "Microsoft.EntityFrameworkCore.SqlServer": "2.0.3",
-          "RiotApi.NET": "1.4.4",
           "Swashbuckle.AspNetCore.Swagger": "2.4.0"
         },
         "runtime": {
@@ -488,11 +487,6 @@
         },
         "runtime": {
           "lib/netstandard1.0/Remotion.Linq.dll": {}
-        }
-      },
-      "RiotApi.NET/1.4.4": {
-        "runtime": {
-          "lib/net452/RiotApi.Net.RestClient.dll": {}
         }
       },
       "runtime.native.System/4.0.0": {
@@ -1552,13 +1546,6 @@
       "sha512": "sha512-IJn0BqkvwEDpP+2qjvci7n4/a9f7DhKESLWb2/uG4xQh3rTkGTBUz69bI4IivCoKkTFAqjXxYDZw2K/npohjsw==",
       "path": "remotion.linq/2.1.1",
       "hashPath": "remotion.linq.2.1.1.nupkg.sha512"
-    },
-    "RiotApi.NET/1.4.4": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-7jjtzUz8Mba/6A+VgKHVffFsV/qQvtSqKhuNxC2/SjeK+T+fQq9SPckLhzHXNyFc6SuU1ThnMusgfUnqM5St6A==",
-      "path": "riotapi.net/1.4.4",
-      "hashPath": "riotapi.net.1.4.4.nupkg.sha512"
     },
     "runtime.native.System/4.0.0": {
       "type": "package",

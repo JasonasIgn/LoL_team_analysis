@@ -9,3 +9,8 @@ C:\Users\Ingas\Desktop\My project\LoL_team_analysis\Analysis.Web\Analysis.Web\ob
 C:\Users\Ingas\Desktop\My project\LoL_team_analysis\Analysis.Web\Analysis.Web\obj\Debug\netcoreapp2.0\Analysis.Web.AssemblyInfo.cs
 C:\Users\Ingas\Desktop\My project\LoL_team_analysis\Analysis.Web\Analysis.Web\obj\Debug\netcoreapp2.0\Analysis.Web.dll
 C:\Users\Ingas\Desktop\My project\LoL_team_analysis\Analysis.Web\Analysis.Web\obj\Debug\netcoreapp2.0\Analysis.Web.pdb
+C:\Users\Ingas\Desktop\My project\LoL_team_analysis\Analysis.Web\Analysis.Web\bin\Debug\netcoreapp2.0\Analysis.EF.dll
+C:\Users\Ingas\Desktop\My project\LoL_team_analysis\Analysis.Web\Analysis.Web\bin\Debug\netcoreapp2.0\Analysis.Application.dll
+C:\Users\Ingas\Desktop\My project\LoL_team_analysis\Analysis.Web\Analysis.Web\bin\Debug\netcoreapp2.0\Analysis.Application.pdb
+C:\Users\Ingas\Desktop\My project\LoL_team_analysis\Analysis.Web\Analysis.Web\bin\Debug\netcoreapp2.0\Analysis.EF.pdb
+C:\Users\Ingas\Desktop\My project\LoL_team_analysis\Analysis.Web\Analysis.Web\obj\Debug\netcoreapp2.0\Analysis.Web.csproj.CopyComplete
