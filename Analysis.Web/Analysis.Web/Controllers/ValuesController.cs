@@ -6,8 +6,6 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using RiotApi.Net.RestClient;
-using RiotApi.Net.RestClient.Configuration;
 
 namespace Analysis.Web.Controllers
 {
