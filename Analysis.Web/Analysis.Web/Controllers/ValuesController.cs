@@ -16,27 +16,7 @@ namespace Analysis.Web.Controllers
         [HttpGet]
         public string Get()
         {
-            string url = "https://euw1.api.riotgames.com/lol/match/v3/matches/3638638589?api_key=RGAPI-96ceb40b-8fd3-4086-a34c-155f6e1f0664";
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-            try
-            {
-                WebResponse response = request.GetResponse();
-                using (Stream responseStream = response.GetResponseStream())
-                {
-                    StreamReader reader = new StreamReader(responseStream, Encoding.UTF8);
-                    return reader.ReadToEnd();
-                }
-            }
-            catch (WebException ex)
-            {
-                WebResponse errorResponse = ex.Response;
-                using (Stream responseStream = errorResponse.GetResponseStream())
-                {
-                    StreamReader reader = new StreamReader(responseStream, Encoding.GetEncoding("utf-8"));
-                    String errorText = reader.ReadToEnd();
-                }
-                throw;
-            }
+            return "hello";
         }
 
         // GET api/values/5
