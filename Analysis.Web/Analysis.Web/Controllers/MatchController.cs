@@ -31,7 +31,7 @@ namespace Analysis.Web.Controllers
         [HttpGet("{id}/{api}")]
         public RiotMatch Get(long id, string api)
         {
-            return _matchService.GetMatchById(id, api);
+            return _matchService.SaveRiotMatchById(id, api);
         }
     }
 }

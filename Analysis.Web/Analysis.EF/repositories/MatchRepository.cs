@@ -22,7 +22,7 @@ namespace Analysis.EF.repositories
             get { return Context as AnalysisContext; }
         }
 
-        public RiotMatch GetMatchById(long id, string api)
+        public RiotMatch SaveRiotMatchById(long id, string api)
         {
             string url = "https://euw1.api.riotgames.com/lol/match/v3/matches/" + id + "?api_key=" + api;
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
