@@ -54,10 +54,7 @@ namespace Analysis.EF.repositories
                             integ += responseString[start];
                             start++;
                         }
-                        if (i == 0)
-                        {
-                            match.champ11 = Int32.Parse(integ);
-                        }
+                        if (i == 0) match.champ11 = Int32.Parse(integ);
                         else if (i == 1) match.champ12 = Int32.Parse(integ);
                         else if (i == 2) match.champ13 = Int32.Parse(integ);
                         else if (i == 3) match.champ14 = Int32.Parse(integ);
