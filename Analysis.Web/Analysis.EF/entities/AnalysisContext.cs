@@ -11,7 +11,8 @@ namespace Analysis.EF.entities
         : base(options)
         { }
 
-        public virtual DbSet<RiotMatch> Match { get; set; }
+        public virtual DbSet<RiotMatch> RiotMatch { get; set; }
+        public virtual DbSet<Match> Match { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -23,7 +24,24 @@ namespace Analysis.EF.entities
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            
+            modelBuilder.Entity<Match>(entity =>
+            {
+                entity.ToTable("matches");
+
+                entity.Property(e => e.Id).HasColumnName("Id");
+
+                entity.Property(e => e.TeamCode)
+                .HasColumnName("TeamCode")
+                .HasMaxLength(255);
+
+                entity.Property(e => e.Team1Wins)
+                    .HasColumnName("Team1Wins")
+                    .HasDefaultValueSql("((0))");
+
+                entity.Property(e => e.Team2Wins)
+                    .HasColumnName("Team2Wins")
+                    .HasDefaultValueSql("((0))");
+            });
         }
     }
 }
