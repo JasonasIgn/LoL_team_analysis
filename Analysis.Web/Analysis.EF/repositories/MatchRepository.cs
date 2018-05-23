@@ -22,7 +22,11 @@ namespace Analysis.EF.repositories
             get { return Context as AnalysisContext; }
         }
 
-       // public Match
+        public Match GetMatchByTeamcode(string code)
+        {
+            return AnalysisContext.Match
+                .SingleOrDefault(p => p.TeamCode == code);
+        }
         public Match SaveRiotMatchById(long id, string api)
         {
             string url = "https://euw1.api.riotgames.com/lol/match/v3/matches/" + id + "?api_key=" + api;
@@ -91,11 +95,21 @@ namespace Analysis.EF.repositories
 
                     if (AnalysisContext.Match.Any(x => x.TeamCode == teamCode1))
                     {
-
+                        Match newMatch = GetMatchByTeamcode(teamCode1);
+                        if (match.winTeam1 == true) newMatch.Team1Wins++;
+                        else newMatch.Team2Wins++;
+                        AnalysisContext.Update(newMatch);
+                        AnalysisContext.SaveChanges();
+                        return newMatch;
                     }
                     else if (AnalysisContext.Match.Any(x => x.TeamCode == teamCode2))
                     {
-
+                        Match newMatch = GetMatchByTeamcode(teamCode2);
+                        if (match.winTeam1 == true) newMatch.Team2Wins++;
+                        else newMatch.Team1Wins++;
+                        AnalysisContext.Update(newMatch);
+                        AnalysisContext.SaveChanges();
+                        return newMatch;
                     }
                     else
                     {
@@ -107,9 +121,6 @@ namespace Analysis.EF.repositories
                         AnalysisContext.SaveChanges();
                         return newMatch;
                     }
-                    
-
-                    return null;
                 }
             }
             catch (WebException ex)
