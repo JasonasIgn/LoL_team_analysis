@@ -16,6 +16,7 @@ namespace Analysis.EF.entities
         public int champ23 { get; set; }
         public int champ24 { get; set; }
         public int champ25 { get; set; }
+        public bool winTeam1 { get; set; }
 
     }
 }

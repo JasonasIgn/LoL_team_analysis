@@ -33,20 +33,21 @@ namespace Analysis.EF.repositories
                 {
                     StreamReader reader = new StreamReader(responseStream, Encoding.UTF8);
                     Match match = new Match();
-                    match.champ11 = 10;
-                    match.champ12 = 10;
-                    match.champ13 = 10;
-                    match.champ14 = 10;
-                    match.champ15 = 10;
-                    match.champ21 = 10;
-                    match.champ22 = 10;
-                    match.champ23 = 10;
-                    match.champ24 = 10;
-                    match.champ25 = 10;
+                    int start;
+                    match.champ11 = 0;
+                    match.champ12 = 0;
+                    match.champ13 = 0;
+                    match.champ14 = 0;
+                    match.champ15 = 0;
+                    match.champ21 = 0;
+                    match.champ22 = 0;
+                    match.champ23 = 0;
+                    match.champ24 = 0;
+                    match.champ25 = 0;
                     string responseString = reader.ReadToEnd();
                     for (int i = 0; i < 10; i++)
                     {
-                        int start = responseString.IndexOf("championId");
+                        start = responseString.IndexOf("championId");
                         responseString = responseString.Remove(start, 12);
                         string integ = "";
                         while (Char.IsNumber(responseString[start]))
@@ -65,12 +66,17 @@ namespace Analysis.EF.repositories
                         else if (i == 8) match.champ24 = Int32.Parse(integ);
                         else if (i == 9) match.champ25 = Int32.Parse(integ);
                         else { }
-
+                        integ += responseString[start];
+                            start++;
 
                     }
-                    
+
+                    start = responseString.IndexOf("win");
+                    responseString = responseString.Remove(start, 6);
+                    if (responseString[start] == 'W') match.winTeam1 = true;
+                    else match.winTeam1 = false;
+
                     return match;
-                    //return reader.ReadToEnd();
                 }
             }
             catch (WebException ex)
