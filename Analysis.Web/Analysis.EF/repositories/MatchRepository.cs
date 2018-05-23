@@ -59,12 +59,11 @@ namespace Analysis.EF.repositories
                         }
                         if (i < 5) match.team1[i] = Int32.Parse(integ);
                         else match.team2[i - 5] = Int32.Parse(integ);
-                        
                         integ += responseString[start];
-                            start++;
-
+                        start++;
                     }
-
+                    Array.Sort(match.team1);
+                    Array.Sort(match.team2);
                     start = responseString.IndexOf("win");
                     responseString = responseString.Remove(start, 6);
                     if (responseString[start] == 'W') match.winTeam1 = true;
