@@ -5,6 +5,8 @@ using Analysis.EF.repositories;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Net;
+using System.IO;
 
 namespace Analysis.Application.main.match
 {
@@ -17,6 +19,12 @@ namespace Analysis.Application.main.match
         {
             _matchRepository = MatchRepository;
             _mapper = mapper;
+        }
+
+        public string GetMatchById(long id, string api)
+        {
+            string match = _matchRepository.GetMatchById(id, api);
+            return match;
         }
 
         

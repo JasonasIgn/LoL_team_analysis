@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Analysis.Application.automapper;
+using Analysis.Application.main;
+using Analysis.Application.main.match;
 using Analysis.EF;
+using Analysis.EF.entities;
 using Analysis.EF.repositories;
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -43,10 +45,11 @@ namespace Analysis.Web
         {
             services.AddAutoMapper(x => x.AddProfile(new MappingsProfile()));
 
-           // services.AddDbContext<AnalysisContext>(options =>
-           // options.UseSqlServer(_configuration.GetConnectionString("LeagueDatabase")));
+            services.AddDbContext<AnalysisContext>(options =>
+            options.UseSqlServer(_configuration.GetConnectionString("LeagueDatabase")));
 
             services.AddScoped<IMatchRepository, MatchRepository>();
+            services.AddScoped<IMatchService, MatchService>();
 
             services.AddCors();
             services.AddMvc();
@@ -59,7 +62,7 @@ namespace Analysis.Web
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            app.UseSwagger();
+            
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -71,12 +74,13 @@ namespace Analysis.Web
            .AllowAnyMethod()
            .AllowCredentials());
 
+            
+            app.UseMvc();
+            app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
             });
-            app.UseMvc();
-            
         }
     }
 }

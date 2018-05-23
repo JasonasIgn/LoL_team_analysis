@@ -7,6 +7,8 @@ using System.Net;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using Analysis.Application.main;
+using Analysis.Application.main.match;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
@@ -18,14 +20,17 @@ namespace Analysis.Web.Controllers
     [Route("/[controller]")]
     public class MatchController : Controller
     {
-
-        public MatchController()
+        protected readonly IMatchService _matchService;
+        public MatchController(IMatchService matchService)
         {
-
+             _matchService = matchService;
         }
+
+
         [HttpGet("{id}/{api}")]
         public string Get(long id, string api)
         {
+
             string url = "https://euw1.api.riotgames.com/lol/match/v3/matches/" + id + "?api_key=" + api;
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
             try
