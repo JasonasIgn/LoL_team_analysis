@@ -87,6 +87,25 @@ namespace Analysis.EF.repositories
                     if (responseString[start] == 'W') match.winTeam1 = true;
                     else match.winTeam1 = false;
 
+                    if (AnalysisContext.Match.Any(x => x.TeamCode == teamCode1))
+                    {
+
+                    }
+                    else if (AnalysisContext.Match.Any(x => x.TeamCode == teamCode2))
+                    {
+
+                    }
+                    else
+                    {
+                        Match newMatch = new Match();
+                        newMatch.TeamCode = teamCode1;
+                        if (match.winTeam1 == true) newMatch.Team1Wins = 1;
+                        else newMatch.Team2Wins = 1;
+                        AnalysisContext.Add(newMatch);
+                        AnalysisContext.SaveChanges();
+                    }
+                    
+
                     return match;
                 }
             }

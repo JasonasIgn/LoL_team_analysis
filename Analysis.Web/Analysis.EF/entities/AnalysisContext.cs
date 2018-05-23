@@ -11,7 +11,6 @@ namespace Analysis.EF.entities
         : base(options)
         { }
 
-        public virtual DbSet<RiotMatch> RiotMatch { get; set; }
         public virtual DbSet<Match> Match { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
