@@ -10,7 +10,7 @@ using System.Text;
 
 namespace Analysis.EF.repositories
 {
-    public class MatchRepository : Repository<Match>, IMatchRepository
+    public class MatchRepository : Repository<RiotMatch>, IMatchRepository
     {
         public MatchRepository(AnalysisContext context) : base(context)
         {
@@ -22,7 +22,7 @@ namespace Analysis.EF.repositories
             get { return Context as AnalysisContext; }
         }
 
-        public Match GetMatchById(long id, string api)
+        public RiotMatch GetMatchById(long id, string api)
         {
             string url = "https://euw1.api.riotgames.com/lol/match/v3/matches/" + id + "?api_key=" + api;
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
@@ -32,7 +32,7 @@ namespace Analysis.EF.repositories
                 using (Stream responseStream = response.GetResponseStream())
                 {
                     StreamReader reader = new StreamReader(responseStream, Encoding.UTF8);
-                    Match match = new Match();
+                    RiotMatch match = new RiotMatch();
                     int start;
                     match.champ11 = 0;
                     match.champ12 = 0;
@@ -46,6 +46,11 @@ namespace Analysis.EF.repositories
                     match.champ25 = 0;
                     string responseString = reader.ReadToEnd();
                     for (int i = 0; i < 10; i++)
+                    {
+                        start = responseString.IndexOf("championId");
+                        responseString = responseString.Remove(start, 12);
+                    }
+                        for (int i = 0; i < 10; i++)
                     {
                         start = responseString.IndexOf("championId");
                         responseString = responseString.Remove(start, 12);
