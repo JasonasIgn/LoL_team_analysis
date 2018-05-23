@@ -34,23 +34,20 @@ namespace Analysis.EF.repositories
                     StreamReader reader = new StreamReader(responseStream, Encoding.UTF8);
                     RiotMatch match = new RiotMatch();
                     int start;
-                    match.champ11 = 0;
-                    match.champ12 = 0;
-                    match.champ13 = 0;
-                    match.champ14 = 0;
-                    match.champ15 = 0;
-                    match.champ21 = 0;
-                    match.champ22 = 0;
-                    match.champ23 = 0;
-                    match.champ24 = 0;
-                    match.champ25 = 0;
+                    for (int i = 0; i < 5; i++)
+                    {
+                        match.team1[i] = 0;
+                        match.team2[i] = 0;
+                    }
+                    string teamCode1 = "";
+                    string teamCode2 = "";
                     string responseString = reader.ReadToEnd();
                     for (int i = 0; i < 10; i++)
                     {
                         start = responseString.IndexOf("championId");
                         responseString = responseString.Remove(start, 12);
                     }
-                        for (int i = 0; i < 10; i++)
+                    for (int i = 0; i < 10; i++)
                     {
                         start = responseString.IndexOf("championId");
                         responseString = responseString.Remove(start, 12);
@@ -60,17 +57,9 @@ namespace Analysis.EF.repositories
                             integ += responseString[start];
                             start++;
                         }
-                        if (i == 0) match.champ11 = Int32.Parse(integ);
-                        else if (i == 1) match.champ12 = Int32.Parse(integ);
-                        else if (i == 2) match.champ13 = Int32.Parse(integ);
-                        else if (i == 3) match.champ14 = Int32.Parse(integ);
-                        else if (i == 4) match.champ15 = Int32.Parse(integ);
-                        else if (i == 5) match.champ21 = Int32.Parse(integ);
-                        else if (i == 6) match.champ22 = Int32.Parse(integ);
-                        else if (i == 7) match.champ23 = Int32.Parse(integ);
-                        else if (i == 8) match.champ24 = Int32.Parse(integ);
-                        else if (i == 9) match.champ25 = Int32.Parse(integ);
-                        else { }
+                        if (i < 5) match.team1[i] = Int32.Parse(integ);
+                        else match.team2[i - 5] = Int32.Parse(integ);
+                        
                         integ += responseString[start];
                             start++;
 
