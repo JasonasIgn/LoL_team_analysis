@@ -6,16 +6,16 @@ namespace Analysis.EF.entities
 {
     public class Match
     {
-        public int top1ChampionId { get; set; }
-        public int jgl1ChampionId { get; set; }
-        public int mid1ChampionId { get; set; }
-        public int bot1ChampionId { get; set; }
-        public int sup1ChampionId { get; set; }
-        public int top2ChampionId { get; set; }
-        public int jgl2ChampionId { get; set; }
-        public int mid2ChampionId { get; set; }
-        public int bot2ChampionId { get; set; }
-        public int sup2ChampionId { get; set; }
+        public int champ11 { get; set; }
+        public int champ12 { get; set; }
+        public int champ13 { get; set; }
+        public int champ14 { get; set; }
+        public int champ15 { get; set; }
+        public int champ21 { get; set; }
+        public int champ22 { get; set; }
+        public int champ23 { get; set; }
+        public int champ24 { get; set; }
+        public int champ25 { get; set; }
 
     }
 }

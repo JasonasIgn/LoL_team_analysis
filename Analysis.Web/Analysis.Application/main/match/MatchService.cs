@@ -21,9 +21,9 @@ namespace Analysis.Application.main.match
             _mapper = mapper;
         }
 
-        public string GetMatchById(long id, string api)
+        public Match GetMatchById(long id, string api)
         {
-            string match = _matchRepository.GetMatchById(id, api);
+            Match match = _matchRepository.GetMatchById(id, api);
             return match;
         }
 

@@ -5,6 +5,6 @@ namespace Analysis.EF.repositories
 {
     public interface IMatchRepository
     {
-        string GetMatchById(long id, string api);
+        Match GetMatchById(long id, string api);
     }
 }
