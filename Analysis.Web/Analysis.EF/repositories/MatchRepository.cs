@@ -64,6 +64,24 @@ namespace Analysis.EF.repositories
                     }
                     Array.Sort(match.team1);
                     Array.Sort(match.team2);
+                    teamCode1 += match.team1[0];
+                    teamCode2 += match.team2[0];
+                    for (int i = 1; i < 5; i++)
+                    {
+                        teamCode1 += "_" + match.team1[i];
+                        teamCode2 += "_" + match.team2[i];
+                    }
+                    teamCode1 += "-";
+                    teamCode2 += "-";
+
+                    teamCode2 += match.team1[0];
+                    teamCode1 += match.team2[0];
+                    for (int i = 1; i < 5; i++)
+                    {
+                        teamCode2 += "_" + match.team1[i];
+                        teamCode1 += "_" + match.team2[i];
+                    }
+
                     start = responseString.IndexOf("win");
                     responseString = responseString.Remove(start, 6);
                     if (responseString[start] == 'W') match.winTeam1 = true;
