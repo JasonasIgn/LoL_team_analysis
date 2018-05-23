@@ -21,9 +21,9 @@ namespace Analysis.Application.main.match
             _mapper = mapper;
         }
 
-        public RiotMatch SaveRiotMatchById(long id, string api)
+        public Match SaveRiotMatchById(long id, string api)
         {
-            RiotMatch match = _matchRepository.SaveRiotMatchById(id, api);
+            Match match = _matchRepository.SaveRiotMatchById(id, api);
             return match;
         }
 

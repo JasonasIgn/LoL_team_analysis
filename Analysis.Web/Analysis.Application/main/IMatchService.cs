@@ -7,6 +7,6 @@ namespace Analysis.Application.main.match
 {
     public interface IMatchService
     {
-        RiotMatch SaveRiotMatchById(long id, string api);
+        Match SaveRiotMatchById(long id, string api);
     }
 }

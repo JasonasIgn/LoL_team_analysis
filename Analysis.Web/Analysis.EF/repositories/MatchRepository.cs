@@ -10,7 +10,7 @@ using System.Text;
 
 namespace Analysis.EF.repositories
 {
-    public class MatchRepository : Repository<RiotMatch>, IMatchRepository
+    public class MatchRepository : Repository<Match>, IMatchRepository
     {
         public MatchRepository(AnalysisContext context) : base(context)
         {
@@ -22,7 +22,8 @@ namespace Analysis.EF.repositories
             get { return Context as AnalysisContext; }
         }
 
-        public RiotMatch SaveRiotMatchById(long id, string api)
+       // public Match
+        public Match SaveRiotMatchById(long id, string api)
         {
             string url = "https://euw1.api.riotgames.com/lol/match/v3/matches/" + id + "?api_key=" + api;
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
@@ -36,6 +37,7 @@ namespace Analysis.EF.repositories
                     int start;
                     for (int i = 0; i < 5; i++)
                     {
+                        
                         match.team1[i] = 0;
                         match.team2[i] = 0;
                     }
@@ -103,10 +105,11 @@ namespace Analysis.EF.repositories
                         else newMatch.Team2Wins = 1;
                         AnalysisContext.Add(newMatch);
                         AnalysisContext.SaveChanges();
+                        return newMatch;
                     }
                     
 
-                    return match;
+                    return null;
                 }
             }
             catch (WebException ex)

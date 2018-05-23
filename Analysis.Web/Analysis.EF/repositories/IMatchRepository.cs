@@ -5,6 +5,6 @@ namespace Analysis.EF.repositories
 {
     public interface IMatchRepository
     {
-        RiotMatch SaveRiotMatchById(long id, string api);
+        Match SaveRiotMatchById(long id, string api);
     }
 }
