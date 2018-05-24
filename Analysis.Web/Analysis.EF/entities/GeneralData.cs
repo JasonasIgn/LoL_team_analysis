@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Analysis.EF.entities
 {
-    class GeneralData
+    public class GeneralData
     {
         public int Id { get; set; }
         public string CurrentMatchId { get; set; }
