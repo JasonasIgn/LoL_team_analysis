@@ -12,9 +12,12 @@ export class MatchService {
 
   constructor(private http: Http) { }
     url = "http://localhost:1756/Match/";
-    getGeneralData(id, api): Observable<MatchModel> {
+
+    SaveMatchData(id, api): Observable<MatchModel> {
         return this.http.get(this.url + id + '/' + api)
         .map((res: Response) => res.json() as MatchModel)
         .catch((error: any) => Observable.throw(error)); 
     }
+
+
 }

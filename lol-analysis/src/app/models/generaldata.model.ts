@@ -1,6 +1,6 @@
 export class GeneralData {
     id: Number;
-    currentMatchId: Number;
+    currentMatchId: number;
     totalTeamCombinations: Number;
   }
   
