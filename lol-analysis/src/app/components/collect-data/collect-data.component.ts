@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GeneralData } from '../../models/generaldata.model';
+import { Observable, BehaviorSubject } from 'rxjs/';
+import { GeneralDataService } from '../../services/general.service';
 
 @Component({
   selector: 'app-collect-data',
@@ -8,13 +10,14 @@ import { GeneralData } from '../../models/generaldata.model';
 })
 export class CollectDataComponent implements OnInit {
 
-  constructor() { }
-  data: GeneralData = new GeneralData;
+  constructor(private generalDataService: GeneralDataService) { }
+  generalData: GeneralData = new GeneralData;
   
   ngOnInit() {
-    this.data.id = 1;
-    this.data.currentMatchId = 3639741266;
-    this.data.totalTeamCombinations = 1;
-  }
 
+    this.generalDataService.getGeneralData(1).subscribe((response: GeneralData) => {
+      this.generalData = response;
+    });
+
+  }
 }

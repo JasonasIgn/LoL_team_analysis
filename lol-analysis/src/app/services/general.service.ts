@@ -10,11 +10,10 @@ import { GeneralData } from '../models/generaldata.model';
 @Injectable()
 export class GeneralDataService {
 
-  http: any;
-  constructor() { }
-    url = "http://localhost:1756/GeneralData/1";
+  constructor(private http: Http) { }
+    url = "http://localhost:1756/GeneralData";
     getGeneralData(id): Observable<GeneralData> {
-        return this.http.get(this.url)
+        return this.http.get(this.url + '/' + id)
         .map((res: Response) => res.json() as GeneralData)
         .catch((error: any) => Observable.throw(error)); 
     }

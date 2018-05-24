@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
 import { CollectDataComponent } from './components/collect-data/collect-data.component';
 import { AppRoutingModule } from './components/shared/app.routing';
+import { GeneralDataService } from './services/general.service';
+import { HttpModule } from '@angular/http';
 
 
 
@@ -17,9 +19,12 @@ import { AppRoutingModule } from './components/shared/app.routing';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpModule
   ],
-  providers: [],
+  providers: [
+    GeneralDataService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
