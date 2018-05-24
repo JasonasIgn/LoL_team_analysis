@@ -8,6 +8,7 @@ import { CollectDataComponent } from './components/collect-data/collect-data.com
 import { AppRoutingModule } from './components/shared/app.routing';
 import { GeneralDataService } from './services/general.service';
 import { HttpModule } from '@angular/http';
+import { MatchService } from './services/match.service';
 
 
 
@@ -23,7 +24,8 @@ import { HttpModule } from '@angular/http';
     HttpModule
   ],
   providers: [
-    GeneralDataService
+    GeneralDataService, 
+    MatchService
   ],
   bootstrap: [AppComponent]
 })
