@@ -7,7 +7,7 @@ namespace Analysis.EF.entities
     public class GeneralData
     {
         public int Id { get; set; }
-        public string CurrentMatchId { get; set; }
-        public int TotalTeamCombinantions { get; set; }
+        public long CurrentMatchId { get; set; }
+        public int TotalTeamCombinations { get; set; }
     }
 }

@@ -21,7 +21,10 @@ namespace Analysis.Application.main.generalData
             _mapper = mapper;
         }
 
-
+        public GeneralData GetById(int id)
+        {
+            return _generalDataRepository.GetById(id);
+        }
 
     }
 }

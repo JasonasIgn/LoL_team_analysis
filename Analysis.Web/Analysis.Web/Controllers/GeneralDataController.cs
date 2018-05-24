@@ -9,7 +9,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Analysis.Application.main;
 using Analysis.Application.main.generalData;
-using Analysis.Application.main.match;
 using Analysis.EF.entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -29,10 +28,10 @@ namespace Analysis.Web.Controllers
         }
 
 
-       // [HttpGet("{id}")]
-        //public GeneralData Get(int id)
-       // {
-            //return _generalDataService.SaveRiotMatchById(id, api);
-       // }
+        [HttpGet("{id}")]
+        public GeneralData Get(int id)
+        {
+            return _generalDataService.GetById(id);
+        }
     }
 }

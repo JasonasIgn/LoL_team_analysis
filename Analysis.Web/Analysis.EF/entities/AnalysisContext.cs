@@ -52,8 +52,8 @@ namespace Analysis.EF.entities
                 entity.Property(e => e.CurrentMatchId)
                 .HasColumnName("CurrentMatchId");
 
-                entity.Property(e => e.TotalTeamCombinantions)
-                    .HasColumnName("TotalTeamCombinantions")
+                entity.Property(e => e.TotalTeamCombinations)
+                    .HasColumnName("TotalTeamCombinations")
                     .HasDefaultValueSql("((0))");
             });
         }
