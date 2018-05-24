@@ -26,5 +26,10 @@ namespace Analysis.Application.main.generalData
             return _generalDataRepository.GetById(id);
         }
 
+        public GeneralData UpdateGeneralData(GeneralData data)
+        {
+            return _generalDataRepository.UpdateGeneralData(data);
+        }
+
     }
 }

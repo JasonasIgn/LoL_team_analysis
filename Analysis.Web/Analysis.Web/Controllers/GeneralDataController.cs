@@ -33,5 +33,20 @@ namespace Analysis.Web.Controllers
         {
             return _generalDataService.GetById(id);
         }
+
+        [HttpPut]
+        public IActionResult UpdateGeneralData([FromBody] GeneralData data)
+        {
+            try
+            {
+                _generalDataService.UpdateGeneralData(data);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+            return BadRequest();
+        }
     }
 }

@@ -20,4 +20,10 @@ export class CollectDataComponent implements OnInit {
     });
 
   }
+  
+  ExtractData()
+  {
+      
+  }
+
 }

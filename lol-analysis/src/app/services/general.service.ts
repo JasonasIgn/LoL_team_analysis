@@ -17,4 +17,9 @@ export class GeneralDataService {
         .map((res: Response) => res.json() as GeneralData)
         .catch((error: any) => Observable.throw(error)); 
     }
+    updateGeneralData(data): Observable<GeneralData> {
+        return this.http.put(this.url + '/' + data.id, data)
+          .map((res: Response) => res.json() as GeneralData)
+          .catch((error: any) => Observable.throw(error));
+      }
 }

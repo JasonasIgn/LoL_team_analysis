@@ -28,5 +28,12 @@ namespace Analysis.EF.repositories
             return AnalysisContext.GeneralData
                 .SingleOrDefault(p => p.Id == id);
         }
+        
+        public GeneralData UpdateGeneralData(GeneralData data)
+        {
+            AnalysisContext.Update(data);
+            AnalysisContext.SaveChanges();
+            return data;
+        }
     }
 }
