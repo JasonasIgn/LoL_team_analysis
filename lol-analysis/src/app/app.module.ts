@@ -3,17 +3,21 @@ import { NgModule } from '@angular/core';
 
 
 import { AppComponent } from './app.component';
-import { NavbarComponent } from '../components/shared/navbar/navbar.component';
+import { NavbarComponent } from './components/shared/navbar/navbar.component';
+import { CollectDataComponent } from './components/collect-data/collect-data.component';
+import { AppRoutingModule } from './components/shared/app.routing';
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent
+    NavbarComponent,
+    CollectDataComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
