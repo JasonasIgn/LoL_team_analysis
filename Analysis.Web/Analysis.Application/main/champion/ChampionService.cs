@@ -20,10 +20,14 @@ namespace Analysis.Application.main.champion
             _championRepository = ChampionRepository;
             _mapper = mapper;
         }
-        public List<Champion> GetChampions(string api)
+        public List<Champion> UpdateChampions(string api)
         {
             return _championRepository.UpdateChampions(api);
         }
 
+        public List<Champion> GetAll()
+        {
+            return _championRepository.GetAll();
+        }
     }
 }

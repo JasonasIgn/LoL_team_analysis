@@ -104,8 +104,12 @@ namespace Analysis.EF.repositories
                 WebResponse errorResponse = ex.Response;
                 throw;
             }
-
-
         }
+
+            public List<Champion> GetAll()
+            {
+                return AnalysisContext.Champion
+                    .ToList();
+            }
     }
 }

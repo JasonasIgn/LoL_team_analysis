@@ -5,6 +5,7 @@ namespace Analysis.Application.main.champion
 {
     public interface IChampionService
     {
-        List<Champion> GetChampions(string api);
+        List<Champion> UpdateChampions(string api);
+        List<Champion> GetAll();
     }
 }
