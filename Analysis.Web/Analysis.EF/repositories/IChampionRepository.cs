@@ -1,6 +1,10 @@
-﻿namespace Analysis.EF.repositories
+﻿using Analysis.EF.entities;
+using System.Collections.Generic;
+
+namespace Analysis.EF.repositories
 {
-    internal interface IChampionRepository
+    public interface IChampionRepository
     {
+        List<Champion> GetChampions(string api);
     }
 }

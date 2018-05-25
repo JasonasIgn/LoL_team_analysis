@@ -13,14 +13,17 @@ namespace Analysis.Application.main.champion
     public class ChampionService : IChampionService
     {
         protected readonly IMapper _mapper;
-        protected readonly IChampionService _championRepository;
+        protected readonly IChampionRepository _championRepository;
 
-        public ChampionService(IChampionService ChampionRepository, IMapper mapper)
+        public ChampionService(IChampionRepository ChampionRepository, IMapper mapper)
         {
             _championRepository = ChampionRepository;
             _mapper = mapper;
         }
-
+        public List<Champion> GetChampions(string api)
+        {
+            return _championRepository.GetChampions(api);
+        }
 
     }
 }

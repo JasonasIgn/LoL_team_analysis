@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Analysis.Application.automapper;
 using Analysis.Application.main;
+using Analysis.Application.main.champion;
 using Analysis.Application.main.generalData;
 using Analysis.Application.main.match;
 using Analysis.EF;
@@ -54,6 +55,9 @@ namespace Analysis.Web
 
             services.AddScoped<IGeneralDataRepository, GeneralDataRepository>();
             services.AddScoped<IGeneralDataService, GeneralDataService>();
+
+            services.AddScoped<IChampionRepository, ChampionRepository>();
+            services.AddScoped<IChampionService, ChampionService>();
 
             services.AddCors();
             services.AddMvc();
