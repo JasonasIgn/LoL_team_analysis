@@ -1,17 +1,28 @@
 <div class="conteiner" style="text-align: center;">
+
+        <div style="display: inline-block;" *ngFor="let ch of searchChampions; let ind = index;">
+
+            <div class="card border-success just-box" style="height: 100px;width: 100px;" (click)="setSelected(ind)">
+
+            {{ch.name}}
+            </div>
+        
+        </div>
+        <br>
     Your API key:<br>
     <input type="text" #api name="api"><br>
     <br>
     <button type="button" class="btn btn-primary" (click)='Load(api.value)' [disabled]="loading" >Load</button>
 
+    <div style="height: 20px"></div>
+    <div>
+        <div style="display: inline-block;" *ngFor="let ch of championList; let ind = index;">
 
+            <div class="card border-success just-box" style="height: 100px;width: 100px;" (click)="pickChampion(ch.id)">
 
-    <div *ngFor="let ch of championList; let ind = index;">
-
-        <div class="card border-success just-box" style="height: 100px;width: 100px">
-
-          {{ch.title}}
+            {{ch.name}}
+            </div>
+        
         </div>
-      
     </div>
 </div>
