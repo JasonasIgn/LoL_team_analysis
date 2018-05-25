@@ -1,0 +1,15 @@
+<div class="conteiner" style="text-align: center;">
+    <br>
+        Your API key:<br>
+        <input type="text" #api name="api"><br>
+        <br>
+        <button type="button" class="btn btn-primary" (click)='UpdateApi(api.value)' [disabled]="loading" >Update</button>
+    
+        <br>
+        <br>
+        <br>
+        Update all champions:<br>
+        <button type="button" class="btn btn-primary" (click)='UpdateChampions()' [disabled]="loading" >Update</button>
+    </div>
+    
+      

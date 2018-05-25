@@ -4,11 +4,12 @@ import { RouterModule } from '@angular/router';
 import { CollectDataComponent } from '../collect-data/collect-data.component';
 import { AppComponent } from '../../app.component';
 import { SearchTeamsComponent } from '../search-teams/search-teams.component';
+import { HomeComponent } from '../home/home.component';
 
 @NgModule({
   imports: [
       RouterModule.forRoot([
-          //{ path: '' , component: AppComponent},
+          { path: '' , component: HomeComponent},
           { path: 'collect-data' , component: CollectDataComponent},
           { path: 'search-teams' , component: SearchTeamsComponent},
           // otherwise redirect to home
