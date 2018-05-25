@@ -73,7 +73,7 @@ namespace Analysis.EF.repositories
 
                     //GET MAP ID (11 - summoners rift, 12 - ARAM)
                     start = responseString.IndexOf("mapId");
-                    
+
                     responseString = responseString.Remove(start, 7);
                     string integ = "";
                     while (Char.IsNumber(responseString[start]))
@@ -82,17 +82,23 @@ namespace Analysis.EF.repositories
                         start++;
                     }
                     mapId = Int32.Parse(integ);
-                    if (mapId != 11) return 3;
+                    integ = "";
+                    if (mapId != 11 && mapId != 1 && mapId != 2) return 3;
 
                     //CHECK IF ITS RANKED/DRAFT
-                    start = responseString.IndexOf("bans");
-                    responseString = responseString.Remove(start, 6);
-                    if (responseString[start + 1] == ']') return 2;
+                    start = responseString.IndexOf("queueId");
+                    responseString = responseString.Remove(start, 9);
+                    while (Char.IsNumber(responseString[start]))
+                    {
+                        integ += responseString[start];
+                        start++;
+                    }
+                    if (Int32.Parse(integ) != 420) return 2;
 
-
-                    //CHECK PLAYER RANKS (accept platinum and above)
+                    integ = "";
+                    //CHECK PLAYER RANKS (accept gold and above)
                     if (responseString.IndexOf("UNRANKED") != -1 || responseString.IndexOf("BRONZE") != -1
-                        || responseString.IndexOf("SILVER") != -1 || responseString.IndexOf("GOLD") != -1)
+                        || responseString.IndexOf("SILVER") != -1)
                     {
                         return 4;
                     }
@@ -114,8 +120,8 @@ namespace Analysis.EF.repositories
                         }
                         if (i < 5) match.team1[i] = Int32.Parse(integ);
                         else match.team2[i - 5] = Int32.Parse(integ);
-                        integ += responseString[start];
-                        start++;
+                        //integ += responseString[start];
+                        //start++;
                     }
                     Array.Sort(match.team1);
                     Array.Sort(match.team2);
