@@ -15,6 +15,7 @@ export class CollectDataComponent implements OnInit {
   constructor(private generalDataService: GeneralDataService,
                 private matchService: MatchService) { }
   generalData: GeneralData = new GeneralData;
+  loading: boolean = false;
   
   ngOnInit() {
 
@@ -26,14 +27,19 @@ export class CollectDataComponent implements OnInit {
   
   ExtractData(api: string)
   {
+    this.loading = true;
       this.matchService.SaveMatchData(this.generalData.currentMatchId, api).subscribe((res: MatchModel) => {
         console.log(res);
+        console.log("Aaa");
+        
       });
       this.generalData.currentMatchId = this.generalData.currentMatchId + 1;
-      this.generalDataService.updateGeneralData(this.generalData).subscribe((res: GeneralData) => {
-        console.log(res);
-      });;
-      
+      this.generalDataService.updateGeneralData(this.generalData).subscribe((res: any) => {
+        
+        console.log("Aaa");
+        
+      });
+      this.loading = false;
   }
 
 }

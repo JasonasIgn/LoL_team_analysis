@@ -4,7 +4,7 @@
   <br><div>Total team combinations:</div>{{generalData.totalTeamCombinations}}
   <div style="height: 50px;"></div>
   Your API key:<br>
-  <input type="text" id="api" name="api"><br>
+  <input type="text" #api name="api"><br>
   <br>
-  <button type="button" class="btn btn-primary" (click)='ExtractData("api")' >Go</button>
+  <button type="button" class="btn btn-primary" (click)='ExtractData(api.value)' [disabled]="loading" >Go</button>
 </div>
