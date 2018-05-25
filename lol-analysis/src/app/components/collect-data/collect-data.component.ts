@@ -22,7 +22,7 @@ export class CollectDataComponent implements OnInit, OnDestroy {
   badMap: boolean = true;
   notDraft: boolean = true;
   lowRank: boolean = true;
-  loops: number = 10;
+  loops: number = 0;
 
   loopSubscription: Subscription;
 
@@ -44,13 +44,18 @@ export class CollectDataComponent implements OnInit, OnDestroy {
   
   Loop(api:string, loops:number)
   {
+    this.loading = true;
     this.loops = loops;
     if (this.loops > 0)
     {
       this.loopSubscription = Observable.interval(1200).subscribe(x => {
         this.ExtractData(api);
         this.loops--;
-        if (this.loops <= 0) this.loopSubscription.unsubscribe();
+        if (this.loops <= 0)
+        {
+          this.loading = false;
+          this.loopSubscription.unsubscribe();
+        } 
       });
     }
   }
@@ -130,7 +135,7 @@ export class CollectDataComponent implements OnInit, OnDestroy {
             console.log("Aaa");
             
           });
-        this.loading = false;
+        
   }
 
   sleep(milliseconds) {
