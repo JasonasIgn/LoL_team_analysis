@@ -16,6 +16,10 @@ export class CollectDataComponent implements OnInit {
                 private matchService: MatchService) { }
   generalData: GeneralData = new GeneralData;
   loading: boolean = false;
+  notice: number = 0;
+  newTeam: boolean = true;
+  updateTeam: boolean = true;
+  notFound: boolean = true;
   
   ngOnInit() {
 
@@ -27,9 +31,30 @@ export class CollectDataComponent implements OnInit {
   
   ExtractData(api: string)
   {
+    this.updateTeam = true;
+    this.newTeam = true;
+    this.notFound = true;
     this.loading = true;
-      this.matchService.SaveMatchData(this.generalData.currentMatchId, api).subscribe((res: MatchModel) => {
+      this.matchService.SaveMatchData(this.generalData.currentMatchId, api).subscribe((res: any) => {
         console.log(res);
+        if (res == 0)
+        {
+          this.updateTeam = true;
+          this.newTeam = false;
+          this.notFound = true;
+        } 
+        else if (res == 1)
+        {
+          this.updateTeam = false;
+          this.newTeam = true;
+          this.notFound = true;
+        }
+        else if (res == 404)
+        {
+          this.updateTeam = true;
+          this.newTeam = true;
+          this.notFound = false;
+        }
         console.log("Aaa");
         
       });

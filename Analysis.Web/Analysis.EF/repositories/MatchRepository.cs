@@ -27,7 +27,7 @@ namespace Analysis.EF.repositories
             return AnalysisContext.Match
                 .SingleOrDefault(p => p.TeamCode == code);
         }
-        public Match SaveRiotMatchById(long id, string api)
+        public int SaveRiotMatchById(long id, string api)
         {
             string url = "https://euw1.api.riotgames.com/lol/match/v3/matches/" + id + "?api_key=" + api;
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
@@ -100,7 +100,7 @@ namespace Analysis.EF.repositories
                         else newMatch.Team2Wins++;
                         AnalysisContext.Update(newMatch);
                         AnalysisContext.SaveChanges();
-                        return newMatch;
+                        return 1;
                     }
                     else if (AnalysisContext.Match.Any(x => x.TeamCode == teamCode2))
                     {
@@ -109,7 +109,7 @@ namespace Analysis.EF.repositories
                         else newMatch.Team1Wins++;
                         AnalysisContext.Update(newMatch);
                         AnalysisContext.SaveChanges();
-                        return newMatch;
+                        return 1;
                     }
                     else
                     {
@@ -119,19 +119,15 @@ namespace Analysis.EF.repositories
                         else newMatch.Team2Wins = 1;
                         AnalysisContext.Add(newMatch);
                         AnalysisContext.SaveChanges();
-                        return newMatch;
+                        return 0;
                     }
                 }
             }
             catch (WebException ex)
             {
                 WebResponse errorResponse = ex.Response;
-                using (Stream responseStream = errorResponse.GetResponseStream())
-                {
-                    StreamReader reader = new StreamReader(responseStream, Encoding.GetEncoding("utf-8"));
-                    String errorText = reader.ReadToEnd();
-                }
-                throw;
+                if (ex.Message.IndexOf("404") != -1) return 404;
+                else return 500;
             }
         }
 

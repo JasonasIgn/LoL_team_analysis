@@ -15,7 +15,7 @@ export class MatchService {
 
     SaveMatchData(id, api): Observable<MatchModel> {
         return this.http.get(this.url + id + '/' + api)
-        .map((res: Response) => res.json() as MatchModel)
+        .map((res: Response) => res.json() as number)
         .catch((error: any) => Observable.throw(error)); 
     }
 
