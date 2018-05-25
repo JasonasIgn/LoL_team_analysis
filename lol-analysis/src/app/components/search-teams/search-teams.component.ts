@@ -14,12 +14,14 @@ export class SearchTeamsComponent implements OnInit {
   constructor(private championService: ChampionService) { }
 
   ngOnInit() {
+      this.championService.getAllChampions().subscribe((data: ChampionModel[]) =>{
+        this.championList = data;
+      });
   }
   Load(api: string)
   {
-    this.championService.getChampions(api).subscribe((data: ChampionModel[]) =>{
-      this.championList = data;
-      console.log(data);
+    this.championService.updateChampions(api).subscribe((data: ChampionModel[]) =>{
+      console.log("success");
     });
   }
 }
