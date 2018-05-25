@@ -77,7 +77,13 @@ export class SearchTeamsComponent implements OnInit {
       this.teamCode2 = this.teamIds2[0] + '_' + this.teamIds2[1] + '_' + this.teamIds2[2] + '_' + this.teamIds2[3] + '_' + this.teamIds2[4];
         console.log(this.teamCode1);
         this.matchService.getMatch(this.teamCode1, this.teamCode2).subscribe((data: MatchModel) =>{
+          
           this.matchdata = data;
+          if (data.teamCode.indexOf(this.teamCode1) != -1 && data.teamCode.indexOf(this.teamCode1) != 0)
+          {
+            this.matchdata.team1Wins = data.team2Wins;
+            this.matchdata.team2Wins = data.team1Wins;
+          }
           console.log(data);
         });
     }
