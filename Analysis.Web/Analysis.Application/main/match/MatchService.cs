@@ -26,7 +26,12 @@ namespace Analysis.Application.main.match
             int match = _matchRepository.SaveRiotMatchById(id, api);
             return match;
         }
+        public Match FindMatch(string team1, string team2)
+        {
+            return _matchRepository.FindMatch(team1, team2);
+        }
 
-        
+
+
     }
 }

@@ -27,6 +27,23 @@ namespace Analysis.EF.repositories
             return AnalysisContext.Match
                 .SingleOrDefault(p => p.TeamCode == code);
         }
+
+        public Match FindMatch(string team1, string team2)
+        {
+            string teamCode1 = team1 + '-' + team2;
+            string teamCode2 = team2 + '-' + team1;
+            if (AnalysisContext.Match.Any(x => x.TeamCode == teamCode1))
+            {
+                return AnalysisContext.Match
+                    .SingleOrDefault(x => x.TeamCode == teamCode1);
+            }
+            else
+            {
+                return AnalysisContext.Match
+                    .SingleOrDefault(x => x.TeamCode == teamCode2);
+            }
+        }
+
         public int SaveRiotMatchById(long id, string api)
         {
             string url = "https://euw1.api.riotgames.com/lol/match/v3/matches/" + id + "?api_key=" + api;

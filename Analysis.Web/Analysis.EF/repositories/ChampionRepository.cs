@@ -106,10 +106,10 @@ namespace Analysis.EF.repositories
             }
         }
 
-            public List<Champion> GetAll()
-            {
-                return AnalysisContext.Champion
-                    .ToList();
-            }
+        public List<Champion> GetAll()
+        {
+            return AnalysisContext.Champion
+                .ToList();
+        }
     }
 }

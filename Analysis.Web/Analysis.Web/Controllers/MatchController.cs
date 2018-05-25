@@ -33,5 +33,11 @@ namespace Analysis.Web.Controllers
         {
             return _matchService.SaveRiotMatchById(id, api);
         }
+
+        [HttpGet("find/{team1}/{team2}")]
+        public Match FindMatch(string team1, string team2)
+        {
+            return _matchService.FindMatch(team1, team2);
+        }
     }
 }

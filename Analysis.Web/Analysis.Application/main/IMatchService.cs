@@ -8,5 +8,6 @@ namespace Analysis.Application.main.match
     public interface IMatchService
     {
         int SaveRiotMatchById(long id, string api);
+        Match FindMatch(string team1, string team2);
     }
 }
