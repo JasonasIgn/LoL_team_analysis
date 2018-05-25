@@ -20,9 +20,14 @@ export class SearchTeamsComponent implements OnInit {
   teamIds1: number[] = new Array<number>(5);
   teamIds2: number[] = new Array<number>(5);
   matchdata: MatchModel = new MatchModel();
+  team1Winrate: number = 0;
+  team2Winrate: number = 0;
+  temp: number = 0;
   constructor(private championService: ChampionService, private matchService: MatchService) { }
 
   ngOnInit() {
+    this.matchdata.team1Wins = 0;
+    this.matchdata.team2Wins = 0;
     for (var i = 0; i < 10; i++)
     {
       this.searchChampions[i] = new ChampionModel();
@@ -58,7 +63,7 @@ export class SearchTeamsComponent implements OnInit {
 
   search()
   {
-    
+    console.log("a");
     this.teamValid = true;
     for (var i = 0; i < this.searchChampions.length; i++)
     {
@@ -71,19 +76,25 @@ export class SearchTeamsComponent implements OnInit {
     }
     if (this.teamValid)
     {
+      console.log("b");
       this.teamIds1.sort();
       this.teamIds2.sort();
-      this.teamCode1 = this.teamIds1[0] + '_' + this.teamIds1[1] + '_' + this.teamIds1[2] + '_' + this.teamIds1[3] + '_' + this.teamIds1[4];
-      this.teamCode2 = this.teamIds2[0] + '_' + this.teamIds2[1] + '_' + this.teamIds2[2] + '_' + this.teamIds2[3] + '_' + this.teamIds2[4];
+      //this.teamCode1 = this.teamIds1[0] + '_' + this.teamIds1[1] + '_' + this.teamIds1[2] + '_' + this.teamIds1[3] + '_' + this.teamIds1[4];
+      //this.teamCode2 = this.teamIds2[0] + '_' + this.teamIds2[1] + '_' + this.teamIds2[2] + '_' + this.teamIds2[3] + '_' + this.teamIds2[4];
+      this.teamCode1 = "19_51_62_238_432";
+      this.teamCode2 = "22_45_86_141_201";
         console.log(this.teamCode1);
         this.matchService.getMatch(this.teamCode1, this.teamCode2).subscribe((data: MatchModel) =>{
           
           this.matchdata = data;
           if (data.teamCode.indexOf(this.teamCode1) != -1 && data.teamCode.indexOf(this.teamCode1) != 0)
           {
+            this.temp = data.team1Wins;
             this.matchdata.team1Wins = data.team2Wins;
-            this.matchdata.team2Wins = data.team1Wins;
+            this.matchdata.team2Wins = this.temp;
           }
+          this.team1Winrate = (this.matchdata.team1Wins / (this.matchdata.team1Wins + this.matchdata.team2Wins)) * 100;
+          this.team2Winrate = (this.matchdata.team2Wins / (this.matchdata.team2Wins + this.matchdata.team1Wins)) * 100;
           console.log(data);
         });
     }

@@ -1,7 +1,7 @@
 export class MatchModel {
     id: Number;
     teamCode: string;
-    team1Wins: Number;
-    team2Wins: Number;
+    team1Wins: number;
+    team2Wins: number;
   }
   
