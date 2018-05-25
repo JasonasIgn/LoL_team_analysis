@@ -58,6 +58,7 @@ export class SearchTeamsComponent implements OnInit {
         }
         
       }
+      this.selected++;
     }
   }
 
@@ -79,10 +80,10 @@ export class SearchTeamsComponent implements OnInit {
       console.log("b");
       this.teamIds1.sort();
       this.teamIds2.sort();
-      //this.teamCode1 = this.teamIds1[0] + '_' + this.teamIds1[1] + '_' + this.teamIds1[2] + '_' + this.teamIds1[3] + '_' + this.teamIds1[4];
-      //this.teamCode2 = this.teamIds2[0] + '_' + this.teamIds2[1] + '_' + this.teamIds2[2] + '_' + this.teamIds2[3] + '_' + this.teamIds2[4];
-      this.teamCode1 = "19_51_62_238_432";
-      this.teamCode2 = "22_45_86_141_201";
+      this.teamCode1 = this.teamIds1[0] + '_' + this.teamIds1[1] + '_' + this.teamIds1[2] + '_' + this.teamIds1[3] + '_' + this.teamIds1[4];
+      this.teamCode2 = this.teamIds2[0] + '_' + this.teamIds2[1] + '_' + this.teamIds2[2] + '_' + this.teamIds2[3] + '_' + this.teamIds2[4];
+      //this.teamCode1 = "19_51_62_238_432";
+      //this.teamCode2 = "22_45_86_141_201";
         console.log(this.teamCode1);
         this.matchService.getMatch(this.teamCode1, this.teamCode2).subscribe((data: MatchModel) =>{
           
