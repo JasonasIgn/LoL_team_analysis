@@ -73,6 +73,12 @@ namespace Analysis.EF.repositories
                     if (responseString[start + 1] == ']') return 2;
 
 
+                    //CHECK PLAYER RANKS (accept platinum and above)
+                    if (responseString.IndexOf("UNRANKED") != -1 || responseString.IndexOf("BRONZE") != -1
+                        || responseString.IndexOf("SILVER") != -1 || responseString.IndexOf("GOLD") != -1)
+                    {
+                        return 4;
+                    }
 
                     for (int i = 0; i < 10; i++)
                     {

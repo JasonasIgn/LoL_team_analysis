@@ -22,6 +22,7 @@ export class CollectDataComponent implements OnInit {
   notFound: boolean = true;
   badMap: boolean = true;
   notDraft: boolean = true;
+  lowRank: boolean = true;
   
   ngOnInit() {
 
@@ -38,6 +39,7 @@ export class CollectDataComponent implements OnInit {
     this.notFound = true;
     this.badMap = true;
     this.notDraft = true;
+    this.lowRank = true;
 
     this.loading = true;
       this.matchService.SaveMatchData(this.generalData.currentMatchId, api).subscribe((res: any) => {
@@ -49,6 +51,7 @@ export class CollectDataComponent implements OnInit {
           this.notFound = true;
           this.badMap = true;
           this.notDraft = true;
+          this.lowRank = true;
         } 
         else if (res == 1)
         {
@@ -57,6 +60,7 @@ export class CollectDataComponent implements OnInit {
           this.notFound = true;
           this.notDraft = true;
           this.badMap = true;
+          this.lowRank = true;
         }
         else if (res == 2)
         {
@@ -65,6 +69,7 @@ export class CollectDataComponent implements OnInit {
           this.notFound = true;
           this.notDraft = false;
           this.badMap = true;
+          this.lowRank = true;
         }
         else if (res == 3)
         {
@@ -73,6 +78,16 @@ export class CollectDataComponent implements OnInit {
           this.notFound = true;
           this.badMap = false;
           this.notDraft = true;
+          this.lowRank = true;
+        }
+        else if (res == 4)
+        {
+          this.updateTeam = true;
+          this.newTeam = true;
+          this.notFound = true;
+          this.badMap = true;
+          this.notDraft = true;
+          this.lowRank = false;
         }
         else if (res == 404)
         {
@@ -81,8 +96,8 @@ export class CollectDataComponent implements OnInit {
           this.notFound = false;
           this.notDraft = true;
           this.badMap = true;
+          this.lowRank = true;
         }
-        console.log("Aaa");
         
       });
       this.generalData.currentMatchId = this.generalData.currentMatchId + 1;
