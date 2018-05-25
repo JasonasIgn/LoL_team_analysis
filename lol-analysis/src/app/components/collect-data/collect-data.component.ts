@@ -52,6 +52,7 @@ export class CollectDataComponent implements OnInit {
           this.badMap = true;
           this.notDraft = true;
           this.lowRank = true;
+          this.generalData.totalTeamCombinations = this.generalData.totalTeamCombinations + 1;
         } 
         else if (res == 1)
         {
