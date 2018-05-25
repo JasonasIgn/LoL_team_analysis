@@ -48,7 +48,7 @@ export class CollectDataComponent implements OnInit, OnDestroy {
     this.loops = loops;
     if (this.loops > 0)
     {
-      this.loopSubscription = Observable.interval(1200).subscribe(x => {
+      this.loopSubscription = Observable.interval(300).subscribe(x => {
         this.ExtractData(api);
         this.loops--;
         if (this.loops <= 0)
@@ -136,15 +136,6 @@ export class CollectDataComponent implements OnInit, OnDestroy {
             
           });
         
-  }
-
-  sleep(milliseconds) {
-    var start = new Date().getTime();
-    for (var i = 0; i < 1e7; i++) {
-      if ((new Date().getTime() - start) > milliseconds){
-        break;
-      }
-    }
   }
 
 }
