@@ -9,7 +9,7 @@ import { GeneralData } from '../models/generaldata.model';
 import { ChampionModel } from '../models/champion.model';
 
 @Injectable()
-export class GeneralDataService {
+export class ChampionService {
 
   constructor(private http: Http) { }
     url = "http://localhost:1756/Champion";

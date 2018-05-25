@@ -14,6 +14,8 @@ namespace Analysis.EF.entities
         public virtual DbSet<Match> Match { get; set; }
         public virtual DbSet<GeneralData> GeneralData { get; set; }
 
+        public virtual DbSet<Champion> Champion { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
@@ -55,6 +57,22 @@ namespace Analysis.EF.entities
                 entity.Property(e => e.TotalTeamCombinations)
                     .HasColumnName("TotalTeamCombinations")
                     .HasDefaultValueSql("((0))");
+            });
+
+            modelBuilder.Entity<Champion>(entity =>
+            {
+                entity.ToTable("champion");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Title)
+                .HasColumnName("title");
+
+                entity.Property(e => e.Name)
+               .HasColumnName("name");
+
+                entity.Property(e => e.Key)
+                    .HasColumnName("keyy");
             });
         }
     }

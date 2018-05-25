@@ -10,6 +10,7 @@ import { GeneralDataService } from './services/general.service';
 import { HttpModule } from '@angular/http';
 import { MatchService } from './services/match.service';
 import { SearchTeamsComponent } from './components/search-teams/search-teams.component';
+import { ChampionService } from './services/champion.service';
 
 
 
@@ -27,7 +28,8 @@ import { SearchTeamsComponent } from './components/search-teams/search-teams.com
   ],
   providers: [
     GeneralDataService, 
-    MatchService
+    MatchService,
+    ChampionService
   ],
   bootstrap: [AppComponent]
 })

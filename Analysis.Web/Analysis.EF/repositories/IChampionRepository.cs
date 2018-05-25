@@ -5,6 +5,6 @@ namespace Analysis.EF.repositories
 {
     public interface IChampionRepository
     {
-        List<Champion> GetChampions(string api);
+        List<Champion> UpdateChampions(string api);
     }
 }

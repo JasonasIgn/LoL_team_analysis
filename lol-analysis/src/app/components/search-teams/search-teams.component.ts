@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ChampionService } from '../../services/champion.service';
+import { ChampionModel } from '../../models/champion.model';
 
 @Component({
   selector: 'app-search-teams',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SearchTeamsComponent implements OnInit {
 
-  constructor() { }
+  championList: ChampionModel[];
+
+  constructor(private championService: ChampionService) { }
 
   ngOnInit() {
   }
-
+  Load(api: string)
+  {
+    this.championService.getChampions(api).subscribe((data: ChampionModel[]) =>{
+      this.championList = data;
+      console.log(data);
+    });
+  }
 }

@@ -22,7 +22,7 @@ namespace Analysis.Application.main.champion
         }
         public List<Champion> GetChampions(string api)
         {
-            return _championRepository.GetChampions(api);
+            return _championRepository.UpdateChampions(api);
         }
 
     }

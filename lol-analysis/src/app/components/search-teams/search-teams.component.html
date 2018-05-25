@@ -1,3 +1,17 @@
-<p>
-  search-teams works!
-</p>
+<div class="conteiner" style="text-align: center;">
+    Your API key:<br>
+    <input type="text" #api name="api"><br>
+    <br>
+    <button type="button" class="btn btn-primary" (click)='Load(api.value)' [disabled]="loading" >Load</button>
+
+
+
+    <div *ngFor="let ch of championList; let ind = index;">
+
+        <div class="card border-success just-box" style="height: 100px;width: 100px">
+
+          {{ch.title}}
+        </div>
+      
+    </div>
+</div>

@@ -22,7 +22,7 @@ namespace Analysis.EF.repositories
             get { return Context as AnalysisContext; }
         }
 
-        public List<Champion> GetChampions(string api)
+        public List<Champion> UpdateChampions(string api)
         {
             string url = "https://euw1.api.riotgames.com/lol/static-data/v3/champions" + "?api_key=" + api;
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
@@ -93,7 +93,9 @@ namespace Analysis.EF.repositories
                         list.Add(champ);
                         champ = new Champion();
                     }
-
+                    AnalysisContext.RemoveRange(list);
+                    AnalysisContext.AddRange(list);
+                    AnalysisContext.SaveChanges();
                     return list;
                 }
             }
