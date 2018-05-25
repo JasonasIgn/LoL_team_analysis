@@ -18,6 +18,11 @@ export class MatchService {
         .map((res: Response) => res.json() as number)
         .catch((error: any) => Observable.throw(error)); 
     }
+    getMatch(team1, team2): Observable<MatchModel> {
+        return this.http.get(this.url + 'find/' + team1 + "/" + team2)
+        .map((res: Response) => res.json() as MatchModel)
+        .catch((error: any) => Observable.throw(error)); 
+    }
 
 
 }

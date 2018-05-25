@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ChampionService } from '../../services/champion.service';
 import { ChampionModel } from '../../models/champion.model';
+import { MatchModel } from '../../models/match.model';
+import { MatchService } from '../../services/match.service';
 
 @Component({
   selector: 'app-search-teams',
@@ -17,7 +19,8 @@ export class SearchTeamsComponent implements OnInit {
   teamCode2:string = "";
   teamIds1: number[] = new Array<number>(5);
   teamIds2: number[] = new Array<number>(5);
-  constructor(private championService: ChampionService) { }
+  matchdata: MatchModel = new MatchModel();
+  constructor(private championService: ChampionService, private matchService: MatchService) { }
 
   ngOnInit() {
     for (var i = 0; i < 10; i++)
@@ -73,7 +76,10 @@ export class SearchTeamsComponent implements OnInit {
       this.teamCode1 = this.teamIds1[0] + '_' + this.teamIds1[1] + '_' + this.teamIds1[2] + '_' + this.teamIds1[3] + '_' + this.teamIds1[4];
       this.teamCode2 = this.teamIds2[0] + '_' + this.teamIds2[1] + '_' + this.teamIds2[2] + '_' + this.teamIds2[3] + '_' + this.teamIds2[4];
         console.log(this.teamCode1);
-        
+        this.matchService.getMatch(this.teamCode1, this.teamCode2).subscribe((data: MatchModel) =>{
+          this.matchdata = data;
+          console.log(data);
+        });
     }
   }
 }
