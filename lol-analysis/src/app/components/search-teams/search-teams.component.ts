@@ -28,12 +28,7 @@ export class SearchTeamsComponent implements OnInit {
         this.championList = data;
       });
   }
-  Load(api: string)
-  {
-    this.championService.updateChampions(api).subscribe((data: ChampionModel[]) =>{
-      console.log("success");
-    });
-  }
+  
   setSelected(nr: number)
   {
     this.selected = nr;
