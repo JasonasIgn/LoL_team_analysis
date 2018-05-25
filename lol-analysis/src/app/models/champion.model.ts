@@ -1,5 +1,5 @@
 export class ChampionModel {
-    id: Number;
+    id: number;
     title: string;
     key: string;
     name: string;

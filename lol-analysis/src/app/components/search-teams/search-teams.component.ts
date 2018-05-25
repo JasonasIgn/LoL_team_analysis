@@ -12,7 +12,11 @@ export class SearchTeamsComponent implements OnInit {
   championList: ChampionModel[];
   searchChampions: ChampionModel[] = new Array<ChampionModel>(10);
   selected: number = -1;
-
+  teamValid: boolean = true;
+  teamCode1:string = "";
+  teamCode2:string = "";
+  teamIds1: number[] = new Array<number>(5);
+  teamIds2: number[] = new Array<number>(5);
   constructor(private championService: ChampionService) { }
 
   ngOnInit() {
@@ -46,6 +50,30 @@ export class SearchTeamsComponent implements OnInit {
         }
         
       }
+    }
+  }
+
+  search()
+  {
+    
+    this.teamValid = true;
+    for (var i = 0; i < this.searchChampions.length; i++)
+    {
+      if (this.searchChampions[i].id == -1) this.teamValid = false;
+      else 
+      {
+        if (i < 5) this.teamIds1[i] = this.searchChampions[i].id;
+        else this.teamIds2[i - 5] = this.searchChampions[i].id;
+      }
+    }
+    if (this.teamValid)
+    {
+      this.teamIds1.sort();
+      this.teamIds2.sort();
+      this.teamCode1 = this.teamIds1[0] + '-' + this.teamIds1[1] + '-' + this.teamIds1[2] + '-' + this.teamIds1[3] + '-' + this.teamIds1[4];
+      this.teamCode2 = this.teamIds2[0] + '-' + this.teamIds2[1] + '-' + this.teamIds2[2] + '-' + this.teamIds2[3] + '-' + this.teamIds2[4];
+        console.log(this.teamCode1);
+        
     }
   }
 }
