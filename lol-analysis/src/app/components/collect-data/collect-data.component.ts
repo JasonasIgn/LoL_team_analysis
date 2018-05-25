@@ -21,6 +21,7 @@ export class CollectDataComponent implements OnInit {
   updateTeam: boolean = true;
   notFound: boolean = true;
   badMap: boolean = true;
+  notDraft: boolean = true;
   
   ngOnInit() {
 
@@ -36,6 +37,8 @@ export class CollectDataComponent implements OnInit {
     this.newTeam = true;
     this.notFound = true;
     this.badMap = true;
+    this.notDraft = true;
+
     this.loading = true;
       this.matchService.SaveMatchData(this.generalData.currentMatchId, api).subscribe((res: any) => {
         console.log(res);
@@ -45,12 +48,22 @@ export class CollectDataComponent implements OnInit {
           this.newTeam = false;
           this.notFound = true;
           this.badMap = true;
+          this.notDraft = true;
         } 
         else if (res == 1)
         {
           this.updateTeam = false;
           this.newTeam = true;
           this.notFound = true;
+          this.notDraft = true;
+          this.badMap = true;
+        }
+        else if (res == 2)
+        {
+          this.updateTeam = true;
+          this.newTeam = true;
+          this.notFound = true;
+          this.notDraft = false;
           this.badMap = true;
         }
         else if (res == 3)
@@ -59,12 +72,14 @@ export class CollectDataComponent implements OnInit {
           this.newTeam = true;
           this.notFound = true;
           this.badMap = false;
+          this.notDraft = true;
         }
         else if (res == 404)
         {
           this.updateTeam = true;
           this.newTeam = true;
           this.notFound = false;
+          this.notDraft = true;
           this.badMap = true;
         }
         console.log("Aaa");

@@ -40,13 +40,13 @@ namespace Analysis.EF.repositories
                     RiotMatch match = new RiotMatch();
                     int start;
                     int mapId;
-                    
+
 
 
 
                     for (int i = 0; i < 5; i++)
                     {
-                        
+
                         match.team1[i] = 0;
                         match.team2[i] = 0;
                     }
@@ -56,6 +56,7 @@ namespace Analysis.EF.repositories
 
                     //GET MAP ID (11 - summoners rift, 12 - ARAM)
                     start = responseString.IndexOf("mapId");
+                    
                     responseString = responseString.Remove(start, 7);
                     string integ = "";
                     while (Char.IsNumber(responseString[start]))
@@ -65,6 +66,13 @@ namespace Analysis.EF.repositories
                     }
                     mapId = Int32.Parse(integ);
                     if (mapId != 11) return 3;
+
+                    //CHECK IF ITS RANKED/DRAFT
+                    start = responseString.IndexOf("bans");
+                    responseString = responseString.Remove(start, 6);
+                    if (responseString[start + 1] == ']') return 2;
+
+
 
                     for (int i = 0; i < 10; i++)
                     {
