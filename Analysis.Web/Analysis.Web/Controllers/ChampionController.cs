@@ -28,7 +28,7 @@ namespace Analysis.Web.Controllers
             _championService = championService;
         }
 
-        [HttpGet]
+        [HttpGet("/{api}")]
         public List<Champion> Get(string api)
         {
             return _championService.GetChampions(api);

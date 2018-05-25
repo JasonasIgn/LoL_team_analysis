@@ -13,8 +13,8 @@ export class GeneralDataService {
 
   constructor(private http: Http) { }
     url = "http://localhost:1756/Champion";
-    getChampions(): Observable<ChampionModel[]> {
-        return this.http.get(this.url)
+    getChampions(api): Observable<ChampionModel[]> {
+        return this.http.get(this.url + '/' + api)
         .map((res: Response) => res.json() as ChampionModel[])
         .catch((error: any) => Observable.throw(error)); 
     }
