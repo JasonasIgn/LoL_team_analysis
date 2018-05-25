@@ -95,6 +95,8 @@ export class SearchTeamsComponent implements OnInit {
           }
           this.team1Winrate = (this.matchdata.team1Wins / (this.matchdata.team1Wins + this.matchdata.team2Wins)) * 100;
           this.team2Winrate = (this.matchdata.team2Wins / (this.matchdata.team2Wins + this.matchdata.team1Wins)) * 100;
+          document.getElementById('team1').style.width = this.team1Winrate + '%';
+          document.getElementById('team2').style.width = this.team2Winrate + '%';
           console.log(data);
         });
     }
