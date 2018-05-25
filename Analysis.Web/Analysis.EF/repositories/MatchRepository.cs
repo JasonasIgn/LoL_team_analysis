@@ -39,6 +39,11 @@ namespace Analysis.EF.repositories
                     StreamReader reader = new StreamReader(responseStream, Encoding.UTF8);
                     RiotMatch match = new RiotMatch();
                     int start;
+                    int mapId;
+                    
+
+
+
                     for (int i = 0; i < 5; i++)
                     {
                         
@@ -48,6 +53,19 @@ namespace Analysis.EF.repositories
                     string teamCode1 = "";
                     string teamCode2 = "";
                     string responseString = reader.ReadToEnd();
+
+                    //GET MAP ID (11 - summoners rift, 12 - ARAM)
+                    start = responseString.IndexOf("mapId");
+                    responseString = responseString.Remove(start, 7);
+                    string integ = "";
+                    while (Char.IsNumber(responseString[start]))
+                    {
+                        integ += responseString[start];
+                        start++;
+                    }
+                    mapId = Int32.Parse(integ);
+                    if (mapId != 11) return 3;
+
                     for (int i = 0; i < 10; i++)
                     {
                         start = responseString.IndexOf("championId");
@@ -57,7 +75,7 @@ namespace Analysis.EF.repositories
                     {
                         start = responseString.IndexOf("championId");
                         responseString = responseString.Remove(start, 12);
-                        string integ = "";
+                        integ = "";
                         while (Char.IsNumber(responseString[start]))
                         {
                             integ += responseString[start];
