@@ -57,6 +57,7 @@ namespace Analysis.EF.repositories
                     RiotMatch match = new RiotMatch();
                     int start;
                     int mapId;
+                    int tolerance = 0;
 
 
 
@@ -97,11 +98,37 @@ namespace Analysis.EF.repositories
 
                     integ = "";
                     //CHECK PLAYER RANKS (accept gold and above)
-                    if (responseString.IndexOf("UNRANKED") != -1 || responseString.IndexOf("BRONZE") != -1
-                        || responseString.IndexOf("SILVER") != -1)
+                    while (responseString.IndexOf("UNRANKED") != -1)
                     {
-                        return 4;
+                        if (tolerance > 3) break;
+                        start = responseString.IndexOf("UNRANKED");
+                        responseString = responseString.Remove(start, 8);
+                        tolerance++;
+                            
                     }
+                    if (tolerance < 4)
+                    {
+                        while (responseString.IndexOf("BRONZE") != -1)
+                        {
+                            if (tolerance > 3) break;
+                            start = responseString.IndexOf("BRONZE");
+                            responseString = responseString.Remove(start, 6);
+                            tolerance++;
+
+                        }
+                    }
+                    if (tolerance < 4)
+                    {
+                        while (responseString.IndexOf("SILVER") != -1)
+                        {
+                            if (tolerance > 3) break;
+                            start = responseString.IndexOf("SILVER");
+                            responseString = responseString.Remove(start, 6);
+                            tolerance++;
+
+                        }
+                    }
+                    if (tolerance > 3) return 4;
 
                     for (int i = 0; i < 10; i++)
                     {
@@ -120,8 +147,6 @@ namespace Analysis.EF.repositories
                         }
                         if (i < 5) match.team1[i] = Int32.Parse(integ);
                         else match.team2[i - 5] = Int32.Parse(integ);
-                        //integ += responseString[start];
-                        //start++;
                     }
                     Array.Sort(match.team1);
                     Array.Sort(match.team2);

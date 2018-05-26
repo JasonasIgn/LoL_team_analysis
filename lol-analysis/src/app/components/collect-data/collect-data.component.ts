@@ -20,7 +20,7 @@ export class CollectDataComponent implements OnInit, OnDestroy {
   updateTeam: boolean = true;
   notFound: boolean = true;
   badMap: boolean = true;
-  notDraft: boolean = true;
+  notRanked: boolean = true;
   lowRank: boolean = true;
   loops: number = 0;
 
@@ -65,7 +65,7 @@ export class CollectDataComponent implements OnInit, OnDestroy {
       this.newTeam = true;
       this.notFound = true;
       this.badMap = true;
-      this.notDraft = true;
+      this.notRanked = true;
       this.lowRank = true;
 
       this.loading = true;
@@ -77,7 +77,7 @@ export class CollectDataComponent implements OnInit, OnDestroy {
             this.newTeam = false;
             this.notFound = true;
             this.badMap = true;
-            this.notDraft = true;
+            this.notRanked = true;
             this.lowRank = true;
             this.generalData.totalTeamCombinations = this.generalData.totalTeamCombinations + 1;
           } 
@@ -86,7 +86,7 @@ export class CollectDataComponent implements OnInit, OnDestroy {
             this.updateTeam = false;
             this.newTeam = true;
             this.notFound = true;
-            this.notDraft = true;
+            this.notRanked = true;
             this.badMap = true;
             this.lowRank = true;
           }
@@ -95,7 +95,7 @@ export class CollectDataComponent implements OnInit, OnDestroy {
             this.updateTeam = true;
             this.newTeam = true;
             this.notFound = true;
-            this.notDraft = false;
+            this.notRanked = false;
             this.badMap = true;
             this.lowRank = true;
           }
@@ -105,7 +105,7 @@ export class CollectDataComponent implements OnInit, OnDestroy {
             this.newTeam = true;
             this.notFound = true;
             this.badMap = false;
-            this.notDraft = true;
+            this.notRanked = true;
             this.lowRank = true;
           }
           else if (res == 4)
@@ -114,7 +114,7 @@ export class CollectDataComponent implements OnInit, OnDestroy {
             this.newTeam = true;
             this.notFound = true;
             this.badMap = true;
-            this.notDraft = true;
+            this.notRanked = true;
             this.lowRank = false;
           }
           else if (res == 404)
@@ -122,7 +122,7 @@ export class CollectDataComponent implements OnInit, OnDestroy {
             this.updateTeam = true;
             this.newTeam = true;
             this.notFound = false;
-            this.notDraft = true;
+            this.notRanked = true;
             this.badMap = true;
             this.lowRank = true;
           }
