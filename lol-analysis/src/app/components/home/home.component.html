@@ -1,8 +1,12 @@
 <div class="conteiner" style="text-align: center;">
+    <div style="text-align: left; margin-left: 10px;">
     <br>
-        Your API key:<br>
+    Current API: {{generalData.apiKey}}
+    <br>
+</div>
+        Update API key:<br>
         <input type="text" #api name="api"><br>
-        <br>
+        <div style="height: 5px;"></div>
         <button type="button" class="btn btn-primary" (click)='UpdateApi(api.value)' [disabled]="loading" >Update</button>
     
         <br>
