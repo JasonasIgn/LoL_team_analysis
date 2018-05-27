@@ -9,5 +9,6 @@ namespace Analysis.EF.entities
         public int Id { get; set; }
         public long CurrentMatchId { get; set; }
         public int TotalTeamCombinations { get; set; }
+        public string ApiKey { get; set; }
     }
 }

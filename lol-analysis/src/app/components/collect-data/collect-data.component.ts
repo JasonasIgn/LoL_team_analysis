@@ -34,6 +34,7 @@ export class CollectDataComponent implements OnInit, OnDestroy {
 
     this.generalDataService.getGeneralData(1).subscribe((response: GeneralData) => {
       this.generalData = response;
+      console.log(this.generalData.apiKey);
     });
 
   }
@@ -42,14 +43,14 @@ export class CollectDataComponent implements OnInit, OnDestroy {
 
   }
   
-  Loop(api:string, loops:number)
+  Loop(loops:number)
   {
     this.loading = true;
     this.loops = loops;
     if (this.loops > 0)
     {
-      this.loopSubscription = Observable.interval(1000).subscribe(x => {
-        this.ExtractData(api);
+      this.loopSubscription = Observable.interval(1100).subscribe(x => {
+        this.ExtractData();
         this.loops--;
         if (this.loops <= 0)
         {
@@ -59,7 +60,7 @@ export class CollectDataComponent implements OnInit, OnDestroy {
       });
     }
   }
-  ExtractData(api: string)
+  ExtractData()
   {
       this.updateTeam = true;
       this.newTeam = true;
@@ -69,7 +70,7 @@ export class CollectDataComponent implements OnInit, OnDestroy {
       this.lowRank = true;
 
       this.loading = true;
-        this.matchService.SaveMatchData(this.generalData.currentMatchId, api).subscribe((res: any) => {
+        this.matchService.SaveMatchData(this.generalData.currentMatchId, this.generalData.apiKey).subscribe((res: any) => {
           console.log(res);
           if (res == 0)
           {

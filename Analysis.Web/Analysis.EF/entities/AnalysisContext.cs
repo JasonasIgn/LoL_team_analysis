@@ -51,6 +51,8 @@ namespace Analysis.EF.entities
 
                 entity.Property(e => e.Id).HasColumnName("Id");
 
+                entity.Property(e => e.ApiKey).HasColumnName("ApiKey");
+
                 entity.Property(e => e.CurrentMatchId)
                 .HasColumnName("CurrentMatchId");
 

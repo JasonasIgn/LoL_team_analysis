@@ -4,13 +4,11 @@
   <br><div>Total team combinations:</div>{{generalData.totalTeamCombinations}}
   <div style="height: 50px;"></div>
   <div>loops: {{loops}}</div>
-  Your API key:<br>
-  <input type="text" #api name="api"><br>
   <br>
   How many matches to analyse?<br>
   <input type="text" #loop name="loop"><br>
   <br>
-  <button type="button" class="btn btn-primary" (click)='Loop(api.value, loop.value)' [disabled]="loading" >Go</button>
+  <button type="button" class="btn btn-primary" (click)='Loop(loop.value)' [disabled]="loading" >Go</button>
 
   <div [hidden]="newTeam">new team! </div>
   <div [hidden]="updateTeam">team updated! </div>
