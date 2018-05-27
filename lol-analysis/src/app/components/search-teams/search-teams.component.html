@@ -2,9 +2,9 @@
 
         <div style="display: inline-block;" *ngFor="let ch of searchChampions; let ind = index;">
 
-            <div class="card border-success just-box" style="height: 100px;width: 100px;" (click)="setSelected(ind)">
-
-            {{ch.name}}
+            <div class="card border-success just-box" style="height: 122px;width: 105px;" (click)="setSelected(ind)">
+                    <div style="height: 20px;">{{ch.name}}</div>
+                    <img src="../../../assets/images/champions/{{ch.id}}.png" >
             </div>
         
         </div>
@@ -32,9 +32,10 @@
     <div>
         <div style="display: inline-block;" *ngFor="let ch of championList; let ind = index;">
 
-            <div class="card border-success just-box" style="height: 100px;width: 100px;" (click)="pickChampion(ch.id)">
+            <div class="card border-success just-box" style="height: 122px;width: 100px; margin: 5px;" (click)="pickChampion(ch.id)">
 
-            {{ch.name}}
+            <div style="height: 20px;">{{ch.name}}</div>
+            <img src="../../../assets/images/champions/{{ch.id}}.png" >
             </div>
         
         </div>
