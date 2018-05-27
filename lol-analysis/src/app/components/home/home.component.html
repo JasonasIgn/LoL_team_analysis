@@ -1,19 +1,20 @@
 <div class="conteiner" style="text-align: center;">
-    <div style="text-align: left; margin-left: 10px;">
-    <br>
-    Current API: {{generalData.apiKey}}
-    <br>
-</div>
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-4">
+                Current API: {{generalData.apiKey}}
+        </div>
+        <div class="col-4">
+            
+        </div>
+        <div class="col-4">
+                <button type="button" class="btn btn-primary" (click)='UpdateChampions()' [disabled]="loading" >Update all champions</button>
+        </div>
+    </div>
         Update API key:<br>
         <input type="text" #api name="api"><br>
         <div style="height: 5px;"></div>
         <button type="button" class="btn btn-primary" (click)='UpdateApi(api.value)' [disabled]="loading" >Update</button>
-    
-        <br>
-        <br>
-        <br>
-        Update all champions:<br>
-        <button type="button" class="btn btn-primary" (click)='UpdateChampions()' [disabled]="loading" >Update</button>
+        
     </div>
     
       

@@ -9,7 +9,7 @@ import { HomeComponent } from '../home/home.component';
 @NgModule({
   imports: [
       RouterModule.forRoot([
-          { path: '' , component: HomeComponent},
+          { path: 'home' , component: HomeComponent},
           { path: 'collect-data' , component: CollectDataComponent},
           { path: 'search-teams' , component: SearchTeamsComponent},
           // otherwise redirect to home
