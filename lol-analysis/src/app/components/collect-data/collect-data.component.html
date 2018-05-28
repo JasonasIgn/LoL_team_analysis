@@ -1,14 +1,32 @@
 <div class="conteiner" style="text-align: center;">
-  <div>Current match id:</div>{{generalData.currentMatchId}}<br>
+  <div class="row">
+    <div class="col-4">
+      <br>
+      <div style="font-size: 30px;">Current run info:</div>
+      <br>
+      <div>Matches analysed: {{matchesAnalysed}}</div>
+      <div>New teams: {{newTeams}}</div>
+      <div>Teams updated: {{updatedTeams}}</div>
+    </div>
+    <div class="col-4">
+        <div>Current match id:</div>{{generalData.currentMatchId}}<br>
   
-  <br><div>Total team combinations:</div>{{generalData.totalTeamCombinations}}
-  <div style="height: 50px;"></div>
-  <div>loops: {{loops}}</div>
-  <br>
-  How many matches to analyse?<br>
-  <input type="text" #loop name="loop"><br>
-  <br>
-  <button type="button" class="btn btn-primary" (click)='Loop(loop.value)' [disabled]="loading" >Go</button>
+        <br><div>Total team combinations:</div>{{generalData.totalTeamCombinations}}
+        <div style="height: 50px;"></div>
+        <div>loops: {{loops}}</div>
+        <br>
+        How many matches to analyse?<br>
+        <input type="text" #loop name="loop"><br>
+        <br>
+        <button type="button" class="btn btn-primary" (click)='Loop(loop.value)' [disabled]="loading" >Go</button>
+    </div>
+    <div class="col-4">
+    
+    </div>
+
+
+  </div>
+  
 
   <div [hidden]="newTeam">new team! </div>
   <div [hidden]="updateTeam">team updated! </div>

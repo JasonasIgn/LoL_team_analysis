@@ -102,4 +102,10 @@ export class SearchTeamsComponent implements OnInit {
         });
     }
   }
+
+  message()
+  {
+    console.log("works");
+  
+  }
 }

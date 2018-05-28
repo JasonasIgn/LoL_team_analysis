@@ -12,6 +12,7 @@ import { MatchService } from './services/match.service';
 import { SearchTeamsComponent } from './components/search-teams/search-teams.component';
 import { ChampionService } from './services/champion.service';
 import { HomeComponent } from './components/home/home.component';
+import { ChampionFilterPipe } from './pipes/champion-filter.pipe';
 
 
 
@@ -21,7 +22,8 @@ import { HomeComponent } from './components/home/home.component';
     NavbarComponent,
     CollectDataComponent,
     SearchTeamsComponent,
-    HomeComponent
+    HomeComponent,
+    ChampionFilterPipe
   ],
   imports: [
     BrowserModule,

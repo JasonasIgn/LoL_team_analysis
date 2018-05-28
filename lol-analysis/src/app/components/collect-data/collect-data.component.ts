@@ -23,6 +23,9 @@ export class CollectDataComponent implements OnInit, OnDestroy {
   notRanked: boolean = true;
   lowRank: boolean = true;
   loops: number = 0;
+  newTeams: number = 0;
+  updatedTeams: number = 0;
+  matchesAnalysed: number = 0;
 
   loopSubscription: Subscription;
 
@@ -47,6 +50,9 @@ export class CollectDataComponent implements OnInit, OnDestroy {
   {
     this.loading = true;
     this.loops = loops;
+    this.updatedTeams = 0;
+    this.newTeams = 0;
+    this.matchesAnalysed = 0;
     if (this.loops > 0)
     {
       this.loopSubscription = Observable.interval(1100).subscribe(x => {
@@ -72,6 +78,7 @@ export class CollectDataComponent implements OnInit, OnDestroy {
       this.loading = true;
         this.matchService.SaveMatchData(this.generalData.currentMatchId, this.generalData.apiKey).subscribe((res: any) => {
           console.log(res);
+          this.matchesAnalysed++;
           if (res == 0)
           {
             this.updateTeam = true;
@@ -81,6 +88,7 @@ export class CollectDataComponent implements OnInit, OnDestroy {
             this.notRanked = true;
             this.lowRank = true;
             this.generalData.totalTeamCombinations = this.generalData.totalTeamCombinations + 1;
+            this.newTeams++;
           } 
           else if (res == 1)
           {
@@ -90,6 +98,7 @@ export class CollectDataComponent implements OnInit, OnDestroy {
             this.notRanked = true;
             this.badMap = true;
             this.lowRank = true;
+            this.updatedTeams++;
           }
           else if (res == 2)
           {

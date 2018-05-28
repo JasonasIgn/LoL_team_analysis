@@ -27,10 +27,22 @@
 
 
     <button type="button" class="btn btn-primary" [disabled]="loading" (click)="search()" >Find</button>
+    
+    <div class="row">
+        <div class="col-4">
+
+        </div>
+        <div class="col-4">
+            
+        </div>
+        <div class="col-4">
+                <input class="form-control mr-sm-2" ng-change="message()" style="width: 200px;" id="searchField" type="text" placeholder="Search">
+        </div>
+    </div>
 
     <div style="height: 20px"></div>
     <div>
-        <div style="display: inline-block;" *ngFor="let ch of championList; let ind = index;">
+        <div style="display: inline-block;" *ngFor="let ch of championList | championFilter; let ind = index;">
 
             <div class="card border-success just-box" style="height: 122px;width: 100px; margin: 5px;" (click)="pickChampion(ch.id)">
 
