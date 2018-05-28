@@ -36,13 +36,13 @@
             
         </div>
         <div class="col-4">
-                <input class="form-control mr-sm-2" ng-change="message()" style="width: 200px;" id="searchField" type="text" placeholder="Search">
+                <app-filter (filterEvent)=setSearchInput($event)></app-filter>
         </div>
     </div>
 
     <div style="height: 20px"></div>
     <div>
-        <div style="display: inline-block;" *ngFor="let ch of championList | championFilter; let ind = index;">
+        <div style="display: inline-block;" *ngFor="let ch of championList | championFilter: searchInput; let ind = index;">
 
             <div class="card border-success just-box" style="height: 122px;width: 100px; margin: 5px;" (click)="pickChampion(ch.id)">
 
@@ -52,4 +52,10 @@
         
         </div>
     </div>
+    <script>
+            function messsage() {
+                console.log("a");
+            }
+    </script>
 </div>
+

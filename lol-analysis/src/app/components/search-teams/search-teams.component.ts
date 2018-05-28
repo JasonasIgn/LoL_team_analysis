@@ -23,6 +23,7 @@ export class SearchTeamsComponent implements OnInit {
   team1Winrate: number = 0;
   team2Winrate: number = 0;
   temp: number = 0;
+  searchInput: string = "";
   constructor(private championService: ChampionService, private matchService: MatchService) { }
 
   ngOnInit() {
@@ -64,7 +65,6 @@ export class SearchTeamsComponent implements OnInit {
 
   search()
   {
-    console.log("a");
     this.teamValid = true;
     for (var i = 0; i < this.searchChampions.length; i++)
     {
@@ -102,10 +102,8 @@ export class SearchTeamsComponent implements OnInit {
         });
     }
   }
-
-  message()
+  setSearchInput(input:string)
   {
-    console.log("works");
-  
+      this.searchInput = input;
   }
 }

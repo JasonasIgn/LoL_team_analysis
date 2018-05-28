@@ -9,7 +9,6 @@ export class ChampionFilterPipe implements PipeTransform {
 
     a: RegExp;
   transform(items: any, input: string): any {
-    console.log(input);
     if (items == null) {
       return [];
 
