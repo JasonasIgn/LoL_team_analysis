@@ -14,7 +14,7 @@ export class ChampionFilterPipe implements PipeTransform {
 
         
     }
-    this.a = new RegExp(input);
-    return items.filter(i => this.a.test(i.name));
+    this.a = new RegExp(input.toLocaleLowerCase());
+    return items.filter(i => this.a.test(i.name.toLowerCase()));
   }
 }
