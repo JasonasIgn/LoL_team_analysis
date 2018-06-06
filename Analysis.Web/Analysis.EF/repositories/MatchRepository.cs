@@ -59,7 +59,7 @@ namespace Analysis.EF.repositories
                     int mapId;
                     int tolerance = 0;
 
-
+                    int champPos = -1;
 
 
                     for (int i = 0; i < 5; i++)
@@ -86,7 +86,7 @@ namespace Analysis.EF.repositories
                     integ = "";
                     if (mapId != 11 && mapId != 1 && mapId != 2) return 3;
 
-                    //CHECK IF ITS RANKED/DRAFT
+                    //CHECK IF ITS RANKED
                     start = responseString.IndexOf("queueId");
                     responseString = responseString.Remove(start, 9);
                     while (Char.IsNumber(responseString[start]))
@@ -130,13 +130,46 @@ namespace Analysis.EF.repositories
                     }
                     if (tolerance > 3) return 4;
 
+                    //ISMETAMI BANNINTI CHAMPAI
                     for (int i = 0; i < 10; i++)
                     {
                         start = responseString.IndexOf("championId");
                         responseString = responseString.Remove(start, 12);
                     }
+
+                    //GAUNAMI PICKINTI CHAMPAI
                     for (int i = 0; i < 10; i++)
                     {
+                        start = responseString.IndexOf("role");
+                        if (responseString[start + 7] == 'N' && responseString[start + 21] == 'J')
+                        {
+                            champPos = 1;
+                            responseString = responseString.Remove(start, 28);
+                        }
+                        else if (responseString[start + 7] == 'S' && responseString[start + 21] == 'M')
+                        {
+                            champPos = 2;
+                            responseString = responseString.Remove(start, 28);
+                        }
+                        else if (responseString[start + 11] == 'S' && responseString[start + 28] == 'B')
+                        {
+                            champPos = 4;
+                            responseString = responseString.Remove(start, 34);
+                        }
+                        else if (responseString[start + 11] == 'C' && responseString[start + 26] == 'B')
+                        {
+                            champPos = 3;
+                            responseString = responseString.Remove(start, 34);
+                        }
+                        else if (responseString[start + 7] == 'S' && responseString[start + 21] == 'T')
+                        {
+                            champPos = 0;
+                            responseString = responseString.Remove(start, 28);
+                        }
+
+                        //ERROR WHILE GETTING POSITIONS
+                        if (i > 4 && match.team2[champPos] != 0 || i <= 4 && match.team1[champPos] != 0) return 5;
+
                         start = responseString.IndexOf("championId");
                         responseString = responseString.Remove(start, 12);
                         integ = "";
@@ -145,11 +178,13 @@ namespace Analysis.EF.repositories
                             integ += responseString[start];
                             start++;
                         }
-                        if (i < 5) match.team1[i] = Int32.Parse(integ);
-                        else match.team2[i - 5] = Int32.Parse(integ);
+                        if (i < 5) match.team1[champPos] = Int32.Parse(integ);
+                        else match.team2[champPos] = Int32.Parse(integ);
                     }
-                    Array.Sort(match.team1);
-                    Array.Sort(match.team2);
+                    //Array.Sort(match.team1);
+                    //Array.Sort(match.team2);
+                    //MORE ERROR EXCEPTIONS WHILE GETTING CHAMPS POSITIONS
+                    if (match.team1.Contains(0) || match.team2.Contains(0)) return 5;
                     teamCode1 += match.team1[0];
                     teamCode2 += match.team2[0];
                     for (int i = 1; i < 5; i++)

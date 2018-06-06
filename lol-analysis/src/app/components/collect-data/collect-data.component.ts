@@ -55,7 +55,7 @@ export class CollectDataComponent implements OnInit, OnDestroy {
     this.matchesAnalysed = 0;
     if (this.loops > 0)
     {
-      this.loopSubscription = Observable.interval(1100).subscribe(x => {
+      this.loopSubscription = Observable.interval(1050).subscribe(x => {
         this.ExtractData();
         this.loops--;
         if (this.loops <= 0)
