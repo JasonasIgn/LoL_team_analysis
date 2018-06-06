@@ -13,6 +13,7 @@ export class SearchTeamsComponent implements OnInit {
 
   championList: ChampionModel[];
   searchChampions: ChampionModel[] = new Array<ChampionModel>(10);
+  searchChampionsPositions: string[] = new Array<string>(10);
   selected: number = -1;
   teamValid: boolean = true;
   teamCode1:string = "";
@@ -29,6 +30,16 @@ export class SearchTeamsComponent implements OnInit {
   ngOnInit() {
     this.matchdata.team1Wins = 0;
     this.matchdata.team2Wins = 0;
+    this.searchChampionsPositions[0] = "TOP";
+    this.searchChampionsPositions[1] = "JUNGLE";
+    this.searchChampionsPositions[2] = "MIDDLE";
+    this.searchChampionsPositions[3] = "ADC";
+    this.searchChampionsPositions[4] = "SUPPORT";
+    this.searchChampionsPositions[5] = "TOP";
+    this.searchChampionsPositions[6] = "JUNGLE";
+    this.searchChampionsPositions[7] = "MIDDLE";
+    this.searchChampionsPositions[8] = "ADC";
+    this.searchChampionsPositions[9] = "SUPPORT";
     for (var i = 0; i < 10; i++)
     {
       this.searchChampions[i] = new ChampionModel();
