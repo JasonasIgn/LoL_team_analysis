@@ -93,8 +93,8 @@ namespace Analysis.EF.repositories
                         list.Add(champ);
                         champ = new Champion();
                     }
-                    AnalysisContext.RemoveRange(list);
-                    AnalysisContext.AddRange(list);
+                    AnalysisContext.Database.ExecuteSqlCommand("TRUNCATE TABLE [champion]");
+                    AnalysisContext.Champion.AddRange(list);
                     AnalysisContext.SaveChanges();
                     return list;
                 }

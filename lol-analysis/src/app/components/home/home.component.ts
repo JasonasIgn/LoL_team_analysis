@@ -36,7 +36,7 @@ export class HomeComponent implements OnInit {
 
   UpdateChampions()
   {
-    this.championService.updateChampions(this.api).subscribe((data: ChampionModel[]) =>{
+    this.championService.updateChampions(this.generalData.apiKey).subscribe((data: ChampionModel[]) =>{
       console.log("success");
     });
   }

@@ -88,6 +88,7 @@ namespace Analysis.EF.repositories
                     }
                     string teamCode1 = "";
                     string teamCode2 = "";
+                    string suggestion = "";
                     string responseString = reader.ReadToEnd();
 
                     //GET MAP ID (11 - summoners rift, 12 - ARAM)
@@ -281,30 +282,7 @@ namespace Analysis.EF.repositories
                                                                 uniqueCode1 += i9 + MAXIND * 511;
                                                                 uniqueCode2 += i9 + MAXIND * 15;
                                                             }
-                                                            //uniqueCode1 = i0 + (i1 + MAXIND * 1 * (i1 / i1)) + (i2 + MAXIND * 3 * (i2 / i2)) + (i3 + MAXIND * 7 * (i3 / i3)) +
-                                                            //    (i4 + MAXIND * 1 * (i4 / i)) + (i1 + MAXIND * 1 * (i1 / i1)) + (i1 + MAXIND * 1 * (i1 / i1)) + (i1 + MAXIND * 1 * (i1 / i1)) + (i1 + MAXIND * 1 * (i1 / i1)) + (i1 + MAXIND * 1 * (i1 / i1));
-                                                            //uniqueCode2 = i5 + i6 + MAXIND * 1 + i7 + MAXIND * 3 + i8 + MAXIND * 7 + i9 + MAXIND * 15 + i0 + MAXIND * 31 + i1 + MAXIND * 63 + i2 + MAXIND * 127 + i3 + MAXIND * 255 + i4 + MAXIND * 511;
-                                                            //teamCode1 = i0 + "_" + i1 + "_" + i2 + "_" + i3 + "_" + i4 + "-" + i5 + "_" + i6 + "_" + i7 + "_" + i8 + "_" + i9;
-                                                            //teamCode2 = i9 + "_" + i8 + "_" + i7 + "_" + i6 + "_" + i5 + "-" + i4 + "_" + i3 + "_" + i2 + "_" + i1 + "_" + i0;
-                                                            //teamCode1 = "";
-                                                            //teamCode2 = "";
-                                                            //teamCode1 += i0;
-                                                            //teamCode2 += i5;
-                                                            //for (int i = 1; i < 5; i++)
-                                                            //{
-                                                            //    teamCode1 += "_" + match.team1[i];
-                                                            //    teamCode2 += "_" + match.team2[i];
-                                                            //}
-                                                            //teamCode1 += "-";
-                                                            //teamCode2 += "-";
-
-                                                            //teamCode2 += match.team1[0];
-                                                            //teamCode1 += match.team2[0];
-                                                            //for (int i = 1; i < 5; i++)
-                                                            //{
-                                                            //    teamCode2 += "_" + match.team1[i];
-                                                            //    teamCode1 += "_" + match.team2[i];
-                                                            //}
+                                                            
                                                             if (uniqueCode1 != 0)
                                                             {
                                                                 if (AnalysisContext.Match.Any(x => x.Id == uniqueCode1))
@@ -313,8 +291,7 @@ namespace Analysis.EF.repositories
                                                                     if (match.winTeam1 == true) newMatch.Team1Wins++;
                                                                     else newMatch.Team2Wins++;
                                                                     AnalysisContext.Update(newMatch);
-                                                                    //AnalysisContext.SaveChanges();
-                                                                    //return 1;
+                                                                    
                                                                 }
                                                                 else if (AnalysisContext.Match.Any(x => x.Id == uniqueCode2))
                                                                 {
@@ -322,8 +299,7 @@ namespace Analysis.EF.repositories
                                                                     if (match.winTeam1 == true) newMatch.Team2Wins++;
                                                                     else newMatch.Team1Wins++;
                                                                     AnalysisContext.Update(newMatch);
-                                                                    //AnalysisContext.SaveChanges();
-                                                                    //return 1;
+                                                                    
                                                                 }
                                                                 else
                                                                 {
@@ -331,9 +307,9 @@ namespace Analysis.EF.repositories
                                                                     newMatch.Id = uniqueCode1;
                                                                     if (match.winTeam1 == true) newMatch.Team1Wins = 1;
                                                                     else newMatch.Team2Wins = 1;
+                                                                    
                                                                     AnalysisContext.Add(newMatch);
-                                                                    //AnalysisContext.SaveChanges();
-                                                                    //return 0;
+                                                                    
                                                                 }
                                                             }
 
