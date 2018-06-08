@@ -32,9 +32,37 @@ namespace Analysis.EF.entities
 
                 entity.Property(e => e.Id).HasColumnName("Id");
 
-                //entity.Property(e => e.TeamCode)
-                //.HasColumnName("TeamCode")
-                //.HasMaxLength(40);
+                entity.Property(e => e.Suggestion0)
+                .HasColumnName("Suggestion0");
+
+                entity.Property(e => e.Suggestion1)
+                .HasColumnName("Suggestion1");
+
+                entity.Property(e => e.Suggestion2)
+                .HasColumnName("Suggestion2");
+
+                entity.Property(e => e.Suggestion3)
+                .HasColumnName("Suggestion3");
+
+                entity.Property(e => e.Suggestion4)
+                .HasColumnName("Suggestion4");
+
+                entity.Property(e => e.Suggestion5)
+                .HasColumnName("Suggestion5");
+
+                entity.Property(e => e.Suggestion6)
+                .HasColumnName("Suggestion6");
+
+                entity.Property(e => e.Suggestion7)
+                .HasColumnName("Suggestion7");
+
+                entity.Property(e => e.Suggestion8)
+                .HasColumnName("Suggestion8");
+
+                entity.Property(e => e.Suggestion9)
+                .HasColumnName("Suggestion9");
+
+                
 
                 entity.Property(e => e.Team1Wins)
                     .HasColumnName("Team1Wins")
