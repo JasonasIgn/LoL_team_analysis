@@ -12,3 +12,4 @@ namespace Analysis.EF.entities
         public string ApiKey { get; set; }
     }
 }
+

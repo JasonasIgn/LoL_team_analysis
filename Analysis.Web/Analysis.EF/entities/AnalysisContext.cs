@@ -32,9 +32,9 @@ namespace Analysis.EF.entities
 
                 entity.Property(e => e.Id).HasColumnName("Id");
 
-                entity.Property(e => e.TeamCode)
-                .HasColumnName("TeamCode")
-                .HasMaxLength(255);
+                //entity.Property(e => e.TeamCode)
+                //.HasColumnName("TeamCode")
+                //.HasMaxLength(40);
 
                 entity.Property(e => e.Team1Wins)
                     .HasColumnName("Team1Wins")

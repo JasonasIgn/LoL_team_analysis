@@ -48,16 +48,19 @@ export class CollectDataComponent implements OnInit, OnDestroy {
   
   Loop(loops:number)
   {
-    this.loading = true;
+    //this.loading = true;
     this.loops = loops;
     this.updatedTeams = 0;
     this.newTeams = 0;
     this.matchesAnalysed = 0;
     if (this.loops > 0)
     {
-      this.loopSubscription = Observable.interval(1050).subscribe(x => {
-        this.ExtractData();
-        this.loops--;
+      this.loopSubscription = Observable.interval(2000).subscribe(x => {
+        if (this.loading == false)
+        {
+          this.ExtractData();
+          this.loops--;
+        }
         if (this.loops <= 0)
         {
           this.loading = false;
@@ -136,7 +139,7 @@ export class CollectDataComponent implements OnInit, OnDestroy {
             this.badMap = true;
             this.lowRank = true;
           }
-          
+          this.loading = false;
           
         });
         this.generalData.currentMatchId = this.generalData.currentMatchId + 1;
