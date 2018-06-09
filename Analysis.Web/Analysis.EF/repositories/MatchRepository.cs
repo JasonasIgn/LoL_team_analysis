@@ -13,7 +13,7 @@ namespace Analysis.EF.repositories
     
     public class MatchRepository : Repository<Match>, IMatchRepository
     {
-        const int MAXIND = 516;   //maksimalus champion id
+        const int MAXIND = 555;   //maksimalus champion id
         private IChampionRepository _championRepository;
         public MatchRepository(AnalysisContext context, IChampionRepository championRepository) : base(context)
         {
@@ -46,8 +46,56 @@ namespace Analysis.EF.repositories
                 team1array[i] = Int32.Parse(team1arrayStr[i]);
                 team2array[i] = Int32.Parse(team2arrayStr[i]);
             }
-            teamCode1 = team1array[0] + team1array[1] + MAXIND * 1 + team1array[2] + MAXIND * 3 + team1array[3] + MAXIND * 7 + team1array[4] + MAXIND * 15 + team2array[0] + MAXIND * 31 + team2array[1] + MAXIND * 63 + team2array[2] + MAXIND * 127 + team2array[3] + MAXIND * 255 + team2array[4] + MAXIND * 511;
-            teamCode2 = team2array[0] + team2array[1] + MAXIND * 1 + team2array[2] + MAXIND * 3 + team2array[3] + MAXIND * 7 + team2array[4] + MAXIND * 15 + team1array[0] + MAXIND * 31 + team1array[1] + MAXIND * 63 + team1array[2] + MAXIND * 127 + team1array[3] + MAXIND * 255 + team1array[4] + MAXIND * 511;
+            if (team1array[0] != 0)
+            {
+                teamCode1 += team1array[0];
+                teamCode2 += team1array[0] + MAXIND * 31;
+            }
+            if (team1array[1] != 0)
+            {
+                teamCode1 += team1array[1] + MAXIND * 1;
+                teamCode2 += team1array[1] + MAXIND * 63;
+            }
+            if (team1array[2] != 0)
+            {
+                teamCode1 += team1array[2] + MAXIND * 3;
+                teamCode2 += team1array[2] + MAXIND * 127;
+            }
+            if (team1array[3] != 0)
+            {
+                teamCode1 += team1array[3] + MAXIND * 7;
+                teamCode2 += team1array[3] + MAXIND * 255;
+            }
+            if (team1array[4] != 0)
+            {
+                teamCode1 += team1array[4] + MAXIND * 15;
+                teamCode2 += team1array[4] + MAXIND * 511;
+            }
+            if (team2array[0] != 0)
+            {
+                teamCode1 += team2array[0] + MAXIND * 31;
+                teamCode2 += team2array[0];
+            }
+            if (team2array[1] != 0)
+            {
+                teamCode1 += team2array[1] + MAXIND * 63;
+                teamCode2 += team2array[1] + MAXIND * 1;
+            }
+            if (team2array[2] != 0)
+            {
+                teamCode1 += team2array[2] + MAXIND * 127;
+                teamCode2 += team2array[2] + MAXIND * 3;
+            }
+            if (team2array[3] != 0)
+            {
+                teamCode1 += team2array[3] + MAXIND * 255;
+                teamCode2 += team2array[3] + MAXIND * 7;
+            }
+            if (team2array[4] != 0)
+            {
+                teamCode1 += team2array[4] + MAXIND * 511;
+                teamCode2 += team2array[4] + MAXIND * 15;
+            }
             if (AnalysisContext.Match.Any(x => x.Id == teamCode1))
             {
                 return AnalysisContext.Match
@@ -769,12 +817,6 @@ namespace Analysis.EF.repositories
 
 
 
-
-
-
-                    
-
-                    
                 }
             }
             catch (WebException ex)

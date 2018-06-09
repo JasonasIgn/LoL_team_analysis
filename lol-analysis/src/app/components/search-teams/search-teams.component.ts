@@ -11,6 +11,9 @@ import { MatchService } from '../../services/match.service';
 })
 export class SearchTeamsComponent implements OnInit {
 
+  MAXIND: number = 555;
+  teamUniqueCode1: number = 0;
+  teamUniqueCode2: number = 0;
   championList: ChampionModel[];
   searchChampions: ChampionModel[] = new Array<ChampionModel>(10);
   searchChampionsPositions: string[] = new Array<string>(10);
@@ -43,7 +46,7 @@ export class SearchTeamsComponent implements OnInit {
     for (var i = 0; i < 10; i++)
     {
       this.searchChampions[i] = new ChampionModel();
-        this.searchChampions[i].id = -1;
+        this.searchChampions[i].id = 0;
         this.searchChampions[i].title = "not selected";
         this.searchChampions[i].name = "not selected";
         this.searchChampions[i].key = "not selected";
@@ -93,18 +96,69 @@ export class SearchTeamsComponent implements OnInit {
       //this.teamIds2.sort();
       this.teamCode1 = this.teamIds1[0] + '_' + this.teamIds1[1] + '_' + this.teamIds1[2] + '_' + this.teamIds1[3] + '_' + this.teamIds1[4];
       this.teamCode2 = this.teamIds2[0] + '_' + this.teamIds2[1] + '_' + this.teamIds2[2] + '_' + this.teamIds2[3] + '_' + this.teamIds2[4];
+      if (this.teamIds1[0] != 0)
+      {
+          this.teamUniqueCode1 += this.teamIds1[0];
+          this.teamUniqueCode2 += this.teamIds1[0] + this.MAXIND * 31;
+      }
+      if (this.teamIds1[1] != 0)
+      {
+        this.teamUniqueCode1 += this.teamIds1[1] + this.MAXIND * 1;
+        this.teamUniqueCode2 += this.teamIds1[1] + this.MAXIND * 63;
+      }
+      if (this.teamIds1[2] != 0)
+      {
+        this.teamUniqueCode1 += this.teamIds1[2] + this.MAXIND * 3;
+        this.teamUniqueCode2 += this.teamIds1[2] + this.MAXIND * 127;
+      }
+      if (this.teamIds1[3] != 0)
+      {
+        this.teamUniqueCode1 += this.teamIds1[3] + this.MAXIND * 7;
+        this.teamUniqueCode2 += this.teamIds1[3] + this.MAXIND * 255;
+      }
+      if (this.teamIds1[4] != 0)
+      {
+        this.teamUniqueCode1 += this.teamIds1[4] + this.MAXIND * 15;
+        this.teamUniqueCode2 += this.teamIds1[4] + this.MAXIND * 511;
+      }
+      if (this.teamIds2[0] != 0)
+      {
+        this.teamUniqueCode1 += this.teamIds2[0] + this.MAXIND * 31;
+        this.teamUniqueCode2 += this.teamIds2[0];
+      }
+      if (this.teamIds2[1] != 0)
+      {
+        this.teamUniqueCode1 += this.teamIds2[1] + this.MAXIND * 63;
+        this.teamUniqueCode2 += this.teamIds2[1] + this.MAXIND * 1;
+      }
+      if (this.teamIds2[2] != 0)
+      {
+        this.teamUniqueCode1 += this.teamIds2[2] + this.MAXIND * 127;
+        this.teamUniqueCode2 += this.teamIds2[2] + this.MAXIND * 3;
+      }
+      if (this.teamIds2[3] != 0)
+      {
+        this.teamUniqueCode1 += this.teamIds2[3] + this.MAXIND * 255;
+        this.teamUniqueCode2 += this.teamIds2[3] + this.MAXIND * 7;
+      }
+      if (this.teamIds2[4] != 0)
+      {
+        this.teamUniqueCode1 += this.teamIds2[4] + this.MAXIND * 511;
+        this.teamUniqueCode2 += this.teamIds2[4] + this.MAXIND * 15;
+      }
       //this.teamCode1 = "19_51_62_238_432";
       //this.teamCode2 = "22_45_86_141_201";
         console.log(this.teamCode1);
         this.matchService.getMatch(this.teamCode1, this.teamCode2).subscribe((data: MatchModel) =>{
           
           this.matchdata = data;
-          if (data.teamCode.indexOf(this.teamCode1) != -1 && data.teamCode.indexOf(this.teamCode1) != 0)
-          {
-            this.temp = data.team1Wins;
-            this.matchdata.team1Wins = data.team2Wins;
-            this.matchdata.team2Wins = this.temp;
-          }
+          console.log(data);
+          //if (data.teamCode.indexOf(this.teamCode1) != -1 && data.teamCode.indexOf(this.teamCode1) != 0)
+          //{
+          //  this.temp = data.team1Wins;
+          //  this.matchdata.team1Wins = data.team2Wins;
+          //  this.matchdata.team2Wins = this.temp;
+          //}
           this.team1Winrate = (this.matchdata.team1Wins / (this.matchdata.team1Wins + this.matchdata.team2Wins)) * 100;
           this.team2Winrate = (this.matchdata.team2Wins / (this.matchdata.team2Wins + this.matchdata.team1Wins)) * 100;
           document.getElementById('team1').style.width = this.team1Winrate + '%';
