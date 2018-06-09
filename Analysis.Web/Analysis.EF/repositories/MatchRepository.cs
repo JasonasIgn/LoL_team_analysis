@@ -289,428 +289,430 @@ namespace Analysis.EF.repositories
                                                                 if (AnalysisContext.Match.Any(x => x.Id == uniqueCode1))
                                                                 {
                                                                     Match newMatch = GetMatchByTeamcode(uniqueCode1);
-                                                                    if (match.winTeam1 == true)
-                                                                    {
-                                                                        newMatch.Team1Wins++;
-                                                                        if (i0 == 0 && newMatch.Suggestion0 != null)
-                                                                        {
-                                                                            temp = match.team1[0].ToString() + "(";
-                                                                            if (newMatch.Suggestion0.IndexOf(temp) == -1) newMatch.Suggestion0 += match.team1[0] + "(1)";
-                                                                            else
-                                                                            {
-                                                                                start = newMatch.Suggestion0.IndexOf(match.team1[0] + "(");
-                                                                                start += match.team1[0].ToString().Length + 1;      //Neefektyvu
-                                                                                integ = "";
-                                                                                while (Char.IsNumber(newMatch.Suggestion0[start]))
-                                                                                {
-                                                                                    integ += newMatch.Suggestion0[start];
-                                                                                    start++;
-                                                                                }
-                                                                                integINT = Int32.Parse(integ) + 1;
-                                                                                newMatch.Suggestion0 = newMatch.Suggestion0.Replace(match.team1[0] + "(" + integ + ")", match.team1[0] + "(" + integINT + ")");
-                                                                            }
-                                                                           
-                                                                        }
-                                                                        else if (i0 == 0 && newMatch.Suggestion0 == null) newMatch.Suggestion0 = match.team1[0] + "(1)";
+                                                                    newMatch = UpdateMatch(match.winTeam1, newMatch, match, i0, i1, i2, i3, i4, i5, i6, i7, i8, i9);
+                                                                    //if (match.winTeam1 == true)
+                                                                    //{
+                                                                    //    newMatch.Team1Wins++;
+                                                                    //    if (i0 == 0 && newMatch.Suggestion0 != null)
+                                                                    //    {
+                                                                    //        temp = match.team1[0].ToString() + "(";
+                                                                    //        if (newMatch.Suggestion0.IndexOf(temp) == -1) newMatch.Suggestion0 += match.team1[0] + "(1,0)";
+                                                                    //        else
+                                                                    //        {
+                                                                    //            start = newMatch.Suggestion0.IndexOf(match.team1[0] + "(");
+                                                                    //            start += match.team1[0].ToString().Length + 1;      //Neefektyvu
+                                                                    //            integ = "";
+                                                                    //            while (Char.IsNumber(newMatch.Suggestion0[start]))
+                                                                    //            {
+                                                                    //                integ += newMatch.Suggestion0[start];
+                                                                    //                start++;
+                                                                    //            }
+                                                                    //            integINT = Int32.Parse(integ) + 1;
+                                                                    //            newMatch.Suggestion0 = newMatch.Suggestion0.Replace(match.team1[0] + "(" + integ + ")", match.team1[0] + "(" + integINT + ")");
+                                                                    //        }
 
-                                                                        if (i1 == 0 && newMatch.Suggestion1 != null)
-                                                                        {
-                                                                            temp = match.team1[1].ToString() + "(";
-                                                                            if (newMatch.Suggestion1.IndexOf(temp) == -1) newMatch.Suggestion1 += match.team1[1] + "(1)";
-                                                                            else
-                                                                            {
-                                                                                start = newMatch.Suggestion1.IndexOf(match.team1[1] + "(");
-                                                                                start += match.team1[1].ToString().Length + 1;      //Neefektyvu
-                                                                                integ = "";
-                                                                                while (Char.IsNumber(newMatch.Suggestion1[start]))
-                                                                                {
-                                                                                    integ += newMatch.Suggestion1[start];
-                                                                                    start++;
-                                                                                }
-                                                                                integINT = Int32.Parse(integ);
-                                                                                newMatch.Suggestion1 = newMatch.Suggestion1.Replace(match.team1[1] + "(" + integ + ")", match.team1[1] + "(" + integINT + 1 + ")");
-                                                                            }
-                                                                        }
-                                                                        else if (i1 == 0 && newMatch.Suggestion1 == null) newMatch.Suggestion1 = match.team1[1] + "(1)";
+                                                                    //    }
+                                                                    //    else if (i0 == 0 && newMatch.Suggestion0 == null) newMatch.Suggestion0 = match.team1[0] + "(1,0)";
 
-                                                                        
-                                                                        if (i2 == 0 && newMatch.Suggestion2 != null)
-                                                                        {
-                                                                            temp = match.team1[2].ToString() + "(";
-                                                                            if (newMatch.Suggestion2.IndexOf(temp) == -1) newMatch.Suggestion2 += match.team1[2] + "(1)";
-                                                                            else
-                                                                            {
-                                                                                start = newMatch.Suggestion2.IndexOf(match.team1[2] + "(");
-                                                                                start += match.team1[2].ToString().Length + 1;      //Neefektyvu
-                                                                                integ = "";
-                                                                                while (Char.IsNumber(newMatch.Suggestion2[start]))
-                                                                                {
-                                                                                    integ += newMatch.Suggestion2[start];
-                                                                                    start++;
-                                                                                }
-                                                                                integINT = Int32.Parse(integ) + 1;
-                                                                                newMatch.Suggestion2 = newMatch.Suggestion2.Replace(match.team1[2] + "(" + integ + ")", match.team1[2] + "(" + integINT + ")");
-                                                                            }
-                                                                        }
-                                                                        else if (i2 == 0 && newMatch.Suggestion2 == null) newMatch.Suggestion2 = match.team1[2] + "(1)";
+                                                                    //    if (i1 == 0 && newMatch.Suggestion1 != null)
+                                                                    //    {
+                                                                    //        temp = match.team1[1].ToString() + "(";
+                                                                    //        if (newMatch.Suggestion1.IndexOf(temp) == -1) newMatch.Suggestion1 += match.team1[1] + "(1,0)";
+                                                                    //        else
+                                                                    //        {
+                                                                    //            start = newMatch.Suggestion1.IndexOf(match.team1[1] + "(");
+                                                                    //            start += match.team1[1].ToString().Length + 1;      //Neefektyvu
+                                                                    //            integ = "";
+                                                                    //            while (Char.IsNumber(newMatch.Suggestion1[start]))
+                                                                    //            {
+                                                                    //                integ += newMatch.Suggestion1[start];
+                                                                    //                start++;
+                                                                    //            }
+                                                                    //            integINT = Int32.Parse(integ);
+                                                                    //            newMatch.Suggestion1 = newMatch.Suggestion1.Replace(match.team1[1] + "(" + integ + ")", match.team1[1] + "(" + integINT + 1 + ")");
+                                                                    //        }
+                                                                    //    }
+                                                                    //    else if (i1 == 0 && newMatch.Suggestion1 == null) newMatch.Suggestion1 = match.team1[1] + "(1,0)";
 
-                                                                        if (i3 == 0 && newMatch.Suggestion3 != null)
-                                                                        {
-                                                                            temp = match.team1[3].ToString() + "(";
-                                                                            if (newMatch.Suggestion3.IndexOf(temp) == -1) newMatch.Suggestion3 += match.team1[3] + "(1)";
-                                                                            else
-                                                                            {
-                                                                                start = newMatch.Suggestion3.IndexOf(match.team1[3] + "(");
-                                                                                start += match.team1[3].ToString().Length + 1;      //Neefektyvu
-                                                                                integ = "";
-                                                                                while (Char.IsNumber(newMatch.Suggestion3[start]))
-                                                                                {
-                                                                                    integ += newMatch.Suggestion3[start];
-                                                                                    start++;
-                                                                                }
-                                                                                integINT = Int32.Parse(integ) + 1;
-                                                                                newMatch.Suggestion3 = newMatch.Suggestion3.Replace(match.team1[3] + "(" + integ + ")", match.team1[3] + "(" + integINT + ")");
-                                                                            }
-                                                                        }
-                                                                        else if (i3 == 0 && newMatch.Suggestion3 == null) newMatch.Suggestion3 = match.team1[3] + "(1)";
 
-                                                                        if (i4 == 0 && newMatch.Suggestion4 != null)
-                                                                        {
-                                                                            temp = match.team1[4].ToString() + "(";
-                                                                            if (newMatch.Suggestion4.IndexOf(temp) == -1) newMatch.Suggestion4 += match.team1[4] + "(1)";
-                                                                            else
-                                                                            {
-                                                                                
-                                                                                start = newMatch.Suggestion4.IndexOf(match.team1[4] + "(");
-                                                                                start += match.team1[4].ToString().Length + 1;      //Neefektyvu
-                                                                                integ = "";
-                                                                                while (Char.IsNumber(newMatch.Suggestion4[start]))
-                                                                                {
-                                                                                    integ += newMatch.Suggestion4[start];
-                                                                                    start++;
-                                                                                }
-                                                                                integINT = Int32.Parse(integ) + 1;
-                                                                                newMatch.Suggestion4 = newMatch.Suggestion4.Replace(match.team1[4] + "(" + integ + ")", match.team1[4] + "(" + integINT + ")");
-                                                                            }
-                                                                        }
-                                                                        else if (i4 == 0 && newMatch.Suggestion4 == null) newMatch.Suggestion4 = match.team1[4] + "(1)";
-                                                                    }
-                                                                    else
-                                                                    {
-                                                                        newMatch.Team2Wins++;
-                                                                        if (i5 == 0 && newMatch.Suggestion5 != null)
-                                                                        {
-                                                                            temp = match.team2[0].ToString() + "(";
-                                                                            if (newMatch.Suggestion5.IndexOf(temp) == -1) newMatch.Suggestion5 += match.team2[0] + "(1)";
-                                                                            else
-                                                                            {
-                                                                                start = newMatch.Suggestion5.IndexOf(match.team2[0] + "(");
-                                                                                start += match.team2[0].ToString().Length + 1;      //Neefektyvu
-                                                                                integ = "";
-                                                                                while (Char.IsNumber(newMatch.Suggestion5[start]))
-                                                                                {
-                                                                                    integ += newMatch.Suggestion5[start];
-                                                                                    start++;
-                                                                                }
-                                                                                integINT = Int32.Parse(integ) + 1;
-                                                                                newMatch.Suggestion5 = newMatch.Suggestion5.Replace(match.team2[0] + "(" + integ + ")", match.team2[0] + "(" + integINT + ")");
-                                                                            }
-                                                                        }
-                                                                        else if (i5 == 0 && newMatch.Suggestion5 == null) newMatch.Suggestion5 = match.team2[0] + "(1)";
+                                                                    //    if (i2 == 0 && newMatch.Suggestion2 != null)
+                                                                    //    {
+                                                                    //        temp = match.team1[2].ToString() + "(";
+                                                                    //        if (newMatch.Suggestion2.IndexOf(temp) == -1) newMatch.Suggestion2 += match.team1[2] + "(1,0)";
+                                                                    //        else
+                                                                    //        {
+                                                                    //            start = newMatch.Suggestion2.IndexOf(match.team1[2] + "(");
+                                                                    //            start += match.team1[2].ToString().Length + 1;      //Neefektyvu
+                                                                    //            integ = "";
+                                                                    //            while (Char.IsNumber(newMatch.Suggestion2[start]))
+                                                                    //            {
+                                                                    //                integ += newMatch.Suggestion2[start];
+                                                                    //                start++;
+                                                                    //            }
+                                                                    //            integINT = Int32.Parse(integ) + 1;
+                                                                    //            newMatch.Suggestion2 = newMatch.Suggestion2.Replace(match.team1[2] + "(" + integ + ")", match.team1[2] + "(" + integINT + ")");
+                                                                    //        }
+                                                                    //    }
+                                                                    //    else if (i2 == 0 && newMatch.Suggestion2 == null) newMatch.Suggestion2 = match.team1[2] + "(1,0)";
 
-                                                                        if (i6 == 0 && newMatch.Suggestion6 != null)
-                                                                        {
-                                                                            temp = match.team2[1].ToString() + "(";
-                                                                            if (newMatch.Suggestion6.IndexOf(temp) == -1) newMatch.Suggestion6 += match.team2[1] + "(1)";
-                                                                            else
-                                                                            {
-                                                                                start = newMatch.Suggestion6.IndexOf(match.team2[1] + "(");
-                                                                                start += match.team2[1].ToString().Length + 1;      //Neefektyvu
-                                                                                integ = "";
-                                                                                while (Char.IsNumber(newMatch.Suggestion6[start]))
-                                                                                {
-                                                                                    integ += newMatch.Suggestion6[start];
-                                                                                    start++;
-                                                                                }
-                                                                                integINT = Int32.Parse(integ) + 1;
-                                                                                newMatch.Suggestion6 = newMatch.Suggestion6.Replace(match.team2[1] + "(" + integ + ")", match.team2[1] + "(" + integINT + ")");
-                                                                            }
-                                                                        }
-                                                                        else if (i6 == 0 && newMatch.Suggestion6 == null) newMatch.Suggestion6 = match.team2[1] + "(1)";
+                                                                    //    if (i3 == 0 && newMatch.Suggestion3 != null)
+                                                                    //    {
+                                                                    //        temp = match.team1[3].ToString() + "(";
+                                                                    //        if (newMatch.Suggestion3.IndexOf(temp) == -1) newMatch.Suggestion3 += match.team1[3] + "(1,0)";
+                                                                    //        else
+                                                                    //        {
+                                                                    //            start = newMatch.Suggestion3.IndexOf(match.team1[3] + "(");
+                                                                    //            start += match.team1[3].ToString().Length + 1;      //Neefektyvu
+                                                                    //            integ = "";
+                                                                    //            while (Char.IsNumber(newMatch.Suggestion3[start]))
+                                                                    //            {
+                                                                    //                integ += newMatch.Suggestion3[start];
+                                                                    //                start++;
+                                                                    //            }
+                                                                    //            integINT = Int32.Parse(integ) + 1;
+                                                                    //            newMatch.Suggestion3 = newMatch.Suggestion3.Replace(match.team1[3] + "(" + integ + ")", match.team1[3] + "(" + integINT + ")");
+                                                                    //        }
+                                                                    //    }
+                                                                    //    else if (i3 == 0 && newMatch.Suggestion3 == null) newMatch.Suggestion3 = match.team1[3] + "(1,0)";
 
-                                                                        if (i7 == 0 && newMatch.Suggestion7 != null)
-                                                                        {
-                                                                            temp = match.team2[2].ToString() + "(";
-                                                                            if (newMatch.Suggestion7.IndexOf(temp) == -1) newMatch.Suggestion7 += match.team2[2] + "(1)";
-                                                                            else
-                                                                            {
-                                                                                start = newMatch.Suggestion7.IndexOf(match.team2[2] + "(");
-                                                                                start += match.team2[2].ToString().Length + 1;      //Neefektyvu
-                                                                                integ = "";
-                                                                                while (Char.IsNumber(newMatch.Suggestion7[start]))
-                                                                                {
-                                                                                    integ += newMatch.Suggestion7[start];
-                                                                                    start++;
-                                                                                }
-                                                                                integINT = Int32.Parse(integ) + 1;
-                                                                                newMatch.Suggestion7 = newMatch.Suggestion7.Replace(match.team2[2] + "(" + integ + ")", match.team2[2] + "(" + integINT + ")");
-                                                                            }
-                                                                        }
-                                                                        else if (i7 == 0 && newMatch.Suggestion7 == null) newMatch.Suggestion7 = match.team2[2] + "(1)";
+                                                                    //    if (i4 == 0 && newMatch.Suggestion4 != null)
+                                                                    //    {
+                                                                    //        temp = match.team1[4].ToString() + "(";
+                                                                    //        if (newMatch.Suggestion4.IndexOf(temp) == -1) newMatch.Suggestion4 += match.team1[4] + "(1,0)";
+                                                                    //        else
+                                                                    //        {
 
-                                                                        if (i8 == 0 && newMatch.Suggestion8 != null)
-                                                                        {
-                                                                            temp = match.team2[3].ToString() + "(";
-                                                                            if (newMatch.Suggestion8.IndexOf(temp) == -1) newMatch.Suggestion8 += match.team2[3] + "(1)";
-                                                                            else
-                                                                            {
-                                                                                start = newMatch.Suggestion8.IndexOf(match.team2[3] + "(");
-                                                                                start += match.team2[3].ToString().Length + 1;      //Neefektyvu
-                                                                                integ = "";
-                                                                                while (Char.IsNumber(newMatch.Suggestion8[start]))
-                                                                                {
-                                                                                    integ += newMatch.Suggestion8[start];
-                                                                                    start++;
-                                                                                }
-                                                                                integINT = Int32.Parse(integ) + 1;
-                                                                                newMatch.Suggestion8 = newMatch.Suggestion8.Replace(match.team2[3] + "(" + integ + ")", match.team2[3] + "(" + integINT + ")");
-                                                                            }
-                                                                        }
-                                                                        else if (i8 == 0 && newMatch.Suggestion8 == null) newMatch.Suggestion8 = match.team2[3] + "(1)";
+                                                                    //            start = newMatch.Suggestion4.IndexOf(match.team1[4] + "(");
+                                                                    //            start += match.team1[4].ToString().Length + 1;      //Neefektyvu
+                                                                    //            integ = "";
+                                                                    //            while (Char.IsNumber(newMatch.Suggestion4[start]))
+                                                                    //            {
+                                                                    //                integ += newMatch.Suggestion4[start];
+                                                                    //                start++;
+                                                                    //            }
+                                                                    //            integINT = Int32.Parse(integ) + 1;
+                                                                    //            newMatch.Suggestion4 = newMatch.Suggestion4.Replace(match.team1[4] + "(" + integ + ")", match.team1[4] + "(" + integINT + ")");
+                                                                    //        }
+                                                                    //    }
+                                                                    //    else if (i4 == 0 && newMatch.Suggestion4 == null) newMatch.Suggestion4 = match.team1[4] + "(1,0)";
+                                                                    //}
+                                                                    //else
+                                                                    //{
+                                                                    //    newMatch.Team2Wins++;
+                                                                    //    if (i5 == 0 && newMatch.Suggestion5 != null)
+                                                                    //    {
+                                                                    //        temp = match.team2[0].ToString() + "(";
+                                                                    //        if (newMatch.Suggestion5.IndexOf(temp) == -1) newMatch.Suggestion5 += match.team2[0] + "(1,0)";
+                                                                    //        else
+                                                                    //        {
+                                                                    //            start = newMatch.Suggestion5.IndexOf(match.team2[0] + "(");
+                                                                    //            start += match.team2[0].ToString().Length + 1;      //Neefektyvu
+                                                                    //            integ = "";
+                                                                    //            while (Char.IsNumber(newMatch.Suggestion5[start]))
+                                                                    //            {
+                                                                    //                integ += newMatch.Suggestion5[start];
+                                                                    //                start++;
+                                                                    //            }
+                                                                    //            integINT = Int32.Parse(integ) + 1;
+                                                                    //            newMatch.Suggestion5 = newMatch.Suggestion5.Replace(match.team2[0] + "(" + integ + ")", match.team2[0] + "(" + integINT + ")");
+                                                                    //        }
+                                                                    //    }
+                                                                    //    else if (i5 == 0 && newMatch.Suggestion5 == null) newMatch.Suggestion5 = match.team2[0] + "(1,0)";
 
-                                                                        if (i9 == 0 && newMatch.Suggestion9 != null)
-                                                                        {
-                                                                            temp = match.team2[4].ToString() + "(";
-                                                                            if (newMatch.Suggestion9.IndexOf(temp) == -1) newMatch.Suggestion9 += match.team2[4] + "(1)";
-                                                                            else
-                                                                            {
-                                                                                start = newMatch.Suggestion9.IndexOf(match.team2[4] + "(");
-                                                                                start += match.team2[4].ToString().Length + 1;      //Neefektyvu
-                                                                                integ = "";
-                                                                                while (Char.IsNumber(newMatch.Suggestion9[start]))
-                                                                                {
-                                                                                    integ += newMatch.Suggestion9[start];
-                                                                                    start++;
-                                                                                }
-                                                                                integINT = Int32.Parse(integ) + 1;
-                                                                                newMatch.Suggestion9 = newMatch.Suggestion9.Replace(match.team2[4] + "(" + integ + ")", match.team2[4] + "(" + integINT + ")");
-                                                                            }
-                                                                            
-                                                                        }
-                                                                        else if (i9 == 0 && newMatch.Suggestion9 == null) newMatch.Suggestion9 = match.team2[4] + "(1)";
-                                                                    }
+                                                                    //    if (i6 == 0 && newMatch.Suggestion6 != null)
+                                                                    //    {
+                                                                    //        temp = match.team2[1].ToString() + "(";
+                                                                    //        if (newMatch.Suggestion6.IndexOf(temp) == -1) newMatch.Suggestion6 += match.team2[1] + "(1,0)";
+                                                                    //        else
+                                                                    //        {
+                                                                    //            start = newMatch.Suggestion6.IndexOf(match.team2[1] + "(");
+                                                                    //            start += match.team2[1].ToString().Length + 1;      //Neefektyvu
+                                                                    //            integ = "";
+                                                                    //            while (Char.IsNumber(newMatch.Suggestion6[start]))
+                                                                    //            {
+                                                                    //                integ += newMatch.Suggestion6[start];
+                                                                    //                start++;
+                                                                    //            }
+                                                                    //            integINT = Int32.Parse(integ) + 1;
+                                                                    //            newMatch.Suggestion6 = newMatch.Suggestion6.Replace(match.team2[1] + "(" + integ + ")", match.team2[1] + "(" + integINT + ")");
+                                                                    //        }
+                                                                    //    }
+                                                                    //    else if (i6 == 0 && newMatch.Suggestion6 == null) newMatch.Suggestion6 = match.team2[1] + "(1,0)";
+
+                                                                    //    if (i7 == 0 && newMatch.Suggestion7 != null)
+                                                                    //    {
+                                                                    //        temp = match.team2[2].ToString() + "(";
+                                                                    //        if (newMatch.Suggestion7.IndexOf(temp) == -1) newMatch.Suggestion7 += match.team2[2] + "(1,0)";
+                                                                    //        else
+                                                                    //        {
+                                                                    //            start = newMatch.Suggestion7.IndexOf(match.team2[2] + "(");
+                                                                    //            start += match.team2[2].ToString().Length + 1;      //Neefektyvu
+                                                                    //            integ = "";
+                                                                    //            while (Char.IsNumber(newMatch.Suggestion7[start]))
+                                                                    //            {
+                                                                    //                integ += newMatch.Suggestion7[start];
+                                                                    //                start++;
+                                                                    //            }
+                                                                    //            integINT = Int32.Parse(integ) + 1;
+                                                                    //            newMatch.Suggestion7 = newMatch.Suggestion7.Replace(match.team2[2] + "(" + integ + ")", match.team2[2] + "(" + integINT + ")");
+                                                                    //        }
+                                                                    //    }
+                                                                    //    else if (i7 == 0 && newMatch.Suggestion7 == null) newMatch.Suggestion7 = match.team2[2] + "(1,0)";
+
+                                                                    //    if (i8 == 0 && newMatch.Suggestion8 != null)
+                                                                    //    {
+                                                                    //        temp = match.team2[3].ToString() + "(";
+                                                                    //        if (newMatch.Suggestion8.IndexOf(temp) == -1) newMatch.Suggestion8 += match.team2[3] + "(1,0)";
+                                                                    //        else
+                                                                    //        {
+                                                                    //            start = newMatch.Suggestion8.IndexOf(match.team2[3] + "(");
+                                                                    //            start += match.team2[3].ToString().Length + 1;      //Neefektyvu
+                                                                    //            integ = "";
+                                                                    //            while (Char.IsNumber(newMatch.Suggestion8[start]))
+                                                                    //            {
+                                                                    //                integ += newMatch.Suggestion8[start];
+                                                                    //                start++;
+                                                                    //            }
+                                                                    //            integINT = Int32.Parse(integ) + 1;
+                                                                    //            newMatch.Suggestion8 = newMatch.Suggestion8.Replace(match.team2[3] + "(" + integ + ")", match.team2[3] + "(" + integINT + ")");
+                                                                    //        }
+                                                                    //    }
+                                                                    //    else if (i8 == 0 && newMatch.Suggestion8 == null) newMatch.Suggestion8 = match.team2[3] + "(1,0)";
+
+                                                                    //    if (i9 == 0 && newMatch.Suggestion9 != null)
+                                                                    //    {
+                                                                    //        temp = match.team2[4].ToString() + "(";
+                                                                    //        if (newMatch.Suggestion9.IndexOf(temp) == -1) newMatch.Suggestion9 += match.team2[4] + "(1,0)";
+                                                                    //        else
+                                                                    //        {
+                                                                    //            start = newMatch.Suggestion9.IndexOf(match.team2[4] + "(");
+                                                                    //            start += match.team2[4].ToString().Length + 1;      //Neefektyvu
+                                                                    //            integ = "";
+                                                                    //            while (Char.IsNumber(newMatch.Suggestion9[start]))
+                                                                    //            {
+                                                                    //                integ += newMatch.Suggestion9[start];
+                                                                    //                start++;
+                                                                    //            }
+                                                                    //            integINT = Int32.Parse(integ) + 1;
+                                                                    //            newMatch.Suggestion9 = newMatch.Suggestion9.Replace(match.team2[4] + "(" + integ + ")", match.team2[4] + "(" + integINT + ")");
+                                                                    //        }
+
+                                                                    //    }
+                                                                    //    else if (i9 == 0 && newMatch.Suggestion9 == null) newMatch.Suggestion9 = match.team2[4] + "(1,0)";
+                                                                    //}
                                                                     AnalysisContext.Update(newMatch);
                                                                     
                                                                 }
                                                                 else if (AnalysisContext.Match.Any(x => x.Id == uniqueCode2))
                                                                 {
                                                                     Match newMatch = GetMatchByTeamcode(uniqueCode2);
-                                                                    if (match.winTeam1 == true)
-                                                                    {
-                                                                        newMatch.Team2Wins++;
-                                                                        if (i5 == 0 && newMatch.Suggestion5 != null)
-                                                                        {
-                                                                            temp = match.team2[0].ToString() + "(";
-                                                                            if (newMatch.Suggestion5.IndexOf(temp) == -1) newMatch.Suggestion5 += match.team2[0] + "(1)";
-                                                                            else
-                                                                            {
-                                                                                start = newMatch.Suggestion5.IndexOf(match.team2[0] + "(");
-                                                                                start += match.team2[0].ToString().Length + 1;      //Neefektyvu
-                                                                                integ = "";
-                                                                                while (Char.IsNumber(newMatch.Suggestion5[start]))
-                                                                                {
-                                                                                    integ += newMatch.Suggestion5[start];
-                                                                                    start++;
-                                                                                }
-                                                                                integINT = Int32.Parse(integ) + 1;
-                                                                                newMatch.Suggestion5 = newMatch.Suggestion5.Replace(match.team2[0] + "(" + integ + ")", match.team2[0] + "(" + integINT + ")");
-                                                                            }
-                                                                        }
-                                                                        else if (i5 == 0 && newMatch.Suggestion5 == null) newMatch.Suggestion5 = match.team2[0] + "(1)";
+                                                                    newMatch = UpdateMatch(match.winTeam1, newMatch, match, i0, i1, i2, i3, i4, i5, i6, i7, i8, i9);
+                                                                    //if (match.winTeam1 == true)
+                                                                    //{
+                                                                    //    newMatch.Team2Wins++;   //////////
+                                                                    //    if (i5 == 0 && newMatch.Suggestion5 != null)
+                                                                    //    {
+                                                                    //        temp = match.team2[0].ToString() + "(";
+                                                                    //        if (newMatch.Suggestion5.IndexOf(temp) == -1) newMatch.Suggestion5 += match.team2[0] + "(1,0)";
+                                                                    //        else
+                                                                    //        {
+                                                                    //            start = newMatch.Suggestion5.IndexOf(match.team2[0] + "(");
+                                                                    //            start += match.team2[0].ToString().Length + 1;      //Neefektyvu
+                                                                    //            integ = "";
+                                                                    //            while (Char.IsNumber(newMatch.Suggestion5[start]))
+                                                                    //            {
+                                                                    //                integ += newMatch.Suggestion5[start];
+                                                                    //                start++;
+                                                                    //            }
+                                                                    //            integINT = Int32.Parse(integ) + 1;
+                                                                    //            newMatch.Suggestion5 = newMatch.Suggestion5.Replace(match.team2[0] + "(" + integ + ")", match.team2[0] + "(" + integINT + ")");
+                                                                    //        }
+                                                                    //    }
+                                                                    //    else if (i5 == 0 && newMatch.Suggestion5 == null) newMatch.Suggestion5 = match.team2[0] + "(1,0)";
 
-                                                                        if (i6 == 0 && newMatch.Suggestion6 != null)
-                                                                        {
-                                                                            temp = match.team2[1].ToString() + "(";
-                                                                            if (newMatch.Suggestion6.IndexOf(temp) == -1) newMatch.Suggestion6 += match.team2[1] + "(1)";
-                                                                            else
-                                                                            {
-                                                                                start = newMatch.Suggestion6.IndexOf(match.team2[1] + "(");
-                                                                                start += match.team2[1].ToString().Length + 1;      //Neefektyvu
-                                                                                integ = "";
-                                                                                while (Char.IsNumber(newMatch.Suggestion6[start]))
-                                                                                {
-                                                                                    integ += newMatch.Suggestion6[start];
-                                                                                    start++;
-                                                                                }
-                                                                                integINT = Int32.Parse(integ) + 1;
-                                                                                newMatch.Suggestion6 = newMatch.Suggestion6.Replace(match.team2[1] + "(" + integ + ")", match.team2[1] + "(" + integINT + ")");
-                                                                            }
-                                                                        }
-                                                                        else if (i6 == 0 && newMatch.Suggestion6 == null) newMatch.Suggestion6 = match.team2[1] + "(1)";
+                                                                    //    if (i6 == 0 && newMatch.Suggestion6 != null)
+                                                                    //    {
+                                                                    //        temp = match.team2[1].ToString() + "(";
+                                                                    //        if (newMatch.Suggestion6.IndexOf(temp) == -1) newMatch.Suggestion6 += match.team2[1] + "(1,0)";
+                                                                    //        else
+                                                                    //        {
+                                                                    //            start = newMatch.Suggestion6.IndexOf(match.team2[1] + "(");
+                                                                    //            start += match.team2[1].ToString().Length + 1;      //Neefektyvu
+                                                                    //            integ = "";
+                                                                    //            while (Char.IsNumber(newMatch.Suggestion6[start]))
+                                                                    //            {
+                                                                    //                integ += newMatch.Suggestion6[start];
+                                                                    //                start++;
+                                                                    //            }
+                                                                    //            integINT = Int32.Parse(integ) + 1;
+                                                                    //            newMatch.Suggestion6 = newMatch.Suggestion6.Replace(match.team2[1] + "(" + integ + ")", match.team2[1] + "(" + integINT + ")");
+                                                                    //        }
+                                                                    //    }
+                                                                    //    else if (i6 == 0 && newMatch.Suggestion6 == null) newMatch.Suggestion6 = match.team2[1] + "(1,0)";
 
-                                                                        if (i7 == 0 && newMatch.Suggestion7 != null)
-                                                                        {
-                                                                            temp = match.team2[2].ToString() + "(";
-                                                                            if (newMatch.Suggestion7.IndexOf(temp) == -1) newMatch.Suggestion7 += match.team2[2] + "(1)";
-                                                                            else
-                                                                            {
-                                                                                start = newMatch.Suggestion7.IndexOf(match.team2[2] + "(");
-                                                                                start += match.team2[2].ToString().Length + 1;      //Neefektyvu
-                                                                                integ = "";
-                                                                                while (Char.IsNumber(newMatch.Suggestion7[start]))
-                                                                                {
-                                                                                    integ += newMatch.Suggestion7[start];
-                                                                                    start++;
-                                                                                }
-                                                                                integINT = Int32.Parse(integ) + 1;
-                                                                                newMatch.Suggestion7 = newMatch.Suggestion7.Replace(match.team2[2] + "(" + integ + ")", match.team2[2] + "(" + integINT + ")");
-                                                                            }
-                                                                        }
-                                                                        else if (i7 == 0 && newMatch.Suggestion7 == null) newMatch.Suggestion7 = match.team2[2] + "(1)";
+                                                                    //    if (i7 == 0 && newMatch.Suggestion7 != null)
+                                                                    //    {
+                                                                    //        temp = match.team2[2].ToString() + "(";
+                                                                    //        if (newMatch.Suggestion7.IndexOf(temp) == -1) newMatch.Suggestion7 += match.team2[2] + "(1,0)";
+                                                                    //        else
+                                                                    //        {
+                                                                    //            start = newMatch.Suggestion7.IndexOf(match.team2[2] + "(");
+                                                                    //            start += match.team2[2].ToString().Length + 1;      //Neefektyvu
+                                                                    //            integ = "";
+                                                                    //            while (Char.IsNumber(newMatch.Suggestion7[start]))
+                                                                    //            {
+                                                                    //                integ += newMatch.Suggestion7[start];
+                                                                    //                start++;
+                                                                    //            }
+                                                                    //            integINT = Int32.Parse(integ) + 1;
+                                                                    //            newMatch.Suggestion7 = newMatch.Suggestion7.Replace(match.team2[2] + "(" + integ + ")", match.team2[2] + "(" + integINT + ")");
+                                                                    //        }
+                                                                    //    }
+                                                                    //    else if (i7 == 0 && newMatch.Suggestion7 == null) newMatch.Suggestion7 = match.team2[2] + "(1,0)";
 
-                                                                        if (i8 == 0 && newMatch.Suggestion8 != null)
-                                                                        {
-                                                                            temp = match.team2[3].ToString() + "(";
-                                                                            if (newMatch.Suggestion8.IndexOf(temp) == -1) newMatch.Suggestion8 += match.team2[3] + "(1)";
-                                                                            else
-                                                                            {
-                                                                                start = newMatch.Suggestion8.IndexOf(match.team2[3] + "(");
-                                                                                start += match.team2[3].ToString().Length + 1;      //Neefektyvu
-                                                                                integ = "";
-                                                                                while (Char.IsNumber(newMatch.Suggestion8[start]))
-                                                                                {
-                                                                                    integ += newMatch.Suggestion8[start];
-                                                                                    start++;
-                                                                                }
-                                                                                integINT = Int32.Parse(integ) + 1;
-                                                                                newMatch.Suggestion8 = newMatch.Suggestion8.Replace(match.team2[3] + "(" + integ + ")", match.team2[3] + "(" + integINT + ")");
-                                                                            }
-                                                                        }
-                                                                        else if (i8 == 0 && newMatch.Suggestion8 == null) newMatch.Suggestion8 = match.team2[3] + "(1)";
+                                                                    //    if (i8 == 0 && newMatch.Suggestion8 != null)
+                                                                    //    {
+                                                                    //        temp = match.team2[3].ToString() + "(";
+                                                                    //        if (newMatch.Suggestion8.IndexOf(temp) == -1) newMatch.Suggestion8 += match.team2[3] + "(1,0)";
+                                                                    //        else
+                                                                    //        {
+                                                                    //            start = newMatch.Suggestion8.IndexOf(match.team2[3] + "(");
+                                                                    //            start += match.team2[3].ToString().Length + 1;      //Neefektyvu
+                                                                    //            integ = "";
+                                                                    //            while (Char.IsNumber(newMatch.Suggestion8[start]))
+                                                                    //            {
+                                                                    //                integ += newMatch.Suggestion8[start];
+                                                                    //                start++;
+                                                                    //            }
+                                                                    //            integINT = Int32.Parse(integ) + 1;
+                                                                    //            newMatch.Suggestion8 = newMatch.Suggestion8.Replace(match.team2[3] + "(" + integ + ")", match.team2[3] + "(" + integINT + ")");
+                                                                    //        }
+                                                                    //    }
+                                                                    //    else if (i8 == 0 && newMatch.Suggestion8 == null) newMatch.Suggestion8 = match.team2[3] + "(1,0)";
 
-                                                                        if (i9 == 0 && newMatch.Suggestion9 != null)
-                                                                        {
-                                                                            temp = match.team2[4].ToString() + "(";
-                                                                            if (newMatch.Suggestion9.IndexOf(temp) == -1) newMatch.Suggestion9 += match.team2[4] + "(1)";
-                                                                            else
-                                                                            {
-                                                                                start = newMatch.Suggestion9.IndexOf(match.team2[4] + "(");
-                                                                                start += match.team2[4].ToString().Length + 1;      //Neefektyvu
-                                                                                integ = "";
-                                                                                while (Char.IsNumber(newMatch.Suggestion9[start]))
-                                                                                {
-                                                                                    integ += newMatch.Suggestion9[start];
-                                                                                    start++;
-                                                                                }
-                                                                                integINT = Int32.Parse(integ) + 1;
-                                                                                newMatch.Suggestion9 = newMatch.Suggestion9.Replace(match.team2[4] + "(" + integ + ")", match.team2[4] + "(" + integINT + ")");
-                                                                            }
-                                                                        }
-                                                                        else if (i9 == 0 && newMatch.Suggestion9 == null) newMatch.Suggestion9 = match.team2[4] + "(1)";
-                                                                    }
-                                                                    else
-                                                                    {
-                                                                        newMatch.Team1Wins++;
-                                                                        if (i0 == 0 && newMatch.Suggestion0 != null)
-                                                                        {
-                                                                            temp = match.team1[0].ToString() + "(";
-                                                                            if (newMatch.Suggestion0.IndexOf(temp) == -1) newMatch.Suggestion0 += match.team1[0] + "(1)";
-                                                                            else
-                                                                            {
-                                                                                start = newMatch.Suggestion0.IndexOf(match.team1[0] + "(");
-                                                                                start += match.team1[0].ToString().Length + 1;      //Neefektyvu
-                                                                                integ = "";
-                                                                                while (Char.IsNumber(newMatch.Suggestion0[start]))
-                                                                                {
-                                                                                    integ += newMatch.Suggestion0[start];
-                                                                                    start++;
-                                                                                }
-                                                                                integINT = Int32.Parse(integ) + 1;
-                                                                                newMatch.Suggestion0 = newMatch.Suggestion0.Replace(match.team1[0] + "(" + integ + ")", match.team1[0] + "(" + integINT + ")");
-                                                                            }
-                                                                        }
-                                                                        else if (i0 == 0 && newMatch.Suggestion0 == null) newMatch.Suggestion0 = match.team1[0] + "(1)";
+                                                                    //    if (i9 == 0 && newMatch.Suggestion9 != null)
+                                                                    //    {
+                                                                    //        temp = match.team2[4].ToString() + "(";
+                                                                    //        if (newMatch.Suggestion9.IndexOf(temp) == -1) newMatch.Suggestion9 += match.team2[4] + "(1,0)";
+                                                                    //        else
+                                                                    //        {
+                                                                    //            start = newMatch.Suggestion9.IndexOf(match.team2[4] + "(");
+                                                                    //            start += match.team2[4].ToString().Length + 1;      //Neefektyvu
+                                                                    //            integ = "";
+                                                                    //            while (Char.IsNumber(newMatch.Suggestion9[start]))
+                                                                    //            {
+                                                                    //                integ += newMatch.Suggestion9[start];
+                                                                    //                start++;
+                                                                    //            }
+                                                                    //            integINT = Int32.Parse(integ) + 1;
+                                                                    //            newMatch.Suggestion9 = newMatch.Suggestion9.Replace(match.team2[4] + "(" + integ + ")", match.team2[4] + "(" + integINT + ")");
+                                                                    //        }
+                                                                    //    }
+                                                                    //    else if (i9 == 0 && newMatch.Suggestion9 == null) newMatch.Suggestion9 = match.team2[4] + "(1,0)";
+                                                                    //}
+                                                                    //else
+                                                                    //{
+                                                                    //    newMatch.Team1Wins++;
+                                                                    //    if (i0 == 0 && newMatch.Suggestion0 != null)
+                                                                    //    {
+                                                                    //        temp = match.team1[0].ToString() + "(";
+                                                                    //        if (newMatch.Suggestion0.IndexOf(temp) == -1) newMatch.Suggestion0 += match.team1[0] + "(1,0)";
+                                                                    //        else
+                                                                    //        {
+                                                                    //            start = newMatch.Suggestion0.IndexOf(match.team1[0] + "(");
+                                                                    //            start += match.team1[0].ToString().Length + 1;      //Neefektyvu
+                                                                    //            integ = "";
+                                                                    //            while (Char.IsNumber(newMatch.Suggestion0[start]))
+                                                                    //            {
+                                                                    //                integ += newMatch.Suggestion0[start];
+                                                                    //                start++;
+                                                                    //            }
+                                                                    //            integINT = Int32.Parse(integ) + 1;
+                                                                    //            newMatch.Suggestion0 = newMatch.Suggestion0.Replace(match.team1[0] + "(" + integ + ")", match.team1[0] + "(" + integINT + ")");
+                                                                    //        }
+                                                                    //    }
+                                                                    //    else if (i0 == 0 && newMatch.Suggestion0 == null) newMatch.Suggestion0 = match.team1[0] + "(1,0)";
 
-                                                                        if (i1 == 0 && newMatch.Suggestion1 != null)
-                                                                        {
-                                                                            temp = match.team1[1].ToString() + "(";
-                                                                            if (newMatch.Suggestion1.IndexOf(temp) == -1) newMatch.Suggestion1 += match.team1[1] + "(1)";
-                                                                            else
-                                                                            {
-                                                                                start = newMatch.Suggestion1.IndexOf(match.team1[1] + "(");
-                                                                                start += match.team1[1].ToString().Length + 1;      //Neefektyvu
-                                                                                integ = "";
-                                                                                while (Char.IsNumber(newMatch.Suggestion1[start]))
-                                                                                {
-                                                                                    integ += newMatch.Suggestion1[start];
-                                                                                    start++;
-                                                                                }
-                                                                                integINT = Int32.Parse(integ) + 1;
-                                                                                newMatch.Suggestion1 = newMatch.Suggestion1.Replace(match.team1[1] + "(" + integ + ")", match.team1[1] + "(" + integINT + ")");
-                                                                            }
-                                                                        }
-                                                                        else if (i1 == 0 && newMatch.Suggestion1 == null) newMatch.Suggestion1 = match.team1[1] + "(1)";
+                                                                    //    if (i1 == 0 && newMatch.Suggestion1 != null)
+                                                                    //    {
+                                                                    //        temp = match.team1[1].ToString() + "(";
+                                                                    //        if (newMatch.Suggestion1.IndexOf(temp) == -1) newMatch.Suggestion1 += match.team1[1] + "(1,0)";
+                                                                    //        else
+                                                                    //        {
+                                                                    //            start = newMatch.Suggestion1.IndexOf(match.team1[1] + "(");
+                                                                    //            start += match.team1[1].ToString().Length + 1;      //Neefektyvu
+                                                                    //            integ = "";
+                                                                    //            while (Char.IsNumber(newMatch.Suggestion1[start]))
+                                                                    //            {
+                                                                    //                integ += newMatch.Suggestion1[start];
+                                                                    //                start++;
+                                                                    //            }
+                                                                    //            integINT = Int32.Parse(integ) + 1;
+                                                                    //            newMatch.Suggestion1 = newMatch.Suggestion1.Replace(match.team1[1] + "(" + integ + ")", match.team1[1] + "(" + integINT + ")");
+                                                                    //        }
+                                                                    //    }
+                                                                    //    else if (i1 == 0 && newMatch.Suggestion1 == null) newMatch.Suggestion1 = match.team1[1] + "(1,0)";
 
-                                                                        if (i2 == 0 && newMatch.Suggestion2 != null)
-                                                                        {
-                                                                            temp = match.team1[2].ToString() + "(";
-                                                                            if (newMatch.Suggestion2.IndexOf(temp) == -1) newMatch.Suggestion2 += match.team1[2] + "(1)";
-                                                                            else
-                                                                            {
-                                                                                start = newMatch.Suggestion2.IndexOf(match.team1[2] + "(");
-                                                                                start += match.team1[2].ToString().Length + 1;      //Neefektyvu
-                                                                                integ = "";
-                                                                                while (Char.IsNumber(newMatch.Suggestion2[start]))
-                                                                                {
-                                                                                    integ += newMatch.Suggestion2[start];
-                                                                                    start++;
-                                                                                }
-                                                                                integINT = Int32.Parse(integ) + 1;
-                                                                                newMatch.Suggestion2 = newMatch.Suggestion2.Replace(match.team1[2] + "(" + integ + ")", match.team1[2] + "(" + integINT + ")");
-                                                                            }
-                                                                        }
-                                                                        else if (i2 == 0 && newMatch.Suggestion2 == null) newMatch.Suggestion2 = match.team1[2] + "(1)";
+                                                                    //    if (i2 == 0 && newMatch.Suggestion2 != null)
+                                                                    //    {
+                                                                    //        temp = match.team1[2].ToString() + "(";
+                                                                    //        if (newMatch.Suggestion2.IndexOf(temp) == -1) newMatch.Suggestion2 += match.team1[2] + "(1,0)";
+                                                                    //        else
+                                                                    //        {
+                                                                    //            start = newMatch.Suggestion2.IndexOf(match.team1[2] + "(");
+                                                                    //            start += match.team1[2].ToString().Length + 1;      //Neefektyvu
+                                                                    //            integ = "";
+                                                                    //            while (Char.IsNumber(newMatch.Suggestion2[start]))
+                                                                    //            {
+                                                                    //                integ += newMatch.Suggestion2[start];
+                                                                    //                start++;
+                                                                    //            }
+                                                                    //            integINT = Int32.Parse(integ) + 1;
+                                                                    //            newMatch.Suggestion2 = newMatch.Suggestion2.Replace(match.team1[2] + "(" + integ + ")", match.team1[2] + "(" + integINT + ")");
+                                                                    //        }
+                                                                    //    }
+                                                                    //    else if (i2 == 0 && newMatch.Suggestion2 == null) newMatch.Suggestion2 = match.team1[2] + "(1,0)";
 
-                                                                        if (i3 == 0 && newMatch.Suggestion3 != null)
-                                                                        {
-                                                                            temp = match.team1[3].ToString() + "(";
-                                                                            if (newMatch.Suggestion3.IndexOf(temp) == -1) newMatch.Suggestion3 += match.team1[3] + "(1)";
-                                                                            else
-                                                                            {
-                                                                                start = newMatch.Suggestion3.IndexOf(match.team1[3] + "(");
-                                                                                start += match.team1[3].ToString().Length + 1;      //Neefektyvu
-                                                                                integ = "";
-                                                                                while (Char.IsNumber(newMatch.Suggestion3[start]))
-                                                                                {
-                                                                                    integ += newMatch.Suggestion3[start];
-                                                                                    start++;
-                                                                                }
-                                                                                integINT = Int32.Parse(integ) + 1;
-                                                                                newMatch.Suggestion3 = newMatch.Suggestion3.Replace(match.team1[3] + "(" + integ + ")", match.team1[3] + "(" + integINT + ")");
-                                                                            }
-                                                                        }
-                                                                        else if (i3 == 0 && newMatch.Suggestion3 == null) newMatch.Suggestion3 = match.team1[3] + "(1)";
+                                                                    //    if (i3 == 0 && newMatch.Suggestion3 != null)
+                                                                    //    {
+                                                                    //        temp = match.team1[3].ToString() + "(";
+                                                                    //        if (newMatch.Suggestion3.IndexOf(temp) == -1) newMatch.Suggestion3 += match.team1[3] + "(1,0)";
+                                                                    //        else
+                                                                    //        {
+                                                                    //            start = newMatch.Suggestion3.IndexOf(match.team1[3] + "(");
+                                                                    //            start += match.team1[3].ToString().Length + 1;      //Neefektyvu
+                                                                    //            integ = "";
+                                                                    //            while (Char.IsNumber(newMatch.Suggestion3[start]))
+                                                                    //            {
+                                                                    //                integ += newMatch.Suggestion3[start];
+                                                                    //                start++;
+                                                                    //            }
+                                                                    //            integINT = Int32.Parse(integ) + 1;
+                                                                    //            newMatch.Suggestion3 = newMatch.Suggestion3.Replace(match.team1[3] + "(" + integ + ")", match.team1[3] + "(" + integINT + ")");
+                                                                    //        }
+                                                                    //    }
+                                                                    //    else if (i3 == 0 && newMatch.Suggestion3 == null) newMatch.Suggestion3 = match.team1[3] + "(1,0)";
 
-                                                                        if (i4 == 0 && newMatch.Suggestion4 != null)
-                                                                        {
-                                                                            temp = match.team1[4].ToString() + "(";
-                                                                            if (newMatch.Suggestion4.IndexOf(temp) == -1) newMatch.Suggestion4 += match.team1[4] + "(1)";
-                                                                            else
-                                                                            {
-                                                                                start = newMatch.Suggestion4.IndexOf(match.team1[4] + "(");
-                                                                                start += match.team1[4].ToString().Length + 1;      //Neefektyvu
-                                                                                integ = "";
-                                                                                while (Char.IsNumber(newMatch.Suggestion4[start]))
-                                                                                {
-                                                                                    integ += newMatch.Suggestion4[start];
-                                                                                    start++;
-                                                                                }
-                                                                                integINT = Int32.Parse(integ) + 1;
-                                                                                newMatch.Suggestion4 = newMatch.Suggestion4.Replace(match.team1[4] + "(" + integ + ")", match.team1[4] + "(" + integINT + ")");
-                                                                            }
-                                                                        }
-                                                                        else if (i4 == 0 && newMatch.Suggestion4 == null) newMatch.Suggestion4 = match.team1[4] + "(1)";
-                                                                    }
+                                                                    //    if (i4 == 0 && newMatch.Suggestion4 != null)
+                                                                    //    {
+                                                                    //        temp = match.team1[4].ToString() + "(";
+                                                                    //        if (newMatch.Suggestion4.IndexOf(temp) == -1) newMatch.Suggestion4 += match.team1[4] + "(1,0)";
+                                                                    //        else
+                                                                    //        {
+                                                                    //            start = newMatch.Suggestion4.IndexOf(match.team1[4] + "(");
+                                                                    //            start += match.team1[4].ToString().Length + 1;      //Neefektyvu
+                                                                    //            integ = "";
+                                                                    //            while (Char.IsNumber(newMatch.Suggestion4[start]))
+                                                                    //            {
+                                                                    //                integ += newMatch.Suggestion4[start];
+                                                                    //                start++;
+                                                                    //            }
+                                                                    //            integINT = Int32.Parse(integ) + 1;
+                                                                    //            newMatch.Suggestion4 = newMatch.Suggestion4.Replace(match.team1[4] + "(" + integ + ")", match.team1[4] + "(" + integINT + ")");
+                                                                    //        }
+                                                                    //    }
+                                                                    //    else if (i4 == 0 && newMatch.Suggestion4 == null) newMatch.Suggestion4 = match.team1[4] + "(1,0)";
+                                                                    //}
                                                                     AnalysisContext.Update(newMatch);
                                                                     
                                                                 }
@@ -721,20 +723,30 @@ namespace Analysis.EF.repositories
                                                                     if (match.winTeam1 == true)
                                                                     {
                                                                         newMatch.Team1Wins = 1;
-                                                                        if (i0 == 0) newMatch.Suggestion0 = match.team1[0] + "(1)";
-                                                                        if (i1 == 0) newMatch.Suggestion1 = match.team1[1] + "(1)";
-                                                                        if (i2 == 0) newMatch.Suggestion2 = match.team1[2] + "(1)";
-                                                                        if (i3 == 0) newMatch.Suggestion3 = match.team1[3] + "(1)";
-                                                                        if (i4 == 0) newMatch.Suggestion4 = match.team1[4] + "(1)";
+                                                                        if (i0 == 0) newMatch.Suggestion0 = match.team1[0] + "(1,0)";
+                                                                        if (i1 == 0) newMatch.Suggestion1 = match.team1[1] + "(1,0)";
+                                                                        if (i2 == 0) newMatch.Suggestion2 = match.team1[2] + "(1,0)";
+                                                                        if (i3 == 0) newMatch.Suggestion3 = match.team1[3] + "(1,0)";
+                                                                        if (i4 == 0) newMatch.Suggestion4 = match.team1[4] + "(1,0)";
+                                                                        if (i5 == 0) newMatch.Suggestion5 = match.team2[0] + "(0,1)";
+                                                                        if (i6 == 0) newMatch.Suggestion6 = match.team2[1] + "(0,1)";
+                                                                        if (i7 == 0) newMatch.Suggestion7 = match.team2[2] + "(0,1)";
+                                                                        if (i8 == 0) newMatch.Suggestion8 = match.team2[3] + "(0,1)";
+                                                                        if (i9 == 0) newMatch.Suggestion9 = match.team2[4] + "(0,1)";
                                                                     }
                                                                     else
                                                                     {
                                                                         newMatch.Team2Wins = 1;
-                                                                        if (i5 == 0) newMatch.Suggestion5 = match.team2[0] + "(1)";
-                                                                        if (i6 == 0) newMatch.Suggestion6 = match.team2[1] + "(1)";
-                                                                        if (i7 == 0) newMatch.Suggestion7 = match.team2[2] + "(1)";
-                                                                        if (i8 == 0) newMatch.Suggestion8 = match.team2[3] + "(1)";
-                                                                        if (i9 == 0) newMatch.Suggestion9 = match.team2[4] + "(1)";
+                                                                        if (i0 == 0) newMatch.Suggestion0 = match.team1[0] + "(0,1)";
+                                                                        if (i1 == 0) newMatch.Suggestion1 = match.team1[1] + "(0,1)";
+                                                                        if (i2 == 0) newMatch.Suggestion2 = match.team1[2] + "(0,1)";
+                                                                        if (i3 == 0) newMatch.Suggestion3 = match.team1[3] + "(0,1)";
+                                                                        if (i4 == 0) newMatch.Suggestion4 = match.team1[4] + "(0,1)";
+                                                                        if (i5 == 0) newMatch.Suggestion5 = match.team2[0] + "(1,0)";
+                                                                        if (i6 == 0) newMatch.Suggestion6 = match.team2[1] + "(1,0)";
+                                                                        if (i7 == 0) newMatch.Suggestion7 = match.team2[2] + "(1,0)";
+                                                                        if (i8 == 0) newMatch.Suggestion8 = match.team2[3] + "(1,0)";
+                                                                        if (i9 == 0) newMatch.Suggestion9 = match.team2[4] + "(1,0)";
                                                                     }
                                                                     
                                                                     AnalysisContext.Add(newMatch);
@@ -771,6 +783,569 @@ namespace Analysis.EF.repositories
                 if (ex.Message.IndexOf("404") != -1) return 404;
                 else return 500;
             }
+        }
+
+        public Match UpdateMatch(bool firstTeamWon, Match newMatch, RiotMatch match, int i0, int i1, int i2, int i3,
+            int i4, int i5, int i6, int i7, int i8, int i9)
+        {
+            string integ2 = "";
+            bool isOther = false;
+            string temp = "", integ = "";
+            int start = 0, integINT = 0, integ2INT = 0;
+            if (firstTeamWon) newMatch.Team1Wins++;
+            else newMatch.Team2Wins++;   //////////
+            if (i0 == 0 && newMatch.Suggestion0 != null)
+            {
+                temp = match.team1[0].ToString() + "(";
+                if (newMatch.Suggestion0.IndexOf(temp) == -1)
+                {
+                    if (firstTeamWon) newMatch.Suggestion0 += match.team1[0] + "(1,0)";
+                    else newMatch.Suggestion0 += match.team1[0] + "(0,1)";
+
+                }
+                else
+                {
+                    if (firstTeamWon)
+                    {
+                        start = newMatch.Suggestion0.IndexOf(match.team1[0] + "(");
+                        start += match.team1[0].ToString().Length + 1;      //Neefektyvu
+                        integ = "";
+                        while (Char.IsNumber(newMatch.Suggestion0[start]))
+                        {
+                            integ += newMatch.Suggestion0[start];
+                            start++;
+                        }
+                        integINT = Int32.Parse(integ) + 1;
+                        newMatch.Suggestion0 = newMatch.Suggestion0.Replace(match.team1[0] + "(" + integ, match.team1[0] + "(" + integINT);
+                    }
+                    else
+                    {
+                        start = newMatch.Suggestion0.IndexOf(match.team1[0] + "(");
+                        start += match.team1[0].ToString().Length + 1;      //Neefektyvu
+                        integ = "";
+                        integ2 = "";
+                        isOther = false;
+                        while (Char.IsNumber(newMatch.Suggestion0[start]))
+                        {
+                            
+                            if (!isOther) integ += newMatch.Suggestion0[start];
+                            if (isOther) integ2 += newMatch.Suggestion0[start];
+                            start++;
+                            if (newMatch.Suggestion0[start] == ',')
+                            {
+                                start++;
+                                isOther = true;
+                            }
+                        }
+                        //integINT = Int32.Parse(integ);
+                        integ2INT = Int32.Parse(integ2) + 1;    //Pralaimejimu skaicius
+                        newMatch.Suggestion0 = newMatch.Suggestion0.Replace(match.team1[0] + "(" + integ + "," + integ2 + ")", match.team1[0] + "(" + integ + "," + integ2INT + ")");
+                    }
+                }
+            }
+            else if (i0 == 0 && newMatch.Suggestion0 == null)
+            {
+                if (firstTeamWon) newMatch.Suggestion0 = match.team1[0] + "(1,0)";
+                else newMatch.Suggestion0 = match.team1[0] + "(0,1)";
+
+            }
+
+            if (i1 == 0 && newMatch.Suggestion1 != null)
+            {
+                temp = match.team1[1].ToString() + "(";
+                if (newMatch.Suggestion1.IndexOf(temp) == -1)
+                {
+                    if (firstTeamWon) newMatch.Suggestion1 += match.team1[1] + "(1,0)";
+                    else newMatch.Suggestion1 += match.team1[1] + "(0,1)";
+
+                }
+                else
+                {
+                    if (firstTeamWon)
+                    {
+                        start = newMatch.Suggestion1.IndexOf(match.team1[1] + "(");
+                        start += match.team1[1].ToString().Length + 1;      //Neefektyvu
+                        integ = "";
+                        while (Char.IsNumber(newMatch.Suggestion1[start]))
+                        {
+                            integ += newMatch.Suggestion1[start];
+                            start++;
+                        }
+                        integINT = Int32.Parse(integ) + 1;
+                        newMatch.Suggestion1 = newMatch.Suggestion1.Replace(match.team1[1] + "(" + integ, match.team1[1] + "(" + integINT);
+                    }
+                    else
+                    {
+                        start = newMatch.Suggestion1.IndexOf(match.team1[1] + "(");
+                        start += match.team1[1].ToString().Length + 1;      //Neefektyvu
+                        integ = "";
+                        integ2 = "";
+                        isOther = false;
+                        while (Char.IsNumber(newMatch.Suggestion1[start]))
+                        {
+                            
+                            if (!isOther) integ += newMatch.Suggestion1[start];
+                            if (isOther) integ2 += newMatch.Suggestion1[start];
+                            start++;
+                            if (newMatch.Suggestion1[start] == ',')
+                            {
+                                start++;
+                                isOther = true;
+                            }
+                        }
+                        //integINT = Int32.Parse(integ);
+                        integ2INT = Int32.Parse(integ2) + 1;    //Pralaimejimu skaicius
+                        newMatch.Suggestion1 = newMatch.Suggestion1.Replace(match.team1[1] + "(" + integ + "," + integ2 + ")", match.team1[1] + "(" + integ + "," + integ2INT + ")");
+                    }
+                }
+            }
+            else if (i1 == 0 && newMatch.Suggestion1 == null)
+            {
+                if (firstTeamWon) newMatch.Suggestion1 = match.team1[1] + "(1,0)";
+                else newMatch.Suggestion1 = match.team1[1] + "(0,1)";
+
+            }
+            if (i2 == 0 && newMatch.Suggestion2 != null)
+            {
+                temp = match.team1[2].ToString() + "(";
+                if (newMatch.Suggestion2.IndexOf(temp) == -1)
+                {
+                    if (firstTeamWon) newMatch.Suggestion2 += match.team1[2] + "(1,0)";
+                    else newMatch.Suggestion2 += match.team1[2] + "(0,1)";
+
+                }
+                else
+                {
+                    if (firstTeamWon)
+                    {
+                        start = newMatch.Suggestion2.IndexOf(match.team1[2] + "(");
+                        start += match.team1[2].ToString().Length + 1;      //Neefektyvu
+                        integ = "";
+                        while (Char.IsNumber(newMatch.Suggestion2[start]))
+                        {
+                            integ += newMatch.Suggestion2[start];
+                            start++;
+                        }
+                        integINT = Int32.Parse(integ) + 1;
+                        newMatch.Suggestion2 = newMatch.Suggestion2.Replace(match.team1[2] + "(" + integ, match.team1[2] + "(" + integINT);
+                    }
+                    else
+                    {
+                        start = newMatch.Suggestion2.IndexOf(match.team1[2] + "(");
+                        start += match.team1[2].ToString().Length + 1;      //Neefektyvu
+                        integ = "";
+                        integ2 = "";
+                        isOther = false;
+                        while (Char.IsNumber(newMatch.Suggestion2[start]))
+                        {
+                            
+                            if (!isOther) integ += newMatch.Suggestion2[start];
+                            if (isOther) integ2 += newMatch.Suggestion2[start];
+                            start++;
+                            if (newMatch.Suggestion2[start] == ',')
+                            {
+                                start++;
+                                isOther = true;
+                            }
+                        }
+                        //integINT = Int32.Parse(integ);
+                        integ2INT = Int32.Parse(integ2) + 1;    //Pralaimejimu skaicius
+                        newMatch.Suggestion2 = newMatch.Suggestion2.Replace(match.team1[2] + "(" + integ + "," + integ2 + ")", match.team1[2] + "(" + integ + "," + integ2INT + ")");
+                    }
+                }
+            }
+            else if (i2 == 0 && newMatch.Suggestion2 == null)
+            {
+                if (firstTeamWon) newMatch.Suggestion2 = match.team1[2] + "(1,0)";
+                else newMatch.Suggestion2 = match.team1[2] + "(0,1)";
+
+            }
+            if (i3 == 0 && newMatch.Suggestion3 != null)
+            {
+                temp = match.team1[3].ToString() + "(";
+                if (newMatch.Suggestion3.IndexOf(temp) == -1)
+                {
+                    if (firstTeamWon) newMatch.Suggestion3 += match.team1[3] + "(1,0)";
+                    else newMatch.Suggestion3 += match.team1[3] + "(0,1)";
+
+                }
+                else
+                {
+                    if (firstTeamWon)
+                    {
+                        start = newMatch.Suggestion3.IndexOf(match.team1[3] + "(");
+                        start += match.team1[3].ToString().Length + 1;      //Neefektyvu
+                        integ = "";
+                        while (Char.IsNumber(newMatch.Suggestion3[start]))
+                        {
+                            integ += newMatch.Suggestion3[start];
+                            start++;
+                        }
+                        integINT = Int32.Parse(integ) + 1;
+                        newMatch.Suggestion3 = newMatch.Suggestion3.Replace(match.team1[3] + "(" + integ, match.team1[3] + "(" + integINT);
+                    }
+                    else
+                    {
+                        start = newMatch.Suggestion3.IndexOf(match.team1[3] + "(");
+                        start += match.team1[3].ToString().Length + 1;      //Neefektyvu
+                        integ = "";
+                        integ2 = "";
+                        isOther = false;
+                        while (Char.IsNumber(newMatch.Suggestion3[start]))
+                        {
+                            
+                            if (!isOther) integ += newMatch.Suggestion3[start];
+                            if (isOther) integ2 += newMatch.Suggestion3[start];
+                            start++;
+                            if (newMatch.Suggestion3[start] == ',')
+                            {
+                                start++;
+                                isOther = true;
+                            }
+                        }
+                        //integINT = Int32.Parse(integ);
+                        integ2INT = Int32.Parse(integ2) + 1;    //Pralaimejimu skaicius
+                        newMatch.Suggestion3 = newMatch.Suggestion3.Replace(match.team1[3] + "(" + integ + "," + integ2 + ")", match.team1[3] + "(" + integ + "," + integ2INT + ")");
+                    }
+                }
+            }
+            else if (i3 == 0 && newMatch.Suggestion3 == null)
+            {
+                if (firstTeamWon) newMatch.Suggestion3 = match.team1[3] + "(1,0)";
+                else newMatch.Suggestion3 = match.team1[3] + "(0,1)";
+
+            }
+            if (i4 == 0 && newMatch.Suggestion4 != null)
+            {
+                temp = match.team1[4].ToString() + "(";
+                if (newMatch.Suggestion4.IndexOf(temp) == -1)
+                {
+                    if (firstTeamWon) newMatch.Suggestion4 += match.team1[4] + "(1,0)";
+                    else newMatch.Suggestion4 += match.team1[4] + "(0,1)";
+
+                }
+                else
+                {
+                    if (firstTeamWon)
+                    {
+                        start = newMatch.Suggestion4.IndexOf(match.team1[4] + "(");
+                        start += match.team1[4].ToString().Length + 1;      //Neefektyvu
+                        integ = "";
+                        while (Char.IsNumber(newMatch.Suggestion4[start]))
+                        {
+                            integ += newMatch.Suggestion4[start];
+                            start++;
+                        }
+                        integINT = Int32.Parse(integ) + 1;
+                        newMatch.Suggestion4 = newMatch.Suggestion4.Replace(match.team1[4] + "(" + integ, match.team1[4] + "(" + integINT);
+                    }
+                    else
+                    {
+                        start = newMatch.Suggestion4.IndexOf(match.team1[4] + "(");
+                        start += match.team1[4].ToString().Length + 1;      //Neefektyvu
+                        integ = "";
+                        integ2 = "";
+                        isOther = false;
+                        while (Char.IsNumber(newMatch.Suggestion4[start]))
+                        {
+                            
+                            if (!isOther) integ += newMatch.Suggestion4[start];
+                            if (isOther) integ2 += newMatch.Suggestion4[start];
+                            start++;
+                            if (newMatch.Suggestion4[start] == ',')
+                            {
+                                start++;
+                                isOther = true;
+                            }
+                        }
+                        //integINT = Int32.Parse(integ);
+                        integ2INT = Int32.Parse(integ2) + 1;    //Pralaimejimu skaicius
+                        newMatch.Suggestion4 = newMatch.Suggestion4.Replace(match.team1[4] + "(" + integ + "," + integ2 + ")", match.team1[4] + "(" + integ + "," + integ2INT + ")");
+                    }
+                }
+            }
+            else if (i4 == 0 && newMatch.Suggestion4 == null)
+            {
+                if (firstTeamWon) newMatch.Suggestion4 = match.team1[4] + "(1,0)";
+                else newMatch.Suggestion4 = match.team1[4] + "(0,1)";
+
+            }
+            if (i5 == 0 && newMatch.Suggestion5 != null)
+            {
+                temp = match.team2[0].ToString() + "(";
+                if (newMatch.Suggestion5.IndexOf(temp) == -1)
+                {
+                    if (!firstTeamWon) newMatch.Suggestion5 += match.team2[0] + "(1,0)";
+                    else newMatch.Suggestion5 += match.team2[0] + "(0,1)";
+
+                }
+                else
+                {
+                    if (!firstTeamWon)
+                    {
+                        start = newMatch.Suggestion5.IndexOf(match.team2[0] + "(");
+                        start += match.team2[0].ToString().Length + 1;      //Neefektyvu
+                        integ = "";
+                        while (Char.IsNumber(newMatch.Suggestion5[start]))
+                        {
+                            integ += newMatch.Suggestion5[start];
+                            start++;
+                        }
+                        integINT = Int32.Parse(integ) + 1;
+                        newMatch.Suggestion5 = newMatch.Suggestion5.Replace(match.team2[0] + "(" + integ, match.team2[0] + "(" + integINT);
+                    }
+                    else
+                    {
+                        start = newMatch.Suggestion5.IndexOf(match.team2[0] + "(");
+                        start += match.team2[0].ToString().Length + 1;      //Neefektyvu
+                        integ = "";
+                        integ2 = "";
+                        isOther = false;
+                        while (Char.IsNumber(newMatch.Suggestion5[start]))
+                        {
+                            
+                            if (!isOther) integ += newMatch.Suggestion5[start];
+                            if (isOther) integ2 += newMatch.Suggestion5[start];
+                            start++;
+                            if (newMatch.Suggestion5[start] == ',')
+                            {
+                                start++;
+                                isOther = true;
+                            }
+                        }
+                        //integINT = Int32.Parse(integ);
+                        integ2INT = Int32.Parse(integ2) + 1;    //Pralaimejimu skaicius
+                        newMatch.Suggestion5 = newMatch.Suggestion5.Replace(match.team2[0] + "(" + integ + "," + integ2 + ")", match.team2[0] + "(" + integ + "," + integ2INT + ")");
+                    }
+                }
+            }
+            else if (i5 == 0 && newMatch.Suggestion5 == null)
+            {
+                if (!firstTeamWon) newMatch.Suggestion5 = match.team2[0] + "(1,0)";
+                else newMatch.Suggestion5 = match.team2[0] + "(0,1)";
+
+            }
+
+            if (i6 == 0 && newMatch.Suggestion6 != null)
+            {
+                temp = match.team2[1].ToString() + "(";
+                if (newMatch.Suggestion6.IndexOf(temp) == -1)
+                {
+                    if (!firstTeamWon) newMatch.Suggestion6 += match.team2[1] + "(1,0)";
+                    else newMatch.Suggestion6 += match.team2[1] + "(0,1)";
+
+                }
+                else
+                {
+                    if (!firstTeamWon)
+                    {
+                        start = newMatch.Suggestion6.IndexOf(match.team2[1] + "(");
+                        start += match.team2[1].ToString().Length + 1;      //Neefektyvu
+                        integ = "";
+                        while (Char.IsNumber(newMatch.Suggestion6[start]))
+                        {
+                            integ += newMatch.Suggestion6[start];
+                            start++;
+                        }
+                        integINT = Int32.Parse(integ) + 1;
+                        newMatch.Suggestion6 = newMatch.Suggestion6.Replace(match.team2[1] + "(" + integ, match.team2[1] + "(" + integINT);
+                    }
+                    else
+                    {
+                        start = newMatch.Suggestion6.IndexOf(match.team2[1] + "(");
+                        start += match.team2[1].ToString().Length + 1;      //Neefektyvu
+                        integ = "";
+                        integ2 = "";
+                        isOther = false;
+                        while (Char.IsNumber(newMatch.Suggestion6[start]))
+                        {
+                            
+                            if (!isOther) integ += newMatch.Suggestion6[start];
+                            if (isOther) integ2 += newMatch.Suggestion6[start];
+                            start++;
+                            if (newMatch.Suggestion6[start] == ',')
+                            {
+                                start++;
+                                isOther = true;
+                            }
+                        }
+                        //integINT = Int32.Parse(integ);
+                        integ2INT = Int32.Parse(integ2) + 1;    //Pralaimejimu skaicius
+                        newMatch.Suggestion6 = newMatch.Suggestion6.Replace(match.team2[1] + "(" + integ + "," + integ2 + ")", match.team2[1] + "(" + integ + "," + integ2INT + ")");
+                    }
+                }
+            }
+            else if (i6 == 0 && newMatch.Suggestion6 == null)
+            {
+                if (!firstTeamWon) newMatch.Suggestion6 = match.team2[1] + "(1,0)";
+                else newMatch.Suggestion6 = match.team2[1] + "(0,1)";
+
+            }
+            if (i7 == 0 && newMatch.Suggestion7 != null)
+            {
+                temp = match.team2[2].ToString() + "(";
+                if (newMatch.Suggestion7.IndexOf(temp) == -1)
+                {
+                    if (!firstTeamWon) newMatch.Suggestion7 += match.team2[2] + "(1,0)";
+                    else newMatch.Suggestion7 += match.team2[2] + "(0,1)";
+
+                }
+                else
+                {
+                    if (!firstTeamWon)
+                    {
+                        start = newMatch.Suggestion7.IndexOf(match.team2[2] + "(");
+                        start += match.team2[2].ToString().Length + 1;      //Neefektyvu
+                        integ = "";
+                        while (Char.IsNumber(newMatch.Suggestion7[start]))
+                        {
+                            integ += newMatch.Suggestion7[start];
+                            start++;
+                        }
+                        integINT = Int32.Parse(integ) + 1;
+                        newMatch.Suggestion7 = newMatch.Suggestion7.Replace(match.team2[2] + "(" + integ, match.team2[2] + "(" + integINT);
+                    }
+                    else
+                    {
+                        start = newMatch.Suggestion7.IndexOf(match.team2[2] + "(");
+                        start += match.team2[2].ToString().Length + 1;      //Neefektyvu
+                        integ = "";
+                        integ2 = "";
+                        isOther = false;
+                        while (Char.IsNumber(newMatch.Suggestion7[start]))
+                        {
+                            
+                            if (!isOther) integ += newMatch.Suggestion7[start];
+                            if (isOther) integ2 += newMatch.Suggestion7[start];
+                            start++;
+                            if (newMatch.Suggestion7[start] == ',')
+                            {
+                                start++;
+                                isOther = true;
+                            }
+                        }
+                        //integINT = Int32.Parse(integ);
+                        integ2INT = Int32.Parse(integ2) + 1;    //Pralaimejimu skaicius
+                        newMatch.Suggestion7 = newMatch.Suggestion7.Replace(match.team2[2] + "(" + integ + "," + integ2 + ")", match.team2[2] + "(" + integ + "," + integ2INT + ")");
+                    }
+                }
+            }
+            else if (i7 == 0 && newMatch.Suggestion7 == null)
+            {
+                if (!firstTeamWon) newMatch.Suggestion7 = match.team2[2] + "(1,0)";
+                else newMatch.Suggestion7 = match.team2[2] + "(0,1)";
+
+            }
+            if (i8 == 0 && newMatch.Suggestion8 != null)
+            {
+                temp = match.team2[3].ToString() + "(";
+                if (newMatch.Suggestion8.IndexOf(temp) == -1)
+                {
+                    if (!firstTeamWon) newMatch.Suggestion8 += match.team2[3] + "(1,0)";
+                    else newMatch.Suggestion8 += match.team2[3] + "(0,1)";
+
+                }
+                else
+                {
+                    if (!firstTeamWon)
+                    {
+                        start = newMatch.Suggestion8.IndexOf(match.team2[3] + "(");
+                        start += match.team2[3].ToString().Length + 1;      //Neefektyvu
+                        integ = "";
+                        while (Char.IsNumber(newMatch.Suggestion8[start]))
+                        {
+                            integ += newMatch.Suggestion8[start];
+                            start++;
+                        }
+                        integINT = Int32.Parse(integ) + 1;
+                        newMatch.Suggestion8 = newMatch.Suggestion8.Replace(match.team2[3] + "(" + integ, match.team2[3] + "(" + integINT);
+                    }
+                    else
+                    {
+                        start = newMatch.Suggestion8.IndexOf(match.team2[3] + "(");
+                        start += match.team2[3].ToString().Length + 1;      //Neefektyvu
+                        integ = "";
+                        integ2 = "";
+                        isOther = false;
+                        while (Char.IsNumber(newMatch.Suggestion8[start]))
+                        {
+                            if (!isOther) integ += newMatch.Suggestion8[start];
+                            if (isOther) integ2 += newMatch.Suggestion8[start];
+                            start++;
+                            if (newMatch.Suggestion8[start] == ',')
+                            {
+                                start++;
+                                isOther = true;
+                            }
+                        }
+                        //integINT = Int32.Parse(integ);
+                        integ2INT = Int32.Parse(integ2) + 1;    //Pralaimejimu skaicius
+                        newMatch.Suggestion8 = newMatch.Suggestion8.Replace(match.team2[3] + "(" + integ + "," + integ2 + ")", match.team2[3] + "(" + integ + "," + integ2INT + ")");
+                    }
+                }
+            }
+            else if (i8 == 0 && newMatch.Suggestion8 == null)
+            {
+                if (!firstTeamWon) newMatch.Suggestion8 = match.team2[3] + "(1,0)";
+                else newMatch.Suggestion8 = match.team2[3] + "(0,1)";
+
+            }
+            if (i9 == 0 && newMatch.Suggestion9 != null)
+            {
+                temp = match.team2[4].ToString() + "(";
+                if (newMatch.Suggestion9.IndexOf(temp) == -1)
+                {
+                    if (!firstTeamWon) newMatch.Suggestion9 += match.team2[4] + "(1,0)";
+                    else newMatch.Suggestion9 += match.team2[4] + "(0,1)";
+
+                }
+                else
+                {
+                    if (!firstTeamWon)
+                    {
+                        start = newMatch.Suggestion9.IndexOf(match.team2[4] + "(");
+                        start += match.team2[4].ToString().Length + 1;      //Neefektyvu
+                        integ = "";
+                        while (Char.IsNumber(newMatch.Suggestion9[start]))
+                        {
+                            integ += newMatch.Suggestion9[start];
+                            start++;
+                        }
+                        integINT = Int32.Parse(integ) + 1;
+                        newMatch.Suggestion9 = newMatch.Suggestion9.Replace(match.team2[4] + "(" + integ, match.team2[4] + "(" + integINT);
+                    }
+                    else
+                    {
+                        start = newMatch.Suggestion9.IndexOf(match.team2[4] + "(");
+                        start += match.team2[4].ToString().Length + 1;      //Neefektyvu
+                        integ = "";
+                        integ2 = "";
+                        isOther = false;
+                        while (Char.IsNumber(newMatch.Suggestion9[start]))
+                        {
+                            if (!isOther) integ += newMatch.Suggestion9[start];
+                            if (isOther) integ2 += newMatch.Suggestion9[start];
+                            start++;
+                            if (newMatch.Suggestion9[start] == ',')
+                            {
+                                start++;
+                                isOther = true;
+                            }
+                        }
+                        //integINT = Int32.Parse(integ);
+                        integ2INT = Int32.Parse(integ2) + 1;    //Pralaimejimu skaicius
+                        newMatch.Suggestion9 = newMatch.Suggestion9.Replace(match.team2[4] + "(" + integ + "," + integ2 + ")", match.team2[4] + "(" + integ + "," + integ2INT + ")");
+                    }
+                }
+            }
+            else if (i9 == 0 && newMatch.Suggestion9 == null)
+            {
+                if (!firstTeamWon) newMatch.Suggestion9 = match.team2[4] + "(1,0)";
+                else newMatch.Suggestion9 = match.team2[4] + "(0,1)";
+
+            }
+
+            return newMatch;
         }
 
 
