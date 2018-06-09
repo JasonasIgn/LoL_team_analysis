@@ -27,6 +27,7 @@ export class SearchTeamsComponent implements OnInit {
   team1Winrate: number = 0;
   team2Winrate: number = 0;
   temp: number = 0;
+  tempString: string;
   searchInput: string = "";
   constructor(private championService: ChampionService, private matchService: MatchService) { }
 
@@ -152,7 +153,36 @@ export class SearchTeamsComponent implements OnInit {
         this.matchService.getMatch(this.teamCode1, this.teamCode2).subscribe((data: MatchModel) =>{
           
           this.matchdata = data;
-          console.log(data);
+          //console.log(data);
+          console.log(this.teamUniqueCode1);
+          console.log(this.teamUniqueCode2);
+          if (data.id == this.teamUniqueCode2)
+          {
+            //Apkeiciamos reiksmes
+            this.temp = data.team1Wins;
+            this.matchdata.team1Wins = data.team2Wins;
+            this.matchdata.team2Wins = this.temp;
+
+            this.tempString = data.suggestion0;
+            this.matchdata.suggestion0 = data.suggestion5;
+            this.matchdata.suggestion5 = this.tempString;
+
+            this.tempString = data.suggestion1;
+            this.matchdata.suggestion1 = data.suggestion6;
+            this.matchdata.suggestion6 = this.tempString;
+
+            this.tempString = data.suggestion2;
+            this.matchdata.suggestion2 = data.suggestion7;
+            this.matchdata.suggestion7 = this.tempString;
+
+            this.tempString = data.suggestion3;
+            this.matchdata.suggestion3 = data.suggestion8;
+            this.matchdata.suggestion8 = this.tempString;
+
+            this.tempString = data.suggestion4;
+            this.matchdata.suggestion4 = data.suggestion9;
+            this.matchdata.suggestion9 = this.tempString;
+          }
           //if (data.teamCode.indexOf(this.teamCode1) != -1 && data.teamCode.indexOf(this.teamCode1) != 0)
           //{
           //  this.temp = data.team1Wins;
@@ -163,7 +193,7 @@ export class SearchTeamsComponent implements OnInit {
           this.team2Winrate = (this.matchdata.team2Wins / (this.matchdata.team2Wins + this.matchdata.team1Wins)) * 100;
           document.getElementById('team1').style.width = this.team1Winrate + '%';
           document.getElementById('team2').style.width = this.team2Winrate + '%';
-          console.log(data);
+          console.log(this.matchdata);
         });
     }
   }
