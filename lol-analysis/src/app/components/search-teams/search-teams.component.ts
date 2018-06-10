@@ -276,11 +276,14 @@ export class SearchTeamsComponent implements OnInit {
                   this.suggestionModel = new SuggestionModel();
                   this.suggestionModel.ChampionId = this.champId;
                   console.log(this.suggestionModel.ChampionId + "CHAAAMP");
-                  this.suggestionModel.Loss = this.loss;
-                  this.suggestionModel.Win = this.win;
-                  this.suggestionModel.Total = this.win + this.loss;
-                  
-                  suggestionArray.push(this.suggestionModel);
+                  if (this.win > this.loss)
+                  {
+                    this.suggestionModel.Loss = this.loss;
+                    this.suggestionModel.Win = this.win;
+                    this.suggestionModel.Total = this.win + this.loss;
+                    
+                    suggestionArray.push(this.suggestionModel);
+                  }
                   
                   this.indexPosition++;
               }
