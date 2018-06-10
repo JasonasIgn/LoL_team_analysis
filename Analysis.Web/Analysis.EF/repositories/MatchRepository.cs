@@ -126,6 +126,7 @@ namespace Analysis.EF.repositories
                     int uniqueCode2 = 0;
                     int champPos = -1;
                     int integINT = 0;
+                    int tempInt = 0;
 
 
                     for (int i = 0; i < 5; i++)
@@ -344,7 +345,20 @@ namespace Analysis.EF.repositories
                                                                 else if (AnalysisContext.Match.Any(x => x.Id == uniqueCode2))
                                                                 {
                                                                     Match newMatch = GetMatchByTeamcode(uniqueCode2);
-                                                                    newMatch = UpdateMatch(match.winTeam1, newMatch, match, i0, i1, i2, i3, i4, i5, i6, i7, i8, i9);
+                                                                    for (int i = 0; i < 5; i++)
+                                                                    {
+                                                                        tempInt = match.team1[i];
+                                                                        match.team1[i] = match.team2[i];
+                                                                        match.team2[i] = tempInt;
+                                                                    }
+                                                                    
+                                                                    newMatch = UpdateMatch(!match.winTeam1, newMatch, match, i5, i6, i7, i8, i9, i0, i1, i2, i3, i4);
+                                                                    for (int i = 0; i < 5; i++)
+                                                                    {
+                                                                        tempInt = match.team1[i];
+                                                                        match.team1[i] = match.team2[i];
+                                                                        match.team2[i] = tempInt;
+                                                                    }
                                                                     AnalysisContext.Update(newMatch);
                                                                     
                                                                 }
