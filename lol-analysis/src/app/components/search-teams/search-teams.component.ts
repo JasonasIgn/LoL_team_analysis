@@ -63,6 +63,7 @@ export class SearchTeamsComponent implements OnInit {
     this.searchChampionsPositions[7] = "MIDDLE";
     this.searchChampionsPositions[8] = "ADC";
     this.searchChampionsPositions[9] = "SUPPORT";
+    
     for (var i = 0; i < 10; i++)
     {
       this.searchChampions[i] = new ChampionModel();
@@ -172,9 +173,9 @@ export class SearchTeamsComponent implements OnInit {
         this.matchService.getMatch(this.teamCode1, this.teamCode2).subscribe((data: MatchModel) =>{
           
           this.matchdata = data;
-          //console.log(data);
-          console.log(this.teamUniqueCode1);
-          console.log(this.teamUniqueCode2);
+          console.log(data);
+          //console.log(this.teamUniqueCode1);
+          //console.log(this.teamUniqueCode2);
           if (data.id == this.teamUniqueCode2)
           {
             //Apkeiciamos reiksmes
@@ -212,7 +213,7 @@ export class SearchTeamsComponent implements OnInit {
           this.GetSuggestionInfo(this.matchdata.suggestion7, this.suggestion7);
           this.GetSuggestionInfo(this.matchdata.suggestion8, this.suggestion8);
           this.GetSuggestionInfo(this.matchdata.suggestion9, this.suggestion9);
-          console.log(this.suggestion5);
+          //console.log(this.suggestion1[0].Win + "CHAAAMP");
           //if (data.teamCode.indexOf(this.teamCode1) != -1 && data.teamCode.indexOf(this.teamCode1) != 0)
           //{
           //  this.temp = data.team1Wins;
@@ -234,7 +235,9 @@ export class SearchTeamsComponent implements OnInit {
   GetSuggestionInfo(input: string, suggestionArray:SuggestionModel[])
   {
     
-    this.status = 0;
+        this.status = 0;
+        this.champId = 0;
+        this.stringForConvert = ""; 
         this.indexPosition = 0;
         if (input != null)
         {
@@ -250,6 +253,7 @@ export class SearchTeamsComponent implements OnInit {
                 
                   this.status++;
                   this.champId = parseInt(this.stringForConvert, 10); 
+                  
                   this.stringForConvert = "";
 
                   this.indexPosition++;
@@ -271,11 +275,13 @@ export class SearchTeamsComponent implements OnInit {
                   this.stringForConvert = "";
                   this.suggestionModel = new SuggestionModel();
                   this.suggestionModel.ChampionId = this.champId;
+                  console.log(this.suggestionModel.ChampionId + "CHAAAMP");
                   this.suggestionModel.Loss = this.loss;
                   this.suggestionModel.Win = this.win;
                   this.suggestionModel.Total = this.win + this.loss;
                   
                   suggestionArray.push(this.suggestionModel);
+                  
                   this.indexPosition++;
               }
           }
