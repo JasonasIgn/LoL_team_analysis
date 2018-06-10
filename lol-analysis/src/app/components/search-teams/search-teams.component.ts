@@ -3,6 +3,7 @@ import { ChampionService } from '../../services/champion.service';
 import { ChampionModel } from '../../models/champion.model';
 import { MatchModel } from '../../models/match.model';
 import { MatchService } from '../../services/match.service';
+import { SuggestionModel } from '../../models/suggestion.model';
 
 @Component({
   selector: 'app-search-teams',
@@ -12,6 +13,7 @@ import { MatchService } from '../../services/match.service';
 export class SearchTeamsComponent implements OnInit {
 
   MAXIND: number = 555;
+  MAXCHAMPS: number = 141;
   teamUniqueCode1: number = 0;
   teamUniqueCode2: number = 0;
   championList: ChampionModel[];
@@ -23,6 +25,23 @@ export class SearchTeamsComponent implements OnInit {
   teamCode2:string = "";
   teamIds1: number[] = new Array<number>(5);
   teamIds2: number[] = new Array<number>(5);
+  suggestion0: SuggestionModel[] = new Array<SuggestionModel>();
+  suggestion1: SuggestionModel[] = new Array<SuggestionModel>();
+  suggestion2: SuggestionModel[] = new Array<SuggestionModel>();
+  suggestion3: SuggestionModel[] = new Array<SuggestionModel>();
+  suggestion4: SuggestionModel[] = new Array<SuggestionModel>();
+  suggestion5: SuggestionModel[] = new Array<SuggestionModel>();
+  suggestion6: SuggestionModel[] = new Array<SuggestionModel>();
+  suggestion7: SuggestionModel[] = new Array<SuggestionModel>();
+  suggestion8: SuggestionModel[] = new Array<SuggestionModel>();
+  suggestion9: SuggestionModel[] = new Array<SuggestionModel>();
+  suggestionModel: SuggestionModel = new SuggestionModel();
+  win:number;
+  champId: number;
+  loss: number;
+  indexPosition: number;
+  status:number;
+  stringForConvert: string;
   matchdata: MatchModel = new MatchModel();
   team1Winrate: number = 0;
   team2Winrate: number = 0;
@@ -183,6 +202,17 @@ export class SearchTeamsComponent implements OnInit {
             this.matchdata.suggestion4 = data.suggestion9;
             this.matchdata.suggestion9 = this.tempString;
           }
+          this.GetSuggestionInfo(this.matchdata.suggestion0, this.suggestion0);
+          this.GetSuggestionInfo(this.matchdata.suggestion1, this.suggestion1);
+          this.GetSuggestionInfo(this.matchdata.suggestion2, this.suggestion2);
+          this.GetSuggestionInfo(this.matchdata.suggestion3, this.suggestion3);
+          this.GetSuggestionInfo(this.matchdata.suggestion4, this.suggestion4);
+          this.GetSuggestionInfo(this.matchdata.suggestion5, this.suggestion5);
+          this.GetSuggestionInfo(this.matchdata.suggestion6, this.suggestion6);
+          this.GetSuggestionInfo(this.matchdata.suggestion7, this.suggestion7);
+          this.GetSuggestionInfo(this.matchdata.suggestion8, this.suggestion8);
+          this.GetSuggestionInfo(this.matchdata.suggestion9, this.suggestion9);
+          console.log(this.suggestion5);
           //if (data.teamCode.indexOf(this.teamCode1) != -1 && data.teamCode.indexOf(this.teamCode1) != 0)
           //{
           //  this.temp = data.team1Wins;
@@ -200,5 +230,56 @@ export class SearchTeamsComponent implements OnInit {
   setSearchInput(input:string)
   {
       this.searchInput = input;
+  }
+  GetSuggestionInfo(input: string, suggestionArray:SuggestionModel[])
+  {
+    
+    this.status = 0;
+        this.indexPosition = 0;
+        if (input != null)
+        {
+          while(this.indexPosition < input.length)
+          {
+              if ('0123456789'.indexOf(input[this.indexPosition]) !== -1)
+              {
+                this.stringForConvert += input[this.indexPosition];
+                this.indexPosition++;
+              }
+              else if (input[this.indexPosition] == '(')
+              {
+                
+                  this.status++;
+                  this.champId = parseInt(this.stringForConvert, 10); 
+                  this.stringForConvert = "";
+
+                  this.indexPosition++;
+              }
+              else if (input[this.indexPosition] == ',')
+              {
+                
+                  this.status++;
+                  this.win = parseInt(this.stringForConvert, 10); 
+                  this.stringForConvert = "";
+
+                  this.indexPosition++;
+              }
+              else if (input[this.indexPosition] == ')')
+              {
+                
+                  this.status = 0;
+                  this.loss = parseInt(this.stringForConvert, 10); 
+                  this.stringForConvert = "";
+                  this.suggestionModel = new SuggestionModel();
+                  this.suggestionModel.ChampionId = this.champId;
+                  this.suggestionModel.Loss = this.loss;
+                  this.suggestionModel.Win = this.win;
+                  this.suggestionModel.Total = this.win + this.loss;
+                  
+                  suggestionArray.push(this.suggestionModel);
+                  this.indexPosition++;
+              }
+          }
+        }
+        //return suggestionArray;
   }
 }
