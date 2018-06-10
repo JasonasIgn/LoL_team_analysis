@@ -33,36 +33,46 @@ namespace Analysis.EF.entities
                 entity.Property(e => e.Id).HasColumnName("Id");
 
                 entity.Property(e => e.Suggestion0)
-                .HasColumnName("Suggestion0");
+                .HasColumnName("Suggestion0")
+                .HasMaxLength(1500);
 
                 entity.Property(e => e.Suggestion1)
-                .HasColumnName("Suggestion1");
+                .HasColumnName("Suggestion1")
+                .HasMaxLength(1500);
 
                 entity.Property(e => e.Suggestion2)
-                .HasColumnName("Suggestion2");
+                .HasColumnName("Suggestion2")
+                .HasMaxLength(1500);
 
                 entity.Property(e => e.Suggestion3)
-                .HasColumnName("Suggestion3");
+                .HasColumnName("Suggestion3")
+                .HasMaxLength(1500);
 
                 entity.Property(e => e.Suggestion4)
-                .HasColumnName("Suggestion4");
+                .HasColumnName("Suggestion4")
+                .HasMaxLength(1500);
 
                 entity.Property(e => e.Suggestion5)
-                .HasColumnName("Suggestion5");
+                .HasColumnName("Suggestion5")
+                .HasMaxLength(1500);
 
                 entity.Property(e => e.Suggestion6)
-                .HasColumnName("Suggestion6");
+                .HasColumnName("Suggestion6")
+                .HasMaxLength(1500);
 
                 entity.Property(e => e.Suggestion7)
-                .HasColumnName("Suggestion7");
+                .HasColumnName("Suggestion7")
+                .HasMaxLength(1500);
 
                 entity.Property(e => e.Suggestion8)
-                .HasColumnName("Suggestion8");
+                .HasColumnName("Suggestion8")
+                .HasMaxLength(1500);
 
                 entity.Property(e => e.Suggestion9)
-                .HasColumnName("Suggestion9");
+                .HasColumnName("Suggestion9")
+                .HasMaxLength(1500);
 
-                
+
 
                 entity.Property(e => e.Team1Wins)
                     .HasColumnName("Team1Wins")
