@@ -231,17 +231,16 @@ export class SearchTeamsComponent implements OnInit {
           this.GetSuggestionInfo(this.matchdata.suggestion9, this.suggestion9);
 
            
-          this.suggestion0.sort((a, b) => (a.Win / a.Total) < (b.Win / b.Total) ? -1 : (a.Win / a.Total) > (b.Win / b.Total) ? 1 : 0);
-          this.suggestion1.sort((a, b) => (a.Win / a.Total) < (b.Win / b.Total) ? -1 : (a.Win / a.Total) > (b.Win / b.Total) ? 1 : 0);
-          this.suggestion2.sort((a, b) => (a.Win / a.Total) < (b.Win / b.Total) ? -1 : (a.Win / a.Total) > (b.Win / b.Total) ? 1 : 0);
-          this.suggestion3.sort((a, b) => (a.Win / a.Total) < (b.Win / b.Total) ? -1 : (a.Win / a.Total) > (b.Win / b.Total) ? 1 : 0);
-          this.suggestion4.sort((a, b) => (a.Win / a.Total) < (b.Win / b.Total) ? -1 : (a.Win / a.Total) > (b.Win / b.Total) ? 1 : 0);
-          this.suggestion5.sort((a, b) => (a.Win / a.Total) < (b.Win / b.Total) ? -1 : (a.Win / a.Total) > (b.Win / b.Total) ? 1 : 0);
-          this.suggestion6.sort((a, b) => (a.Win / a.Total) < (b.Win / b.Total) ? -1 : (a.Win / a.Total) > (b.Win / b.Total) ? 1 : 0);
-          this.suggestion7.sort((a, b) => (a.Win / a.Total) < (b.Win / b.Total) ? -1 : (a.Win / a.Total) > (b.Win / b.Total) ? 1 : 0);
-          this.suggestion8.sort((a, b) => (a.Win / a.Total) < (b.Win / b.Total) ? -1 : (a.Win / a.Total) > (b.Win / b.Total) ? 1 : 0);
-          this.suggestion9.sort((a, b) => (a.Win / a.Total) < (b.Win / b.Total) ? -1 : (a.Win / a.Total) > (b.Win / b.Total) ? 1 : 0);
-
+          this.suggestion0.sort((a, b) => a.Win > b.Win ? -1 : a.Win < b.Win ? 1 : 0);
+          this.suggestion1.sort((a, b) => a.Win > b.Win ? -1 : a.Win < b.Win ? 1 : 0);
+          this.suggestion2.sort((a, b) => a.Win > b.Win ? -1 : a.Win < b.Win ? 1 : 0);
+          this.suggestion3.sort((a, b) => a.Win > b.Win ? -1 : a.Win < b.Win ? 1 : 0);
+          this.suggestion4.sort((a, b) => a.Win > b.Win ? -1 : a.Win < b.Win ? 1 : 0);
+          this.suggestion5.sort((a, b) => a.Win > b.Win ? -1 : a.Win < b.Win ? 1 : 0);
+          this.suggestion6.sort((a, b) => a.Win > b.Win ? -1 : a.Win < b.Win ? 1 : 0);
+          this.suggestion7.sort((a, b) => a.Win > b.Win ? -1 : a.Win < b.Win ? 1 : 0);
+          this.suggestion8.sort((a, b) => a.Win > b.Win ? -1 : a.Win < b.Win ? 1 : 0);
+          this.suggestion9.sort((a, b) => a.Win > b.Win ? -1 : a.Win < b.Win ? 1 : 0);
           //console.log(this.suggestion1[0].Win + "CHAAAMP");
           //if (data.teamCode.indexOf(this.teamCode1) != -1 && data.teamCode.indexOf(this.teamCode1) != 0)
           //{
