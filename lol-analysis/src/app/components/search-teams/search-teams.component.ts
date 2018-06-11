@@ -126,6 +126,8 @@ export class SearchTeamsComponent implements OnInit {
       console.log("b");
       //this.teamIds1.sort();
       //this.teamIds2.sort();
+      this.teamUniqueCode1 = 0;
+      this.teamUniqueCode2 = 0;
       this.teamCode1 = this.teamIds1[0] + '_' + this.teamIds1[1] + '_' + this.teamIds1[2] + '_' + this.teamIds1[3] + '_' + this.teamIds1[4];
       this.teamCode2 = this.teamIds2[0] + '_' + this.teamIds2[1] + '_' + this.teamIds2[2] + '_' + this.teamIds2[3] + '_' + this.teamIds2[4];
       if (this.teamIds1[0] != 0)
@@ -180,15 +182,17 @@ export class SearchTeamsComponent implements OnInit {
       }
       //this.teamCode1 = "19_51_62_238_432";
       //this.teamCode2 = "22_45_86_141_201";
-        console.log(this.teamCode1);
+        console.log(this.teamCode1 + '-' + this.teamCode2);
         this.matchService.getMatch(this.teamCode1, this.teamCode2).subscribe((data: MatchModel) =>{
           
           this.matchdata = data;
           console.log(data);
-          //console.log(this.teamUniqueCode1);
-          //console.log(this.teamUniqueCode2);
+          console.log(this.teamUniqueCode1);
+          console.log(this.teamUniqueCode2);
+          
           if (data.id == this.teamUniqueCode2)
           {
+            console.log("KEICIAMOS");
             //Apkeiciamos reiksmes
             this.temp = data.team1Wins;
             this.matchdata.team1Wins = data.team2Wins;
@@ -213,7 +217,8 @@ export class SearchTeamsComponent implements OnInit {
             this.tempString = data.suggestion4;
             this.matchdata.suggestion4 = data.suggestion9;
             this.matchdata.suggestion9 = this.tempString;
-          }
+          } 
+
           this.GetSuggestionInfo(this.matchdata.suggestion0, this.suggestion0);
           this.GetSuggestionInfo(this.matchdata.suggestion1, this.suggestion1);
           this.GetSuggestionInfo(this.matchdata.suggestion2, this.suggestion2);
@@ -225,6 +230,7 @@ export class SearchTeamsComponent implements OnInit {
           this.GetSuggestionInfo(this.matchdata.suggestion8, this.suggestion8);
           this.GetSuggestionInfo(this.matchdata.suggestion9, this.suggestion9);
 
+           
           this.suggestion0.sort((a, b) => (a.Win / a.Total) < (b.Win / b.Total) ? -1 : (a.Win / a.Total) > (b.Win / b.Total) ? 1 : 0);
           this.suggestion1.sort((a, b) => (a.Win / a.Total) < (b.Win / b.Total) ? -1 : (a.Win / a.Total) > (b.Win / b.Total) ? 1 : 0);
           this.suggestion2.sort((a, b) => (a.Win / a.Total) < (b.Win / b.Total) ? -1 : (a.Win / a.Total) > (b.Win / b.Total) ? 1 : 0);
@@ -298,7 +304,7 @@ export class SearchTeamsComponent implements OnInit {
                   this.stringForConvert = "";
                   this.suggestionModel = new SuggestionModel();
                   this.suggestionModel.ChampionId = this.champId;
-                  console.log(this.suggestionModel.ChampionId + "CHAAAMP");
+                  //console.log(this.suggestionModel.ChampionId + "CHAAAMP");
                   if (this.win > this.loss)
                   {
                     this.suggestionModel.Loss = this.loss;
