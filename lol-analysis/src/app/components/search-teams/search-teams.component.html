@@ -51,6 +51,8 @@
                 <div class="card border-success just-box" style="display: inline-block;">
                     <div style="height: 20px; text-align: center;">{{searchChampionsPositions[0]}}</div>
                     <img src="../../../assets/images/champions/0.png">
+                    <div style="height: 20px;">Winrate</div>
+                    <div style="height: 20px;">Games</div>
                 </div>
                 <img src="../../../assets/images/arrow.jpg">
 
@@ -60,6 +62,8 @@
                     <div *ngIf="ind < 3" class="card border-success just-box" style="display: inline-block;">
                         <div style="height: 20px; text-align: center;">Name</div>
                             <img src="../../../assets/images/champions/{{ch.ChampionId}}.png">
+                            <div style="height: 20px;">Winrate: {{ch.Winrate}}%</div>
+                            <div style="height: 20px;">Games: {{ch.Total}}</div>
                     </div>
                 </div>
             </div>
