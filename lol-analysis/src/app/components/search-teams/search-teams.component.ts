@@ -241,15 +241,9 @@ export class SearchTeamsComponent implements OnInit {
           this.suggestion7.sort((a, b) => a.Win > b.Win ? -1 : a.Win < b.Win ? 1 : 0);
           this.suggestion8.sort((a, b) => a.Win > b.Win ? -1 : a.Win < b.Win ? 1 : 0);
           this.suggestion9.sort((a, b) => a.Win > b.Win ? -1 : a.Win < b.Win ? 1 : 0);
-          //console.log(this.suggestion1[0].Win + "CHAAAMP");
-          //if (data.teamCode.indexOf(this.teamCode1) != -1 && data.teamCode.indexOf(this.teamCode1) != 0)
-          //{
-          //  this.temp = data.team1Wins;
-          //  this.matchdata.team1Wins = data.team2Wins;
-          //  this.matchdata.team2Wins = this.temp;
-          //}
-          this.team1Winrate = (this.matchdata.team1Wins / (this.matchdata.team1Wins + this.matchdata.team2Wins)) * 100;
-          this.team2Winrate = (this.matchdata.team2Wins / (this.matchdata.team2Wins + this.matchdata.team1Wins)) * 100;
+          
+          this.team1Winrate = Math.round((this.matchdata.team1Wins / (this.matchdata.team1Wins + this.matchdata.team2Wins)) * 100);
+          this.team2Winrate = Math.round((this.matchdata.team2Wins / (this.matchdata.team2Wins + this.matchdata.team1Wins)) * 100);
           document.getElementById('team1').style.width = this.team1Winrate + '%';
           document.getElementById('team2').style.width = this.team2Winrate + '%';
           console.log(this.matchdata);
@@ -309,6 +303,7 @@ export class SearchTeamsComponent implements OnInit {
                     this.suggestionModel.Loss = this.loss;
                     this.suggestionModel.Win = this.win;
                     this.suggestionModel.Total = this.win + this.loss;
+                    this.suggestionModel.Winrate = Math.round(this.win / (this.win + this.loss) * 100);
                     
                     suggestionArray.push(this.suggestionModel);
                   }

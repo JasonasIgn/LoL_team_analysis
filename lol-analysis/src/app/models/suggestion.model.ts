@@ -3,5 +3,6 @@ export class SuggestionModel {
     Loss: number;
     Win: number;
     Total: number;
+    Winrate: number;
   }
   
