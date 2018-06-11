@@ -94,7 +94,7 @@ export class SearchTeamsComponent implements OnInit {
         }
         
       }
-      this.selected++;
+      if (this.selected < 9) this.selected++;
     }
   }
 
