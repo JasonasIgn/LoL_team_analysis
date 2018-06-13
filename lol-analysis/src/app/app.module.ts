@@ -15,6 +15,7 @@ import { AdminComponent } from './components/admin/admin.component';
 import { ChampionFilterPipe } from './pipes/champion-filter.pipe';
 import { ChampionFilterComponent } from './components/counter/champion-filter.component';
 import { SynergyComponent } from './components/synergy/synergy.component';
+import { HomeComponent } from './components/home/home.component';
 
 
 
@@ -27,7 +28,8 @@ import { SynergyComponent } from './components/synergy/synergy.component';
     AdminComponent,
     ChampionFilterPipe,
     ChampionFilterComponent,
-    SynergyComponent
+    SynergyComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
