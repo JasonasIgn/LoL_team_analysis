@@ -117,11 +117,11 @@ export class SynergyComponent implements OnInit {
       this.suggestion2 = new Array<SuggestionModel>();
       this.suggestion3 = new Array<SuggestionModel>();
       this.suggestion4 = new Array<SuggestionModel>();
-      //this.suggestion5 = new Array<SuggestionModel>();
-      //this.suggestion6 = new Array<SuggestionModel>();
-      //this.suggestion7 = new Array<SuggestionModel>();
-      //this.suggestion8 = new Array<SuggestionModel>();
-      //this.suggestion9 = new Array<SuggestionModel>();
+      this.suggestion5 = new Array<SuggestionModel>();
+      this.suggestion6 = new Array<SuggestionModel>();
+      this.suggestion7 = new Array<SuggestionModel>();
+      this.suggestion8 = new Array<SuggestionModel>();
+      this.suggestion9 = new Array<SuggestionModel>();
       
       console.log("b");
       //this.teamIds1.sort();
@@ -191,7 +191,7 @@ export class SynergyComponent implements OnInit {
           console.log(this.teamUniqueCode1);
           console.log(this.teamUniqueCode2);
           
-          /* if (data.id == this.teamUniqueCode2)
+          if (data.id == this.teamUniqueCode2)
           {
             console.log("KEICIAMOS");
             //Apkeiciamos reiksmes
@@ -218,7 +218,7 @@ export class SynergyComponent implements OnInit {
             this.tempString = data.suggestion4;
             this.matchdata.suggestion4 = data.suggestion9;
             this.matchdata.suggestion9 = this.tempString;
-          }  */
+          } 
 
           this.GetSuggestionInfo(this.matchdata.suggestion0, this.suggestion0);
           this.GetSuggestionInfo(this.matchdata.suggestion1, this.suggestion1);
