@@ -9,11 +9,11 @@ import { AppRoutingModule } from './components/shared/app.routing';
 import { GeneralDataService } from './services/general.service';
 import { HttpModule } from '@angular/http';
 import { MatchService } from './services/match.service';
-import { SearchTeamsComponent } from './components/search-teams/search-teams.component';
+import { CounterComponent } from './components/counter/counter.component';
 import { ChampionService } from './services/champion.service';
 import { HomeComponent } from './components/home/home.component';
 import { ChampionFilterPipe } from './pipes/champion-filter.pipe';
-import { ChampionFilterComponent } from './components/search-teams/champion-filter.component';
+import { ChampionFilterComponent } from './components/counter/champion-filter.component';
 import { SynergyComponent } from './components/synergy/synergy.component';
 
 
@@ -23,7 +23,7 @@ import { SynergyComponent } from './components/synergy/synergy.component';
     AppComponent,
     NavbarComponent,
     CollectDataComponent,
-    SearchTeamsComponent,
+    CounterComponent,
     HomeComponent,
     ChampionFilterPipe,
     ChampionFilterComponent,

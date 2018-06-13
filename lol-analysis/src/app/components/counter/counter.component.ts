@@ -6,11 +6,11 @@ import { MatchService } from '../../services/match.service';
 import { SuggestionModel } from '../../models/suggestion.model';
 
 @Component({
-  selector: 'app-search-teams',
-  templateUrl: './search-teams.component.html',
-  styleUrls: ['./search-teams.component.css']
+  selector: 'app-counter',
+  templateUrl: './counter.component.html',
+  styleUrls: ['./counter.component.css']
 })
-export class SearchTeamsComponent implements OnInit {
+export class CounterComponent implements OnInit {
 
   MAXIND: number = 555;
   MAXCHAMPS: number = 141;

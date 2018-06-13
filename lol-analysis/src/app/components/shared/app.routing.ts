@@ -3,7 +3,7 @@ import { RouterModule } from '@angular/router';
 
 import { CollectDataComponent } from '../collect-data/collect-data.component';
 import { AppComponent } from '../../app.component';
-import { SearchTeamsComponent } from '../search-teams/search-teams.component';
+import { CounterComponent } from '../counter/counter.component';
 import { HomeComponent } from '../home/home.component';
 import { SynergyComponent } from '../synergy/synergy.component';
 
@@ -12,7 +12,7 @@ import { SynergyComponent } from '../synergy/synergy.component';
       RouterModule.forRoot([
           { path: 'home' , component: HomeComponent},
           { path: 'collect-data' , component: CollectDataComponent},
-          { path: 'search-teams' , component: SearchTeamsComponent},
+          { path: 'counter' , component: CounterComponent},
           { path: 'synergy' , component: SynergyComponent},
           // otherwise redirect to home
           { path: '**', redirectTo: '' }
