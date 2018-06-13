@@ -17,8 +17,8 @@ export class SearchTeamsComponent implements OnInit {
   teamUniqueCode1: number = 0;
   teamUniqueCode2: number = 0;
   championList: ChampionModel[];
-  searchChampions: ChampionModel[] = new Array<ChampionModel>(10);
-  searchChampionsPositions: string[] = new Array<string>(10);
+  searchChampions: ChampionModel[] = new Array<ChampionModel>(5);
+  searchChampionsPositions: string[] = new Array<string>(5);
   selected: number = -1;
   teamValid: boolean = true;
   teamCode1:string = "";
@@ -58,13 +58,13 @@ export class SearchTeamsComponent implements OnInit {
     this.searchChampionsPositions[2] = "MIDDLE";
     this.searchChampionsPositions[3] = "ADC";
     this.searchChampionsPositions[4] = "SUPPORT";
-    this.searchChampionsPositions[5] = "TOP";
-    this.searchChampionsPositions[6] = "JUNGLE";
-    this.searchChampionsPositions[7] = "MIDDLE";
-    this.searchChampionsPositions[8] = "ADC";
-    this.searchChampionsPositions[9] = "SUPPORT";
+   // this.searchChampionsPositions[5] = "TOP";
+    //this.searchChampionsPositions[6] = "JUNGLE";
+    //this.searchChampionsPositions[7] = "MIDDLE";
+    //this.searchChampionsPositions[8] = "ADC";
+    //this.searchChampionsPositions[9] = "SUPPORT";
     
-    for (var i = 0; i < 10; i++)
+    for (var i = 0; i < 5; i++)
     {
       this.searchChampions[i] = new ChampionModel();
         this.searchChampions[i].id = 0;
@@ -94,7 +94,7 @@ export class SearchTeamsComponent implements OnInit {
         }
         
       }
-      if (this.selected < 9) this.selected++;
+      if (this.selected < 4) this.selected++;
     }
   }
 
@@ -117,11 +117,11 @@ export class SearchTeamsComponent implements OnInit {
       this.suggestion2 = new Array<SuggestionModel>();
       this.suggestion3 = new Array<SuggestionModel>();
       this.suggestion4 = new Array<SuggestionModel>();
-      this.suggestion5 = new Array<SuggestionModel>();
-      this.suggestion6 = new Array<SuggestionModel>();
-      this.suggestion7 = new Array<SuggestionModel>();
-      this.suggestion8 = new Array<SuggestionModel>();
-      this.suggestion9 = new Array<SuggestionModel>();
+      //this.suggestion5 = new Array<SuggestionModel>();
+      //this.suggestion6 = new Array<SuggestionModel>();
+      //this.suggestion7 = new Array<SuggestionModel>();
+      //this.suggestion8 = new Array<SuggestionModel>();
+      //this.suggestion9 = new Array<SuggestionModel>();
       
       console.log("b");
       //this.teamIds1.sort();
@@ -130,6 +130,7 @@ export class SearchTeamsComponent implements OnInit {
       this.teamUniqueCode2 = 0;
       this.teamCode1 = this.teamIds1[0] + '_' + this.teamIds1[1] + '_' + this.teamIds1[2] + '_' + this.teamIds1[3] + '_' + this.teamIds1[4];
       this.teamCode2 = this.teamIds2[0] + '_' + this.teamIds2[1] + '_' + this.teamIds2[2] + '_' + this.teamIds2[3] + '_' + this.teamIds2[4];
+      this.teamCode2 = "0_0_0_0_0";
       if (this.teamIds1[0] != 0)
       {
           this.teamUniqueCode1 += this.teamIds1[0];
@@ -155,7 +156,7 @@ export class SearchTeamsComponent implements OnInit {
         this.teamUniqueCode1 += this.teamIds1[4] + this.MAXIND * 15;
         this.teamUniqueCode2 += this.teamIds1[4] + this.MAXIND * 511;
       }
-      if (this.teamIds2[0] != 0)
+      /* if (this.teamIds2[0] != 0)
       {
         this.teamUniqueCode1 += this.teamIds2[0] + this.MAXIND * 31;
         this.teamUniqueCode2 += this.teamIds2[0];
@@ -179,7 +180,7 @@ export class SearchTeamsComponent implements OnInit {
       {
         this.teamUniqueCode1 += this.teamIds2[4] + this.MAXIND * 511;
         this.teamUniqueCode2 += this.teamIds2[4] + this.MAXIND * 15;
-      }
+      } */
       //this.teamCode1 = "19_51_62_238_432";
       //this.teamCode2 = "22_45_86_141_201";
         console.log(this.teamCode1 + '-' + this.teamCode2);
@@ -190,7 +191,7 @@ export class SearchTeamsComponent implements OnInit {
           console.log(this.teamUniqueCode1);
           console.log(this.teamUniqueCode2);
           
-          if (data.id == this.teamUniqueCode2)
+          /* if (data.id == this.teamUniqueCode2)
           {
             console.log("KEICIAMOS");
             //Apkeiciamos reiksmes
@@ -217,7 +218,7 @@ export class SearchTeamsComponent implements OnInit {
             this.tempString = data.suggestion4;
             this.matchdata.suggestion4 = data.suggestion9;
             this.matchdata.suggestion9 = this.tempString;
-          } 
+          }  */
 
           this.GetSuggestionInfo(this.matchdata.suggestion0, this.suggestion0);
           this.GetSuggestionInfo(this.matchdata.suggestion1, this.suggestion1);
