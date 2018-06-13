@@ -11,7 +11,7 @@ import { HttpModule } from '@angular/http';
 import { MatchService } from './services/match.service';
 import { CounterComponent } from './components/counter/counter.component';
 import { ChampionService } from './services/champion.service';
-import { HomeComponent } from './components/home/home.component';
+import { AdminComponent } from './components/admin/admin.component';
 import { ChampionFilterPipe } from './pipes/champion-filter.pipe';
 import { ChampionFilterComponent } from './components/counter/champion-filter.component';
 import { SynergyComponent } from './components/synergy/synergy.component';
@@ -24,7 +24,7 @@ import { SynergyComponent } from './components/synergy/synergy.component';
     NavbarComponent,
     CollectDataComponent,
     CounterComponent,
-    HomeComponent,
+    AdminComponent,
     ChampionFilterPipe,
     ChampionFilterComponent,
     SynergyComponent
