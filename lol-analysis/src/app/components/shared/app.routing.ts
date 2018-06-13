@@ -5,6 +5,7 @@ import { CollectDataComponent } from '../collect-data/collect-data.component';
 import { AppComponent } from '../../app.component';
 import { SearchTeamsComponent } from '../search-teams/search-teams.component';
 import { HomeComponent } from '../home/home.component';
+import { SynergyComponent } from '../synergy/synergy.component';
 
 @NgModule({
   imports: [
@@ -12,6 +13,7 @@ import { HomeComponent } from '../home/home.component';
           { path: 'home' , component: HomeComponent},
           { path: 'collect-data' , component: CollectDataComponent},
           { path: 'search-teams' , component: SearchTeamsComponent},
+          { path: 'synergy' , component: SynergyComponent},
           // otherwise redirect to home
           { path: '**', redirectTo: '' }
       ])

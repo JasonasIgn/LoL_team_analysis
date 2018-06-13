@@ -14,6 +14,7 @@ import { ChampionService } from './services/champion.service';
 import { HomeComponent } from './components/home/home.component';
 import { ChampionFilterPipe } from './pipes/champion-filter.pipe';
 import { ChampionFilterComponent } from './components/search-teams/champion-filter.component';
+import { SynergyComponent } from './components/synergy/synergy.component';
 
 
 
@@ -25,7 +26,8 @@ import { ChampionFilterComponent } from './components/search-teams/champion-filt
     SearchTeamsComponent,
     HomeComponent,
     ChampionFilterPipe,
-    ChampionFilterComponent
+    ChampionFilterComponent,
+    SynergyComponent
   ],
   imports: [
     BrowserModule,
