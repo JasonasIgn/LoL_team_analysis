@@ -1,7 +1,7 @@
 <div style="text-align: center; height: 30px; margin-top: 10px;">YOUR TEAM</div>
 <div class="conteiner" style="text-align: center; margin-left: 13%; margin-right: 13%;">
   <div style="display: inline-block;" *ngFor="let ch of searchChampions; let ind = index;">
-      {{searchChampionsPositions[ind]}}
+     <b> {{searchChampionsPositions[ind]}} </b>
       <div class="card border-success just-box" style="height: 122px;width: 102px;" (click)="setSelected(ind)">
             <a href="javascript:;" style="text-decoration:none; color: black;">
               <div style="height: 20px;">{{ch.name}}</div>
@@ -180,7 +180,7 @@
   <div style="display: inline-block;"  *ngFor="let ch of championList | championFilter: searchInput; let ind = index;">
       <div class="card border-success just-box"  style="height: 102px;width: 80px; margin: 5px;" (click)="pickChampion(ch.id)">
         <a href="javascript:;" style="text-decoration:none; color: black;">
-      <div style="height: 20px;">{{ch.name}}</div>
+      <div style="height: 20px;"><b><font size="2">{{ch.name}}</font></b></div>
     
       <img style="height: 80px; width: 78px;" src="../../../assets/images/champions/{{ch.id}}.png" >
     </a>

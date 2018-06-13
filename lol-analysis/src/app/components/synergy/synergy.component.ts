@@ -68,9 +68,9 @@ export class SynergyComponent implements OnInit {
     {
       this.searchChampions[i] = new ChampionModel();
         this.searchChampions[i].id = 0;
-        this.searchChampions[i].title = "not selected";
-        this.searchChampions[i].name = "not selected";
-        this.searchChampions[i].key = "not selected";
+        this.searchChampions[i].title = "none";
+        this.searchChampions[i].name = "none";
+        this.searchChampions[i].key = "none";
     }
       this.championService.getAllChampions().subscribe((data: ChampionModel[]) =>{
         this.championList = data;
