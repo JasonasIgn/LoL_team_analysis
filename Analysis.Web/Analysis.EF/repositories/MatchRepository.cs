@@ -260,6 +260,7 @@ namespace Analysis.EF.repositories
                     if (responseString[start] == 'W') match.winTeam1 = true;
                     else match.winTeam1 = false;
 
+                    
                     for (int i0 = 0; i0 <= match.team1[0]; i0 += match.team1[0])
                     {
                         for (int i1 = 0; i1 <= match.team1[1]; i1 += match.team1[1])
@@ -270,139 +271,208 @@ namespace Analysis.EF.repositories
                                 {
                                     for (int i4 = 0; i4 <= match.team1[4]; i4 += match.team1[4])
                                     {
-                                        for (int i5 = 0; i5 <= match.team2[0]; i5 += match.team2[0])
+                                        uniqueCode1 = 0;
+                                        uniqueCode2 = 0;
+                                        if (i0 != 0)
                                         {
-                                            for (int i6 = 0; i6 <= match.team2[1]; i6 += match.team2[1])
+                                            uniqueCode1 += i0;
+                                            uniqueCode2 += i0 + MAXIND * 31;
+                                        }
+                                        if (i1 != 0)
+                                        {
+                                            uniqueCode1 += i1 + MAXIND * 1;
+                                            uniqueCode2 += i1 + MAXIND * 63;
+                                        }
+                                        if (i2 != 0)
+                                        {
+                                            uniqueCode1 += i2 + MAXIND * 3;
+                                            uniqueCode2 += i2 + MAXIND * 127;
+                                        }
+                                        if (i3 != 0)
+                                        {
+                                            uniqueCode1 += i3 + MAXIND * 7;
+                                            uniqueCode2 += i3 + MAXIND * 255;
+                                        }
+                                        if (i4 != 0)
+                                        {
+                                            uniqueCode1 += i4 + MAXIND * 15;
+                                            uniqueCode2 += i4 + MAXIND * 511;
+                                        }
+                                        if (uniqueCode1 != 0)
+                                        {
+                                            if (AnalysisContext.Match.Any(x => x.Id == uniqueCode1))
                                             {
-                                                for (int i7 = 0; i7 <= match.team2[2]; i7 += match.team2[2])
-                                                {
-                                                    for (int i8 = 0; i8 <= match.team2[3]; i8 += match.team2[3])
-                                                    {
-                                                        for (int i9 = 0; i9 <= match.team2[4]; i9 += match.team2[4])
-                                                        {
-                                                            uniqueCode1 = 0;
-                                                            uniqueCode2 = 0;
-                                                            if (i0 != 0)
-                                                            {
-                                                                uniqueCode1 += i0;
-                                                                uniqueCode2 += i0 + MAXIND * 31;
-                                                            }
-                                                            if (i1 != 0)
-                                                            {
-                                                                uniqueCode1 += i1 + MAXIND * 1;
-                                                                uniqueCode2 += i1 + MAXIND * 63;
-                                                            }
-                                                            if (i2 != 0)
-                                                            {
-                                                                uniqueCode1 += i2 + MAXIND * 3;
-                                                                uniqueCode2 += i2 + MAXIND * 127;
-                                                            }
-                                                            if (i3 != 0)
-                                                            {
-                                                                uniqueCode1 += i3 + MAXIND * 7;
-                                                                uniqueCode2 += i3 + MAXIND * 255;
-                                                            }
-                                                            if (i4 != 0)
-                                                            {
-                                                                uniqueCode1 += i4 + MAXIND * 15;
-                                                                uniqueCode2 += i4 + MAXIND * 511;
-                                                            }
-                                                            if (i5 != 0)
-                                                            {
-                                                                uniqueCode1 += i5 + MAXIND * 31;
-                                                                uniqueCode2 += i5;
-                                                            }
-                                                            if (i6 != 0)
-                                                            {
-                                                                uniqueCode1 += i6 + MAXIND * 63;
-                                                                uniqueCode2 += i6 + MAXIND * 1;
-                                                            }
-                                                            if (i7 != 0)
-                                                            {
-                                                                uniqueCode1 += i7 + MAXIND * 127;
-                                                                uniqueCode2 += i7 + MAXIND * 3;
-                                                            }
-                                                            if (i8 != 0)
-                                                            {
-                                                                uniqueCode1 += i8 + MAXIND * 255;
-                                                                uniqueCode2 += i8 + MAXIND * 7;
-                                                            }
-                                                            if (i9 != 0)
-                                                            {
-                                                                uniqueCode1 += i9 + MAXIND * 511;
-                                                                uniqueCode2 += i9 + MAXIND * 15;
-                                                            }
-                                                            
-                                                            if (uniqueCode1 != 0)
-                                                            {
-                                                                if (AnalysisContext.Match.Any(x => x.Id == uniqueCode1))
-                                                                {
-                                                                    Match newMatch = GetMatchByTeamcode(uniqueCode1);
-                                                                    newMatch = UpdateMatch(match.winTeam1, newMatch, match, i0, i1, i2, i3, i4, i5, i6, i7, i8, i9);
-                                                                    AnalysisContext.Update(newMatch);
-                                                                    
-                                                                }
-                                                                else if (AnalysisContext.Match.Any(x => x.Id == uniqueCode2))
-                                                                {
-                                                                    Match newMatch = GetMatchByTeamcode(uniqueCode2);
-                                                                    for (int i = 0; i < 5; i++)
-                                                                    {
-                                                                        tempInt = match.team1[i];
-                                                                        match.team1[i] = match.team2[i];
-                                                                        match.team2[i] = tempInt;
-                                                                    }
-                                                                    
-                                                                    newMatch = UpdateMatch(!match.winTeam1, newMatch, match, i5, i6, i7, i8, i9, i0, i1, i2, i3, i4);
-                                                                    for (int i = 0; i < 5; i++)
-                                                                    {
-                                                                        tempInt = match.team1[i];
-                                                                        match.team1[i] = match.team2[i];
-                                                                        match.team2[i] = tempInt;
-                                                                    }
-                                                                    AnalysisContext.Update(newMatch);
-                                                                    
-                                                                }
-                                                                else
-                                                                {
-                                                                    Match newMatch = new Match();
-                                                                    newMatch.Id = uniqueCode1;
-                                                                    if (match.winTeam1 == true)
-                                                                    {
-                                                                        newMatch.Team1Wins = 1;
-                                                                        if (i0 == 0) newMatch.Suggestion0 = match.team1[0] + "(1,0)";
-                                                                        if (i1 == 0) newMatch.Suggestion1 = match.team1[1] + "(1,0)";
-                                                                        if (i2 == 0) newMatch.Suggestion2 = match.team1[2] + "(1,0)";
-                                                                        if (i3 == 0) newMatch.Suggestion3 = match.team1[3] + "(1,0)";
-                                                                        if (i4 == 0) newMatch.Suggestion4 = match.team1[4] + "(1,0)";
-                                                                        if (i5 == 0) newMatch.Suggestion5 = match.team2[0] + "(0,1)";
-                                                                        if (i6 == 0) newMatch.Suggestion6 = match.team2[1] + "(0,1)";
-                                                                        if (i7 == 0) newMatch.Suggestion7 = match.team2[2] + "(0,1)";
-                                                                        if (i8 == 0) newMatch.Suggestion8 = match.team2[3] + "(0,1)";
-                                                                        if (i9 == 0) newMatch.Suggestion9 = match.team2[4] + "(0,1)";
-                                                                    }
-                                                                    else
-                                                                    {
-                                                                        newMatch.Team2Wins = 1;
-                                                                        if (i0 == 0) newMatch.Suggestion0 = match.team1[0] + "(0,1)";
-                                                                        if (i1 == 0) newMatch.Suggestion1 = match.team1[1] + "(0,1)";
-                                                                        if (i2 == 0) newMatch.Suggestion2 = match.team1[2] + "(0,1)";
-                                                                        if (i3 == 0) newMatch.Suggestion3 = match.team1[3] + "(0,1)";
-                                                                        if (i4 == 0) newMatch.Suggestion4 = match.team1[4] + "(0,1)";
-                                                                        if (i5 == 0) newMatch.Suggestion5 = match.team2[0] + "(1,0)";
-                                                                        if (i6 == 0) newMatch.Suggestion6 = match.team2[1] + "(1,0)";
-                                                                        if (i7 == 0) newMatch.Suggestion7 = match.team2[2] + "(1,0)";
-                                                                        if (i8 == 0) newMatch.Suggestion8 = match.team2[3] + "(1,0)";
-                                                                        if (i9 == 0) newMatch.Suggestion9 = match.team2[4] + "(1,0)";
-                                                                    }
-                                                                    
-                                                                    AnalysisContext.Add(newMatch);
-                                                                    
-                                                                }
-                                                            }
+                                                Match newMatch = GetMatchByTeamcode(uniqueCode1);
+                                                newMatch = UpdateMatch(match.winTeam1, newMatch, match, i0, i1, i2, i3, i4, 0, 0, 0, 0, 0);
+                                                AnalysisContext.Update(newMatch);
 
-                                                        }
-                                                    }
+                                            }
+                                            else if (AnalysisContext.Match.Any(x => x.Id == uniqueCode2))
+                                            {
+                                                Match newMatch = GetMatchByTeamcode(uniqueCode2);
+                                                for (int i = 0; i < 5; i++)
+                                                {
+                                                    tempInt = match.team1[i];
+                                                    match.team1[i] = match.team2[i];
+                                                    match.team2[i] = tempInt;
                                                 }
+
+                                                newMatch = UpdateMatch(!match.winTeam1, newMatch, match, 0, 0, 0, 0, 0, i0, i1, i2, i3, i4);
+                                                for (int i = 0; i < 5; i++)
+                                                {
+                                                    tempInt = match.team1[i];
+                                                    match.team1[i] = match.team2[i];
+                                                    match.team2[i] = tempInt;
+                                                }
+                                                AnalysisContext.Update(newMatch);
+
+                                            }
+                                            else
+                                            {
+                                                Match newMatch = new Match();
+                                                newMatch.Id = uniqueCode1;
+                                                if (match.winTeam1 == true)
+                                                {
+                                                    newMatch.Team1Wins = 1;
+                                                    if (i0 == 0) newMatch.Suggestion0 = match.team1[0] + "(1,0)";
+                                                    if (i1 == 0) newMatch.Suggestion1 = match.team1[1] + "(1,0)";
+                                                    if (i2 == 0) newMatch.Suggestion2 = match.team1[2] + "(1,0)";
+                                                    if (i3 == 0) newMatch.Suggestion3 = match.team1[3] + "(1,0)";
+                                                    if (i4 == 0) newMatch.Suggestion4 = match.team1[4] + "(1,0)";
+                                                    newMatch.Suggestion5 = match.team2[0] + "(0,1)";
+                                                    newMatch.Suggestion6 = match.team2[1] + "(0,1)";
+                                                    newMatch.Suggestion7 = match.team2[2] + "(0,1)";
+                                                    newMatch.Suggestion8 = match.team2[3] + "(0,1)";
+                                                    newMatch.Suggestion9 = match.team2[4] + "(0,1)";
+                                                }
+                                                else
+                                                {
+                                                    newMatch.Team2Wins = 1;
+                                                    if (i0 == 0) newMatch.Suggestion0 = match.team1[0] + "(0,1)";
+                                                    if (i1 == 0) newMatch.Suggestion1 = match.team1[1] + "(0,1)";
+                                                    if (i2 == 0) newMatch.Suggestion2 = match.team1[2] + "(0,1)";
+                                                    if (i3 == 0) newMatch.Suggestion3 = match.team1[3] + "(0,1)";
+                                                    if (i4 == 0) newMatch.Suggestion4 = match.team1[4] + "(0,1)";
+                                                    newMatch.Suggestion5 = match.team2[0] + "(1,0)";
+                                                    newMatch.Suggestion6 = match.team2[1] + "(1,0)";
+                                                    newMatch.Suggestion7 = match.team2[2] + "(1,0)";
+                                                    newMatch.Suggestion8 = match.team2[3] + "(1,0)";
+                                                    newMatch.Suggestion9 = match.team2[4] + "(1,0)";
+                                                }
+
+                                                AnalysisContext.Add(newMatch);
+
+                                            }
+                                        }
+
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    for (int i5 = 0; i5 <= match.team2[0]; i5 += match.team2[0])
+                    {
+                        for (int i6 = 0; i6 <= match.team2[1]; i6 += match.team2[1])
+                        {
+                            for (int i7 = 0; i7 <= match.team2[2]; i7 += match.team2[2])
+                            {
+                                for (int i8 = 0; i8 <= match.team2[3]; i8 += match.team2[3])
+                                {
+                                    for (int i9 = 0; i9 <= match.team2[4]; i9 += match.team2[4])
+                                    {
+                                        uniqueCode1 = 0;
+                                        uniqueCode2 = 0;
+                                            
+                                        if (i5 != 0)
+                                        {
+                                            uniqueCode1 += i5 + MAXIND * 31;
+                                            uniqueCode2 += i5;
+                                        }
+                                        if (i6 != 0)
+                                        {
+                                            uniqueCode1 += i6 + MAXIND * 63;
+                                            uniqueCode2 += i6 + MAXIND * 1;
+                                        }
+                                        if (i7 != 0)
+                                        {
+                                            uniqueCode1 += i7 + MAXIND * 127;
+                                            uniqueCode2 += i7 + MAXIND * 3;
+                                        }
+                                        if (i8 != 0)
+                                        {
+                                            uniqueCode1 += i8 + MAXIND * 255;
+                                            uniqueCode2 += i8 + MAXIND * 7;
+                                        }
+                                        if (i9 != 0)
+                                        {
+                                            uniqueCode1 += i9 + MAXIND * 511;
+                                            uniqueCode2 += i9 + MAXIND * 15;
+                                        }
+                                        if (uniqueCode1 != 0)
+                                        {
+                                            if (AnalysisContext.Match.Any(x => x.Id == uniqueCode1))
+                                            {
+                                                Match newMatch = GetMatchByTeamcode(uniqueCode1);
+                                                newMatch = UpdateMatch(match.winTeam1, newMatch, match, 0, 0, 0, 0, 0, i5, i6, i7, i8, i9);
+                                                AnalysisContext.Update(newMatch);
+
+                                            }
+                                            else if (AnalysisContext.Match.Any(x => x.Id == uniqueCode2))
+                                            {
+                                                Match newMatch = GetMatchByTeamcode(uniqueCode2);
+                                                for (int i = 0; i < 5; i++)
+                                                {
+                                                    tempInt = match.team1[i];
+                                                    match.team1[i] = match.team2[i];
+                                                    match.team2[i] = tempInt;
+                                                }
+
+                                                newMatch = UpdateMatch(!match.winTeam1, newMatch, match, i5, i6, i7, i8, i9, 0, 0, 0, 0, 0);
+                                                for (int i = 0; i < 5; i++)
+                                                {
+                                                    tempInt = match.team1[i];
+                                                    match.team1[i] = match.team2[i];
+                                                    match.team2[i] = tempInt;
+                                                }
+                                                AnalysisContext.Update(newMatch);
+
+                                            }
+                                            else
+                                            {
+                                                Match newMatch = new Match();
+                                                newMatch.Id = uniqueCode1;
+                                                if (match.winTeam1 == true)
+                                                {
+                                                    newMatch.Team1Wins = 1;
+                                                    newMatch.Suggestion0 = match.team1[0] + "(1,0)";
+                                                    newMatch.Suggestion1 = match.team1[1] + "(1,0)";
+                                                    newMatch.Suggestion2 = match.team1[2] + "(1,0)";
+                                                    newMatch.Suggestion3 = match.team1[3] + "(1,0)";
+                                                    newMatch.Suggestion4 = match.team1[4] + "(1,0)";
+                                                    if (i5 == 0) newMatch.Suggestion5 = match.team2[0] + "(0,1)";
+                                                    if (i6 == 0) newMatch.Suggestion6 = match.team2[1] + "(0,1)";
+                                                    if (i7 == 0) newMatch.Suggestion7 = match.team2[2] + "(0,1)";
+                                                    if (i8 == 0) newMatch.Suggestion8 = match.team2[3] + "(0,1)";
+                                                    if (i9 == 0) newMatch.Suggestion9 = match.team2[4] + "(0,1)";
+                                                }
+                                                else
+                                                {
+                                                    newMatch.Team2Wins = 1;
+                                                    newMatch.Suggestion0 = match.team1[0] + "(0,1)";
+                                                    newMatch.Suggestion1 = match.team1[1] + "(0,1)";
+                                                    newMatch.Suggestion2 = match.team1[2] + "(0,1)";
+                                                    newMatch.Suggestion3 = match.team1[3] + "(0,1)";
+                                                    newMatch.Suggestion4 = match.team1[4] + "(0,1)";
+                                                    if (i5 == 0) newMatch.Suggestion5 = match.team2[0] + "(1,0)";
+                                                    if (i6 == 0) newMatch.Suggestion6 = match.team2[1] + "(1,0)";
+                                                    if (i7 == 0) newMatch.Suggestion7 = match.team2[2] + "(1,0)";
+                                                    if (i8 == 0) newMatch.Suggestion8 = match.team2[3] + "(1,0)";
+                                                    if (i9 == 0) newMatch.Suggestion9 = match.team2[4] + "(1,0)";
+                                                }
+
+                                                AnalysisContext.Add(newMatch);
+
                                             }
                                         }
                                     }
@@ -410,6 +480,156 @@ namespace Analysis.EF.repositories
                             }
                         }
                     }
+                    //for (int i0 = 0; i0 <= match.team1[0]; i0 += match.team1[0])
+                    //{
+                    //    for (int i1 = 0; i1 <= match.team1[1]; i1 += match.team1[1])
+                    //    {
+                    //        for (int i2 = 0; i2 <= match.team1[2]; i2 += match.team1[2])
+                    //        {
+                    //            for (int i3 = 0; i3 <= match.team1[3]; i3 += match.team1[3])
+                    //            {
+                    //                for (int i4 = 0; i4 <= match.team1[4]; i4 += match.team1[4])
+                    //                {
+                    //                    for (int i5 = 0; i5 <= match.team2[0]; i5 += match.team2[0])
+                    //                    {
+                    //                        for (int i6 = 0; i6 <= match.team2[1]; i6 += match.team2[1])
+                    //                        {
+                    //                            for (int i7 = 0; i7 <= match.team2[2]; i7 += match.team2[2])
+                    //                            {
+                    //                                for (int i8 = 0; i8 <= match.team2[3]; i8 += match.team2[3])
+                    //                                {
+                    //                                    for (int i9 = 0; i9 <= match.team2[4]; i9 += match.team2[4])
+                    //                                    {
+                    //                                        uniqueCode1 = 0;
+                    //                                        uniqueCode2 = 0;
+                    //                                        if (i0 != 0)
+                    //                                        {
+                    //                                            uniqueCode1 += i0;
+                    //                                            uniqueCode2 += i0 + MAXIND * 31;
+                    //                                        }
+                    //                                        if (i1 != 0)
+                    //                                        {
+                    //                                            uniqueCode1 += i1 + MAXIND * 1;
+                    //                                            uniqueCode2 += i1 + MAXIND * 63;
+                    //                                        }
+                    //                                        if (i2 != 0)
+                    //                                        {
+                    //                                            uniqueCode1 += i2 + MAXIND * 3;
+                    //                                            uniqueCode2 += i2 + MAXIND * 127;
+                    //                                        }
+                    //                                        if (i3 != 0)
+                    //                                        {
+                    //                                            uniqueCode1 += i3 + MAXIND * 7;
+                    //                                            uniqueCode2 += i3 + MAXIND * 255;
+                    //                                        }
+                    //                                        if (i4 != 0)
+                    //                                        {
+                    //                                            uniqueCode1 += i4 + MAXIND * 15;
+                    //                                            uniqueCode2 += i4 + MAXIND * 511;
+                    //                                        }
+                    //                                        if (i5 != 0)
+                    //                                        {
+                    //                                            uniqueCode1 += i5 + MAXIND * 31;
+                    //                                            uniqueCode2 += i5;
+                    //                                        }
+                    //                                        if (i6 != 0)
+                    //                                        {
+                    //                                            uniqueCode1 += i6 + MAXIND * 63;
+                    //                                            uniqueCode2 += i6 + MAXIND * 1;
+                    //                                        }
+                    //                                        if (i7 != 0)
+                    //                                        {
+                    //                                            uniqueCode1 += i7 + MAXIND * 127;
+                    //                                            uniqueCode2 += i7 + MAXIND * 3;
+                    //                                        }
+                    //                                        if (i8 != 0)
+                    //                                        {
+                    //                                            uniqueCode1 += i8 + MAXIND * 255;
+                    //                                            uniqueCode2 += i8 + MAXIND * 7;
+                    //                                        }
+                    //                                        if (i9 != 0)
+                    //                                        {
+                    //                                            uniqueCode1 += i9 + MAXIND * 511;
+                    //                                            uniqueCode2 += i9 + MAXIND * 15;
+                    //                                        }
+                                                            
+                    //                                        if (uniqueCode1 != 0)
+                    //                                        {
+                    //                                            if (AnalysisContext.Match.Any(x => x.Id == uniqueCode1))
+                    //                                            {
+                    //                                                Match newMatch = GetMatchByTeamcode(uniqueCode1);
+                    //                                                newMatch = UpdateMatch(match.winTeam1, newMatch, match, i0, i1, i2, i3, i4, i5, i6, i7, i8, i9);
+                    //                                                AnalysisContext.Update(newMatch);
+                                                                    
+                    //                                            }
+                    //                                            else if (AnalysisContext.Match.Any(x => x.Id == uniqueCode2))
+                    //                                            {
+                    //                                                Match newMatch = GetMatchByTeamcode(uniqueCode2);
+                    //                                                for (int i = 0; i < 5; i++)
+                    //                                                {
+                    //                                                    tempInt = match.team1[i];
+                    //                                                    match.team1[i] = match.team2[i];
+                    //                                                    match.team2[i] = tempInt;
+                    //                                                }
+                                                                    
+                    //                                                newMatch = UpdateMatch(!match.winTeam1, newMatch, match, i5, i6, i7, i8, i9, i0, i1, i2, i3, i4);
+                    //                                                for (int i = 0; i < 5; i++)
+                    //                                                {
+                    //                                                    tempInt = match.team1[i];
+                    //                                                    match.team1[i] = match.team2[i];
+                    //                                                    match.team2[i] = tempInt;
+                    //                                                }
+                    //                                                AnalysisContext.Update(newMatch);
+                                                                    
+                    //                                            }
+                    //                                            else
+                    //                                            {
+                    //                                                Match newMatch = new Match();
+                    //                                                newMatch.Id = uniqueCode1;
+                    //                                                if (match.winTeam1 == true)
+                    //                                                {
+                    //                                                    newMatch.Team1Wins = 1;
+                    //                                                    if (i0 == 0) newMatch.Suggestion0 = match.team1[0] + "(1,0)";
+                    //                                                    if (i1 == 0) newMatch.Suggestion1 = match.team1[1] + "(1,0)";
+                    //                                                    if (i2 == 0) newMatch.Suggestion2 = match.team1[2] + "(1,0)";
+                    //                                                    if (i3 == 0) newMatch.Suggestion3 = match.team1[3] + "(1,0)";
+                    //                                                    if (i4 == 0) newMatch.Suggestion4 = match.team1[4] + "(1,0)";
+                    //                                                    if (i5 == 0) newMatch.Suggestion5 = match.team2[0] + "(0,1)";
+                    //                                                    if (i6 == 0) newMatch.Suggestion6 = match.team2[1] + "(0,1)";
+                    //                                                    if (i7 == 0) newMatch.Suggestion7 = match.team2[2] + "(0,1)";
+                    //                                                    if (i8 == 0) newMatch.Suggestion8 = match.team2[3] + "(0,1)";
+                    //                                                    if (i9 == 0) newMatch.Suggestion9 = match.team2[4] + "(0,1)";
+                    //                                                }
+                    //                                                else
+                    //                                                {
+                    //                                                    newMatch.Team2Wins = 1;
+                    //                                                    if (i0 == 0) newMatch.Suggestion0 = match.team1[0] + "(0,1)";
+                    //                                                    if (i1 == 0) newMatch.Suggestion1 = match.team1[1] + "(0,1)";
+                    //                                                    if (i2 == 0) newMatch.Suggestion2 = match.team1[2] + "(0,1)";
+                    //                                                    if (i3 == 0) newMatch.Suggestion3 = match.team1[3] + "(0,1)";
+                    //                                                    if (i4 == 0) newMatch.Suggestion4 = match.team1[4] + "(0,1)";
+                    //                                                    if (i5 == 0) newMatch.Suggestion5 = match.team2[0] + "(1,0)";
+                    //                                                    if (i6 == 0) newMatch.Suggestion6 = match.team2[1] + "(1,0)";
+                    //                                                    if (i7 == 0) newMatch.Suggestion7 = match.team2[2] + "(1,0)";
+                    //                                                    if (i8 == 0) newMatch.Suggestion8 = match.team2[3] + "(1,0)";
+                    //                                                    if (i9 == 0) newMatch.Suggestion9 = match.team2[4] + "(1,0)";
+                    //                                                }
+                                                                    
+                    //                                                AnalysisContext.Add(newMatch);
+                                                                    
+                    //                                            }
+                    //                                        }
+
+                    //                                    }
+                    //                                }
+                    //                            }
+                    //                        }
+                    //                    }
+                    //                }
+                    //            }
+                    //        }
+                    //    }
+                    //}
                     AnalysisContext.SaveChanges();
                     return 0;
 
