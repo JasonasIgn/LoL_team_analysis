@@ -186,12 +186,13 @@
 
 <div style="height: 20px"></div>
 <div>
-  <div style="display: inline-block;" *ngFor="let ch of championList | championFilter: searchInput; let ind = index;">
-
-      <div class="card border-success just-box" style="height: 122px;width: 100px; margin: 5px;" (click)="pickChampion(ch.id)">
-
+  <div style="display: inline-block;"  *ngFor="let ch of championList | championFilter: searchInput; let ind = index;">
+      <div class="card border-success just-box"  style="height: 122px;width: 100px; margin: 5px;" (click)="pickChampion(ch.id)">
+        <a href="javascript:;" style="text-decoration:none; color: black;">
       <div style="height: 20px;">{{ch.name}}</div>
+    
       <img src="../../../assets/images/champions/{{ch.id}}.png" >
+    </a>
       </div>
   
   </div>
