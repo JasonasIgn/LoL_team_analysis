@@ -4,6 +4,7 @@ import { ChampionModel } from '../../models/champion.model';
 import { MatchModel } from '../../models/match.model';
 import { MatchService } from '../../services/match.service';
 import { SuggestionModel } from '../../models/suggestion.model';
+import { forEach } from '@angular/router/src/utils/collection';
 
 @Component({
   selector: 'app-counter',
@@ -17,6 +18,7 @@ export class CounterComponent implements OnInit {
   teamUniqueCode1: number = 0;
   teamUniqueCode2: number = 0;
   championList: ChampionModel[];
+  championListForDisplay: ChampionModel[] = new Array<ChampionModel>(this.MAXIND);
   searchChampions: ChampionModel[] = new Array<ChampionModel>(5);
   searchChampionsPositions: string[] = new Array<string>(5);
   selected: number = -1;
@@ -74,6 +76,10 @@ export class CounterComponent implements OnInit {
     }
       this.championService.getAllChampions().subscribe((data: ChampionModel[]) =>{
         this.championList = data;
+        for (var i = 0; i < this.MAXCHAMPS; i++)
+        {
+          this.championListForDisplay[this.championList[i].id] = this.championList[i];
+        }
       });
   }
   
