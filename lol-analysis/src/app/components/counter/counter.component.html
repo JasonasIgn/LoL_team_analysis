@@ -33,21 +33,22 @@
             
 
 
-                <div *ngIf="suggestion0.length != 0">
-                    
-                        <div class="champBlock">
-                                
-                            <div style="color: lightgray; text-align: center;">
-                                <div style="height: 20px; text-align: center;">{{searchChampionsPositions[0]}}</div>
-                                <img src="../../../assets/images/champions/-1.png">
-                                
-                            </div>
-                        
 
+
+
+                <div class="champBlock">
+                                
+                        <div style="color: lightgray; text-align: center;">
+                            <div style="height: 20px; text-align: center;">{{searchChampionsPositions[0]}}</div>
+                            <img src="../../../assets/images/champions/-1.png">
+                            
+                </div>
+                
+                
                         <div class="row" style="text-align: center;">
                             <div style="padding-left: 100px;" class="col-6">
-                                <b style="font-size: 30px;">BEST PICKS</b>
-                                <table  class="table table-hover">
+                                <b style="font-size: 30px;">BEST COUNTERS</b>
+                                <table *ngIf="suggestion0.length != 0" class="table table-hover">
                                         <thead>
                                           <tr>
                                             
@@ -58,13 +59,9 @@
                                           </tr>
                                         </thead>
                                         <tbody>
-                                            
+                                        
+                                                
                                         <tr *ngFor="let ch of suggestion0; let ind = index;">
-                        
-                                                
-                                                    
-                                                
-                                                
 
                                                 <td style="text-align: left;">
                                                     <div style="display: inline-block; ">
@@ -85,14 +82,15 @@
                                                 </tr>
                                             
                                         
-                                          </tbody>
+                                          </tbody>   
                                 </table>
+                                <div *ngIf="suggestion0.length == 0" style="text-align: center"> NO DATA</div>
                                 
                             </div>
 
                             <div style="padding-right: 100px;" class="col-6">
-                                    <b style="font-size: 30px;">WORST PICKS</b>
-                                    <table  class="table table-hover">
+                                    <b style="font-size: 30px;">WORST COUNTERS</b>
+                                    <table *ngIf="suggestion0Worst.length != 0" class="table table-hover">
                                             <thead>
                                               <tr>
                                                 
@@ -106,11 +104,6 @@
                                                 
                                             <tr *ngFor="let ch of suggestion0Worst; let ind = index;">
                             
-                                                    
-                                                        
-                                                    
-                                                    
-    
                                                     <td style="text-align: left;">
                                                         <div style="display: inline-block; ">
                                                         <img style="border-radius: 50%; width: 70px; height: 70px;" src="../../../assets/images/champions/{{ch.ChampionId}}.png">
@@ -119,10 +112,6 @@
                                                             <br>
                                                             <small>{{championListForDisplay[ch.ChampionId].title}}</small>
                                                         </div>
-                                                        
-                                                        
-                                                    
-                                                        
                                                     </td>
                                                     
                                                     <td style="vertical-align: middle;"><b>{{ch.Winrate}}%</b></td>
@@ -132,43 +121,12 @@
                                             
                                               </tbody>
                                     </table>
+                                    <div *ngIf="suggestion0Worst.length == 0" style="text-align: center"> NO DATA</div>
                                     
                                 </div>
-                        </div>
-                        </div>
-                    </div>
-
-
-
-
-
-
-            <div *ngIf="suggestion0.length != 0">
-                <div class="block">
-                    <div style="display: inline-block; vertical-align: middle; color: lightgray">
-                        <div style="height: 20px; text-align: center;">{{searchChampionsPositions[0]}}</div>
-                        <img src="../../../assets/images/champions/-1.png">
-                        
-                    </div>
-                    
                             
-                    <img style="display: inline-block; vertical-align: middle;" src="../../../assets/images/arrow.png">
-                            
-                    
-                    
-
-
-                    <div style="display: inline-block;" *ngFor="let ch of suggestion0; let ind = index;">
-                    
-                        <div *ngIf="ind < 3" class="card border-primary just-box" style="display: inline-block;vertical-align: middle; color: lightgray">
-                            <div style="height: 20px; text-align: center;">{{championListForDisplay[ch.ChampionId].name}}</div>
-                                <img src="../../../assets/images/champions/{{ch.ChampionId}}.png">
-                                <div style="height: 20px;">Winrate: {{ch.Winrate}}%</div>
-                                <div style="height: 20px;">Games: {{ch.Total}}</div>
                         </div>
                     </div>
-                </div>
-            </div>
 
 
             
@@ -274,7 +232,7 @@
 
         
     </div>
-
+    <div style="height: 20px;"></div>
     <div class="row">
         <div class="col-4">
 
