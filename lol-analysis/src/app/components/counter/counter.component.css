@@ -1,3 +1,12 @@
 div.card:hover { 
     background-color: rgb(76, 76, 76);
 }
+.block {
+    height: 160px;
+}
+.block2:before {
+content: "";
+display: inline-block;
+vertical-align: middle;
+height: 100%;
+}

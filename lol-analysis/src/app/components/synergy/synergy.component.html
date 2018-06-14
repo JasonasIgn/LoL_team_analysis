@@ -37,7 +37,7 @@
       </div>
       <div *ngIf="suggestion0.length != 0">
           
-          <div class="card border-primary just-box" style="display: inline-block;">
+          <div class="card border-primary just-box" style="display: inline-block; color: lightgray">
               <div style="height: 20px; text-align: center;">{{searchChampionsPositions[0]}}</div>
               <img src="../../../assets/images/champions/-1.png">
               <div style="height: 20px;">Winrate</div>
@@ -48,7 +48,7 @@
 
           <div style="display: inline-block;" *ngFor="let ch of suggestion0; let ind = index;">
           
-              <div *ngIf="ind < 3" class="card border-primary just-box" style="display: inline-block;">
+              <div *ngIf="ind < 3" class="card border-primary just-box" style="display: inline-block; color: lightgray">
                   <div style="height: 20px; text-align: center;">{{championListForDisplay[ch.ChampionId].name}}</div>
                       <img src="../../../assets/images/champions/{{ch.ChampionId}}.png">
                       <div style="height: 20px;">Winrate: {{ch.Winrate}}%</div>
@@ -61,7 +61,7 @@
       
       <div *ngIf="suggestion1.length != 0">
           
-              <div class="card border-primary just-box" style="display: inline-block;">
+              <div class="card border-primary just-box" style="display: inline-block; color: lightgray">
                   <div>
                   <div style="height: 20px; text-align: center;">{{searchChampionsPositions[1]}}</div>
                   <img src="../../../assets/images/champions/-2.png">
@@ -75,7 +75,7 @@
 
               <div style="display: inline-block;" *ngFor="let ch of suggestion1; let ind = index;">
               
-                  <div *ngIf="ind < 3" class="card border-primary just-box" style="display: inline-block;">
+                  <div *ngIf="ind < 3" class="card border-primary just-box" style="display: inline-block; color: lightgray">
                       <div style="height: 160px;">
                           <div style="height: 20px; text-align: center;">{{championListForDisplay[ch.ChampionId].name}}</div>
                           <img src="../../../assets/images/champions/{{ch.ChampionId}}.png">
@@ -90,7 +90,7 @@
 
       <div *ngIf="suggestion2.length != 0">
           
-          <div class="card border-primary just-box" style="display: inline-block;">
+          <div class="card border-primary just-box" style="display: inline-block; color: lightgray">
               <div style="height: 20px; text-align: center;">{{searchChampionsPositions[2]}}</div>
               <img src="../../../assets/images/champions/-3.png">
               <div style="height: 20px;">Winrate</div>
@@ -101,7 +101,7 @@
 
           <div style="display: inline-block;" *ngFor="let ch of suggestion2; let ind = index;">
           
-              <div *ngIf="ind < 3" class="card border-primary just-box" style="display: inline-block;">
+              <div *ngIf="ind < 3" class="card border-primary just-box" style="display: inline-block; color: lightgray">
                   <div style="height: 20px; text-align: center;">{{championListForDisplay[ch.ChampionId].name}}</div>
                       <img src="../../../assets/images/champions/{{ch.ChampionId}}.png">
                       <div style="height: 20px;">Winrate: {{ch.Winrate}}%</div>
@@ -112,7 +112,7 @@
 
       <div *ngIf="suggestion3.length != 0">
           
-          <div class="card border-primary just-box" style="display: inline-block;">
+          <div class="card border-primary just-box" style="display: inline-block; color: lightgray">
               <div style="height: 20px; text-align: center;">{{searchChampionsPositions[3]}}</div>
               <img src="../../../assets/images/champions/-4.png">
               <div style="height: 20px;">Winrate</div>
@@ -123,7 +123,7 @@
 
           <div style="display: inline-block;" *ngFor="let ch of suggestion3; let ind = index;">
           
-              <div *ngIf="ind < 3" class="card border-primary just-box" style="display: inline-block;">
+              <div *ngIf="ind < 3" class="card border-primary just-box" style="display: inline-block; color: lightgray">
                   <div style="height: 20px; text-align: center;">{{championListForDisplay[ch.ChampionId].name}}</div>
                       <img src="../../../assets/images/champions/{{ch.ChampionId}}.png">
                       <div style="height: 20px;">Winrate: {{ch.Winrate}}%</div>
@@ -134,7 +134,7 @@
 
       <div *ngIf="suggestion4.length != 0">
           
-          <div class="card border-primary just-box" style="display: inline-block;">
+          <div class="card border-primary just-box" style="display: inline-block; color: lightgray">
               <div style="height: 20px; text-align: center;">{{searchChampionsPositions[4]}}</div>
               <img src="../../../assets/images/champions/-5.png">
               <div style="height: 20px;">Winrate</div>
@@ -145,7 +145,7 @@
 
           <div style="display: inline-block;" *ngFor="let ch of suggestion4; let ind = index;">
           
-              <div *ngIf="ind < 3" class="card border-primary just-box" style="display: inline-block;">
+              <div *ngIf="ind < 3" class="card border-primary just-box" style="display: inline-block; color: lightgray">
                   <div style="height: 20px; text-align: center;">{{championListForDisplay[ch.ChampionId].name}}</div>
                       <img src="../../../assets/images/champions/{{ch.ChampionId}}.png">
                       <div style="height: 20px;">Winrate: {{ch.Winrate}}%</div>
