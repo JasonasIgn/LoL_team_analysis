@@ -272,7 +272,15 @@ export class CounterComponent implements OnInit {
           this.suggestion9Worst.sort((a, b) => a.Win < b.Win ? -1 : a.Win > b.Win ? 1 : 0);
           
           this.suggestion0 = this.suggestion0.slice(0, 3);
+          this.suggestion1 = this.suggestion1.slice(0, 3);
+          this.suggestion2 = this.suggestion2.slice(0, 3);
+          this.suggestion3 = this.suggestion3.slice(0, 3);
+          this.suggestion4 = this.suggestion4.slice(0, 3);
           this.suggestion0Worst = this.suggestion0Worst.slice(0, 3);
+          this.suggestion1Worst = this.suggestion1Worst.slice(0, 3);
+          this.suggestion2Worst = this.suggestion2Worst.slice(0, 3);
+          this.suggestion3Worst = this.suggestion3Worst.slice(0, 3);
+          this.suggestion4Worst = this.suggestion4Worst.slice(0, 3);
           this.team1Winrate = Math.round((this.matchdata.team1Wins / (this.matchdata.team1Wins + this.matchdata.team2Wins)) * 100);
           this.team2Winrate = Math.round((this.matchdata.team2Wins / (this.matchdata.team2Wins + this.matchdata.team1Wins)) * 100);
           document.getElementById('team1').style.width = this.team1Winrate + '%';
