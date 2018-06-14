@@ -10,3 +10,9 @@ display: inline-block;
 vertical-align: middle;
 height: 100%;
 }
+.champBlock {
+    
+    border-width: 1px;
+    border-color: grey;
+    border-style: solid;
+}
