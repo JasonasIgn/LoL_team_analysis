@@ -29,10 +29,7 @@
   <div style=" margin-top: 10px;text-align: left;">
       <div style="display: inline-block;" *ngFor="let ch of searchChampions; let ind = index;">
           
-          <div *ngIf="ind < 5" class="card border-success just-box">
-                  <div style="height: 20px; text-align: center;">{{searchChampionsPositions[ind]}}</div>
-                  <img src="../../../assets/images/champions/{{ch.id}}.png">
-          </div>
+          
 
           
 
@@ -41,7 +38,7 @@
           
           <div class="card border-success just-box" style="display: inline-block;">
               <div style="height: 20px; text-align: center;">{{searchChampionsPositions[0]}}</div>
-              <img src="../../../assets/images/champions/0.png">
+              <img src="../../../assets/images/champions/-1.png">
               <div style="height: 20px;">Winrate</div>
               <div style="height: 20px;">Games</div>
           </div>
@@ -66,7 +63,7 @@
               <div class="card border-success just-box" style="display: inline-block;">
                   <div>
                   <div style="height: 20px; text-align: center;">{{searchChampionsPositions[1]}}</div>
-                  <img src="../../../assets/images/champions/0.png">
+                  <img src="../../../assets/images/champions/-2.png">
                   <div style="height: 20px;">Winrate</div>
                   <div style="height: 20px;">Games</div>
               </div>
@@ -94,7 +91,7 @@
           
           <div class="card border-success just-box" style="display: inline-block;">
               <div style="height: 20px; text-align: center;">{{searchChampionsPositions[2]}}</div>
-              <img src="../../../assets/images/champions/0.png">
+              <img src="../../../assets/images/champions/-3.png">
               <div style="height: 20px;">Winrate</div>
                   <div style="height: 20px;">Games</div>
           </div>
@@ -116,7 +113,7 @@
           
           <div class="card border-success just-box" style="display: inline-block;">
               <div style="height: 20px; text-align: center;">{{searchChampionsPositions[3]}}</div>
-              <img src="../../../assets/images/champions/0.png">
+              <img src="../../../assets/images/champions/-4.png">
               <div style="height: 20px;">Winrate</div>
                   <div style="height: 20px;">Games</div>
           </div>
@@ -138,7 +135,7 @@
           
           <div class="card border-success just-box" style="display: inline-block;">
               <div style="height: 20px; text-align: center;">{{searchChampionsPositions[4]}}</div>
-              <img src="../../../assets/images/champions/0.png">
+              <img src="../../../assets/images/champions/-5.png">
               <div style="height: 20px;">Winrate</div>
                   <div style="height: 20px;">Games</div>
           </div>
@@ -178,11 +175,11 @@
 <div style="height: 20px"></div>
 <div>
   <div style="display: inline-block;"  *ngFor="let ch of championList | championFilter: searchInput; let ind = index;">
-      <div class="card border-success just-box"  style="height: 102px;width: 80px; margin: 5px;" (click)="pickChampion(ch.id)">
+      <div class="card border-success just-box"  style="height: 107px;width: 85px; margin: 5px;" (click)="pickChampion(ch.id)">
         <a href="javascript:;" style="text-decoration:none; color: black;">
       <div style="height: 20px;"><b><font size="2">{{ch.name}}</font></b></div>
     
-      <img style="height: 80px; width: 78px;" src="../../../assets/images/champions/{{ch.id}}.png" >
+      <img style="height: 85px; width: 83px;" src="../../../assets/images/champions/{{ch.id}}.png" >
     </a>
       </div>
   

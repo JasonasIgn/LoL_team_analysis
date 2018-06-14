@@ -55,7 +55,7 @@ export class SynergyComponent implements OnInit {
     this.matchdata.team2Wins = 0;
     this.searchChampionsPositions[0] = "TOP";
     this.searchChampionsPositions[1] = "JUNGLE";
-    this.searchChampionsPositions[2] = "MIDDLE";
+    this.searchChampionsPositions[2] = "MID";
     this.searchChampionsPositions[3] = "ADC";
     this.searchChampionsPositions[4] = "SUPPORT";
    // this.searchChampionsPositions[5] = "TOP";
@@ -67,7 +67,7 @@ export class SynergyComponent implements OnInit {
     for (var i = 0; i < 5; i++)
     {
       this.searchChampions[i] = new ChampionModel();
-        this.searchChampions[i].id = 0;
+        this.searchChampions[i].id = -1 + (i * -1);
         this.searchChampions[i].title = "none";
         this.searchChampions[i].name = "none";
         this.searchChampions[i].key = "none";
@@ -103,12 +103,9 @@ export class SynergyComponent implements OnInit {
     this.teamValid = true;
     for (var i = 0; i < this.searchChampions.length; i++)
     {
-      if (this.searchChampions[i].id == -1) this.teamValid = false;
-      else 
-      {
+      
         if (i < 5) this.teamIds1[i] = this.searchChampions[i].id;
-        else this.teamIds2[i - 5] = this.searchChampions[i].id;
-      }
+        
     }
     if (this.teamValid)
     {
@@ -128,8 +125,12 @@ export class SynergyComponent implements OnInit {
       //this.teamIds2.sort();
       this.teamUniqueCode1 = 0;
       this.teamUniqueCode2 = 0;
+      for (var i = 0; i < 5; i++)
+      {
+        if (this.teamIds1[i] < 0) this.teamIds1[i] = 0;
+      }
       this.teamCode1 = this.teamIds1[0] + '_' + this.teamIds1[1] + '_' + this.teamIds1[2] + '_' + this.teamIds1[3] + '_' + this.teamIds1[4];
-      this.teamCode2 = this.teamIds2[0] + '_' + this.teamIds2[1] + '_' + this.teamIds2[2] + '_' + this.teamIds2[3] + '_' + this.teamIds2[4];
+      //this.teamCode2 = this.teamIds2[0] + '_' + this.teamIds2[1] + '_' + this.teamIds2[2] + '_' + this.teamIds2[3] + '_' + this.teamIds2[4];
       this.teamCode2 = "0_0_0_0_0";
       if (this.teamIds1[0] != 0)
       {
