@@ -4,7 +4,7 @@ div.card:hover {
 .block {
     height: 160px;
 }
-.block2:before {
+.block:before {
 content: "";
 display: inline-block;
 vertical-align: middle;
