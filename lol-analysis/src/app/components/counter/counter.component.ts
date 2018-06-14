@@ -37,6 +37,16 @@ export class CounterComponent implements OnInit {
   suggestion7: SuggestionModel[] = new Array<SuggestionModel>();
   suggestion8: SuggestionModel[] = new Array<SuggestionModel>();
   suggestion9: SuggestionModel[] = new Array<SuggestionModel>();
+  suggestion0Worst: SuggestionModel[] = new Array<SuggestionModel>();
+  suggestion1Worst: SuggestionModel[] = new Array<SuggestionModel>();
+  suggestion2Worst: SuggestionModel[] = new Array<SuggestionModel>();
+  suggestion3Worst: SuggestionModel[] = new Array<SuggestionModel>();
+  suggestion4Worst: SuggestionModel[] = new Array<SuggestionModel>();
+  suggestion5Worst: SuggestionModel[] = new Array<SuggestionModel>();
+  suggestion6Worst: SuggestionModel[] = new Array<SuggestionModel>();
+  suggestion7Worst: SuggestionModel[] = new Array<SuggestionModel>();
+  suggestion8Worst: SuggestionModel[] = new Array<SuggestionModel>();
+  suggestion9Worst: SuggestionModel[] = new Array<SuggestionModel>();
   suggestionModel: SuggestionModel = new SuggestionModel();
   win:number;
   champId: number;
@@ -227,16 +237,16 @@ export class CounterComponent implements OnInit {
             this.matchdata.suggestion9 = this.tempString;
           } 
 
-          this.GetSuggestionInfo(this.matchdata.suggestion0, this.suggestion0);
-          this.GetSuggestionInfo(this.matchdata.suggestion1, this.suggestion1);
-          this.GetSuggestionInfo(this.matchdata.suggestion2, this.suggestion2);
-          this.GetSuggestionInfo(this.matchdata.suggestion3, this.suggestion3);
-          this.GetSuggestionInfo(this.matchdata.suggestion4, this.suggestion4);
-          this.GetSuggestionInfo(this.matchdata.suggestion5, this.suggestion5);
-          this.GetSuggestionInfo(this.matchdata.suggestion6, this.suggestion6);
-          this.GetSuggestionInfo(this.matchdata.suggestion7, this.suggestion7);
-          this.GetSuggestionInfo(this.matchdata.suggestion8, this.suggestion8);
-          this.GetSuggestionInfo(this.matchdata.suggestion9, this.suggestion9);
+          this.GetSuggestionInfo(this.matchdata.suggestion0, this.suggestion0, this.suggestion0Worst);
+          this.GetSuggestionInfo(this.matchdata.suggestion1, this.suggestion1, this.suggestion1Worst);
+          this.GetSuggestionInfo(this.matchdata.suggestion2, this.suggestion2, this.suggestion2Worst);
+          this.GetSuggestionInfo(this.matchdata.suggestion3, this.suggestion3, this.suggestion3Worst);
+          this.GetSuggestionInfo(this.matchdata.suggestion4, this.suggestion4, this.suggestion4Worst);
+          this.GetSuggestionInfo(this.matchdata.suggestion5, this.suggestion5, this.suggestion5Worst);
+          this.GetSuggestionInfo(this.matchdata.suggestion6, this.suggestion6, this.suggestion6Worst);
+          this.GetSuggestionInfo(this.matchdata.suggestion7, this.suggestion7, this.suggestion7Worst);
+          this.GetSuggestionInfo(this.matchdata.suggestion8, this.suggestion8, this.suggestion8Worst);
+          this.GetSuggestionInfo(this.matchdata.suggestion9, this.suggestion9, this.suggestion9Worst);
 
            
           this.suggestion0.sort((a, b) => a.Win > b.Win ? -1 : a.Win < b.Win ? 1 : 0);
@@ -249,7 +259,20 @@ export class CounterComponent implements OnInit {
           this.suggestion7.sort((a, b) => a.Win > b.Win ? -1 : a.Win < b.Win ? 1 : 0);
           this.suggestion8.sort((a, b) => a.Win > b.Win ? -1 : a.Win < b.Win ? 1 : 0);
           this.suggestion9.sort((a, b) => a.Win > b.Win ? -1 : a.Win < b.Win ? 1 : 0);
+
+          this.suggestion0Worst.sort((a, b) => a.Win < b.Win ? -1 : a.Win > b.Win ? 1 : 0);
+          this.suggestion1Worst.sort((a, b) => a.Win < b.Win ? -1 : a.Win > b.Win ? 1 : 0);
+          this.suggestion2Worst.sort((a, b) => a.Win < b.Win ? -1 : a.Win > b.Win ? 1 : 0);
+          this.suggestion3Worst.sort((a, b) => a.Win < b.Win ? -1 : a.Win > b.Win ? 1 : 0);
+          this.suggestion4Worst.sort((a, b) => a.Win < b.Win ? -1 : a.Win > b.Win ? 1 : 0);
+          this.suggestion5Worst.sort((a, b) => a.Win < b.Win ? -1 : a.Win > b.Win ? 1 : 0);
+          this.suggestion6Worst.sort((a, b) => a.Win < b.Win ? -1 : a.Win > b.Win ? 1 : 0);
+          this.suggestion7Worst.sort((a, b) => a.Win < b.Win ? -1 : a.Win > b.Win ? 1 : 0);
+          this.suggestion8Worst.sort((a, b) => a.Win < b.Win ? -1 : a.Win > b.Win ? 1 : 0);
+          this.suggestion9Worst.sort((a, b) => a.Win < b.Win ? -1 : a.Win > b.Win ? 1 : 0);
           
+          this.suggestion0 = this.suggestion0.slice(0, 3);
+          this.suggestion0Worst = this.suggestion0Worst.slice(0, 3);
           this.team1Winrate = Math.round((this.matchdata.team1Wins / (this.matchdata.team1Wins + this.matchdata.team2Wins)) * 100);
           this.team2Winrate = Math.round((this.matchdata.team2Wins / (this.matchdata.team2Wins + this.matchdata.team1Wins)) * 100);
           document.getElementById('team1').style.width = this.team1Winrate + '%';
@@ -262,7 +285,7 @@ export class CounterComponent implements OnInit {
   {
       this.searchInput = input;
   }
-  GetSuggestionInfo(input: string, suggestionArray:SuggestionModel[])
+  GetSuggestionInfo(input: string, suggestionArray:SuggestionModel[], suggestionArrayWorst:SuggestionModel[])
   {
     
         this.status = 0;
@@ -306,14 +329,18 @@ export class CounterComponent implements OnInit {
                   this.suggestionModel = new SuggestionModel();
                   this.suggestionModel.ChampionId = this.champId;
                   //console.log(this.suggestionModel.ChampionId + "CHAAAMP");
-                  if (this.win > this.loss)
+                  this.suggestionModel.Loss = this.loss;
+                  this.suggestionModel.Win = this.win;
+                  this.suggestionModel.Total = this.win + this.loss;
+                  this.suggestionModel.Winrate = Math.round(this.win / (this.win + this.loss) * 100);
+                  if (this.win >= this.loss)
                   {
-                    this.suggestionModel.Loss = this.loss;
-                    this.suggestionModel.Win = this.win;
-                    this.suggestionModel.Total = this.win + this.loss;
-                    this.suggestionModel.Winrate = Math.round(this.win / (this.win + this.loss) * 100);
                     
                     suggestionArray.push(this.suggestionModel);
+                  }
+                  else
+                  {
+                    suggestionArrayWorst.push(this.suggestionModel);
                   }
                   
                   this.indexPosition++;

@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 @Component({
   selector: 'app-filter',
   template: `
-  <input class="form-control mr-sm-2" (keyup)="onKey($event)"  style="width: 200px;" id="searchField" type="text" placeholder="Search">
+  <input class="form-control mr-sm-2" (keyup)="onKey($event)"  style="width: 200px;" id="searchField" type="text" placeholder="Filter champions">
     `
 })
 
