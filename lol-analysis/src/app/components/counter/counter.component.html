@@ -1,10 +1,11 @@
-<div style="text-align: center; height: 30px; margin-top: 10px;">COUNTERS</div>
-<div class="conteiner jumbotron" style="text-align: center; text-align: center; margin-left: 13%; margin-right: 13%;">
-        <div style="text-align: center; height: 30px; margin-top: 5px;">ENEMY TEAM</div>
+<div style="text-align: center; height: 60px; margin-top: 10px; font-size: 35px;">COUNTERS</div>
+<div class="conteiner jumbotron" style="text-align: center; text-align: center; margin-left: 13%; margin-right: 13%; padding: 0;">
+        <div style=" background: linear-gradient(rgb(110, 0, 0), rgb(48,48,48))">
+        <div style="text-align: center; height: 40px; margin-bottom: 10px; padding-top: 10px; font-size: 20px;">ENEMY TEAM</div>
     
-        <div style="display: inline-block;" *ngFor="let ch of searchChampions; let ind = index;">
+        <div style="display: inline-block; padding-bottom:15px; " *ngFor="let ch of searchChampions; let ind = index;">
             <b>{{searchChampionsPositions[ind]}}</b>
-            <div class="card border-primary just-box" style="height: 122px;width: 102px; margin: 3px;" (click)="setSelected(ind)">
+            <div class="card just-box" style="height: 122px;width: 102px; margin: 3px; border-color: rgb(124, 0, 0)" (click)="setSelected(ind)">
                     <a href="javascript:;" style="text-decoration:none; color: lightgrey;">
                         
                     <div style="height: 20px; background-color: rgb(70, 70, 70)">{{ch.name}}</div>
@@ -12,6 +13,7 @@
                     </a>
             </div>
         
+        </div>
         </div>
         <br>
         <div style="height: 20px"></div>
