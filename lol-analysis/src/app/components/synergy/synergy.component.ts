@@ -66,7 +66,7 @@ export class SynergyComponent implements OnInit {
     this.matchdata.team2Wins = 0;
     this.searchChampionsPositions[0] = "TOP";
     this.searchChampionsPositions[1] = "JUNGLE";
-    this.searchChampionsPositions[2] = "MID";
+    this.searchChampionsPositions[2] = "MIDDLE";
     this.searchChampionsPositions[3] = "ADC";
     this.searchChampionsPositions[4] = "SUPPORT";
    // this.searchChampionsPositions[5] = "TOP";

@@ -2,16 +2,23 @@
 <div class="conteiner jumbotron" style="text-align: center; margin-left: 13%; margin-right: 13%; padding: 0;">
     <div style=" background: linear-gradient(rgb(10, 0, 150), rgb(48,48,48))">
     <div style="text-align: center; height: 40px; margin-bottom: 10px; padding-top: 10px; font-size: 20px;">YOUR TEAM</div>
+
   <div style="display: inline-block; padding-bottom:15px;" *ngFor="let ch of searchChampions; let ind = index;">
      <b> {{searchChampionsPositions[ind]}} </b>
-      <div class="card border-primary just-box" style="height: 122px;width: 102px; margin: 3px;" (click)="setSelected(ind)">
+      <div *ngIf="selected == ind" class="card border-success just-box" style="height: 122px;width: 102px; margin: 3px;" (click)="setSelected(ind)">
             <a href="javascript:;" style="text-decoration:none; color: lightgray;">
               <div style="height: 20px; background-color: rgb(70, 70, 70)">{{ch.name}}</div>
               <img src="../../../assets/images/champions/{{ch.id}}.png" >
               </a>
       </div>
-  
+      <div *ngIf="selected != ind" class="card border-primary just-box" style="height: 122px;width: 102px; margin: 3px;" (click)="setSelected(ind)">
+            <a href="javascript:;" style="text-decoration:none; color: lightgray;">
+              <div style="height: 20px; background-color: rgb(70, 70, 70)">{{ch.name}}</div>
+              <img src="../../../assets/images/champions/{{ch.id}}.png" >
+              </a>
+      </div>
   </div>
+  
 </div>
   <br>
   <div style="height: 20px"></div>
@@ -22,7 +29,7 @@
 
 <button type="button" class="btn btn-primary" [disabled]="loading" (click)="search()" >Find synergy</button>
 <br>
-<div style="text-align: left; margin-left: 70px;">
+<div  style="text-align: left; margin-left: 70px;">
   <button class="btn btn-primary" data-toggle="collapse" data-target="#collapseExample">
       Show/Hide
   </button>

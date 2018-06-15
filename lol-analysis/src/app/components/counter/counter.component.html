@@ -5,7 +5,14 @@
     
         <div style="display: inline-block; padding-bottom:15px; " *ngFor="let ch of searchChampions; let ind = index;">
             <b>{{searchChampionsPositions[ind]}}</b>
-            <div class="card just-box" style="height: 122px;width: 102px; margin: 3px; border-color: rgb(124, 0, 0)" (click)="setSelected(ind)">
+            <div *ngIf="selected != ind" class="card just-box" style="height: 122px;width: 102px; margin: 3px; border-color: rgb(124, 0, 0)" (click)="setSelected(ind)">
+                    <a href="javascript:;" style="text-decoration:none; color: lightgrey;">
+                        
+                    <div style="height: 20px; background-color: rgb(70, 70, 70)">{{ch.name}}</div>
+                    <img src="../../../assets/images/champions/{{ch.id}}.png" >
+                    </a>
+            </div>
+            <div *ngIf="selected == ind" class="card just-box" style="height: 122px;width: 102px; border-color: rgb(255, 26, 26); margin: 3px;" (click)="setSelected(ind)">
                     <a href="javascript:;" style="text-decoration:none; color: lightgrey;">
                         
                     <div style="height: 20px; background-color: rgb(70, 70, 70)">{{ch.name}}</div>
