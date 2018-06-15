@@ -11,7 +11,7 @@ import { HomeComponent } from '../home/home.component';
 @NgModule({
   imports: [
       RouterModule.forRoot([
-          { path: 'home' , component: HomeComponent},
+          { path: '' , component: HomeComponent},
           { path: 'admin' , component: AdminComponent},
           { path: 'collect-data' , component: CollectDataComponent},
           { path: 'counter' , component: CounterComponent},
