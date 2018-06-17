@@ -134,6 +134,17 @@ export class SynergyComponent implements OnInit {
       this.suggestion7 = new Array<SuggestionModel>();
       this.suggestion8 = new Array<SuggestionModel>();
       this.suggestion9 = new Array<SuggestionModel>();
+
+      this.suggestion0Worst = new Array<SuggestionModel>();
+      this.suggestion1Worst = new Array<SuggestionModel>();
+      this.suggestion2Worst = new Array<SuggestionModel>();
+      this.suggestion3Worst = new Array<SuggestionModel>();
+      this.suggestion4Worst = new Array<SuggestionModel>();
+      this.suggestion5Worst = new Array<SuggestionModel>();
+      this.suggestion6Worst = new Array<SuggestionModel>();
+      this.suggestion7Worst = new Array<SuggestionModel>();
+      this.suggestion8Worst = new Array<SuggestionModel>();
+      this.suggestion9Worst = new Array<SuggestionModel>();
       
       console.log("b");
       //this.teamIds1.sort();
