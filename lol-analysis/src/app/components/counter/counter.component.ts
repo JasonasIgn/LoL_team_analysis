@@ -70,11 +70,6 @@ export class CounterComponent implements OnInit {
     this.searchChampionsPositions[2] = "MIDDLE";
     this.searchChampionsPositions[3] = "ADC";
     this.searchChampionsPositions[4] = "SUPPORT";
-   // this.searchChampionsPositions[5] = "TOP";
-    //this.searchChampionsPositions[6] = "JUNGLE";
-    //this.searchChampionsPositions[7] = "MIDDLE";
-    //this.searchChampionsPositions[8] = "ADC";
-    //this.searchChampionsPositions[9] = "SUPPORT";
     
     for (var i = 0; i < 5; i++)
     {
@@ -96,7 +91,6 @@ export class CounterComponent implements OnInit {
   setSelected(nr: number)
   {
     this.selected = nr;
-    console.log(this.selected);
   }
   pickChampion(id:number)
   {
@@ -151,13 +145,9 @@ export class CounterComponent implements OnInit {
       {
         if (this.teamIds1[i] < 0) this.teamIds1[i] = 0;
       }
-      console.log("b");
-      //this.teamIds1.sort();
-      //this.teamIds2.sort();
       this.teamUniqueCode1 = 0;
       this.teamUniqueCode2 = 0;
       this.teamCode1 = this.teamIds1[0] + '_' + this.teamIds1[1] + '_' + this.teamIds1[2] + '_' + this.teamIds1[3] + '_' + this.teamIds1[4];
-      //this.teamCode2 = this.teamIds2[0] + '_' + this.teamIds2[1] + '_' + this.teamIds2[2] + '_' + this.teamIds2[3] + '_' + this.teamIds2[4];
       this.teamCode2 = "0_0_0_0_0";
       if (this.teamIds1[0] != 0)
       {
@@ -184,44 +174,12 @@ export class CounterComponent implements OnInit {
         this.teamUniqueCode1 += this.teamIds1[4] + this.MAXIND * 15;
         this.teamUniqueCode2 += this.teamIds1[4] + this.MAXIND * 511;
       }
-      /* if (this.teamIds2[0] != 0)
-      {
-        this.teamUniqueCode1 += this.teamIds2[0] + this.MAXIND * 31;
-        this.teamUniqueCode2 += this.teamIds2[0];
-      }
-      if (this.teamIds2[1] != 0)
-      {
-        this.teamUniqueCode1 += this.teamIds2[1] + this.MAXIND * 63;
-        this.teamUniqueCode2 += this.teamIds2[1] + this.MAXIND * 1;
-      }
-      if (this.teamIds2[2] != 0)
-      {
-        this.teamUniqueCode1 += this.teamIds2[2] + this.MAXIND * 127;
-        this.teamUniqueCode2 += this.teamIds2[2] + this.MAXIND * 3;
-      }
-      if (this.teamIds2[3] != 0)
-      {
-        this.teamUniqueCode1 += this.teamIds2[3] + this.MAXIND * 255;
-        this.teamUniqueCode2 += this.teamIds2[3] + this.MAXIND * 7;
-      }
-      if (this.teamIds2[4] != 0)
-      {
-        this.teamUniqueCode1 += this.teamIds2[4] + this.MAXIND * 511;
-        this.teamUniqueCode2 += this.teamIds2[4] + this.MAXIND * 15;
-      } */
-      //this.teamCode1 = "19_51_62_238_432";
-      //this.teamCode2 = "22_45_86_141_201";
-        console.log(this.teamCode1 + '-' + this.teamCode2);
         this.matchService.getMatch(this.teamCode1, this.teamCode2).subscribe((data: MatchModel) =>{
           
           this.matchdata = data;
-          console.log(data);
-          console.log(this.teamUniqueCode1);
-          console.log(this.teamUniqueCode2);
           
           if (data.id == this.teamUniqueCode1)
           {
-            console.log("KEICIAMOS");
             //Apkeiciamos reiksmes
             this.temp = data.team1Wins;
             this.matchdata.team1Wins = data.team2Wins;
@@ -296,7 +254,6 @@ export class CounterComponent implements OnInit {
           this.team2Winrate = Math.round((this.matchdata.team2Wins / (this.matchdata.team2Wins + this.matchdata.team1Wins)) * 100);
           document.getElementById('team1').style.width = this.team1Winrate + '%';
           document.getElementById('team2').style.width = this.team2Winrate + '%';
-          console.log(this.matchdata);
         });
     }
   }
@@ -347,7 +304,6 @@ export class CounterComponent implements OnInit {
                   this.stringForConvert = "";
                   this.suggestionModel = new SuggestionModel();
                   this.suggestionModel.ChampionId = this.champId;
-                  //console.log(this.suggestionModel.ChampionId + "CHAAAMP");
                   this.suggestionModel.Loss = this.loss;
                   this.suggestionModel.Win = this.win;
                   this.suggestionModel.Total = this.win + this.loss;
@@ -366,6 +322,5 @@ export class CounterComponent implements OnInit {
               }
           }
         }
-        //return suggestionArray;
   }
 }
