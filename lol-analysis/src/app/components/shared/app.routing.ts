@@ -13,8 +13,6 @@ import { ContactComponent } from '../contact/contact.component';
   imports: [
       RouterModule.forRoot([
           { path: '' , component: HomeComponent},
-          { path: 'admin' , component: AdminComponent},
-          { path: 'collect-data' , component: CollectDataComponent},
           { path: 'counter' , component: CounterComponent},
           { path: 'synergy' , component: SynergyComponent},
           { path: 'contact' , component: ContactComponent},
