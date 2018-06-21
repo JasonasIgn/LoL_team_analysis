@@ -48,7 +48,7 @@ namespace Analysis.Web
             services.AddAutoMapper(x => x.AddProfile(new MappingsProfile()));
 
             services.AddDbContext<AnalysisContext>(options =>
-            options.UseSqlServer(_configuration.GetConnectionString("LeagueDatabase")));
+            options.UseSqlServer(_configuration.GetConnectionString("LeagueDatabaseRemote")));
 
             services.AddScoped<IMatchRepository, MatchRepository>();
             services.AddScoped<IMatchService, MatchService>();

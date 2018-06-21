@@ -20,7 +20,7 @@ namespace Analysis.EF.entities
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer(@"Server=(localdb)\MSSQLLocalDB;Database=LOL;Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer(@"Server = 704228.s.dedikuoti.lt; Database = LOL; User Id = SA; Password = IgnelisSSHc00L;");
             }
         }
 
