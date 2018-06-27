@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { ChampionService } from './services/champion.service';
-import { ChampionModel } from './models/champion.model';
 
 @Component({
   selector: 'app-root',
@@ -8,21 +7,8 @@ import { ChampionModel } from './models/champion.model';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'LoL analysis';
-  api: string = "";
-  loading: boolean = false;
+  title = 'LoL Picker';
 
-  constructor(private championService: ChampionService) { }
+  constructor() { }
   
-  UpdateApi(api: string)
-  {
-    //Not implemented
-  }
-
-  UpdateChampions()
-  {
-    this.championService.updateChampions(this.api).subscribe((data: ChampionModel[]) =>{
-      console.log("success");
-    });
-  }
 }
