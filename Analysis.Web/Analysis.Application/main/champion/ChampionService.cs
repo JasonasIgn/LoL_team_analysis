@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using Analysis.Application.main.match.dto;
+﻿using Analysis.Application.main.match.dto;
 using Analysis.EF.entities;
 using Analysis.EF.repositories;
 using System;
@@ -12,13 +11,11 @@ namespace Analysis.Application.main.champion
 {
     public class ChampionService : IChampionService
     {
-        protected readonly IMapper _mapper;
         protected readonly IChampionRepository _championRepository;
 
-        public ChampionService(IChampionRepository ChampionRepository, IMapper mapper)
+        public ChampionService(IChampionRepository ChampionRepository)
         {
             _championRepository = ChampionRepository;
-            _mapper = mapper;
         }
         public List<Champion> UpdateChampions(string api)
         {

@@ -11,8 +11,8 @@ import { MatchModel } from '../models/match.model';
 export class MatchService {
 
   constructor(private http: Http) { }
-    url = "http://localhost:1756/Match/";
-
+    url = "http://176.223.135.232/Match/";
+    //url = "http://localhost:1756/Match/";
     SaveMatchData(id, api): Observable<MatchModel> {
         return this.http.get(this.url + id + '/' + api)
         .map((res: Response) => res.json() as number)

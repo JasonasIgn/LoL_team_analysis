@@ -11,7 +11,8 @@ import { GeneralData } from '../models/generaldata.model';
 export class GeneralDataService {
 
   constructor(private http: Http) { }
-    url = "http://localhost:1756/GeneralData";
+    url = "http://176.223.135.232/GeneralData";
+    //url = "http://localhost:1756/GeneralData";
     getGeneralData(id): Observable<GeneralData> {
         return this.http.get(this.url + '/' + id)
         .map((res: Response) => res.json() as GeneralData)

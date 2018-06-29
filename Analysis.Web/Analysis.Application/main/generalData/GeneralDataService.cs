@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using Analysis.Application.main.match.dto;
+﻿using Analysis.Application.main.match.dto;
 using Analysis.EF.entities;
 using Analysis.EF.repositories;
 using System;
@@ -12,13 +11,11 @@ namespace Analysis.Application.main.generalData
 {
     public class GeneralDataService : IGeneralDataService
     {
-        protected readonly IMapper _mapper;
         protected readonly IGeneralDataRepository _generalDataRepository;
 
-        public GeneralDataService(IGeneralDataRepository GeneralDataRepository, IMapper mapper)
+        public GeneralDataService(IGeneralDataRepository GeneralDataRepository)
         {
             _generalDataRepository = GeneralDataRepository;
-            _mapper = mapper;
         }
 
         public GeneralData GetById(int id)

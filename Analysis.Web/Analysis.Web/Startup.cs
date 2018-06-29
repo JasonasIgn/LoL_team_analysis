@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using Analysis.Application.automapper;
 using Analysis.Application.main;
 using Analysis.Application.main.champion;
 using Analysis.Application.main.generalData;
@@ -10,9 +10,9 @@ using Analysis.Application.main.match;
 using Analysis.EF;
 using Analysis.EF.entities;
 using Analysis.EF.repositories;
-using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -45,7 +45,6 @@ namespace Analysis.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddAutoMapper(x => x.AddProfile(new MappingsProfile()));
 
             services.AddDbContext<AnalysisContext>(options =>
             options.UseSqlServer(_configuration.GetConnectionString("LeagueDatabaseRemote")));
@@ -70,14 +69,27 @@ namespace Analysis.Web
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            
+            app.UseForwardedHeaders(new ForwardedHeadersOptions
+            {
+                ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+            });
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.Use(async (context, next) =>
+            {
+                await next();
+                if (context.Response.StatusCode == 404 && !Path.HasExtension(context.Request.Path.Value))
+                {
+                    context.Request.Path = "/index.html";
+                    await next();
+                }
+            });
 
             app.UseCors(builder =>
-                builder.WithOrigins("http://localhost:4200")
+                builder.WithOrigins("http://176.223.135.232")
            .AllowAnyHeader()
            .AllowAnyMethod()
            .AllowCredentials());
@@ -85,6 +97,8 @@ namespace Analysis.Web
             
             app.UseMvc();
             app.UseSwagger();
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");

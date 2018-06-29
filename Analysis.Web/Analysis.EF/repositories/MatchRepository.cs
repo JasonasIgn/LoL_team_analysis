@@ -135,10 +135,6 @@ namespace Analysis.EF.repositories
                         match.team1[i] = 0;
                         match.team2[i] = 0;
                     }
-                    string teamCode1 = "";
-                    string teamCode2 = "";
-                    string suggestion = "";
-                    string temp = "";
                     string responseString = reader.ReadToEnd();
 
                     //GET MAP ID (11 - summoners rift, 12 - ARAM)
