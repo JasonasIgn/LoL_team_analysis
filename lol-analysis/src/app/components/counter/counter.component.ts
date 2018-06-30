@@ -250,10 +250,7 @@ export class CounterComponent implements OnInit {
           this.suggestion2Worst = this.suggestion2Worst.slice(0, 3);
           this.suggestion3Worst = this.suggestion3Worst.slice(0, 3);
           this.suggestion4Worst = this.suggestion4Worst.slice(0, 3);
-          this.team1Winrate = Math.round((this.matchdata.team1Wins / (this.matchdata.team1Wins + this.matchdata.team2Wins)) * 100);
-          this.team2Winrate = Math.round((this.matchdata.team2Wins / (this.matchdata.team2Wins + this.matchdata.team1Wins)) * 100);
-          document.getElementById('team1').style.width = this.team1Winrate + '%';
-          document.getElementById('team2').style.width = this.team2Winrate + '%';
+
         });
     }
   }
