@@ -16,6 +16,7 @@ import { SynergyComponent } from './components/synergy/synergy.component';
 import { HomeComponent } from './components/home/home.component';
 import { FooterComponent } from './components/shared/footer/footer.component';
 import { ContactComponent } from './components/contact/contact.component';
+import { AboutComponent } from './components/about/about.component';
 
 
 
@@ -29,7 +30,8 @@ import { ContactComponent } from './components/contact/contact.component';
     SynergyComponent,
     HomeComponent,
     FooterComponent,
-    ContactComponent
+    ContactComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule,
