@@ -12,7 +12,10 @@ using Analysis.EF.entities;
 using Analysis.EF.repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Rewrite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -60,24 +63,30 @@ namespace Analysis.Web
 
             services.AddCors();
             services.AddMvc();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Info { Title = "My API", Version = "v1" });
             });
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+
             app.UseForwardedHeaders(new ForwardedHeadersOptions
             {
                 ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
             });
 
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
+
             app.Use(async (context, next) =>
             {
                 await next();
@@ -89,16 +98,19 @@ namespace Analysis.Web
             });
 
             app.UseCors(builder =>
-                builder.WithOrigins("http://176.223.135.232")
+                builder.WithOrigins("http://lolpicker.com")
            .AllowAnyHeader()
            .AllowAnyMethod()
            .AllowCredentials());
 
             
-            app.UseMvc();
+            
             app.UseSwagger();
             app.UseDefaultFiles();
             app.UseStaticFiles();
+
+            app.UseMvc();
+
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");

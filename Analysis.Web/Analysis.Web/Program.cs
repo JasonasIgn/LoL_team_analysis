@@ -20,7 +20,7 @@ namespace Analysis.Web
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
-		.UseUrls("http://176.223.135.232")
+		.UseUrls("http://lolpicker.com")
                 .Build();
     }
 }

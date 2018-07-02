@@ -12,7 +12,7 @@ import { ChampionModel } from '../models/champion.model';
 export class ChampionService {
 
   constructor(private http: Http) { }
-    url = "http://176.223.135.232/Champion";
+    url = "http://lolpicker.com/Champion";
     //url = "http://localhost:1756/Champion";
     updateChampions(api): Observable<ChampionModel[]> {
         return this.http.get(this.url + '/' + api)
