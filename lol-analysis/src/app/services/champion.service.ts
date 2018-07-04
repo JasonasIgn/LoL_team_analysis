@@ -5,7 +5,6 @@ import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/toPromise';
-import { GeneralData } from '../models/generaldata.model';
 import { ChampionModel } from '../models/champion.model';
 
 @Injectable()
