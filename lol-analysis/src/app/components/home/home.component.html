@@ -1,30 +1,41 @@
-<div class="conteiner" style="text-align: center; text-align: center; margin-left: 13%; margin-right: 13%; padding: 0;  min-height: calc(100vh - 145px);">
-  <div style="font-size: 70px; margin-top: 20px; padding-top: 40px; color:whitesmoke;"> Find the best picks </div>
+<div style="background-image: url('../../../assets/images/background.jpg'); background-repeat: no-repeat; background-size:cover; top: 0">
+<div class="conteiner" style=" text-align: center; text-align: center; margin-left: 13%; margin-right: 13%; padding: 0;  min-height: calc(100vh - 128px);">
+  <div style="font-size: 70px; padding-top: 60px; color:whitesmoke;"> Find the best picks </div>
   <div style="font-size: 40px;"> Gain advantage </div>
   
   
-  <div style="height: 90px;"></div>
+  <div style="height: 150px;"></div>
 
 
-  <hr>
-  <div class="jumbotron" style="padding-top: 30px; padding-bottom: 30px;" >
-  <div style="height: 20px;"></div>
+  <div class="jumbotron" style="padding-top: 20px; padding-bottom: 20px; margin-left: 15%; margin-right: 15%; background-color: rgba(0, 0, 0, 0.767)" >
+  <div>
+      <div class="row" style="margin-bottom: 15px;">
+          <div class="col-4"></div>
+          <div class="col-4">
+            <div style="font-size: 40px; color: whitesmoke; "> <b>CHOOSE</b>  </div>
+          </div>
+          <div class="col-4"></div>
+        </div>
+  </div>
   <div class="row">
     <div style="display: inline-block"></div>
-    <div class="col-6">
-      <div style="margin-bottom: 40px; padding-left: 20%; padding-right: 20%; color: lightgray; font-size: 20px;">Best champion combinations for your team</div>
-      <button class="btn btn-secondary" a [routerLink]="['/synergy']">SYNERGY</button>
+    <div class="col-1"></div>
+    <div class="col-5">
+      <div style="margin-bottom: 20px; padding-left: 5%; padding-right: 5%; color: lightgray; font-size: 20px;">Best champion combinations for your team</div>
+      <button class="btn btn-secondary" style="width: 200px;" a [routerLink]="['/synergy']">SYNERGY</button>
       <div style="height: 20px;"></div>
     </div>
 
-    <div class="col-6">
-        <div style="margin-bottom: 40px; padding-left: 20%; padding-right: 20%; color: lightgray; font-size: 20px; ">Best champion combinations against your enemy</div>
-        <button class="btn btn-secondary" a [routerLink]="['/counter']">COUNTERS</button>
+    <div class="col-5">
+        <div style="margin-bottom: 20px; padding-left: 5%; padding-right: 5%; color: lightgray; font-size: 20px; ">Best champion combinations against your enemy</div>
+        <button class="btn btn-secondary" style="width: 200px;" a [routerLink]="['/counter']">COUNTERS</button>
         <div style="height: 20px;"></div>
     </div>
-   
+    <div class="col-1"></div>
     <div style="height: 100px;"></div>
   </div>
 </div>
 </div>
+
 <app-footer></app-footer>
+</div>
