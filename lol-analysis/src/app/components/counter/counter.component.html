@@ -11,14 +11,28 @@
                     <a href="javascript:;" style="text-decoration:none; color: lightgrey;">
                         
                     <div style="height: 20px; background-color: rgb(70, 70, 70)">{{ch.name}}</div>
-                    <img src="../../../assets/images/champions/{{ch.id}}.png" >
+                    <img style="position: absolute; left: 0;" src="../../../assets/images/champions/{{ch.id}}.png">
+                    <div *ngIf="ch.id > 0" class="removeSelection" style="position: absolute; right: 0; bottom: 0;">
+                        <div style="width: 26px; height: 26px; text-align: center;" (click)="deleteSelection(ind)">
+                                <i style="vertical-align: middle; height: 12px; padding-top: 2px;" class="fas fa-times"></i>
+                        </div>
+                            
+                    </div>
                     </a>
             </div>
             <div *ngIf="selected == ind" class="card just-box" style="height: 122px;width: 102px; border-color: rgb(255, 26, 26); margin: 3px;" (click)="setSelected(ind)">
                     <a href="javascript:;" style="text-decoration:none; color: lightgrey;">
                         
                     <div style="height: 20px; background-color: rgb(70, 70, 70)">{{ch.name}}</div>
-                    <img src="../../../assets/images/champions/{{ch.id}}.png" >
+
+                    <img style="position: absolute; left: 0;" src="../../../assets/images/champions/{{ch.id}}.png">
+                    <div *ngIf="ch.id > 0" class="removeSelection" style="position: absolute; right: 0; bottom: 0;">
+                            <div style="width: 26px; height: 26px; text-align: center;" (click)="deleteSelection(ind)">
+                                    <i style="vertical-align: middle; height: 12px; padding-top: 2px;" class="fas fa-times"></i>
+                            </div>
+                                
+                        </div>
+                    
                     </a>
             </div>
         

@@ -257,6 +257,14 @@ export class SynergyComponent implements OnInit {
   {
       this.searchInput = input;
   }
+  deleteSelection(index:number)
+  {
+    this.searchChampions[index] = new ChampionModel();
+    this.searchChampions[index].id = (-1 + (index * -1));
+    this.searchChampions[index].title = "none";
+    this.searchChampions[index].name = "none";
+    this.searchChampions[index].key = "none";
+  }
   GetSuggestionInfo(input: string, suggestionArray:SuggestionModel[], suggestionArrayWorst:SuggestionModel[])
   {
     
