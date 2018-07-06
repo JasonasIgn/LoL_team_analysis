@@ -228,16 +228,16 @@ export class SynergyComponent implements OnInit {
           this.suggestion8.sort((a, b) => a.Win > b.Win ? -1 : a.Win < b.Win ? 1 : 0);
           this.suggestion9.sort((a, b) => a.Win > b.Win ? -1 : a.Win < b.Win ? 1 : 0);
 
-          this.suggestion0Worst.sort((a, b) => a.Win < b.Win ? -1 : a.Win > b.Win ? 1 : 0);
-          this.suggestion1Worst.sort((a, b) => a.Win < b.Win ? -1 : a.Win > b.Win ? 1 : 0);
-          this.suggestion2Worst.sort((a, b) => a.Win < b.Win ? -1 : a.Win > b.Win ? 1 : 0);
-          this.suggestion3Worst.sort((a, b) => a.Win < b.Win ? -1 : a.Win > b.Win ? 1 : 0);
-          this.suggestion4Worst.sort((a, b) => a.Win < b.Win ? -1 : a.Win > b.Win ? 1 : 0);
-          this.suggestion5Worst.sort((a, b) => a.Win < b.Win ? -1 : a.Win > b.Win ? 1 : 0);
-          this.suggestion6Worst.sort((a, b) => a.Win < b.Win ? -1 : a.Win > b.Win ? 1 : 0);
-          this.suggestion7Worst.sort((a, b) => a.Win < b.Win ? -1 : a.Win > b.Win ? 1 : 0);
-          this.suggestion8Worst.sort((a, b) => a.Win < b.Win ? -1 : a.Win > b.Win ? 1 : 0);
-          this.suggestion9Worst.sort((a, b) => a.Win < b.Win ? -1 : a.Win > b.Win ? 1 : 0);
+          this.suggestion0Worst.sort((a, b) => a.Loss > b.Loss ? -1 : a.Loss < b.Loss ? 1 : 0);
+          this.suggestion1Worst.sort((a, b) => a.Loss > b.Loss ? -1 : a.Loss < b.Loss ? 1 : 0);
+          this.suggestion2Worst.sort((a, b) => a.Loss > b.Loss ? -1 : a.Loss < b.Loss ? 1 : 0);
+          this.suggestion3Worst.sort((a, b) => a.Loss > b.Loss ? -1 : a.Loss < b.Loss ? 1 : 0);
+          this.suggestion4Worst.sort((a, b) => a.Loss > b.Loss ? -1 : a.Loss < b.Loss ? 1 : 0);
+          this.suggestion5Worst.sort((a, b) => a.Loss > b.Loss ? -1 : a.Loss < b.Loss ? 1 : 0);
+          this.suggestion6Worst.sort((a, b) => a.Loss > b.Loss ? -1 : a.Loss < b.Loss ? 1 : 0);
+          this.suggestion7Worst.sort((a, b) => a.Loss > b.Loss ? -1 : a.Loss < b.Loss ? 1 : 0);
+          this.suggestion8Worst.sort((a, b) => a.Loss > b.Loss ? -1 : a.Loss < b.Loss ? 1 : 0);
+          this.suggestion9Worst.sort((a, b) => a.Loss > b.Loss ? -1 : a.Loss < b.Loss ? 1 : 0);
 
           this.suggestion0 = this.suggestion0.slice(0, 3);
           this.suggestion1 = this.suggestion1.slice(0, 3);
@@ -317,7 +317,7 @@ export class SynergyComponent implements OnInit {
 
                     suggestionArray.push(this.suggestionModel);
                   }
-                  else
+                  else if (this.loss > this.win)
                   {
                     suggestionArrayWorst.push(this.suggestionModel);
                   }
