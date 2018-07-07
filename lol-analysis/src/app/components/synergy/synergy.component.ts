@@ -4,6 +4,7 @@ import { ChampionModel } from '../../models/champion.model';
 import { MatchModel } from '../../models/match.model';
 import { MatchService } from '../../services/match.service';
 import { SuggestionModel } from '../../models/suggestion.model';
+import { StaticData } from '../data/static';
 
 @Component({
   selector: 'app-synergy',
@@ -14,6 +15,7 @@ export class SynergyComponent implements OnInit {
 
   MAXIND: number = 555;
   MAXCHAMPS: number = 141;
+  Static: StaticData = new StaticData();
   teamUniqueCode1: number = 0;
   teamUniqueCode2: number = 0;
   championList: ChampionModel[];
@@ -78,13 +80,19 @@ export class SynergyComponent implements OnInit {
         this.searchChampions[i].name = "none";
         this.searchChampions[i].key = "none";
     }
-      this.championService.getAllChampions().subscribe((data: ChampionModel[]) =>{
+
+    this.championList = this.Static.GetChampions();
+      for (var i = 0; i < this.MAXCHAMPS; i++)
+      {
+        this.championListForDisplay[this.championList[i].id] = this.championList[i];
+      }
+      /* this.championService.getAllChampions().subscribe((data: ChampionModel[]) =>{
         this.championList = data;
         for (var i = 0; i < this.MAXCHAMPS; i++)
         {
           this.championListForDisplay[this.championList[i].id] = this.championList[i];
         }
-      });
+      }); */
   }
   
   setSelected(nr: number)
