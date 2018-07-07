@@ -4,8 +4,6 @@ import { ChampionModel } from '../../models/champion.model';
 import { MatchModel } from '../../models/match.model';
 import { MatchService } from '../../services/match.service';
 import { SuggestionModel } from '../../models/suggestion.model';
-import { forEach } from '@angular/router/src/utils/collection';
-import { StaticData } from '../data/static';
 
 
 @Component({
@@ -16,7 +14,6 @@ import { StaticData } from '../data/static';
 export class CounterComponent implements OnInit {
 
   MAXIND: number = 555;
-  Static: StaticData = new StaticData();
   MAXCHAMPS: number = 141;
   teamUniqueCode1: number = 0;
   teamUniqueCode2: number = 0;
@@ -82,11 +79,13 @@ export class CounterComponent implements OnInit {
         this.searchChampions[i].name = "none";
         this.searchChampions[i].key = "none";
     }
-    this.championList = this.Static.GetChampions();
+    this.championService.getAllChampions().subscribe((data: ChampionModel[]) =>{
+      this.championList = data;
       for (var i = 0; i < this.MAXCHAMPS; i++)
       {
         this.championListForDisplay[this.championList[i].id] = this.championList[i];
       }
+    });
       
   }
   
