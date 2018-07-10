@@ -34,3 +34,14 @@ i :hover {
     border-radius: 15%;
     
 }
+.sticky {
+    position: fixed;
+    top: 0;
+    right: 13%;
+    left: 13%;
+    z-index: 10;
+    background: linear-gradient(rgb(7, 0, 128), rgb(22, 22, 22));
+}
+.relative {
+    padding-top: 199px;
+}

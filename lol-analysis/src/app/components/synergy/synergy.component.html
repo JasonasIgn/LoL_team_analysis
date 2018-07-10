@@ -4,7 +4,7 @@
 <div class="conteiner jumbotron" style="background-color: rgb(22, 22, 22); text-align: center; margin-left: 13%; margin-right: 13%; padding: 0;">
     <div style=" background: linear-gradient(rgb(10, 0, 150), rgb(22, 22, 22))">
     <div style="text-align: center; height: 40px; margin-bottom: 10px; padding-top: 10px; font-size: 20px;">YOUR TEAM</div>
-
+<div id="inputDiv">
   <div style="display: inline-block; padding-bottom:15px;" *ngFor="let ch of searchChampions; let ind = index;">
      <b> {{searchChampionsPositions[ind]}} </b>
       <div *ngIf="selected == ind" class="card just-box" style="height: 122px;width: 102px; margin: 3px; border-color: rgb(70, 67, 255)" (click)="setSelected(ind)">
@@ -33,16 +33,13 @@
       </div>
   </div>
   
+
+
+  <div style="width: 100%"><button type="button" class="btn btn-secondary" (click)="search()" >Find synergy</button></div>
 </div>
-  <br>
-  <div style="height: 20px"></div>
+</div>
+<div id="lowerContent">
 
-
-
-
-
-<button type="button" class="btn btn-secondary" (click)="search()" >Find synergy</button>
-<br>
 <div  style="text-align: left; margin-left: 70px;">
   <button class="btn btn-secondary" data-toggle="collapse" data-target="#collapseExample">
       Show/Hide
@@ -537,6 +534,7 @@
       </div>
   
   </div>
+</div>
 </div>
 </div>
 <app-footer></app-footer>

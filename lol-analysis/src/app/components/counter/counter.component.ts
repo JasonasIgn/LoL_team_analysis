@@ -61,8 +61,6 @@ export class CounterComponent implements OnInit {
   tempString: string;
   searchInput: string = "";
 
-  inputDiv: Element = document.getElementById("inputDiv");
-  sticky: number = 100;
   constructor(private championService: ChampionService, private matchService: MatchService) { }
 
   ngOnInit() {
