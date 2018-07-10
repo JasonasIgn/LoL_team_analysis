@@ -2,10 +2,12 @@
 <app-navbar></app-navbar>
     <div style="text-align: center; height: 60px; padding-top: 10px; font-size: 35px; color: whitesmoke">COUNTERS</div>
 <div class="conteiner jumbotron" style="background-color: rgb(22, 22, 22); text-align: center; margin-left: 13%; margin-right: 13%; padding: 0;">
+        
+        
         <div style=" background: linear-gradient(rgb(110, 0, 0), rgb(22, 22, 22))">
         <div style="text-align: center; height: 40px; margin-bottom: 10px; padding-top: 10px; font-size: 20px;">ENEMY TEAM</div>
-    
-        <div style="display: inline-block; padding-bottom:15px; " *ngFor="let ch of searchChampions; let ind = index;">
+        <div id="inputDiv" style="text-align: center;">
+        <div  style="display: inline-block; padding-bottom:15px; " *ngFor="let ch of searchChampions; let ind = index;">
             <b>{{searchChampionsPositions[ind]}}</b>
             <div *ngIf="selected != ind" class="card just-box" style="height: 122px;width: 102px; margin: 3px; border-color: rgb(124, 0, 0)" (click)="setSelected(ind)">
                     <a href="javascript:;" style="text-decoration:none; color: lightgrey;">
@@ -37,13 +39,13 @@
             </div>
         
         </div>
-        </div>
-        <br>
-        <div style="height: 20px"></div>
+    
+    <div style="width: 100%"><button type="button"  class="btn btn-secondary" (click)="search()" >Find counters</button></div>
+    </div>
+    </div>
 
 
-
-    <button type="button" class="btn btn-secondary" (click)="search()" >Find counters</button>
+    <div id="lowerContent">
     <br>
     <div style="text-align: left; margin-left: 70px;">
         <button class="btn btn-secondary" data-toggle="collapse" data-target="#collapseExample">
@@ -516,6 +518,7 @@
 
         
     </div>
+    
     <div style="height: 20px;"></div>
     <div class="row">
         <div class="col-4">
@@ -543,7 +546,7 @@
         </div>
     </div>
 </div>
-<app-footer></app-footer>
 </div>
+<app-footer></app-footer>
 
-
+</div>

@@ -60,6 +60,9 @@ export class CounterComponent implements OnInit {
   temp: number = 0;
   tempString: string;
   searchInput: string = "";
+
+  inputDiv: Element = document.getElementById("inputDiv");
+  sticky: number = 100;
   constructor(private championService: ChampionService, private matchService: MatchService) { }
 
   ngOnInit() {
@@ -86,7 +89,17 @@ export class CounterComponent implements OnInit {
         this.championListForDisplay[this.championList[i].id] = this.championList[i];
       }
     });
-      
+
+    window.onscroll = function() {
+      if (window.pageYOffset >= 170) {
+        document.getElementById("inputDiv").classList.add("sticky");
+        document.getElementById("lowerContent").classList.add("relative");
+    } else {
+      document.getElementById("inputDiv").classList.remove("sticky");
+      document.getElementById("lowerContent").classList.remove("relative");
+    }
+    };
+    
   }
   
   setSelected(nr: number)
@@ -254,7 +267,14 @@ export class CounterComponent implements OnInit {
 
         });
     }
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
   }
+
+    
+    
   setSearchInput(input:string)
   {
       this.searchInput = input;
