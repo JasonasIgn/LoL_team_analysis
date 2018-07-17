@@ -6,8 +6,8 @@
     <div style="text-align: center; height: 40px; margin-bottom: 10px; padding-top: 10px; font-size: 20px;">YOUR TEAM</div>
 <div id="inputDiv">
   <div style="display: inline-block; padding-bottom:15px;" *ngFor="let ch of searchChampions; let ind = index;">
-     <b> {{searchChampionsPositions[ind]}} </b>
-      <div *ngIf="selected == ind" class="card just-box" style="height: 122px;width: 102px; margin: 3px; border-color: rgb(70, 67, 255)" (click)="setSelected(ind)">
+     <b class="positions"> {{searchChampionsPositions[ind]}} </b>
+      <div *ngIf="selected == ind" class="card just-box" style="height: 122px;width: 102px; margin: 10px 3px 3px 3px; border-color: rgb(70, 67, 255)" (click)="setSelected(ind)">
             <a href="javascript:;" style="text-decoration:none; color: lightgray;">
               <div style="height: 20px; background-color: rgb(70, 70, 70)">{{ch.name}}</div>
               <img style="position: absolute; left: 0;" src="../../../assets/images/champions/{{ch.id}}.png">
@@ -19,7 +19,7 @@
                     </div>
               </a>
       </div>
-      <div *ngIf="selected != ind" class="card just-box" style="height: 122px;width: 102px; margin: 3px; border-color:  rgb(0, 11, 161)" (click)="setSelected(ind)">
+      <div *ngIf="selected != ind" class="card just-box" style="height: 122px;width: 102px; margin: 10px 3px 3px 3px; border-color:  rgb(0, 11, 161)" (click)="setSelected(ind)">
             <a href="javascript:;" style="text-decoration:none; color: lightgray;">
               <div style="height: 20px; background-color: rgb(70, 70, 70)">{{ch.name}}</div>
               <img style="position: absolute; left: 0;" src="../../../assets/images/champions/{{ch.id}}.png">

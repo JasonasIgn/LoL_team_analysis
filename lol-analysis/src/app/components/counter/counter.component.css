@@ -47,3 +47,6 @@ i :hover {
 .relative {
     padding-top: 199px;
 }
+.display-none {
+    display: none;
+}

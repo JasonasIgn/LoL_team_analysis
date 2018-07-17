@@ -89,12 +89,20 @@ export class CounterComponent implements OnInit {
     });
 
     window.onscroll = function() {
-      if (window.pageYOffset >= 170) {
+      if (window.pageYOffset >= 187) {
         document.getElementById("inputDiv").classList.add("sticky");
         document.getElementById("lowerContent").classList.add("relative");
+        for (let i = 0;i < document.getElementsByClassName("positions").length;i++)
+         {
+          document.getElementsByClassName("positions")[i].classList.add("display-none");
+        }
     } else {
       document.getElementById("inputDiv").classList.remove("sticky");
       document.getElementById("lowerContent").classList.remove("relative");
+      for (let i = 0; i < document.getElementsByClassName("positions").length;i++)
+        {
+          document.getElementsByClassName("positions")[i].classList.remove("display-none");
+        }
     }
     };
     
