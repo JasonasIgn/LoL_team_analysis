@@ -78,7 +78,7 @@ class MatchupController {
           }
           if (
             participant.timeline.role === "SOLO" &&
-            participant.timeline.lane === "MID"
+            participant.timeline.lane === "MIDDLE"
           ) {
             if (participant.teamId === team1Id) {
               matchupData.team1_mid = participant.championId;
@@ -141,6 +141,7 @@ class MatchupController {
             match.team2_wins += matchupData.team1_wins;
             await match.save();
           } else {
+            console.log(data.gameId)
             await Matchup.create(matchupData);
           }
         }
@@ -149,6 +150,7 @@ class MatchupController {
       }
       response.status(404).send({});
     } catch (e) {
+      console.log(e.response.status)
       response.status(400).send({});
     }
   }
