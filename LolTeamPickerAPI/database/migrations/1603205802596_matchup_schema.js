@@ -6,7 +6,7 @@ const Schema = use('Schema')
 class MatchupSchema extends Schema {
   up () {
     this.create('matchups', (table) => {
-      table.increments()
+      table.increments();
       table.integer("team1_top").notNullable();
       table.integer("team1_jungle").notNullable();
       table.integer("team1_mid").notNullable();
@@ -19,6 +19,7 @@ class MatchupSchema extends Schema {
       table.integer("team2_support").notNullable();
       table.integer("team1_wins").defaultsTo(0);
       table.integer("team2_wins").defaultsTo(0);
+      table.timestamps();
     })
   }
 
