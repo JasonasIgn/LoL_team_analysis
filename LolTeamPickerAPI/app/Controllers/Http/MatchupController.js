@@ -1,6 +1,7 @@
 "use strict";
 const Axios = use("axios");
 const Matchup = use("App/Models/Matchup");
+const Config = use("App/Models/Config");
 
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
@@ -34,8 +35,11 @@ class MatchupController {
       team2_wins: 0,
     };
     try {
+      const config = await Config.first()
+      config.gameId += 1;
+      await config.save();
       const res = await Axios.get(
-        "https://euw1.api.riotgames.com/lol/match/v4/matches/4878360879",
+        `https://euw1.api.riotgames.com/lol/match/v4/matches/${config.gameId}`,
         {
           headers: {
             "X-Riot-Token": process.env.LOL_API_KEY,
@@ -103,7 +107,6 @@ class MatchupController {
             }
           }
         });
-        console.log(matchupData);
         const match = await Matchup.findBy({
           team1_top: matchupData.team1_top,
           team1_jungle: matchupData.team1_jungle,
