@@ -19,3 +19,5 @@ const { validator } = use("Validator");
 const Route = use("Route");
 
 Route.get("matchup/collect", "MatchupController.collect");
+
+Route.post("config/gameId", "ConfigController.setGameId");
