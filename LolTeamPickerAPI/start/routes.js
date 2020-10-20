@@ -20,4 +20,6 @@ const Route = use("Route");
 
 Route.get("matchup/collect", "MatchupController.collect");
 
+Route.get("livegame/:name", "LiveGameController.getLiveData");
+
 Route.post("config/gameId", "ConfigController.setGameId");
