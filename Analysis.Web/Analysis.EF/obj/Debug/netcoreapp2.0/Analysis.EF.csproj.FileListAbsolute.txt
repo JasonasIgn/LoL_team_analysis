@@ -1,8 +1,0 @@
-C:\Users\Ingas\Desktop\My project\LoL_team_analysis\Analysis.Web\Analysis.EF\bin\Debug\netcoreapp2.0\Analysis.EF.deps.json
-C:\Users\Ingas\Desktop\My project\LoL_team_analysis\Analysis.Web\Analysis.EF\bin\Debug\netcoreapp2.0\Analysis.EF.dll
-C:\Users\Ingas\Desktop\My project\LoL_team_analysis\Analysis.Web\Analysis.EF\obj\Debug\netcoreapp2.0\Analysis.EF.csproj.CoreCompileInputs.cache
-C:\Users\Ingas\Desktop\My project\LoL_team_analysis\Analysis.Web\Analysis.EF\obj\Debug\netcoreapp2.0\Analysis.EF.AssemblyInfoInputs.cache
-C:\Users\Ingas\Desktop\My project\LoL_team_analysis\Analysis.Web\Analysis.EF\obj\Debug\netcoreapp2.0\Analysis.EF.AssemblyInfo.cs
-C:\Users\Ingas\Desktop\My project\LoL_team_analysis\Analysis.Web\Analysis.EF\bin\Debug\netcoreapp2.0\Analysis.EF.pdb
-C:\Users\Ingas\Desktop\My project\LoL_team_analysis\Analysis.Web\Analysis.EF\obj\Debug\netcoreapp2.0\Analysis.EF.dll
-C:\Users\Ingas\Desktop\My project\LoL_team_analysis\Analysis.Web\Analysis.EF\obj\Debug\netcoreapp2.0\Analysis.EF.pdb
