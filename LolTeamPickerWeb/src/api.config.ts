@@ -1,1 +1,5 @@
-export const baseApiUrl = "localhost:8000"
+export const baseApiUrl = "http://localhost:8080"
+
+export const apiUrls = {
+    collectMatchup: `${baseApiUrl}/matchup/collect`
+}

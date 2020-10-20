@@ -18,8 +18,9 @@ class MatchupController {
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
-  async collect() {
-    return "yop";
+  async collect({ request, response }) {
+    console.log("hes")
+    response.status(200).send("yop");
   }
 }
 
