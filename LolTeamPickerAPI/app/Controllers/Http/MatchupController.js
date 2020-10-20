@@ -141,7 +141,6 @@ class MatchupController {
             match.team2_wins += matchupData.team1_wins;
             await match.save();
           } else {
-            console.log(data.gameId)
             await Matchup.create(matchupData);
           }
         }
