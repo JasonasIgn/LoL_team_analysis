@@ -1,8 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit'
-import chalengesReducer from './features/challenges/challengesSlice'
+import matchupsReducer from './features/matchups/matchupSlice'
+import messagesReducer from './features/messages/messagesSlice'
 
 export default configureStore({
   reducer: {
-    challenges: chalengesReducer
+    matchups: matchupsReducer,
+    messages: messagesReducer
   }
 })
