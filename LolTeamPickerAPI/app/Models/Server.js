@@ -8,6 +8,10 @@ class Server extends Model {
   players() {
     return this.hasMany("App/Models/Player");
   }
+
+  crawledGames() {
+    return this.hasMany("App/Models/CrawledGame");
+  }
 }
 
 module.exports = Server;
