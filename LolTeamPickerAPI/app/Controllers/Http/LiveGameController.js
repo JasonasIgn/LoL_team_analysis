@@ -33,7 +33,7 @@ class LiveGameController {
       console.log(data)
       response.status(200).send({});
     } catch (e) {
-      console.log(e.response)
+      console.log(e)
       response.status(400).send({});
     }
   }

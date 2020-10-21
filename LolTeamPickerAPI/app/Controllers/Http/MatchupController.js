@@ -21,21 +21,21 @@ class MatchupController {
    */
   async collect({ request, response }) {
     let matchupData = {
-      team1_top: 0,
-      team1_jungle: 0,
-      team1_mid: 0,
-      team1_adc: 0,
-      team1_support: 0,
+      team1_top: -1,
+      team1_jungle: -1,
+      team1_mid: -1,
+      team1_adc: -1,
+      team1_support: -1,
       team2_top: 0,
-      team2_jungle: 0,
-      team2_mid: 0,
-      team2_adc: 0,
-      team2_support: 0,
+      team2_jungle: -1,
+      team2_mid: -1,
+      team2_adc: -1,
+      team2_support: -1,
       team1_wins: 0,
       team2_wins: 0,
     };
     try {
-      const config = await Config.first()
+      const config = await Config.first();
       config.gameId += 1;
       await config.save();
       const res = await Axios.get(
@@ -107,6 +107,23 @@ class MatchupController {
             }
           }
         });
+        if (
+          [
+            matchupData.team1_adc,
+            matchupData.team1_jungle,
+            matchupData.team1_mid,
+            matchupData.team1_support,
+            matchupData.team1_top,
+            matchupData.team2_adc,
+            matchupData.team2_jungle,
+            matchupData.team2_mid,
+            matchupData.team2_support,
+            matchupData.team2_top,
+          ].includes(-1)
+        ) {
+          response.status(400).send({});
+          return;
+        }
         const match = await Matchup.findBy({
           team1_top: matchupData.team1_top,
           team1_jungle: matchupData.team1_jungle,
@@ -119,6 +136,7 @@ class MatchupController {
           team2_adc: matchupData.team2_adc,
           team2_support: matchupData.team2_support,
         });
+
         if (match) {
           match.team1_wins += matchupData.team1_wins;
           match.team2_wins += matchupData.team2_wins;
@@ -149,7 +167,7 @@ class MatchupController {
       }
       response.status(404).send({});
     } catch (e) {
-      console.log(e.response.status)
+      console.log(e.response.status);
       response.status(400).send({});
     }
   }

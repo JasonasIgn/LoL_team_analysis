@@ -16,3 +16,7 @@ const Factory = use("Factory");
 Factory.blueprint("App/Models/Config", (faker, i, data) => {
   return data;
 });
+
+Factory.blueprint("App/Models/Server", (faker, i, data) => {
+  return data;
+});
