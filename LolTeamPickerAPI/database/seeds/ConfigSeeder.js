@@ -14,9 +14,7 @@ const Factory = use("Factory");
 
 class ConfigSeeder {
   async run() {
-    await Factory.model("App/Models/Config").create({
-      gameId: 0
-    });
+    await Factory.model("App/Models/Config").create();
   }
 }
 

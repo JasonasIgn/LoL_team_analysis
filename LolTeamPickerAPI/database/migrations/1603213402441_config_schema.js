@@ -7,7 +7,7 @@ class ConfigSchema extends Schema {
   up () {
     this.create('configs', (table) => {
       table.increments()
-      table.bigInteger("gameId").notNullable();
+      table.string("last_craweled_server_name").notNullable().defaultsTo("");
       table.timestamps()
     })
   }
