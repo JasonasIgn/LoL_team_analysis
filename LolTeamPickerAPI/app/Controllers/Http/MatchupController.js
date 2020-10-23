@@ -1,10 +1,12 @@
 "use strict";
+
 const Axios = use("axios");
 const Matchup = use("App/Models/Matchup");
 const Server = use("App/Models/Server");
 const Player = use("App/Models/Player");
 const CrawledGame = use("App/Models/CrawledGame");
 const crawlHelpers = use("App/Helpers/crawlHelpers");
+const roleIdentification = use("App/Helpers/roleIdentification");
 const Config = use("App/Models/Config");
 
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
@@ -25,6 +27,8 @@ class MatchupController {
    */
   async collect({ request, response }) {
     try {
+      const championRoles = await roleIdentification.pullData();
+      // console.log(championRoles)
       const config = await Config.first();
       const serverNameToCrawl = crawlHelpers.getNextServerNameToCrawl(
         config.last_craweled_server_name
@@ -36,8 +40,7 @@ class MatchupController {
         .players()
         .where("crawled", false)
         .first();
-      if (!Boolean(serverPlayerToCrawl))
-      {
+      if (!Boolean(serverPlayerToCrawl)) {
         response.status(400).send({ error: "All players have been crawled" });
         return;
       }
@@ -59,7 +62,7 @@ class MatchupController {
       const playerMatchlistResponse = await Axios.get(
         `https://${
           server.name
-        }.api.riotgames.com/lol/match/v4/matchlists/by-account/${playerAccountId}?queue=420&endTime=${new Date().getTime()}&beginTime=${new Date().setDate(
+        }.api.riotgames.com/lol/match/v4/matchlists/by-account/${playerAccountId}?queue=420&beginTime=${new Date().setDate(
           new Date().getDate() - 7
         )}&endIndex=10&beginIndex=0`,
         {
@@ -68,7 +71,7 @@ class MatchupController {
           },
         }
       );
-      
+
       if (playerMatchlistResponse.data.matches.length === 0) {
         response.status(200).send({ gameCollected: 0 });
         return;
@@ -103,6 +106,8 @@ class MatchupController {
           team2_wins: 0,
         };
         const { data } = gameResponse;
+        let team1Champions = [];
+        let team2Champions = [];
         const team1Id = data.teams[0].teamId;
         const team1Win = data.teams[0].win === "Win";
         const team2Id = data.teams[1].teamId;
@@ -121,64 +126,31 @@ class MatchupController {
         });
 
         data.participants.forEach((participant) => {
-          if (participant.timeline.lane === "TOP") {
-            if (participant.teamId === team1Id) {
-              matchupData.team1_top = participant.championId;
-            } else {
-              matchupData.team2_top = participant.championId;
-            }
-          }
-          if (participant.timeline.lane === "JUNGLE") {
-            if (participant.teamId === team1Id) {
-              matchupData.team1_jungle = participant.championId;
-            } else {
-              matchupData.team2_jungle = participant.championId;
-            }
-          }
-          if (participant.timeline.lane === "MIDDLE") {
-            if (participant.teamId === team1Id) {
-              matchupData.team1_mid = participant.championId;
-            } else {
-              matchupData.team2_mid = participant.championId;
-            }
-          }
-          if (
-            participant.timeline.role === "DUO_CARRY" &&
-            participant.timeline.lane === "BOTTOM"
-          ) {
-            if (participant.teamId === team1Id) {
-              matchupData.team1_adc = participant.championId;
-            } else {
-              matchupData.team2_adc = participant.championId;
-            }
-          }
-          if (
-            participant.timeline.role === "DUO_SUPPORT" &&
-            participant.timeline.lane === "BOTTOM"
-          ) {
-            if (participant.teamId === team1Id) {
-              matchupData.team1_support = participant.championId;
-            } else {
-              matchupData.team2_support = participant.championId;
-            }
+          if (participant.teamId === team1Id) {
+            team1Champions.push(participant.championId);
+          } else {
+            team2Champions.push(participant.championId);
           }
         });
-        if (
-          [
-            matchupData.team1_adc,
-            matchupData.team1_jungle,
-            matchupData.team1_mid,
-            matchupData.team1_support,
-            matchupData.team1_top,
-            matchupData.team2_adc,
-            matchupData.team2_jungle,
-            matchupData.team2_mid,
-            matchupData.team2_support,
-            matchupData.team2_top,
-          ].includes(-1)
-        ) {
-          return;
-        }
+        const team1Roles = roleIdentification.getRoles(
+          championRoles,
+          team1Champions
+        );
+        const team2Roles = roleIdentification.getRoles(
+          championRoles,
+          team2Champions
+        );
+
+        matchupData.team1_top = team1Roles.TOP;
+        matchupData.team1_jungle = team1Roles.JUNGLE;
+        matchupData.team1_mid = team1Roles.MIDDLE;
+        matchupData.team1_adc = team1Roles.BOTTOM;
+        matchupData.team1_support = team1Roles.UTILITY;
+        matchupData.team2_top = team2Roles.TOP;
+        matchupData.team2_jungle = team2Roles.JUNGLE;
+        matchupData.team2_mid = team2Roles.MIDDLE;
+        matchupData.team2_adc = team2Roles.BOTTOM;
+        matchupData.team2_support = team2Roles.UTILITY;
 
         const existingMatch = await Matchup.findBy({
           team1_top: matchupData.team1_top,

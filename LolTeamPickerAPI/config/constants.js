@@ -9,9 +9,9 @@ module.exports = {
     KR: { name: "kr", basePlayer: "32y" },
     LA1: { name: "la1", basePlayer: "Zherson" },
     LA2: { name: "la2", basePlayer: "Doublecasted" },
-    NA: { name: "na1", basePlayer: "asdjnfa" },
+    NA: { name: "na1", basePlayer: "SandvichTF2" },
     OCE: { name: "oc1", basePlayer: "PhilFromSchool" },
-    TR: { name: "tr1", basePlayer: "YuqeX" },
-    RU: { name: "ru", basePlayer: "GhostTF" },
+    TR: { name: "tr1", basePlayer: "1111111112" },
+    RU: { name: "ru", basePlayer: "SUPRAAAA" },
   },
 };
