@@ -19,7 +19,6 @@ class MatchupSchema extends Schema {
       table.integer("team2_support").notNullable();
       table.integer("team1_wins").defaultsTo(0);
       table.integer("team2_wins").defaultsTo(0);
-      table.timestamps();
     })
   }
 

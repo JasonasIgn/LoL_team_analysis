@@ -13,7 +13,6 @@ class CrawledGameSchema extends Schema {
         .unsigned()
         .references("id")
         .inTable("servers");
-      table.timestamps()
     })
   }
 

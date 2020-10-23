@@ -4,7 +4,18 @@
 const Model = use("Model");
 
 class Matchup extends Model {
-
+  static get createTimestamp() {
+    return null;
+  }
+  static get updateTimestamp() {
+    return null;
+  }
+  static get createdAtColumn () {
+    return null
+  }
+  static get updatedAtColumn () {
+    return null
+  }
 }
 
 module.exports = Matchup;

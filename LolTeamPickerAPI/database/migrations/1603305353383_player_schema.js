@@ -14,7 +14,6 @@ class PlayerSchema extends Schema {
         .inTable("servers");
       table.string("summoner_name").notNullable();
       table.boolean("crawled").notNullable().defaultsTo(false);
-      table.timestamps()
     })
   }
 
