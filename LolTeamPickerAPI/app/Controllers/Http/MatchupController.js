@@ -9,6 +9,8 @@ const CrawledGame = use("App/Models/CrawledGame");
 const crawlHelpers = use("App/Helpers/crawlHelpers");
 const roleIdentification = use("App/Helpers/roleIdentification");
 const storing = use("App/Helpers/storingHelpers");
+const utils = use("App/Helpers/utils");
+const Matchup = use("App/Models/Matchup");
 const Config = use("App/Models/Config");
 
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
@@ -30,7 +32,6 @@ class MatchupController {
   async collect({ request, response }) {
     try {
       const championRoles = await roleIdentification.pullData();
-      // console.log(championRoles)
       const config = await Config.first();
       const serverNameToCrawl = crawlHelpers.getNextServerNameToCrawl(
         config.last_craweled_server_name
@@ -154,6 +155,164 @@ class MatchupController {
       console.log(e);
       response.status(400).send({});
     }
+  }
+
+  async whatDoIPlay({ request, response }) {
+    const data = request.only([
+      "top1",
+      "jgl1",
+      "mid1",
+      "adc1",
+      "sup1",
+      "top2",
+      "jgl2",
+      "mid2",
+      "adc2",
+      "sup2",
+    ]);
+
+    const matches1 = await Matchup.query()
+      .where(
+        "team1_top",
+        Number(data.top1) === 0 ? ">" : "=",
+        Number(data.top1)
+      )
+      .where(
+        "team1_jungle",
+        Number(data.jgl1) === 0 ? ">" : "=",
+        Number(data.jgl1)
+      )
+      .where(
+        "team1_mid",
+        Number(data.mid1) === 0 ? ">" : "=",
+        Number(data.mid1)
+      )
+      .where(
+        "team1_adc",
+        Number(data.adc1) === 0 ? ">" : "=",
+        Number(data.adc1)
+      )
+      .where(
+        "team1_support",
+        Number(data.sup1) === 0 ? ">" : "=",
+        Number(data.sup1)
+      )
+      .where(
+        "team2_top",
+        Number(data.top2) === 0 ? ">" : "=",
+        Number(data.top2)
+      )
+      .where(
+        "team2_jungle",
+        Number(data.jgl2) === 0 ? ">" : "=",
+        Number(data.jgl2)
+      )
+      .where(
+        "team2_mid",
+        Number(data.mid2) === 0 ? ">" : "=",
+        Number(data.mid2)
+      )
+      .where(
+        "team2_adc",
+        Number(data.adc2) === 0 ? ">" : "=",
+        Number(data.adc2)
+      )
+      .where(
+        "team2_support",
+        Number(data.sup2) === 0 ? ">" : "=",
+        Number(data.sup2)
+      )
+      .orderBy("team1_wins", "desc")
+      .orderBy("team2_wins", "asc")
+      .fetch();
+
+    const matches2 = await Matchup.query()
+      .where(
+        "team2_top",
+        Number(data.top1) === 0 ? ">" : "=",
+        Number(data.top1)
+      )
+      .where(
+        "team2_jungle",
+        Number(data.jgl1) === 0 ? ">" : "=",
+        Number(data.jgl1)
+      )
+      .where(
+        "team2_mid",
+        Number(data.mid1) === 0 ? ">" : "=",
+        Number(data.mid1)
+      )
+      .where(
+        "team2_adc",
+        Number(data.adc1) === 0 ? ">" : "=",
+        Number(data.adc1)
+      )
+      .where(
+        "team2_support",
+        Number(data.sup1) === 0 ? ">" : "=",
+        Number(data.sup1)
+      )
+      .where(
+        "team1_top",
+        Number(data.top2) === 0 ? ">" : "=",
+        Number(data.top2)
+      )
+      .where(
+        "team1_jungle",
+        Number(data.jgl2) === 0 ? ">" : "=",
+        Number(data.jgl2)
+      )
+      .where(
+        "team1_mid",
+        Number(data.mid2) === 0 ? ">" : "=",
+        Number(data.mid2)
+      )
+      .where(
+        "team1_adc",
+        Number(data.adc2) === 0 ? ">" : "=",
+        Number(data.adc2)
+      )
+      .where(
+        "team1_support",
+        Number(data.sup2) === 0 ? ">" : "=",
+        Number(data.sup2)
+      )
+      .orderBy("team2_wins", "desc")
+      .orderBy("team1_wins", "asc")
+      .fetch();
+    let matches = [];
+    matches1.rows.forEach((match, index) => {
+      if (index < 3) {
+        matches.push({
+          pick: match[utils.getWantedChampMatchupRole(data)],
+          winrate:
+            (match.team1_wins / (match.team1_wins + match.team2_wins)) * 100,
+          totalGames: match.team1_wins + match.team2_wins,
+        });
+      }
+    });
+    matches2.rows.forEach((match, index) => {
+      if (index < 3) {
+        matches.push({
+          pick: match[utils.getWantedChampMatchupRole(data, true)],
+          winrate:
+            (match.team2_wins / (match.team1_wins + match.team2_wins)) * 100,
+          totalGames: match.team1_wins + match.team2_wins,
+        });
+      }
+    });
+    const sortedMatchesByWinrate = matches.sort(function (a, b) {
+      return a.winrate < b.winrate;
+    });
+    const sortedMatches = sortedMatchesByWinrate.sort(function (a, b) {
+      if (a.winrate === b.winrate)
+      {
+        return a.totalGames < b.totalGames
+      }
+      else return 0
+    });
+    const best3Picks = sortedMatches.slice(0, 3)
+    response.status(200).send(best3Picks);
   }
 }
 

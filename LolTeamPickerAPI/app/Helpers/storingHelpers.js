@@ -88,6 +88,7 @@ async function storeSingleCombinationMatchups(matchupData) {
       positions[i] = 0;
       const alteredMatchupData = getResetMatchupData(matchupData, positions);
       await storeMatch(alteredMatchupData);
+      setTimeout(() => {}, 100);
     }
   } catch (e) {
     throw e;
@@ -103,6 +104,7 @@ async function storeDoubleCombinationMatchups(matchupData) {
         positions[j] = 0;
         const alteredMatchupData = getResetMatchupData(matchupData, positions);
         await storeMatch(alteredMatchupData);
+        setTimeout(() => {}, 100);
       }
     }
   } catch (e) {
@@ -124,6 +126,7 @@ async function storeTripleCombinationMatchups(matchupData) {
             positions
           );
           await storeMatch(alteredMatchupData);
+          setTimeout(() => {}, 100);
         }
       }
     }
@@ -148,6 +151,7 @@ async function storeQuadrupleCombinationMatchups(matchupData) {
               positions
             );
             await storeMatch(alteredMatchupData);
+            setTimeout(() => {}, 100);
           }
         }
       }
@@ -175,6 +179,7 @@ async function storePentaCombinationMatchups(matchupData) {
                 positions
               );
               await storeMatch(alteredMatchupData);
+              setTimeout(() => {}, 100);
             }
           }
         }
@@ -201,6 +206,7 @@ async function storeHexaCombinationMatchups(matchupData) {
               positions
             );
             await storeMatch(alteredMatchupData);
+            setTimeout(() => {}, 100);
           }
         }
       }
@@ -224,6 +230,7 @@ async function storeHeptaCombinationMatchups(matchupData) {
             positions
           );
           await storeMatch(alteredMatchupData);
+          setTimeout(() => {}, 100);
         }
       }
     }
@@ -241,6 +248,7 @@ async function storeOctaCombinationMatchups(matchupData) {
         positions[j] = 1;
         const alteredMatchupData = getResetMatchupData(matchupData, positions);
         await storeMatch(alteredMatchupData);
+        setTimeout(() => {}, 100);
       }
     }
   } catch (e) {
@@ -255,6 +263,7 @@ async function storeNonaCombinationMatchups(matchupData) {
       positions[i] = 1;
       const alteredMatchupData = getResetMatchupData(matchupData, positions);
       await storeMatch(alteredMatchupData);
+      setTimeout(() => {}, 100);
     }
   } catch (e) {
     throw e;
