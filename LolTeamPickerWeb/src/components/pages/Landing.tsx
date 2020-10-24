@@ -45,17 +45,9 @@ export const LandingPage = () => {
   );
   const dispatch = useDispatch();
   const [collecting, setCollecting] = useState(false);
-  const [canCollect, setCanCollect] = useState(false);
-  useEffect(() => {
-      if (!canCollect) {
-          setTimeout(() => {
-            setCanCollect(true)
-          }, 1500)
-      }
-  }, [canCollect])
   useEffect(() => {
     if (
-      collecting && canCollect &&
+      collecting &&
       [
         LoadingState.PRISTINE,
         LoadingState.FETCH_FAILED,
@@ -63,9 +55,8 @@ export const LandingPage = () => {
       ].includes(collectingLoadingState)
     ) {
       dispatch(collectMatchup());
-      setCanCollect(false)
     }
-  }, [collecting, collectingLoadingState, dispatch, matchupsCollected, canCollect]);
+  }, [collecting, collectingLoadingState, dispatch, matchupsCollected]);
   return (
     <Container>
       <ContentContainer>
