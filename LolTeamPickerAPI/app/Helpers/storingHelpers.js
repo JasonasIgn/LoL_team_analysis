@@ -280,15 +280,15 @@ async function storeDecaCombinationMatchups(matchupData) {
 
 async function storeMatchup(matchupData) {
   try {
-    await storeSingleCombinationMatchups(matchupData);
-    await storeDoubleCombinationMatchups(matchupData);
-    await storeTripleCombinationMatchups(matchupData);
-    await storeQuadrupleCombinationMatchups(matchupData);
-    await storePentaCombinationMatchups(matchupData);
-    await storeHexaCombinationMatchups(matchupData);
-    await storeHeptaCombinationMatchups(matchupData);
-    await storeOctaCombinationMatchups(matchupData);
-    await storeNonaCombinationMatchups(matchupData);
+    // await storeSingleCombinationMatchups(matchupData);
+    // await storeDoubleCombinationMatchups(matchupData);
+    // await storeTripleCombinationMatchups(matchupData);
+    // await storeQuadrupleCombinationMatchups(matchupData);
+    // await storePentaCombinationMatchups(matchupData);
+    // await storeHexaCombinationMatchups(matchupData);
+    // await storeHeptaCombinationMatchups(matchupData);
+    // await storeOctaCombinationMatchups(matchupData);
+    // await storeNonaCombinationMatchups(matchupData);
     await storeDecaCombinationMatchups(matchupData);
   } catch (e) {
     throw e;

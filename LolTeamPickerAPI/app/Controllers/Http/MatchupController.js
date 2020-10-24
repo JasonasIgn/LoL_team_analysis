@@ -174,144 +174,153 @@ class MatchupController {
     const matches1 = await Matchup.query()
       .where(
         "team1_top",
-        Number(data.top1) === 0 ? ">" : "=",
+        Number(data.top1) === 0 || Number(data.top1) === -1 ? ">" : "=",
         Number(data.top1)
       )
       .where(
         "team1_jungle",
-        Number(data.jgl1) === 0 ? ">" : "=",
+        Number(data.jgl1) === 0 || Number(data.jgl1) === -1 ? ">" : "=",
         Number(data.jgl1)
       )
       .where(
         "team1_mid",
-        Number(data.mid1) === 0 ? ">" : "=",
+        Number(data.mid1) === 0 || Number(data.mid1) === -1 ? ">" : "=",
         Number(data.mid1)
       )
       .where(
         "team1_adc",
-        Number(data.adc1) === 0 ? ">" : "=",
+        Number(data.adc1) === 0 || Number(data.adc1) === -1 ? ">" : "=",
         Number(data.adc1)
       )
       .where(
         "team1_support",
-        Number(data.sup1) === 0 ? ">" : "=",
+        Number(data.sup1) === 0 || Number(data.sup1) === -1 ? ">" : "=",
         Number(data.sup1)
       )
       .where(
         "team2_top",
-        Number(data.top2) === 0 ? ">" : "=",
+        Number(data.top2) === 0 || Number(data.top2) === -1 ? ">" : "=",
         Number(data.top2)
       )
       .where(
         "team2_jungle",
-        Number(data.jgl2) === 0 ? ">" : "=",
+        Number(data.jgl2) === 0 || Number(data.jgl2) === -1 ? ">" : "=",
         Number(data.jgl2)
       )
       .where(
         "team2_mid",
-        Number(data.mid2) === 0 ? ">" : "=",
+        Number(data.mid2) === 0 || Number(data.mid2) === -1 ? ">" : "=",
         Number(data.mid2)
       )
       .where(
         "team2_adc",
-        Number(data.adc2) === 0 ? ">" : "=",
+        Number(data.adc2) === 0 || Number(data.adc2) === -1 ? ">" : "=",
         Number(data.adc2)
       )
       .where(
         "team2_support",
-        Number(data.sup2) === 0 ? ">" : "=",
+        Number(data.sup2) === 0 || Number(data.sup2) === -1 ? ">" : "=",
         Number(data.sup2)
       )
-      .orderBy("team1_wins", "desc")
-      .orderBy("team2_wins", "asc")
+      // .orderBy("team1_wins", "desc")
+      // .orderBy("team2_wins", "asc")
       .fetch();
 
     const matches2 = await Matchup.query()
       .where(
         "team2_top",
-        Number(data.top1) === 0 ? ">" : "=",
+        Number(data.top1) === 0 || Number(data.top1) === -1 ? ">" : "=",
         Number(data.top1)
       )
       .where(
         "team2_jungle",
-        Number(data.jgl1) === 0 ? ">" : "=",
+        Number(data.jgl1) === 0 || Number(data.jgl1) === -1 ? ">" : "=",
         Number(data.jgl1)
       )
       .where(
         "team2_mid",
-        Number(data.mid1) === 0 ? ">" : "=",
+        Number(data.mid1) === 0 || Number(data.mid1) === -1 ? ">" : "=",
         Number(data.mid1)
       )
       .where(
         "team2_adc",
-        Number(data.adc1) === 0 ? ">" : "=",
+        Number(data.adc1) === 0 || Number(data.adc1) === -1 ? ">" : "=",
         Number(data.adc1)
       )
       .where(
         "team2_support",
-        Number(data.sup1) === 0 ? ">" : "=",
+        Number(data.sup1) === 0 || Number(data.sup1) === -1 ? ">" : "=",
         Number(data.sup1)
       )
       .where(
         "team1_top",
-        Number(data.top2) === 0 ? ">" : "=",
+        Number(data.top2) === 0 || Number(data.top2) === -1 ? ">" : "=",
         Number(data.top2)
       )
       .where(
         "team1_jungle",
-        Number(data.jgl2) === 0 ? ">" : "=",
+        Number(data.jgl2) === 0 || Number(data.jgl2) === -1 ? ">" : "=",
         Number(data.jgl2)
       )
       .where(
         "team1_mid",
-        Number(data.mid2) === 0 ? ">" : "=",
+        Number(data.mid2) === 0 || Number(data.mid2) === -1 ? ">" : "=",
         Number(data.mid2)
       )
       .where(
         "team1_adc",
-        Number(data.adc2) === 0 ? ">" : "=",
+        Number(data.adc2) === 0 || Number(data.adc2) === -1 ? ">" : "=",
         Number(data.adc2)
       )
       .where(
         "team1_support",
-        Number(data.sup2) === 0 ? ">" : "=",
+        Number(data.sup2) === 0 || Number(data.sup2) === -1 ? ">" : "=",
         Number(data.sup2)
       )
-      .orderBy("team2_wins", "desc")
-      .orderBy("team1_wins", "asc")
+      // .orderBy("team2_wins", "desc")
+      // .orderBy("team1_wins", "asc")
       .fetch();
-    let matches = [];
-    matches1.rows.forEach((match, index) => {
-      if (index < 3) {
-        matches.push({
-          pick: match[utils.getWantedChampMatchupRole(data)],
-          winrate:
-            (match.team1_wins / (match.team1_wins + match.team2_wins)) * 100,
+    const matches = {};
+    matches1.rows.forEach((match) => {
+      const pick = match[utils.getWantedChampMatchupRole(data)];
+      if (matches[pick]) {
+        matches[pick].wins += match.team1_wins;
+        matches[pick].totalGames += match.team1_wins + match.team2_wins;
+      } else {
+        matches[pick] = {
+          pick,
+          wins: match.team1_wins,
           totalGames: match.team1_wins + match.team2_wins,
-        });
+        };
       }
     });
-    matches2.rows.forEach((match, index) => {
-      if (index < 3) {
-        matches.push({
-          pick: match[utils.getWantedChampMatchupRole(data, true)],
-          winrate:
-            (match.team2_wins / (match.team1_wins + match.team2_wins)) * 100,
+    matches2.rows.forEach((match) => {
+      const pick = match[utils.getWantedChampMatchupRole(data, true)];
+      if (matches[pick]) {
+        matches[pick].wins += match.team2_wins;
+        matches[pick].totalGames += match.team1_wins + match.team2_wins;
+      } else {
+        matches[pick] = {
+          pick,
+          wins: match.team2_wins,
           totalGames: match.team1_wins + match.team2_wins,
-        });
+        };
       }
     });
-    const sortedMatchesByWinrate = matches.sort(function (a, b) {
+    const matchesWithWinrate = Object.values(matches).map((match) => ({
+      pick: match.pick,
+      winrate: Number(((match.wins / match.totalGames) * 100).toFixed(2)),
+      totalGames: match.totalGames,
+    }));
+    const sortedMatchesByWinrate = matchesWithWinrate.sort(function (a, b) {
       return a.winrate < b.winrate;
     });
     const sortedMatches = sortedMatchesByWinrate.sort(function (a, b) {
-      if (a.winrate === b.winrate)
-      {
-        return a.totalGames < b.totalGames
-      }
-      else return 0
+      if (a.winrate === b.winrate) {
+        return a.totalGames < b.totalGames;
+      } else return 0;
     });
-    const best3Picks = sortedMatches.slice(0, 3)
+    const best3Picks = sortedMatches.slice(0, 3);
     response.status(200).send(best3Picks);
   }
 }
