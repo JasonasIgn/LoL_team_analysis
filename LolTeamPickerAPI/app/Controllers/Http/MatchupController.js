@@ -160,15 +160,15 @@ class MatchupController {
   async whatDoIPlay({ request, response }) {
     const data = request.only([
       "top1",
-      "jgl1",
-      "mid1",
-      "adc1",
-      "sup1",
+      "jungle1",
+      "middle1",
+      "bottom1",
+      "utility1",
       "top2",
-      "jgl2",
-      "mid2",
-      "adc2",
-      "sup2",
+      "jungle2",
+      "middle2",
+      "bottom2",
+      "utility2",
     ]);
 
     const matches1 = await Matchup.query()
@@ -179,23 +179,23 @@ class MatchupController {
       )
       .where(
         "team1_jungle",
-        Number(data.jgl1) === 0 || Number(data.jgl1) === -1 ? ">" : "=",
-        Number(data.jgl1)
+        Number(data.jungle1) === 0 || Number(data.jungle1) === -1 ? ">" : "=",
+        Number(data.jungle1)
       )
       .where(
         "team1_mid",
-        Number(data.mid1) === 0 || Number(data.mid1) === -1 ? ">" : "=",
-        Number(data.mid1)
+        Number(data.middle1) === 0 || Number(data.middle1) === -1 ? ">" : "=",
+        Number(data.middle1)
       )
       .where(
         "team1_adc",
-        Number(data.adc1) === 0 || Number(data.adc1) === -1 ? ">" : "=",
-        Number(data.adc1)
+        Number(data.bottom1) === 0 || Number(data.bottom1) === -1 ? ">" : "=",
+        Number(data.bottom1)
       )
       .where(
         "team1_support",
-        Number(data.sup1) === 0 || Number(data.sup1) === -1 ? ">" : "=",
-        Number(data.sup1)
+        Number(data.utility1) === 0 || Number(data.utility1) === -1 ? ">" : "=",
+        Number(data.utility1)
       )
       .where(
         "team2_top",
@@ -204,23 +204,23 @@ class MatchupController {
       )
       .where(
         "team2_jungle",
-        Number(data.jgl2) === 0 || Number(data.jgl2) === -1 ? ">" : "=",
-        Number(data.jgl2)
+        Number(data.jungle2) === 0 || Number(data.jungle2) === -1 ? ">" : "=",
+        Number(data.jungle2)
       )
       .where(
         "team2_mid",
-        Number(data.mid2) === 0 || Number(data.mid2) === -1 ? ">" : "=",
-        Number(data.mid2)
+        Number(data.middle2) === 0 || Number(data.middle2) === -1 ? ">" : "=",
+        Number(data.middle2)
       )
       .where(
         "team2_adc",
-        Number(data.adc2) === 0 || Number(data.adc2) === -1 ? ">" : "=",
-        Number(data.adc2)
+        Number(data.bottom2) === 0 || Number(data.bottom2) === -1 ? ">" : "=",
+        Number(data.bottom2)
       )
       .where(
         "team2_support",
-        Number(data.sup2) === 0 || Number(data.sup2) === -1 ? ">" : "=",
-        Number(data.sup2)
+        Number(data.utility2) === 0 || Number(data.utility2) === -1 ? ">" : "=",
+        Number(data.utility2)
       )
       .fetch();
 
@@ -232,23 +232,23 @@ class MatchupController {
       )
       .where(
         "team2_jungle",
-        Number(data.jgl1) === 0 || Number(data.jgl1) === -1 ? ">" : "=",
-        Number(data.jgl1)
+        Number(data.jungle1) === 0 || Number(data.jungle1) === -1 ? ">" : "=",
+        Number(data.jungle1)
       )
       .where(
         "team2_mid",
-        Number(data.mid1) === 0 || Number(data.mid1) === -1 ? ">" : "=",
-        Number(data.mid1)
+        Number(data.middle1) === 0 || Number(data.middle1) === -1 ? ">" : "=",
+        Number(data.middle1)
       )
       .where(
         "team2_adc",
-        Number(data.adc1) === 0 || Number(data.adc1) === -1 ? ">" : "=",
-        Number(data.adc1)
+        Number(data.bottom1) === 0 || Number(data.bottom1) === -1 ? ">" : "=",
+        Number(data.bottom1)
       )
       .where(
         "team2_support",
-        Number(data.sup1) === 0 || Number(data.sup1) === -1 ? ">" : "=",
-        Number(data.sup1)
+        Number(data.utility1) === 0 || Number(data.utility1) === -1 ? ">" : "=",
+        Number(data.utility1)
       )
       .where(
         "team1_top",
@@ -257,23 +257,23 @@ class MatchupController {
       )
       .where(
         "team1_jungle",
-        Number(data.jgl2) === 0 || Number(data.jgl2) === -1 ? ">" : "=",
-        Number(data.jgl2)
+        Number(data.jungle2) === 0 || Number(data.jungle2) === -1 ? ">" : "=",
+        Number(data.jungle2)
       )
       .where(
         "team1_mid",
-        Number(data.mid2) === 0 || Number(data.mid2) === -1 ? ">" : "=",
-        Number(data.mid2)
+        Number(data.middle2) === 0 || Number(data.middle2) === -1 ? ">" : "=",
+        Number(data.middle2)
       )
       .where(
         "team1_adc",
-        Number(data.adc2) === 0 || Number(data.adc2) === -1 ? ">" : "=",
-        Number(data.adc2)
+        Number(data.bottom2) === 0 || Number(data.bottom2) === -1 ? ">" : "=",
+        Number(data.bottom2)
       )
       .where(
         "team1_support",
-        Number(data.sup2) === 0 || Number(data.sup2) === -1 ? ">" : "=",
-        Number(data.sup2)
+        Number(data.utility2) === 0 || Number(data.utility2) === -1 ? ">" : "=",
+        Number(data.utility2)
       )
       .fetch();
     const matches = {};

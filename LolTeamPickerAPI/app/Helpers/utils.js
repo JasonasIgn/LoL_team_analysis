@@ -8,23 +8,23 @@ module.exports = {
     )
       return "team1_top";
     if (
-      (reverse && Number(requestData.jgl2) === 0) ||
-      (!reverse && Number(requestData.jgl1) === 0)
+      (reverse && Number(requestData.jungle2) === 0) ||
+      (!reverse && Number(requestData.jungle1) === 0)
     )
       return "team1_jungle";
     if (
-      (reverse && Number(requestData.mid2) === 0) ||
-      (!reverse && Number(requestData.mid1) === 0)
+      (reverse && Number(requestData.middle2) === 0) ||
+      (!reverse && Number(requestData.middle1) === 0)
     )
       return "team1_mid";
     if (
-      (reverse && Number(requestData.adc2) === 0) ||
-      (!reverse && Number(requestData.adc1) === 0)
+      (reverse && Number(requestData.bottom2) === 0) ||
+      (!reverse && Number(requestData.bottom1) === 0)
     )
       return "team1_adc";
     if (
-      (reverse && Number(requestData.sup2) === 0) ||
-      (!reverse && Number(requestData.sup1) === 0)
+      (reverse && Number(requestData.utility2) === 0) ||
+      (!reverse && Number(requestData.utility1) === 0)
     )
       return "team1_support";
     if (
@@ -33,23 +33,23 @@ module.exports = {
     )
       return "team2_top";
     if (
-      (reverse && Number(requestData.jgl1) === 0) ||
-      (!reverse && Number(requestData.jgl2) === 0)
+      (reverse && Number(requestData.jungle1) === 0) ||
+      (!reverse && Number(requestData.jungle2) === 0)
     )
       return "team2_jungle";
     if (
-      (reverse && Number(requestData.mid1) === 0) ||
-      (!reverse && Number(requestData.mid2) === 0)
+      (reverse && Number(requestData.middle1) === 0) ||
+      (!reverse && Number(requestData.middle2) === 0)
     )
       return "team2_mid";
     if (
-      (reverse && Number(requestData.adc1) === 0) ||
-      (!reverse && Number(requestData.adc2) === 0)
+      (reverse && Number(requestData.bottom1) === 0) ||
+      (!reverse && Number(requestData.bottom2) === 0)
     )
       return "team2_adc";
     if (
-      (reverse && Number(requestData.sup1) === 0) ||
-      (!reverse && Number(requestData.sup2) === 0)
+      (reverse && Number(requestData.utility1) === 0) ||
+      (!reverse && Number(requestData.utility2) === 0)
     )
       return "team2_support";
   },
