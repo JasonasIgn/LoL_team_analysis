@@ -307,9 +307,7 @@ class MatchupController {
         };
       }
     });
-    console.log(matches, " MATCHES");
     if (Object.keys(matches).length < 3) {
-      console.log(data, " data");
       if (
         Number(data.top1) === 0 ||
         Number(data.jungle1) === 0 ||
@@ -352,7 +350,6 @@ class MatchupController {
             Number(data.utility1)
           )
           .fetch();
-        console.log(synergyMatches, "<<<<");
         synergyMatches.rows.forEach((match) => {
           const pick = match[utils.getWantedChampMatchupRole(data)];
           totalGames += match.team1_wins + match.team2_wins;
@@ -445,7 +442,6 @@ class MatchupController {
     const best3Picks = sortedMatches.slice(0, 3);
     const allMatchupsCount = await Database.from("matchups").count()
     const count = allMatchupsCount[0]['count(*)']
-    console.log(allMatchupsCount);
     response
       .status(200)
       .send({ matchups: best3Picks, totalRecords: count });
