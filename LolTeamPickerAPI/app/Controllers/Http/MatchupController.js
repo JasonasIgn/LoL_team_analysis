@@ -316,9 +316,9 @@ class MatchupController {
         totalGames: match.totalGames,
         pickQuality: Number(
           (
-            (match.wins / totalGames) *
             winrate *
-            utils.getPickQualityMultiplier(winrate)
+            utils.getPickQualityMultiplier(winrate) *
+            utils.getQuantityMultiplier(match.totalGames)
           ).toFixed(2)
         ),
       };
