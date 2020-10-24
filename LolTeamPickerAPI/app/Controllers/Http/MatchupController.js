@@ -222,8 +222,6 @@ class MatchupController {
         Number(data.sup2) === 0 || Number(data.sup2) === -1 ? ">" : "=",
         Number(data.sup2)
       )
-      // .orderBy("team1_wins", "desc")
-      // .orderBy("team2_wins", "asc")
       .fetch();
 
     const matches2 = await Matchup.query()
@@ -277,8 +275,6 @@ class MatchupController {
         Number(data.sup2) === 0 || Number(data.sup2) === -1 ? ">" : "=",
         Number(data.sup2)
       )
-      // .orderBy("team2_wins", "desc")
-      // .orderBy("team1_wins", "asc")
       .fetch();
     const matches = {};
     let totalGames = 0;
