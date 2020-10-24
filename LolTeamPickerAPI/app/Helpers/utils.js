@@ -53,4 +53,40 @@ module.exports = {
     )
       return "team2_support";
   },
+
+  getPickQualityMultiplier(winrate) {
+    if (winrate >= 55 && winrate < 60)
+    {
+      return 1.1
+    }
+    if (winrate >= 60 && winrate < 65)
+    {
+      return 1.5
+    }
+    if (winrate >= 65 && winrate < 70)
+    {
+      return 2
+    }
+    if (winrate >= 70 && winrate < 75)
+    {
+      return 2.5
+    }
+    if (winrate >= 75 && winrate < 80)
+    {
+      return 3
+    }
+    if (winrate >= 80 && winrate < 85)
+    {
+      return 3.5
+    }
+    if (winrate >= 85 && winrate < 90)
+    {
+      return 4
+    }
+    if (winrate >= 90)
+    {
+      return 4.5
+    }
+    return 1
+  }
 };

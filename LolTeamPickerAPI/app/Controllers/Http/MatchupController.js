@@ -67,7 +67,7 @@ class MatchupController {
           server.name
         }.api.riotgames.com/lol/match/v4/matchlists/by-account/${playerAccountId}?queue=420&beginTime=${new Date().setDate(
           new Date().getDate() - 7
-        )}&endIndex=10&beginIndex=0`,
+        )}&endIndex=15&beginIndex=0`,
         {
           headers: {
             "X-Riot-Token": process.env.LOL_API_KEY,
@@ -281,8 +281,10 @@ class MatchupController {
       // .orderBy("team1_wins", "asc")
       .fetch();
     const matches = {};
+    let totalGames = 0;
     matches1.rows.forEach((match) => {
       const pick = match[utils.getWantedChampMatchupRole(data)];
+      totalGames += match.team1_wins + match.team2_wins;
       if (matches[pick]) {
         matches[pick].wins += match.team1_wins;
         matches[pick].totalGames += match.team1_wins + match.team2_wins;
@@ -296,6 +298,7 @@ class MatchupController {
     });
     matches2.rows.forEach((match) => {
       const pick = match[utils.getWantedChampMatchupRole(data, true)];
+      totalGames += match.team1_wins + match.team2_wins;
       if (matches[pick]) {
         matches[pick].wins += match.team2_wins;
         matches[pick].totalGames += match.team1_wins + match.team2_wins;
@@ -307,19 +310,27 @@ class MatchupController {
         };
       }
     });
-    const matchesWithWinrate = Object.values(matches).map((match) => ({
-      pick: match.pick,
-      winrate: Number(((match.wins / match.totalGames) * 100).toFixed(2)),
-      totalGames: match.totalGames,
-    }));
-    const sortedMatchesByWinrate = matchesWithWinrate.sort(function (a, b) {
-      return a.winrate < b.winrate;
+    const matchesWithWinrate = Object.values(matches).map((match) => {
+      const winrate = Number(
+        ((match.wins / match.totalGames) * 100).toFixed(2)
+      );
+      return {
+        pick: match.pick,
+        winrate,
+        totalGames: match.totalGames,
+        pickQuality: Number(
+          (
+            (match.wins / totalGames) *
+            winrate *
+            utils.getPickQualityMultiplier(winrate)
+          ).toFixed(2)
+        ),
+      };
     });
-    const sortedMatches = sortedMatchesByWinrate.sort(function (a, b) {
-      if (a.winrate === b.winrate) {
-        return a.totalGames < b.totalGames;
-      } else return 0;
+    const sortedMatches = matchesWithWinrate.sort(function (a, b) {
+      return a.pickQuality < b.pickQuality ? 1 : -1;
     });
+    console.log(sortedMatches);
     const best3Picks = sortedMatches.slice(0, 3);
     response.status(200).send(best3Picks);
   }
