@@ -3,6 +3,7 @@
 const { match } = require("@adonisjs/framework/src/Route/Manager");
 
 const Axios = use("axios");
+const Database = use("Database");
 const Server = use("App/Models/Server");
 const Player = use("App/Models/Player");
 const CrawledGame = use("App/Models/CrawledGame");
@@ -306,6 +307,119 @@ class MatchupController {
         };
       }
     });
+    console.log(matches, " MATCHES");
+    if (Object.keys(matches).length < 3) {
+      console.log(data, " data");
+      if (
+        Number(data.top1) === 0 ||
+        Number(data.jungle1) === 0 ||
+        Number(data.middle1) === 0 ||
+        Number(data.bottom1) === 0 ||
+        Number(data.utility1) === 0
+      ) {
+        const synergyMatches = await Matchup.query()
+          .where(
+            "team1_top",
+            Number(data.top1) === 0 || Number(data.top1) === -1 ? ">" : "=",
+            Number(data.top1)
+          )
+          .where(
+            "team1_jungle",
+            Number(data.jungle1) === 0 || Number(data.jungle1) === -1
+              ? ">"
+              : "=",
+            Number(data.jungle1)
+          )
+          .where(
+            "team1_mid",
+            Number(data.middle1) === 0 || Number(data.middle1) === -1
+              ? ">"
+              : "=",
+            Number(data.middle1)
+          )
+          .where(
+            "team1_adc",
+            Number(data.bottom1) === 0 || Number(data.bottom1) === -1
+              ? ">"
+              : "=",
+            Number(data.bottom1)
+          )
+          .where(
+            "team1_support",
+            Number(data.utility1) === 0 || Number(data.utility1) === -1
+              ? ">"
+              : "=",
+            Number(data.utility1)
+          )
+          .fetch();
+        console.log(synergyMatches, "<<<<");
+        synergyMatches.rows.forEach((match) => {
+          const pick = match[utils.getWantedChampMatchupRole(data)];
+          totalGames += match.team1_wins + match.team2_wins;
+          if (matches[pick]) {
+            matches[pick].wins += match.team1_wins;
+            matches[pick].totalGames += match.team1_wins + match.team2_wins;
+          } else {
+            matches[pick] = {
+              pick,
+              wins: match.team1_wins,
+              totalGames: match.team1_wins + match.team2_wins,
+            };
+          }
+        });
+      } else {
+        const synergyMatches = await Matchup.query()
+          .where(
+            "team2_top",
+            Number(data.top2) === 0 || Number(data.top2) === -1 ? ">" : "=",
+            Number(data.top2)
+          )
+          .where(
+            "team2_jungle",
+            Number(data.jungle2) === 0 || Number(data.jungle2) === -1
+              ? ">"
+              : "=",
+            Number(data.jungle2)
+          )
+          .where(
+            "team2_mid",
+            Number(data.middle2) === 0 || Number(data.middle2) === -1
+              ? ">"
+              : "=",
+            Number(data.middle2)
+          )
+          .where(
+            "team2_adc",
+            Number(data.bottom2) === 0 || Number(data.bottom2) === -1
+              ? ">"
+              : "=",
+            Number(data.bottom2)
+          )
+          .where(
+            "team2_support",
+            Number(data.utility2) === 0 || Number(data.utility2) === -1
+              ? ">"
+              : "=",
+            Number(data.utility2)
+          )
+          .fetch();
+        synergyMatches.rows.forEach((match) => {
+          const pick = match[utils.getWantedChampMatchupRole(data, true)];
+          totalGames += match.team1_wins + match.team2_wins;
+          if (matches[pick]) {
+            matches[pick].wins += match.team2_wins;
+            matches[pick].totalGames += match.team1_wins + match.team2_wins;
+          } else {
+            matches[pick] = {
+              pick,
+              wins: match.team2_wins,
+              totalGames: match.team1_wins + match.team2_wins,
+            };
+          }
+        });
+      }
+    }
+
     const matchesWithWinrate = Object.values(matches).map((match) => {
       const winrate = Number(
         ((match.wins / match.totalGames) * 100).toFixed(2)
@@ -317,6 +431,7 @@ class MatchupController {
         pickQuality: Number(
           (
             winrate *
+            (match.totalGames / totalGames) *
             utils.getPickQualityMultiplier(winrate) *
             utils.getQuantityMultiplier(match.totalGames)
           ).toFixed(2)
@@ -328,7 +443,12 @@ class MatchupController {
     });
     console.log(sortedMatches);
     const best3Picks = sortedMatches.slice(0, 3);
-    response.status(200).send(best3Picks);
+    const allMatchupsCount = await Database.from("matchups").count()
+    const count = allMatchupsCount[0]['count(*)']
+    console.log(allMatchupsCount);
+    response
+      .status(200)
+      .send({ matchups: best3Picks, totalRecords: count });
   }
 }
 
