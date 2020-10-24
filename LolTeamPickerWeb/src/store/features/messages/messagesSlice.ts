@@ -13,6 +13,10 @@ export const messagesSlice = createSlice({
   initialState: messagesInitialState,
   reducers: {
     addMessage: (state, action) => {
+      if (state.messages.length >= 100)
+      {
+        state.messages.shift()
+      }
       state.messages.push(action.payload)
     },
   }
