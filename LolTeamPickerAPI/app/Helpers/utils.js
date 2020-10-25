@@ -56,7 +56,7 @@ module.exports = {
 
   getPickQualityMultiplier(winrate) {
     if (winrate < 50) {
-      return 0.5;
+      return 0.01;
     }
     if (winrate >= 55 && winrate < 60) {
       return 1.1;
