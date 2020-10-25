@@ -18,7 +18,6 @@ class LiveGameController {
    * @param {Response} ctx.response
    */
   async getLiveData({ request, params: { name }, response }) {
-    console.log(name)
     try {
       const res = await Axios.get(
         `https://euw1.api.riotgames.com/liveclientdata/playerlist?summonerName=Sethel`,
@@ -30,7 +29,6 @@ class LiveGameController {
       );
 
       const { data } = res;
-      console.log(data)
       response.status(200).send({});
     } catch (e) {
       console.log(e)

@@ -8,6 +8,7 @@ const Server = use("App/Models/Server");
 const Player = use("App/Models/Player");
 const CrawledGame = use("App/Models/CrawledGame");
 const crawlHelpers = use("App/Helpers/crawlHelpers");
+const pickHelpers = use("App/Helpers/pickHelpers");
 const roleIdentification = use("App/Helpers/roleIdentification");
 const storing = use("App/Helpers/storingHelpers");
 const utils = use("App/Helpers/utils");
@@ -153,7 +154,7 @@ class MatchupController {
       await Promise.all(promises);
       response.status(200).send({});
     } catch (e) {
-      console.log(e);
+      // console.log(e);
       response.status(400).send({});
     }
   }
@@ -172,142 +173,15 @@ class MatchupController {
       "utility2",
     ]);
 
-    const matches1 = await Matchup.query()
-      .where(
-        "team1_top",
-        Number(data.top1) === 0 || Number(data.top1) === -1 ? ">" : "=",
-        Number(data.top1)
-      )
-      .where(
-        "team1_jungle",
-        Number(data.jungle1) === 0 || Number(data.jungle1) === -1 ? ">" : "=",
-        Number(data.jungle1)
-      )
-      .where(
-        "team1_mid",
-        Number(data.middle1) === 0 || Number(data.middle1) === -1 ? ">" : "=",
-        Number(data.middle1)
-      )
-      .where(
-        "team1_adc",
-        Number(data.bottom1) === 0 || Number(data.bottom1) === -1 ? ">" : "=",
-        Number(data.bottom1)
-      )
-      .where(
-        "team1_support",
-        Number(data.utility1) === 0 || Number(data.utility1) === -1 ? ">" : "=",
-        Number(data.utility1)
-      )
-      .where(
-        "team2_top",
-        Number(data.top2) === 0 || Number(data.top2) === -1 ? ">" : "=",
-        Number(data.top2)
-      )
-      .where(
-        "team2_jungle",
-        Number(data.jungle2) === 0 || Number(data.jungle2) === -1 ? ">" : "=",
-        Number(data.jungle2)
-      )
-      .where(
-        "team2_mid",
-        Number(data.middle2) === 0 || Number(data.middle2) === -1 ? ">" : "=",
-        Number(data.middle2)
-      )
-      .where(
-        "team2_adc",
-        Number(data.bottom2) === 0 || Number(data.bottom2) === -1 ? ">" : "=",
-        Number(data.bottom2)
-      )
-      .where(
-        "team2_support",
-        Number(data.utility2) === 0 || Number(data.utility2) === -1 ? ">" : "=",
-        Number(data.utility2)
-      )
-      .fetch();
-
-    const matches2 = await Matchup.query()
-      .where(
-        "team2_top",
-        Number(data.top1) === 0 || Number(data.top1) === -1 ? ">" : "=",
-        Number(data.top1)
-      )
-      .where(
-        "team2_jungle",
-        Number(data.jungle1) === 0 || Number(data.jungle1) === -1 ? ">" : "=",
-        Number(data.jungle1)
-      )
-      .where(
-        "team2_mid",
-        Number(data.middle1) === 0 || Number(data.middle1) === -1 ? ">" : "=",
-        Number(data.middle1)
-      )
-      .where(
-        "team2_adc",
-        Number(data.bottom1) === 0 || Number(data.bottom1) === -1 ? ">" : "=",
-        Number(data.bottom1)
-      )
-      .where(
-        "team2_support",
-        Number(data.utility1) === 0 || Number(data.utility1) === -1 ? ">" : "=",
-        Number(data.utility1)
-      )
-      .where(
-        "team1_top",
-        Number(data.top2) === 0 || Number(data.top2) === -1 ? ">" : "=",
-        Number(data.top2)
-      )
-      .where(
-        "team1_jungle",
-        Number(data.jungle2) === 0 || Number(data.jungle2) === -1 ? ">" : "=",
-        Number(data.jungle2)
-      )
-      .where(
-        "team1_mid",
-        Number(data.middle2) === 0 || Number(data.middle2) === -1 ? ">" : "=",
-        Number(data.middle2)
-      )
-      .where(
-        "team1_adc",
-        Number(data.bottom2) === 0 || Number(data.bottom2) === -1 ? ">" : "=",
-        Number(data.bottom2)
-      )
-      .where(
-        "team1_support",
-        Number(data.utility2) === 0 || Number(data.utility2) === -1 ? ">" : "=",
-        Number(data.utility2)
-      )
-      .fetch();
+    const matchesTeam1 = await pickHelpers.fetchTeam1Picks(data);
+    const matchesTeam2 = await pickHelpers.fetchTeam2Picks(data);
     const matches = {};
     let totalGames = 0;
-    matches1.rows.forEach((match) => {
-      const pick = match[utils.getWantedChampMatchupRole(data)];
-      totalGames += match.team1_wins + match.team2_wins;
-      if (matches[pick]) {
-        matches[pick].wins += match.team1_wins;
-        matches[pick].totalGames += match.team1_wins + match.team2_wins;
-      } else {
-        matches[pick] = {
-          pick,
-          wins: match.team1_wins,
-          totalGames: match.team1_wins + match.team2_wins,
-        };
-      }
-    });
-    matches2.rows.forEach((match) => {
-      const pick = match[utils.getWantedChampMatchupRole(data, true)];
-      totalGames += match.team1_wins + match.team2_wins;
-      if (matches[pick]) {
-        matches[pick].wins += match.team2_wins;
-        matches[pick].totalGames += match.team1_wins + match.team2_wins;
-      } else {
-        matches[pick] = {
-          pick,
-          wins: match.team2_wins,
-          totalGames: match.team1_wins + match.team2_wins,
-        };
-      }
-    });
+    totalGames += pickHelpers.proccessMatches(data, matches, matchesTeam1);
+    totalGames += pickHelpers.proccessMatches(data, matches, matchesTeam2, true);
+
     if (Object.keys(matches).length < 3) {
+      console.log("SYNERGY INCLUDED");
       if (
         Number(data.top1) === 0 ||
         Number(data.jungle1) === 0 ||
@@ -315,136 +189,25 @@ class MatchupController {
         Number(data.bottom1) === 0 ||
         Number(data.utility1) === 0
       ) {
-        const synergyMatches = await Matchup.query()
-          .where(
-            "team1_top",
-            Number(data.top1) === 0 || Number(data.top1) === -1 ? ">" : "=",
-            Number(data.top1)
-          )
-          .where(
-            "team1_jungle",
-            Number(data.jungle1) === 0 || Number(data.jungle1) === -1
-              ? ">"
-              : "=",
-            Number(data.jungle1)
-          )
-          .where(
-            "team1_mid",
-            Number(data.middle1) === 0 || Number(data.middle1) === -1
-              ? ">"
-              : "=",
-            Number(data.middle1)
-          )
-          .where(
-            "team1_adc",
-            Number(data.bottom1) === 0 || Number(data.bottom1) === -1
-              ? ">"
-              : "=",
-            Number(data.bottom1)
-          )
-          .where(
-            "team1_support",
-            Number(data.utility1) === 0 || Number(data.utility1) === -1
-              ? ">"
-              : "=",
-            Number(data.utility1)
-          )
-          .fetch();
-        synergyMatches.rows.forEach((match) => {
-          const pick = match[utils.getWantedChampMatchupRole(data)];
-          totalGames += match.team1_wins + match.team2_wins;
-          if (matches[pick]) {
-            matches[pick].wins += match.team1_wins;
-            matches[pick].totalGames += match.team1_wins + match.team2_wins;
-          } else {
-            matches[pick] = {
-              pick,
-              wins: match.team1_wins,
-              totalGames: match.team1_wins + match.team2_wins,
-            };
-          }
-        });
+        const synergyMatches = await pickHelpers.fetchSynergyTeamPicks(data);
+        totalGames += pickHelpers.proccessMatches(data, matches, synergyMatches);
       } else {
-        const synergyMatches = await Matchup.query()
-          .where(
-            "team2_top",
-            Number(data.top2) === 0 || Number(data.top2) === -1 ? ">" : "=",
-            Number(data.top2)
-          )
-          .where(
-            "team2_jungle",
-            Number(data.jungle2) === 0 || Number(data.jungle2) === -1
-              ? ">"
-              : "=",
-            Number(data.jungle2)
-          )
-          .where(
-            "team2_mid",
-            Number(data.middle2) === 0 || Number(data.middle2) === -1
-              ? ">"
-              : "=",
-            Number(data.middle2)
-          )
-          .where(
-            "team2_adc",
-            Number(data.bottom2) === 0 || Number(data.bottom2) === -1
-              ? ">"
-              : "=",
-            Number(data.bottom2)
-          )
-          .where(
-            "team2_support",
-            Number(data.utility2) === 0 || Number(data.utility2) === -1
-              ? ">"
-              : "=",
-            Number(data.utility2)
-          )
-          .fetch();
-        synergyMatches.rows.forEach((match) => {
-          const pick = match[utils.getWantedChampMatchupRole(data, true)];
-          totalGames += match.team1_wins + match.team2_wins;
-          if (matches[pick]) {
-            matches[pick].wins += match.team2_wins;
-            matches[pick].totalGames += match.team1_wins + match.team2_wins;
-          } else {
-            matches[pick] = {
-              pick,
-              wins: match.team2_wins,
-              totalGames: match.team1_wins + match.team2_wins,
-            };
-          }
-        });
+        const synergyMatches = await pickHelpers.fetchSynergyTeamPicks(
+          data,
+          true
+        );
+        totalGames += pickHelpers.proccessMatches(data, matches, synergyMatches, true);
       }
     }
-
-    const matchesWithWinrate = Object.values(matches).map((match) => {
-      const winrate = Number(
-        ((match.wins / match.totalGames) * 100).toFixed(2)
-      );
-      return {
-        pick: match.pick,
-        winrate,
-        totalGames: match.totalGames,
-        pickQuality: Number(
-          (
-            winrate *
-            (match.totalGames / totalGames) *
-            utils.getPickQualityMultiplier(winrate) *
-            utils.getQuantityMultiplier(match.totalGames)
-          ).toFixed(2)
-        ),
-      };
-    });
+    const matchesWithWinrate = pickHelpers.getMatchesWithWinrates(matches, totalGames);
     const sortedMatches = matchesWithWinrate.sort(function (a, b) {
       return a.pickQuality < b.pickQuality ? 1 : -1;
     });
     console.log(sortedMatches);
     const best3Picks = sortedMatches.slice(0, 3);
-    const allMatchupsCount = await Database.from("matchups").count()
-    const count = allMatchupsCount[0]['count(*)']
-    response
-      .status(200)
-      .send({ matchups: best3Picks, totalRecords: count });
+    const allMatchupsCount = await Database.from("matchups").count();
+    const count = allMatchupsCount[0]["count(*)"];
+    response.status(200).send({ matchups: best3Picks, totalRecords: count });
   }
 }
 
