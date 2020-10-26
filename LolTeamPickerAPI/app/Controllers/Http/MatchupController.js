@@ -30,6 +30,7 @@ class MatchupController {
    */
   async collect({ request, response }) {
     try {
+      let gamesCollected = 0;
       const championRoles = await roleIdentification.pullData();
       const config = await Config.first();
       const serverNameToCrawl = crawlHelpers.getNextServerNameToCrawl(
@@ -59,7 +60,7 @@ class MatchupController {
       );
 
       if (playerMatchlistResponse.data.matches.length === 0) {
-        response.status(200).send({ gameCollected: 0 });
+        response.status(200).send({ gamesCollected: 0 });
         return;
       }
 
@@ -68,6 +69,7 @@ class MatchupController {
           const matchId = match.gameId;
           const hasBeenCraweled = await CrawledGame.findBy("gameId", matchId);
           if (Boolean(hasBeenCraweled)) return;
+          gamesCollected++;
 
           await server.crawledGames().create({ gameId: matchId });
           const gameResponse = await requests.fetchMatchInfo(
@@ -119,7 +121,14 @@ class MatchupController {
         }
       );
       await Promise.all(promises);
-      response.status(200).send({});
+      console.log(gamesCollected);
+      response
+        .status(200)
+        .send({
+          gamesCollected,
+          serverCrawled: serverNameToCrawl,
+          playerCrawled: serverPlayerToCrawl.summoner_name,
+        });
     } catch (e) {
       console.log(e);
       response.status(400).send({});
