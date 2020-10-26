@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
-import { collectMatchup } from "../../store/features/matchups/effects";
+import {
+  collectMatchup,
+  fetchTotalGames,
+} from "../../store/features/matchups/effects";
 import { AppState } from "../../store/types";
 import { LoadingState } from "../../utils/enums";
+import { CollectingStatistics } from "../organisms/CollectingStatistics";
 
 const MessageBox = styled.div`
   height: 90%;
@@ -15,18 +19,21 @@ const MessageBox = styled.div`
 
 const Container = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  height: 50%;
+  width: 80%;
+  padding: 0 10%;
+  height: 70%;
 `;
 
 const ContentContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 80%;
+  width: 100%;
   height: 100%;
+  max-height: 70%;
   flex-wrap: wrap;
 `;
 
@@ -37,6 +44,10 @@ const Message = styled.span`
 
 export const LandingPage = () => {
   const messages = useSelector((state: AppState) => state.messages.messages);
+  const lastPlayerCrawled = useSelector((state: AppState) => state.matchups.lastPlayerCrawled);
+  const totalGamesCollected = useSelector(
+    (state: AppState) => state.matchups.totalMatchupsCollected
+  );
   const matchupsCollected = useSelector(
     (state: AppState) => state.matchups.matchupsCollected
   );
@@ -57,8 +68,19 @@ export const LandingPage = () => {
       dispatch(collectMatchup());
     }
   }, [collecting, collectingLoadingState, dispatch, matchupsCollected]);
+
+  useEffect(() => {
+    if (totalGamesCollected === -1) {
+      dispatch(fetchTotalGames());
+    }
+  }, [dispatch, totalGamesCollected]);
   return (
     <Container>
+      <CollectingStatistics
+        collectedThisSession={matchupsCollected}
+        lastPlayerCrawled={lastPlayerCrawled || "-"}
+        totalCollected={totalGamesCollected > 0 ? totalGamesCollected : 'Loading...'}
+      />
       <ContentContainer>
         <MessageBox>
           {messages.map((message) => (

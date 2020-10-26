@@ -1,21 +1,40 @@
-import Axios from 'axios'
-import { apiUrls } from '../../../api.config'
-import { AppState } from '../../types'
-import { addMessage } from '../messages/messagesSlice'
-import { collect, collectFailed, collectSuccess } from './matchupSlice'
+import Axios from "axios";
+import { apiUrls } from "../../../api.config";
+import { addMessage } from "../messages/messagesSlice";
+import {
+  collect,
+  collectFailed,
+  collectSuccess,
+  fetchTotalGamesSuccess,
+} from "./matchupSlice";
 
-export const collectMatchup = () => async (dispatch: any, getState: () => AppState) => {
-    const collectedMatchupsCount = getState().matchups.matchupsCollected
-    dispatch(collect())
-    dispatch(addMessage(`Collecting matchup #${collectedMatchupsCount + 1} ...`))
-    try {
-        const response = await Axios.request({url: apiUrls.collectMatchup, method: 'GET'})
-        dispatch(collectSuccess())
-        dispatch(addMessage(`Matchup #${collectedMatchupsCount + 1} collected!`))
-    }
-    catch(e)
-    {
-        dispatch(collectFailed())
-        dispatch(addMessage("Failed!"))
-    }
-}
+export const collectMatchup = () => async (dispatch: any) => {
+  dispatch(collect());
+  dispatch(addMessage(`Collecting matchup...`));
+  try {
+    const response = await Axios.request({
+      url: apiUrls.collectMatchup,
+      method: "GET",
+    });
+    dispatch(
+      collectSuccess({
+        gamesCollected: response.data.gamesCollected,
+        lastPlayerCrawled: response.data.playerCrawled,
+      })
+    );
+    dispatch(addMessage(`Matchup collected!`));
+  } catch (e) {
+    dispatch(collectFailed());
+    dispatch(addMessage("Failed!"));
+  }
+};
+
+export const fetchTotalGames = () => async (dispatch: any) => {
+  try {
+    const response = await Axios.request({
+      url: apiUrls.fetchTotalGames,
+      method: "GET",
+    });
+    dispatch(fetchTotalGamesSuccess(response.data.totalRecords));
+  } catch (e) {}
+};
