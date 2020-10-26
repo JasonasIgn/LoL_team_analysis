@@ -22,7 +22,7 @@ Route.get("matchup/collect", "MatchupController.collect");
 
 Route.post("matchup/whatDoIPlay", "MatchupController.whatDoIPlay");
 
-Route.post("matchup/totalGames", "MatchupController.getTotalGames");
+Route.get("matchup/totalGames", "MatchupController.getTotalGames");
 
 Route.get("livegame/:name", "LiveGameController.getLiveData");
 

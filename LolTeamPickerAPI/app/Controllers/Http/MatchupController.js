@@ -121,13 +121,10 @@ class MatchupController {
         }
       );
       await Promise.all(promises);
-      const allMatchupsCount = await Database.from("matchups").count();
-      const count = allMatchupsCount[0]["count(*)"];
       response.status(200).send({
         gamesCollected,
         serverCrawled: serverNameToCrawl,
         playerCrawled: serverPlayerToCrawl.summoner_name,
-        totalCollected: count,
       });
     } catch (e) {
       console.log(e);
