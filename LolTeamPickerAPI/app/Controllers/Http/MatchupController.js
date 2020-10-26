@@ -1,8 +1,5 @@
 "use strict";
 
-const { match } = require("@adonisjs/framework/src/Route/Manager");
-
-const Axios = use("axios");
 const Database = use("Database");
 const Server = use("App/Models/Server");
 const Player = use("App/Models/Player");
@@ -12,7 +9,7 @@ const pickHelpers = use("App/Helpers/pickHelpers");
 const roleIdentification = use("App/Helpers/roleIdentification");
 const storing = use("App/Helpers/storingHelpers");
 const utils = use("App/Helpers/utils");
-const Matchup = use("App/Models/Matchup");
+const requests = use("App/Helpers/requests");
 const Config = use("App/Models/Config");
 
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
@@ -51,30 +48,14 @@ class MatchupController {
       }
       serverPlayerToCrawl.crawled = true;
       await serverPlayerToCrawl.save();
-      const playerResponse = await Axios.get(
-        `https://${
-          server.name
-        }.api.riotgames.com/lol/summoner/v4/summoners/by-name/${encodeURI(
-          serverPlayerToCrawl.summoner_name
-        )}`,
-        {
-          headers: {
-            "X-Riot-Token": process.env.LOL_API_KEY,
-          },
-        }
+      const playerResponse = await requests.fetchPlayerInfo(
+        server.name,
+        serverPlayerToCrawl.summoner_name
       );
       const playerAccountId = playerResponse.data.accountId;
-      const playerMatchlistResponse = await Axios.get(
-        `https://${
-          server.name
-        }.api.riotgames.com/lol/match/v4/matchlists/by-account/${playerAccountId}?queue=420&beginTime=${new Date().setDate(
-          new Date().getDate() - 7
-        )}&endIndex=15&beginIndex=0`,
-        {
-          headers: {
-            "X-Riot-Token": process.env.LOL_API_KEY,
-          },
-        }
+      const playerMatchlistResponse = await requests.fetchPlayerMatchlist(
+        server.name,
+        playerAccountId
       );
 
       if (playerMatchlistResponse.data.matches.length === 0) {
@@ -89,24 +70,13 @@ class MatchupController {
           if (Boolean(hasBeenCraweled)) return;
 
           await server.crawledGames().create({ gameId: matchId });
-          const gameResponse = await Axios.get(
-            `https://${server.name}.api.riotgames.com//lol/match/v4/matches/${matchId}`,
-            {
-              headers: {
-                "X-Riot-Token": process.env.LOL_API_KEY,
-              },
-            }
+          const gameResponse = await requests.fetchMatchInfo(
+            server.name,
+            matchId
           );
-          let matchupData = {};
           const { data } = gameResponse;
           let team1Champions = [];
           let team2Champions = [];
-          const team1Id = data.teams[0].teamId;
-          const team1Win = data.teams[0].win === "Win";
-          const team2Id = data.teams[1].teamId;
-          const team2Win = data.teams[1].win === "Win";
-          matchupData.team1_wins = team1Win ? 1 : 0;
-          matchupData.team2_wins = team2Win ? 1 : 0;
 
           const promises = data.participantIdentities.map(async (identity) => {
             const playerSummonerName = identity.player.summonerName;
@@ -121,6 +91,7 @@ class MatchupController {
           });
           await Promise.all(promises);
 
+          const team1Id = data.teams[0].teamId;
           data.participants.forEach((participant) => {
             if (participant.teamId === team1Id) {
               team1Champions.push(participant.championId);
@@ -137,16 +108,12 @@ class MatchupController {
             team2Champions
           );
 
-          matchupData.team1_top = team1Roles.TOP;
-          matchupData.team1_jungle = team1Roles.JUNGLE;
-          matchupData.team1_mid = team1Roles.MIDDLE;
-          matchupData.team1_adc = team1Roles.BOTTOM;
-          matchupData.team1_support = team1Roles.UTILITY;
-          matchupData.team2_top = team2Roles.TOP;
-          matchupData.team2_jungle = team2Roles.JUNGLE;
-          matchupData.team2_mid = team2Roles.MIDDLE;
-          matchupData.team2_adc = team2Roles.BOTTOM;
-          matchupData.team2_support = team2Roles.UTILITY;
+          const team1Win = data.teams[0].win === "Win";
+          const matchupData = utils.assignMatchupData(
+            team1Roles,
+            team2Roles,
+            team1Win
+          );
 
           await storing.storeMatchup(matchupData);
         }
@@ -154,7 +121,7 @@ class MatchupController {
       await Promise.all(promises);
       response.status(200).send({});
     } catch (e) {
-      // console.log(e);
+      console.log(e);
       response.status(400).send({});
     }
   }
@@ -178,7 +145,12 @@ class MatchupController {
     const matches = {};
     let totalGames = 0;
     totalGames += pickHelpers.proccessMatches(data, matches, matchesTeam1);
-    totalGames += pickHelpers.proccessMatches(data, matches, matchesTeam2, true);
+    totalGames += pickHelpers.proccessMatches(
+      data,
+      matches,
+      matchesTeam2,
+      true
+    );
 
     if (Object.keys(matches).length < 3) {
       console.log("SYNERGY INCLUDED");
@@ -190,16 +162,28 @@ class MatchupController {
         Number(data.utility1) === 0
       ) {
         const synergyMatches = await pickHelpers.fetchSynergyTeamPicks(data);
-        totalGames += pickHelpers.proccessMatches(data, matches, synergyMatches);
+        totalGames += pickHelpers.proccessMatches(
+          data,
+          matches,
+          synergyMatches
+        );
       } else {
         const synergyMatches = await pickHelpers.fetchSynergyTeamPicks(
           data,
           true
         );
-        totalGames += pickHelpers.proccessMatches(data, matches, synergyMatches, true);
+        totalGames += pickHelpers.proccessMatches(
+          data,
+          matches,
+          synergyMatches,
+          true
+        );
       }
     }
-    const matchesWithWinrate = pickHelpers.getMatchesWithWinrates(matches, totalGames);
+    const matchesWithWinrate = pickHelpers.getMatchesWithWinrates(
+      matches,
+      totalGames
+    );
     const sortedMatches = matchesWithWinrate.sort(function (a, b) {
       return a.pickQuality < b.pickQuality ? 1 : -1;
     });

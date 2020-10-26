@@ -104,6 +104,23 @@ module.exports = {
     if (count <= 50) {
       return 1.3;
     }
-    return 1.5
+    return 1.5;
+  },
+
+  assignMatchupData(team1Roles, team2Roles, team1Win) {
+    return {
+      team1_top: team1Roles.TOP,
+      team1_jungle: team1Roles.JUNGLE,
+      team1_mid: team1Roles.MIDDLE,
+      team1_adc: team1Roles.BOTTOM,
+      team1_support: team1Roles.UTILITY,
+      team2_top: team2Roles.TOP,
+      team2_jungle: team2Roles.JUNGLE,
+      team2_mid: team2Roles.MIDDLE,
+      team2_adc: team2Roles.BOTTOM,
+      team2_support: team2Roles.UTILITY,
+      team1_wins: team1Win ? 1 : 0,
+      team2_wins: team1Win ? 0 : 1,
+    };
   },
 };
