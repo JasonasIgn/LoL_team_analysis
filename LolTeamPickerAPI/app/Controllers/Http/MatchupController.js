@@ -121,14 +121,14 @@ class MatchupController {
         }
       );
       await Promise.all(promises);
-      console.log(gamesCollected);
-      response
-        .status(200)
-        .send({
-          gamesCollected,
-          serverCrawled: serverNameToCrawl,
-          playerCrawled: serverPlayerToCrawl.summoner_name,
-        });
+      const allMatchupsCount = await Database.from("matchups").count();
+      const count = allMatchupsCount[0]["count(*)"];
+      response.status(200).send({
+        gamesCollected,
+        serverCrawled: serverNameToCrawl,
+        playerCrawled: serverPlayerToCrawl.summoner_name,
+        totalCollected: count,
+      });
     } catch (e) {
       console.log(e);
       response.status(400).send({});
@@ -201,6 +201,12 @@ class MatchupController {
     const allMatchupsCount = await Database.from("matchups").count();
     const count = allMatchupsCount[0]["count(*)"];
     response.status(200).send({ matchups: best3Picks, totalRecords: count });
+  }
+
+  async getTotalGames({ request, response }) {
+    const allMatchupsCount = await Database.from("matchups").count();
+    const count = allMatchupsCount[0]["count(*)"];
+    response.status(200).send({ totalRecords: count });
   }
 }
 
