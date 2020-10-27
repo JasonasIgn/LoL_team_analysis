@@ -1,14 +1,17 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "./App.css";
-import { LandingPage } from "./components/pages/Landing";
+import { CollectorPage } from "./components/pages/Collector";
+import { PageWrapper } from "./components/pages/PageWrapper";
 
 function App() {
   return (
     <Router>
-      <Switch>
-        <Route path="/" component={LandingPage}/>
-      </Switch>
+      <PageWrapper>
+        <Switch>
+          <Route path="/collector" component={CollectorPage} />
+        </Switch>
+      </PageWrapper>
     </Router>
   );
 }
