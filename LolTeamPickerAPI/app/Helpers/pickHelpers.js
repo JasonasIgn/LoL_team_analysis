@@ -148,6 +148,70 @@ async function fetchSynergyTeamPicks(data, team2 = false) {
     .fetch();
 }
 
+async function fetchWinrateMatchups(
+  roles = [0, 0, 0, 0, 0],
+  matchupData,
+  reverse = false
+) {
+  const top = Boolean(roles[0]);
+  const jgl = Boolean(roles[1]);
+  const mid = Boolean(roles[2]);
+  const adc = Boolean(roles[3]);
+  const sup = Boolean(roles[4]);
+  return await Matchup.query()
+    .where(
+      `team${reverse ? "2" : "1"}_top`,
+      top ? "=" : ">",
+      top ? matchupData.top1 : -1
+    )
+    .where(
+      `team${reverse ? "2" : "1"}_jungle`,
+      jgl ? "=" : ">",
+      jgl ? matchupData.jgl1 : -1
+    )
+    .where(
+      `team${reverse ? "2" : "1"}_mid`,
+      mid ? "=" : ">",
+      mid ? matchupData.mid1 : -1
+    )
+    .where(
+      `team${reverse ? "2" : "1"}_adc`,
+      adc ? "=" : ">",
+      adc ? matchupData.adc1 : -1
+    )
+    .where(
+      `team${reverse ? "2" : "1"}_support`,
+      sup ? "=" : ">",
+      sup ? matchupData.sup1 : -1
+    )
+    .where(
+      `team${reverse ? "1" : "2"}_top`,
+      top ? "=" : ">",
+      top ? matchupData.top2 : -1
+    )
+    .where(
+      `team${reverse ? "1" : "2"}_jungle`,
+      jgl ? "=" : ">",
+      jgl ? matchupData.jgl2 : -1
+    )
+    .where(
+      `team${reverse ? "1" : "2"}_mid`,
+      mid ? "=" : ">",
+      mid ? matchupData.mid2 : -1
+    )
+    .where(
+      `team${reverse ? "1" : "2"}_adc`,
+      adc ? "=" : ">",
+      adc ? matchupData.adc2 : -1
+    )
+    .where(
+      `team${reverse ? "1" : "2"}_support`,
+      sup ? "=" : ">",
+      sup ? matchupData.sup2 : -1
+    )
+    .fetch();
+}
+
 function proccessMatches(data, mutableResults, foundMatches, reverseTeams) {
   let gamesObject = { total: 0 };
   foundMatches.rows.forEach((match) => {
@@ -194,4 +258,5 @@ module.exports = {
   fetchSynergyTeamPicks,
   proccessMatches,
   getMatchesWithWinrates,
+  fetchWinrateMatchups,
 };

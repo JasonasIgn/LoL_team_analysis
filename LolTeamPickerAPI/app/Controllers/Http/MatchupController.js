@@ -1,5 +1,7 @@
 "use strict";
 
+const { match } = require("@adonisjs/framework/src/Route/Manager");
+
 const Database = use("Database");
 const Server = use("App/Models/Server");
 const Player = use("App/Models/Player");
@@ -204,6 +206,147 @@ class MatchupController {
     const allMatchupsCount = await Database.from("matchups").count();
     const count = allMatchupsCount[0]["count(*)"];
     response.status(200).send({ totalRecords: count });
+  }
+
+  async calculateWinrate({ request, response }) {
+    const data = request.only([
+      "top1",
+      "jgl1",
+      "mid1",
+      "adc1",
+      "sup1",
+      "top2",
+      "jgl2",
+      "mid2",
+      "adc2",
+      "sup2",
+    ]);
+    let team1Wins = 0;
+    let team2Wins = 0;
+
+    for (let i = 0; i < 5; i++) {
+      const roles = [0, 0, 0, 0, 0];
+      roles[i] = 1;
+      const matchups = await pickHelpers.fetchWinrateMatchups(roles, data);
+      matchups.rows.forEach((match) => {
+        team1Wins += match.team1_wins;
+        team2Wins += match.team2_wins;
+      });
+      const matchupsReverse = await pickHelpers.fetchWinrateMatchups(
+        roles,
+        data,
+        true
+      );
+      matchupsReverse.rows.forEach((match) => {
+        team1Wins += match.team2_wins;
+        team2Wins += match.team1_wins;
+      });
+    }
+
+    for (let i = 0; i < 4; i++) {
+      for (let j = i + 1; j < 5; j++) {
+        const roles = [0, 0, 0, 0, 0];
+        roles[i] = 1;
+        roles[j] = 1;
+        const matchups = await pickHelpers.fetchWinrateMatchups(roles, data);
+        matchups.rows.forEach((match) => {
+          team1Wins += match.team1_wins * 2;
+          team2Wins += match.team2_wins * 2;
+        });
+        const matchupsReverse = await pickHelpers.fetchWinrateMatchups(
+          roles,
+          data,
+          true
+        );
+        matchupsReverse.rows.forEach((match) => {
+          team1Wins += match.team2_wins * 2;
+          team2Wins += match.team1_wins * 2;
+        });
+      }
+    }
+
+    for (let i = 0; i < 3; i++) {
+      for (let j = i + 1; j < 4; j++) {
+        for (let k = j + 1; k < 5; k++) {
+          const roles = [0, 0, 0, 0, 0];
+          roles[i] = 1;
+          roles[j] = 1;
+          roles[k] = 1;
+          const matchups = await pickHelpers.fetchWinrateMatchups(roles, data);
+          matchups.rows.forEach((match) => {
+            team1Wins += match.team1_wins * 3;
+            team2Wins += match.team2_wins * 3;
+          });
+          const matchupsReverse = await pickHelpers.fetchWinrateMatchups(
+            roles,
+            data,
+            true
+          );
+          matchupsReverse.rows.forEach((match) => {
+            team1Wins += match.team2_wins * 3;
+            team2Wins += match.team1_wins * 3;
+          });
+        }
+      }
+    }
+
+    for (let i = 0; i < 2; i++) {
+      for (let j = i + 1; j < 3; j++) {
+        for (let k = j + 1; k < 4; k++) {
+          for (let p = k + 1; p < 5; p++) {
+            const roles = [0, 0, 0, 0, 0];
+            roles[i] = 1;
+            roles[j] = 1;
+            roles[k] = 1;
+            roles[p] = 1;
+            const matchups = await pickHelpers.fetchWinrateMatchups(
+              roles,
+              data
+            );
+            matchups.rows.forEach((match) => {
+              team1Wins += match.team1_wins * 4;
+              team2Wins += match.team2_wins * 4;
+            });
+            const matchupsReverse = await pickHelpers.fetchWinrateMatchups(
+              roles,
+              data,
+              true
+            );
+            matchupsReverse.rows.forEach((match) => {
+              team1Wins += match.team2_wins * 4;
+              team2Wins += match.team1_wins * 4;
+            });
+          }
+        }
+      }
+    }
+
+    const matchups = await pickHelpers.fetchWinrateMatchups(
+      [1, 1, 1, 1, 1],
+      data
+    );
+    matchups.rows.forEach((match) => {
+      team1Wins += match.team1_wins * 5;
+      team2Wins += match.team2_wins * 5;
+    });
+    const matchupsReverse = await pickHelpers.fetchWinrateMatchups(
+      [1, 1, 1, 1, 1],
+      data,
+      true
+    );
+    matchupsReverse.rows.forEach((match) => {
+      team1Wins += match.team2_wins * 5;
+      team2Wins += match.team1_wins * 5;
+    });
+    const totalGames = team1Wins + team2Wins;
+    const team1Winrate = `${Number((team1Wins / totalGames) * 100).toFixed(
+      2
+    )}%`;
+    const team2Winrate = `${Number((team2Wins / totalGames) * 100).toFixed(
+      2
+    )}%`;
+    console.log(team1Winrate, team2Winrate);
+    response.status(200).send({ team1Winrate, team2Winrate });
   }
 }
 
