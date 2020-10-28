@@ -70,7 +70,7 @@ export const ChampionInput: React.FC<ChampionInputProps> = ({
                 onChange(Number(value.id))
               }}
               renderInput={(params) => (
-                <TextField {...params} label="Champion" variant="outlined" />
+                <TextField {...params} label="Champion" variant="outlined" autoFocus/>
               )}
             />
           </Popover>
