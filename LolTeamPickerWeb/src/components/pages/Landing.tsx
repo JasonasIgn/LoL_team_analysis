@@ -1,23 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo } from "react";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  collectMatchup,
-  fetchTotalGames,
-} from "../../store/features/matchups/effects";
 import { AppState } from "../../store/types";
+import { TeamSelect } from "../organisms/TeamSelect";
 import { LoadingState } from "../../utils/enums";
-import { CollectingStatistics } from "../organisms/CollectingStatistics";
+import { fetchChampionsEffect } from "../../store/features/champions/effects";
+import { getMappedDataForChampionSelect } from "../../utils/mappers";
+import { useForm } from "react-hook-form";
 
-const MessageBox = styled.div`
-  height: 90%;
-  width: 100%;
-  background-color: black;
-  padding: 10px;
-  overflow: auto;
-`;
-
-const Container = styled.div`
+const Form = styled.form`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -25,72 +16,60 @@ const Container = styled.div`
   width: 80%;
   padding: 0 10%;
   height: 70%;
-`;
-
-const ContentContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-  max-height: 70%;
   flex-wrap: wrap;
 `;
 
-const Message = styled.span`
+const TeamsContainer = styled.div`
   display: flex;
-  color: white;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: space-between;
+  width: 100%;
+  height: 90%;
+  flex-wrap: wrap;
 `;
 
 export const LandingPage = () => {
-  const messages = useSelector((state: AppState) => state.messages.messages);
-  const lastPlayerCrawled = useSelector((state: AppState) => state.matchups.lastPlayerCrawled);
-  const totalGamesCollected = useSelector(
-    (state: AppState) => state.matchups.totalMatchupsCollected
-  );
-  const matchupsCollected = useSelector(
-    (state: AppState) => state.matchups.matchupsCollected
-  );
-  const collectingLoadingState = useSelector(
-    (state: AppState) => state.matchups.collectingLoadingState
-  );
   const dispatch = useDispatch();
-  const [collecting, setCollecting] = useState(false);
+  const championsLoadingState = useSelector(
+    (state: AppState) => state.champions.championsLoadingState
+  );
+  const championsData = useSelector(
+    (state: AppState) => state.champions.champions
+  );
   useEffect(() => {
-    if (
-      collecting &&
-      [
-        LoadingState.PRISTINE,
-        LoadingState.FETCH_FAILED,
-        LoadingState.FETCH_SUCCESS,
-      ].includes(collectingLoadingState)
-    ) {
-      dispatch(collectMatchup());
+    if (championsLoadingState === LoadingState.PRISTINE) {
+      dispatch(fetchChampionsEffect());
     }
-  }, [collecting, collectingLoadingState, dispatch, matchupsCollected]);
+  }, [championsLoadingState, dispatch]);
 
-  useEffect(() => {
-    if (totalGamesCollected === -1) {
-      dispatch(fetchTotalGames());
-    }
-  }, [dispatch, totalGamesCollected]);
+  const champions = useMemo(
+    () => getMappedDataForChampionSelect(championsData),
+    [championsData]
+  );
+
+  const { control, handleSubmit } = useForm();
+  const onSubmit = handleSubmit((data: any) => {
+    console.log(data);
+  });
+
   return (
-    <Container>
-      <CollectingStatistics
-        collectedThisSession={matchupsCollected}
-        lastPlayerCrawled={lastPlayerCrawled || "-"}
-        totalCollected={totalGamesCollected > 0 ? totalGamesCollected : 'Loading...'}
-      />
-      <ContentContainer>
-        <MessageBox>
-          {messages.map((message) => (
-            <Message>{`> ${message}`}</Message>
-          ))}
-        </MessageBox>
-        <button onClick={() => setCollecting(!collecting)}>
-          {!collecting ? "Start collecting" : "Stop Collecting"}
-        </button>
-      </ContentContainer>
-    </Container>
+    <Form onSubmit={onSubmit}>
+      <TeamsContainer>
+        <TeamSelect
+          champions={champions}
+          control={control}
+          teamPrefix="team1"
+        />
+        <TeamSelect
+          champions={champions}
+          control={control}
+          teamPrefix="team2"
+        />
+        
+      </TeamsContainer>
+      <button type="submit"> Calculate</button>
+    </Form>
   );
 };
