@@ -1,12 +1,16 @@
-import React, { useEffect, useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { AppState } from "../../store/types";
 import { TeamSelect } from "../organisms/TeamSelect";
 import { LoadingState } from "../../utils/enums";
-import { fetchChampionsEffect } from "../../store/features/champions/effects";
+import {
+  fetchChampionsEffect,
+  fetchTeamsWinrate,
+} from "../../store/features/champions/effects";
 import { getMappedDataForChampionSelect } from "../../utils/mappers";
 import { useForm } from "react-hook-form";
+import { WinratesProgressBar } from "../molecules/WinratesProgressBar";
 
 const Form = styled.form`
   display: flex;
@@ -30,8 +34,17 @@ const TeamsContainer = styled.div`
   flex-wrap: wrap;
 `;
 
+const WinrateContainer = styled.div`
+  width: 50%;
+`;
+
 export const LandingPage = () => {
   const dispatch = useDispatch();
+  const [submitting, setSubmitting] = useState(false);
+  const [winrates, setWinrates] = useState({
+    team1Winrate: 50,
+    team2Winrate: 50,
+  });
   const championsLoadingState = useSelector(
     (state: AppState) => state.champions.championsLoadingState
   );
@@ -50,26 +63,33 @@ export const LandingPage = () => {
   );
 
   const { control, handleSubmit } = useForm();
-  const onSubmit = handleSubmit((data: any) => {
+  const onSubmit = handleSubmit(async (data: any) => {
+    setSubmitting(true);
+    try {
+      const winrates: any = await dispatch(fetchTeamsWinrate(data));
+      setWinrates(winrates);
+    } catch (e) {
+    } finally {
+      setSubmitting(false);
+    }
     console.log(data);
   });
 
   return (
     <Form onSubmit={onSubmit}>
       <TeamsContainer>
-        <TeamSelect
-          champions={champions}
-          control={control}
-          teamPrefix="team1"
-        />
-        <TeamSelect
-          champions={champions}
-          control={control}
-          teamPrefix="team2"
-        />
-        
+        <TeamSelect champions={champions} control={control} teamNumber="1" />
+        <WinrateContainer>
+          <WinratesProgressBar
+            team1Winrate={winrates.team1Winrate}
+            team2Winrate={winrates.team2Winrate}
+          />
+        </WinrateContainer>
+        <TeamSelect champions={champions} control={control} teamNumber="2" />
       </TeamsContainer>
-      <button type="submit"> Calculate</button>
+      <button type="submit" disabled={submitting}>
+        Calculate
+      </button>
     </Form>
   );
 };

@@ -13,10 +13,21 @@ export const fetchChampionsEffect = () => async (dispatch: any) => {
       url: apiUrls.fetchChampions,
       method: "GET",
     });
-    dispatch(
-      fetchChampionsSuccess(response.data.data)
-    );
+    dispatch(fetchChampionsSuccess(response.data.data));
   } catch (e) {
     dispatch(fetchChampionsFailure());
+  }
+};
+
+export const fetchTeamsWinrate = (data: any) => async (dispatch: any) => {
+  try {
+    const response = await Axios.request({
+      url: apiUrls.winrate,
+      method: "POST",
+      data: data
+    });
+    console.log(response)
+  } catch (e) {
+    throw e
   }
 };

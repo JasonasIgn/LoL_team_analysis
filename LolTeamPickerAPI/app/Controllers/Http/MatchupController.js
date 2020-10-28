@@ -339,12 +339,8 @@ class MatchupController {
       team2Wins += match.team1_wins * 5;
     });
     const totalGames = team1Wins + team2Wins;
-    const team1Winrate = `${Number((team1Wins / totalGames) * 100).toFixed(
-      2
-    )}%`;
-    const team2Winrate = `${Number((team2Wins / totalGames) * 100).toFixed(
-      2
-    )}%`;
+    const team1Winrate = Number((team1Wins / totalGames) * 100).toFixed(2);
+    const team2Winrate = Number((team2Wins / totalGames) * 100).toFixed(2);
     console.log(team1Winrate, team2Winrate);
     response.status(200).send({ team1Winrate, team2Winrate });
   }

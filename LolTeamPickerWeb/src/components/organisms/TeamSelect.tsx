@@ -5,7 +5,7 @@ import { ChampionInput } from "../molecules/ChampionInput";
 interface TeamSelectProps {
   champions: any[];
   control: any;
-  teamPrefix: string;
+  teamNumber: string;
 }
 
 const Container = styled.div`
@@ -18,34 +18,34 @@ const Container = styled.div`
 export const TeamSelect: React.FC<TeamSelectProps> = ({
   champions,
   control,
-  teamPrefix,
+  teamNumber,
 }) => {
   return (
     <Container>
       <ChampionInput
         options={champions}
         control={control}
-        name={`${teamPrefix}_top`}
+        name={`top${teamNumber}`}
       />
       <ChampionInput
         options={champions}
         control={control}
-        name={`${teamPrefix}_jgl`}
+        name={`jgl${teamNumber}`}
       />
       <ChampionInput
         options={champions}
         control={control}
-        name={`${teamPrefix}_mid`}
+        name={`mid${teamNumber}`}
       />
       <ChampionInput
         options={champions}
         control={control}
-        name={`${teamPrefix}_adc`}
+        name={`adc${teamNumber}`}
       />
       <ChampionInput
         options={champions}
         control={control}
-        name={`${teamPrefix}_sup`}
+        name={`sup${teamNumber}`}
       />
     </Container>
   );
