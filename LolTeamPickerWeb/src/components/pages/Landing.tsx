@@ -67,12 +67,15 @@ export const LandingPage = () => {
     setSubmitting(true);
     try {
       const winrates: any = await dispatch(fetchTeamsWinrate(data));
-      setWinrates(winrates);
+      console.log(winrates);
+      setWinrates({
+        team1Winrate: Number(winrates.team1Winrate),
+        team2Winrate: Number(winrates.team2Winrate),
+      });
     } catch (e) {
     } finally {
       setSubmitting(false);
     }
-    console.log(data);
   });
 
   return (

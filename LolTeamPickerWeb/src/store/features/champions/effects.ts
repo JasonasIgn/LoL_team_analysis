@@ -26,7 +26,7 @@ export const fetchTeamsWinrate = (data: any) => async (dispatch: any) => {
       method: "POST",
       data: data
     });
-    console.log(response)
+    return response.data
   } catch (e) {
     throw e
   }
