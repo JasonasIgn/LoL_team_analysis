@@ -250,8 +250,8 @@ class MatchupController {
         roles[j] = 1;
         const matchups = await pickHelpers.fetchWinrateMatchups(roles, data);
         matchups.rows.forEach((match) => {
-          team1Wins += match.team1_wins * 2;
-          team2Wins += match.team2_wins * 2;
+          team1Wins += match.team1_wins * 10;
+          team2Wins += match.team2_wins * 10;
         });
         const matchupsReverse = await pickHelpers.fetchWinrateMatchups(
           roles,
@@ -259,8 +259,8 @@ class MatchupController {
           true
         );
         matchupsReverse.rows.forEach((match) => {
-          team1Wins += match.team2_wins * 2;
-          team2Wins += match.team1_wins * 2;
+          team1Wins += match.team2_wins * 10;
+          team2Wins += match.team1_wins * 10;
         });
       }
     }
@@ -274,8 +274,8 @@ class MatchupController {
           roles[k] = 1;
           const matchups = await pickHelpers.fetchWinrateMatchups(roles, data);
           matchups.rows.forEach((match) => {
-            team1Wins += match.team1_wins * 3;
-            team2Wins += match.team2_wins * 3;
+            team1Wins += match.team1_wins * 20;
+            team2Wins += match.team2_wins * 20;
           });
           const matchupsReverse = await pickHelpers.fetchWinrateMatchups(
             roles,
@@ -283,8 +283,8 @@ class MatchupController {
             true
           );
           matchupsReverse.rows.forEach((match) => {
-            team1Wins += match.team2_wins * 3;
-            team2Wins += match.team1_wins * 3;
+            team1Wins += match.team2_wins * 20;
+            team2Wins += match.team1_wins * 20;
           });
         }
       }
@@ -304,8 +304,8 @@ class MatchupController {
               data
             );
             matchups.rows.forEach((match) => {
-              team1Wins += match.team1_wins * 4;
-              team2Wins += match.team2_wins * 4;
+              team1Wins += match.team1_wins * 30;
+              team2Wins += match.team2_wins * 30;
             });
             const matchupsReverse = await pickHelpers.fetchWinrateMatchups(
               roles,
@@ -313,8 +313,8 @@ class MatchupController {
               true
             );
             matchupsReverse.rows.forEach((match) => {
-              team1Wins += match.team2_wins * 4;
-              team2Wins += match.team1_wins * 4;
+              team1Wins += match.team2_wins * 30;
+              team2Wins += match.team1_wins * 30;
             });
           }
         }
@@ -326,8 +326,8 @@ class MatchupController {
       data
     );
     matchups.rows.forEach((match) => {
-      team1Wins += match.team1_wins * 5;
-      team2Wins += match.team2_wins * 5;
+      team1Wins += match.team1_wins * 50;
+      team2Wins += match.team2_wins * 50;
     });
     const matchupsReverse = await pickHelpers.fetchWinrateMatchups(
       [1, 1, 1, 1, 1],
@@ -335,8 +335,8 @@ class MatchupController {
       true
     );
     matchupsReverse.rows.forEach((match) => {
-      team1Wins += match.team2_wins * 5;
-      team2Wins += match.team1_wins * 5;
+      team1Wins += match.team2_wins * 50;
+      team2Wins += match.team1_wins * 50;
     });
     const totalGames = team1Wins + team2Wins;
     const team1Winrate = Number((team1Wins / totalGames) * 100).toFixed(2);
