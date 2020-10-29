@@ -10,8 +10,8 @@ function App() {
     <Router>
       <PageWrapper>
         <Switch>
-          <Route path="/" component={LandingPage} />
-          <Route path="/collector" component={CollectorPage} />
+          <Route exact path="/" component={LandingPage} />
+          <Route exact path="/collector" component={CollectorPage} />
         </Switch>
       </PageWrapper>
     </Router>
