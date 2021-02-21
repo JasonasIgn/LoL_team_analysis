@@ -1,0 +1,44 @@
+version: "3.2"
+
+services:
+  adonis-api:
+    image: adonis-api
+    container_name: adonis-api
+    restart: unless-stopped
+
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./node_modules
+    ports:
+      - "8080:8080"
+    networks:
+      - app-network
+    depends_on:
+      - adonis-mysql
+    environment:
+      - LOL_API_KEY=${LOL_API_KEY}
+      - APP_KEY=${APP_KEY}
+      - DB_HOST=adonis-mysql 
+      - PORT=8080
+      - HOST=0.0.0.0
+  
+  adonis-mysql:
+    image: mysql:5.7
+    restart: always
+    container_name: adonis-mysql
+    ports:
+      - 3306:3306
+    networks:
+      - app-network
+    volumes:
+      - /data/lolpickerdb:/var/lib/mysql
+    environment:
+      - MYSQL_USER=root
+      - MYSQL_DATABASE=lolpickerdb
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSOWRD}
+    command: ['mysqld', '--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci']
+networks:
+  app-network:
+    driver: bridge
