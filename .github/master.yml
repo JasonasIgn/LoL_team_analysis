@@ -19,7 +19,7 @@ jobs:
         env:
           LOL_API_KEY: ${{secrets.LOL_API_KEY}}
           APP_KEY: ${{secrets.APP_KEY}}
-          MYSQL_ROOT_PASSOWRD: ${{secrets.MYSQL_ROOT_PASSOWRD}}
+          MYSQL_ROOT_PASSOWRD: ${{secrets.MYSQL_ROOT_PASSWORD}}
         run: docker-compose up --build -d
 
       - name: Remove old unused images
