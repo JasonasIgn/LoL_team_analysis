@@ -12,3 +12,5 @@ database/*.sqlite
 
 # nyc generated
 .nyc_output
+
+.editorconfig
