@@ -1,0 +1,31 @@
+name: CI
+
+on:
+  push:
+    branches: [ master ]
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: self-hosted
+    environment: production
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Build and run latest code
+        id: docker_build
+        env:
+          LOL_API_KEY: ${secrets.LOL_API_KEY}
+          APP_KEY: ${{secrets.APP_KEY}}
+          MYSQL_ROOT_PASSOWRD: ${{secrets.MYSQL_ROOT_PASSOWRD}}
+        run: docker-compose up --build -d
+
+      - name: Remove old unused images
+        if: steps.docker_build.outcome == 'success'
+        run: docker image prune -f
+
+      - name: Remove old unused containers
+        if: steps.docker_build.outcome == 'success'
+        run: docker container prune -f
