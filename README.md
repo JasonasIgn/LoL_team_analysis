@@ -1,1 +1,1 @@
-# ChallengesForLifeAPI
+# LoLPickerAPI
