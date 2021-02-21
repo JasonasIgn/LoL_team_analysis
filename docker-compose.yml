@@ -12,7 +12,7 @@ services:
     volumes:
       - ./node_modules
     ports:
-      - "8080:8080"
+      - 8080:8080
     networks:
       - app-network
     depends_on:
@@ -21,6 +21,7 @@ services:
       - LOL_API_KEY=${LOL_API_KEY}
       - APP_KEY=${APP_KEY}
       - DB_HOST=adonis-mysql 
+      - MYSQL_DATABASE=lolpickerdb
       - PORT=8080
       - HOST=0.0.0.0
   
