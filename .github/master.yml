@@ -17,7 +17,7 @@ jobs:
       - name: Build and run latest code
         id: docker_build
         env:
-          LOL_API_KEY: ${secrets.LOL_API_KEY}
+          LOL_API_KEY: ${{secrets.LOL_API_KEY}}
           APP_KEY: ${{secrets.APP_KEY}}
           MYSQL_ROOT_PASSOWRD: ${{secrets.MYSQL_ROOT_PASSOWRD}}
         run: docker-compose up --build -d
