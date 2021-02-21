@@ -20,6 +20,7 @@ services:
       - APP_KEY=${APP_KEY}
       - DB_HOST=adonis-mysql 
       - MYSQL_DATABASE=lolpickerdb
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
       - PORT=8080
       - HOST=0.0.0.0
   
