@@ -1,4 +1,4 @@
-export const baseApiUrl = `http://adonis-api:8080`
+export const baseApiUrl = `http://212.24.110.117:8080`
 
 export const apiUrls = {
     collectMatchup: `${baseApiUrl}/matchup/collect`,
