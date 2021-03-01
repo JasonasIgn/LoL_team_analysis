@@ -7,7 +7,7 @@ services:
     restart: unless-stopped
 
     build:
-      context: .
+      context: ./LoLPickerAPI
       dockerfile: Dockerfile
     ports:
       - 8080:8080
