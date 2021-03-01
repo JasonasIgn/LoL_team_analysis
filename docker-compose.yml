@@ -40,7 +40,7 @@ services:
       - adonis-api
       - adonis-mysql
     environment:
-      - API_HOST=adonis-api 
+      - API_HOST=adonis-api
       - API_PORT=8080
       - PORT=3000
 

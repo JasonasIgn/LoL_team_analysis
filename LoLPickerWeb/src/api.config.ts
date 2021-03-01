@@ -1,4 +1,4 @@
-export const baseApiUrl = `http://${process.env.API_HOST}:${process.env.API_PORT}`
+export const baseApiUrl = `http://adonis-api:8080`
 
 export const apiUrls = {
     collectMatchup: `${baseApiUrl}/matchup/collect`,
