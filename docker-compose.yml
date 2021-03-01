@@ -23,7 +23,27 @@ services:
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
       - PORT=8080
       - HOST=0.0.0.0
-  
+  adonis-web:
+    image: adonis-web
+    container_name: adonis-web
+    restart: unless-stopped
+    build:
+      context: ./LoLPickerWeb
+      dockerfile: Dockerfile
+      args:
+        - PORT=3000
+    ports:
+      - 80:3000
+    networks:
+      - app-network
+    depends_on:
+      - adonis-api
+      - adonis-mysql
+    environment:
+      - API_HOST=adonis-api 
+      - API_PORT=8080
+      - PORT=3000
+
   adonis-mysql:
     image: mysql:5.7
     restart: always
