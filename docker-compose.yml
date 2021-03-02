@@ -36,6 +36,8 @@ services:
       - 80:3000
     networks:
       - app-network
+    volumes:
+      - /data/lolpickerweb/node_modules:/app/node_modules
     depends_on:
       - adonis-api
       - adonis-mysql
