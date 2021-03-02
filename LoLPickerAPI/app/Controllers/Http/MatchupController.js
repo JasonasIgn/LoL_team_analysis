@@ -69,11 +69,12 @@ class MatchupController {
       const promises = playerMatchlistResponse.data.matches.map(
         async (match) => {
           const matchId = match.gameId;
-          const hasBeenCraweled = await CrawledGame.findBy("gameId", matchId);
-          if (Boolean(hasBeenCraweled)) return;
-          gamesCollected++;
-
-          await server.crawledGames().create({ gameId: matchId });
+          try {
+            await server.crawledGames().create({ gameId: matchId });
+            gamesCollected++;
+          } catch (e) {
+            return;
+          }
           const gameResponse = await requests.fetchMatchInfo(
             server.name,
             matchId

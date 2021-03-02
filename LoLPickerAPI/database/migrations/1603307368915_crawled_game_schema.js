@@ -7,7 +7,7 @@ class CrawledGameSchema extends Schema {
   up () {
     this.create('crawled_games', (table) => {
       table.increments()
-      table.bigInteger("gameId").notNullable();
+      table.bigInteger("gameId").notNullable().unique();
       table
         .integer("server_id")
         .unsigned()
