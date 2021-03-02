@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node server.js",
-    "start:dev": "node server.js NODE_ENV=development",
+    "start:dev": "set ENV_PATH=.env.dev&& node server.js",
     "test": "node ace test",
     "test:coverage": "nyc node ace test"
   },

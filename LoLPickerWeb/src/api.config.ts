@@ -1,4 +1,7 @@
-export const baseApiUrl = `http://212.24.110.117:8080`
+const isDev = window.location.hostname.includes("localhost");
+const hostname = isDev ? "localhost" : "212.24.110.117"
+const port = "8080"
+export const baseApiUrl = `http://${hostname}:${port}`
 
 export const apiUrls = {
     collectMatchup: `${baseApiUrl}/matchup/collect`,
