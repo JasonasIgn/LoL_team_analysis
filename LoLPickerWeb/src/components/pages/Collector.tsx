@@ -3,11 +3,14 @@ import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import {
   collectMatchup,
+  fetchConfig,
   fetchTotalGames,
+  toggleRun,
 } from "../../store/features/matchups/effects";
 import { AppState } from "../../store/types";
 import { LoadingState } from "../../utils/enums";
 import { CollectingStatistics } from "../organisms/CollectingStatistics";
+import Switch from "@material-ui/core/Switch";
 
 const MessageBox = styled.div`
   height: 90%;
@@ -43,8 +46,10 @@ const Message = styled.span`
 `;
 
 export const CollectorPage = () => {
-  const messages = useSelector((state: AppState) => state.messages.messages);
-  const lastPlayerCrawled = useSelector((state: AppState) => state.matchups.lastPlayerCrawled);
+  const lastPlayerCrawled = useSelector(
+    (state: AppState) => state.matchups.lastPlayerCrawled
+  );
+  const running = useSelector((state: AppState) => state.matchups.running);
   const totalGamesCollected = useSelector(
     (state: AppState) => state.matchups.totalMatchupsCollected
   );
@@ -70,26 +75,29 @@ export const CollectorPage = () => {
   }, [collecting, collectingLoadingState, dispatch, matchupsCollected]);
 
   useEffect(() => {
-    if (totalGamesCollected === -1) {
-      dispatch(fetchTotalGames());
-    }
-  }, [dispatch, totalGamesCollected]);
+    dispatch(fetchConfig());
+    dispatch(fetchTotalGames());
+  }, [dispatch]);
   return (
     <Container>
       <CollectingStatistics
         collectedThisSession={matchupsCollected}
         lastPlayerCrawled={lastPlayerCrawled || "-"}
-        totalCollected={totalGamesCollected > 0 ? totalGamesCollected : 'Loading...'}
+        totalCollected={
+          totalGamesCollected > 0 ? totalGamesCollected : "Loading..."
+        }
       />
       <ContentContainer>
-        <MessageBox>
-          {messages.map((message) => (
-            <Message>{`> ${message}`}</Message>
-          ))}
-        </MessageBox>
-        <button onClick={() => setCollecting(!collecting)}>
-          {!collecting ? "Start collecting" : "Stop Collecting"}
-        </button>
+        Collecting -
+        <Switch
+          checked={running}
+          onChange={() => {
+            dispatch(toggleRun());
+          }}
+          color="primary"
+          name="checked"
+          inputProps={{ "aria-label": "checkbox" }}
+        />
       </ContentContainer>
     </Container>
   );

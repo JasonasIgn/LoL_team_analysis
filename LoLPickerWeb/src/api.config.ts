@@ -6,6 +6,8 @@ export const baseApiUrl = `http://${hostname}:${port}`
 export const apiUrls = {
     collectMatchup: `${baseApiUrl}/matchup/collect`,
     fetchTotalGames: `${baseApiUrl}/matchup/totalGames`,
+    fetchConfig: `${baseApiUrl}/config`,
+    toggleRun: `${baseApiUrl}/config/toggle-running`,
     winrate: `${baseApiUrl}/matchup/winrate`,
     fetchChampions: 'http://ddragon.leagueoflegends.com/cdn/10.22.1/data/en_US/champion.json',
 }

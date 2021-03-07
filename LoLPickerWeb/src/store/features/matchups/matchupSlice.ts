@@ -6,13 +6,15 @@ export interface MatchupsState {
   collectingLoadingState: LoadingState;
   totalMatchupsCollected: number;
   lastPlayerCrawled: string;
+  running: boolean;
 }
 
 const matchupsInitialState: MatchupsState = {
   matchupsCollected: 0,
   totalMatchupsCollected: -1,
   collectingLoadingState: LoadingState.PRISTINE,
-  lastPlayerCrawled: ""
+  lastPlayerCrawled: "",
+  running: false,
 };
 
 export const matchupsSlice = createSlice({
@@ -31,6 +33,12 @@ export const matchupsSlice = createSlice({
     collectFailed: (state) => {
       state.collectingLoadingState = LoadingState.FETCH_FAILED;
     },
+    toggleRunSuccess: (state) => {
+      state.running = !state.running;
+    },
+    fetchConfigSuccess: (state, action) => {
+      state.running = action.payload.running;
+    },
     fetchTotalGamesSuccess: (state, action) => {
       state.totalMatchupsCollected = action.payload;
     },
@@ -42,6 +50,8 @@ export const {
   collect,
   collectFailed,
   fetchTotalGamesSuccess,
+  fetchConfigSuccess, 
+  toggleRunSuccess,
 } = matchupsSlice.actions;
 
 export default matchupsSlice.reducer;

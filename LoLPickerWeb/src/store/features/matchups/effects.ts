@@ -5,7 +5,9 @@ import {
   collect,
   collectFailed,
   collectSuccess,
+  fetchConfigSuccess,
   fetchTotalGamesSuccess,
+  toggleRunSuccess,
 } from "./matchupSlice";
 
 export const collectMatchup = () => async (dispatch: any) => {
@@ -26,6 +28,31 @@ export const collectMatchup = () => async (dispatch: any) => {
   } catch (e) {
     dispatch(collectFailed());
     dispatch(addMessage("Failed!"));
+  }
+};
+
+export const toggleRun = () => async (dispatch: any) => {
+  try {
+    await Axios.request({
+      url: apiUrls.toggleRun,
+      method: "GET",
+    });
+    dispatch(toggleRunSuccess());
+  } catch (e) {}
+};
+
+export const fetchConfig = () => async (dispatch: any) => {
+  try {
+    const response = await Axios.request({
+      url: apiUrls.fetchConfig,
+      method: "GET",
+    });
+    dispatch(
+      fetchConfigSuccess({
+        running: response.data.running,
+      })
+    );
+  } catch (e) {
   }
 };
 

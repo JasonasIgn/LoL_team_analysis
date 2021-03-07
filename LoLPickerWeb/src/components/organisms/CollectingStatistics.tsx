@@ -25,7 +25,6 @@ export const CollectingStatistics: React.FC<CollectingStatisticsProps> = ({
     <Container>
       <StatisticsBox text={`${totalCollected}`} title="Total games collected" />
       <StatisticsBox text={`${collectedThisSession}`} title="Collected this session" />
-      <StatisticsBox text={lastPlayerCrawled} title="Last player crawled" />
     </Container>
   );
 };
