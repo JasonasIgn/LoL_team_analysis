@@ -10,18 +10,32 @@ const Config = use("App/Models/Config");
  */
 class ConfigController {
   /**
-   * Show a list of all ratings.
-   * GET ratings
+   * Get config
+   * GET config
+   * /config
    *
    * @param {object} ctx
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
-  async setGameId({ request, response }) {
-    const data = request.only(["gameId"]);
+  async index({ request, response }) {
     const config = await Config.first();
-    config.gameId = data.gameId;
+    response.status(200).send(config);
+  }
+
+   /**
+   * Toggle running flag
+   * get /config/toggle-running
+   *
+   * @param {object} ctx
+   * @param {Request} ctx.request
+   * @param {Response} ctx.response
+   */
+  async toggleRunningFlag({ request, response }) {
+    const config = await Config.first();
+    config.running = !config.running;
     await config.save();
+    response.status(204);
   }
 }
 

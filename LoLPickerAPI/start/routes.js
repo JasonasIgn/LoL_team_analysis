@@ -28,4 +28,7 @@ Route.get("matchup/totalGames", "MatchupController.getTotalGames");
 
 Route.get("livegame/:name", "LiveGameController.getLiveData");
 
-Route.post("config/gameId", "ConfigController.setGameId");
+Route.get("config", "ConfigController.index");
+
+Route.get("config/toggle-running", "ConfigController.toggleRunningFlag");
+
