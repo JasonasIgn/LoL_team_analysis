@@ -61,6 +61,7 @@ class MatchupController {
         playerAccountId
       );
 
+      //If the player didn't play any ranked games (not active)
       if (playerMatchlistResponse.data.matches.length === 0) {
         response.status(200).send({ gamesCollected: 0 });
         return;
@@ -83,18 +84,19 @@ class MatchupController {
           let team1Champions = [];
           let team2Champions = [];
 
-          const promises = data.participantIdentities.map(async (identity) => {
+          const addPlayersToCrawlPromises = data.participantIdentities.map(async (identity) => {
             const playerSummonerName = identity.player.summonerName;
-            const alreadyAdded = await Player.findBy(
-              "summoner_name",
-              playerSummonerName
-            );
-            if (Boolean(alreadyAdded)) return;
-            await server
-              .players()
-              .create({ summoner_name: playerSummonerName });
+            try {
+              await server
+                .players()
+                .create({ summoner_name: playerSummonerName });
+            } catch (e) {
+              console.log("ERROR: tried to add existing player:", playerSummonerName)
+              return;
+            }
           });
-          await Promise.all(promises);
+
+          await Promise.all(addPlayersToCrawlPromises);
 
           const team1Id = data.teams[0].teamId;
           data.participants.forEach((participant) => {
@@ -162,7 +164,6 @@ class MatchupController {
     );
 
     if (Object.keys(matches).length < 3) {
-      console.log("SYNERGY INCLUDED");
       if (
         Number(data.top1) === 0 ||
         Number(data.jungle1) === 0 ||
@@ -196,7 +197,6 @@ class MatchupController {
     const sortedMatches = matchesWithWinrate.sort(function (a, b) {
       return a.pickQuality < b.pickQuality ? 1 : -1;
     });
-    console.log(sortedMatches);
     const best3Picks = sortedMatches.slice(0, 3);
     const allMatchupsCount = await Database.from("matchups").count();
     const count = allMatchupsCount[0]["count(*)"];
@@ -342,7 +342,6 @@ class MatchupController {
     const totalGames = team1Wins + team2Wins;
     const team1Winrate = Number((team1Wins / totalGames) * 100).toFixed(2);
     const team2Winrate = Number((team2Wins / totalGames) * 100).toFixed(2);
-    console.log(team1Winrate, team2Winrate);
     response.status(200).send({ team1Winrate, team2Winrate });
   }
 }
