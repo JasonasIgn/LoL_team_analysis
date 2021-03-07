@@ -22,7 +22,7 @@ services:
       - DB_HOST=adonis-mysql 
       - REDIS_HOST=adonis-redis 
       - MYSQL_DATABASE=lolpickerdb
-      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=root
       - PORT=8080
       - HOST=0.0.0.0
   adonis-web:
@@ -46,7 +46,7 @@ services:
       - API_PORT=8080
       - PORT=3000
   adonis-redis:
-    image:  redis:6.2.1-alpine
+    image: redis:6.2.1-alpine
     restart: unless-stopped
     container_name: adonis-redis
     ports:
@@ -55,7 +55,6 @@ services:
       - app-network
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
-    command: ['mysqld', '--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci']
   adonis-mysql:
     image: mysql:5.7
     restart: always
@@ -69,7 +68,7 @@ services:
     environment:
       - MYSQL_USER=root
       - MYSQL_DATABASE=lolpickerdb
-      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=root
     command: ['mysqld', '--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci']
 networks:
   app-network:
