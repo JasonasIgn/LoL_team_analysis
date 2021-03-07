@@ -15,10 +15,12 @@ services:
       - app-network
     depends_on:
       - adonis-mysql
+      - adonis-redis
     environment:
       - LOL_API_KEY=${LOL_API_KEY}
       - APP_KEY=${APP_KEY}
       - DB_HOST=adonis-mysql 
+      - REDIS_HOST=adonis-redis 
       - MYSQL_DATABASE=lolpickerdb
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
       - PORT=8080
@@ -43,7 +45,17 @@ services:
       - API_HOST=adonis-api
       - API_PORT=8080
       - PORT=3000
-
+  adonis-redis:
+    image:  redis:6.2.1-alpine
+    restart: unless-stopped
+    container_name: adonis-redis
+    ports:
+      - 6379:6379
+    networks:
+      - app-network
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+    command: ['mysqld', '--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci']
   adonis-mysql:
     image: mysql:5.7
     restart: always
