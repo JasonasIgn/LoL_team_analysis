@@ -35,104 +35,37 @@ class MatchupController {
       let gamesCollected = 0;
       const championRoles = await roleIdentification.pullData();
       const config = await Config.first();
-      const serverNameToCrawl = crawlHelpers.getNextServerNameToCrawl(
-        config.last_craweled_server_name
-      );
-      config.last_craweled_server_name = serverNameToCrawl;
-      await config.save();
-      const server = await Server.findBy("name", serverNameToCrawl);
-      const serverPlayerToCrawl = await server
-        .players()
-        .where("crawled", false)
-        .first();
-      if (!Boolean(serverPlayerToCrawl)) {
-        response.status(400).send({ error: "All players have been crawled" });
-        return;
-      }
-      serverPlayerToCrawl.crawled = true;
-      await serverPlayerToCrawl.save();
-      const playerResponse = await requests.fetchPlayerInfo(
-        server.name,
-        serverPlayerToCrawl.summoner_name
-      );
-      const playerAccountId = playerResponse.data.accountId;
-      const playerMatchlistResponse = await requests.fetchPlayerMatchlist(
-        server.name,
-        playerAccountId
-      );
+      const servers = await Server.all();
 
-      //If the player didn't play any ranked games (not active)
-      if (playerMatchlistResponse.data.matches.length === 0) {
-        response.status(200).send({ gamesCollected: 0 });
-        return;
-      }
-
-      const promises = playerMatchlistResponse.data.matches.map(
-        async (match) => {
-          const matchId = match.gameId;
+      await Promise.all(
+        servers.rows.map(async (server) => {
           try {
-            await server.crawledGames().create({ gameId: matchId });
-            gamesCollected++;
-          } catch (e) {
-            return;
-          }
-          const gameResponse = await requests.fetchMatchInfo(
-            server.name,
-            matchId
-          );
-          const { data } = gameResponse;
-          let team1Champions = [];
-          let team2Champions = [];
-
-          const addPlayersToCrawlPromises = data.participantIdentities.map(async (identity) => {
-            const playerSummonerName = identity.player.summonerName;
-            try {
-              await server
-                .players()
-                .create({ summoner_name: playerSummonerName });
-            } catch (e) {
-              console.log("ERROR: tried to add existing player:", playerSummonerName)
-              return;
+            if (server.missing_players) {
+              throw Error(`Missing players for server: ${server.name}`);
             }
-          });
-
-          await Promise.all(addPlayersToCrawlPromises);
-
-          const team1Id = data.teams[0].teamId;
-          data.participants.forEach((participant) => {
-            if (participant.teamId === team1Id) {
-              team1Champions.push(participant.championId);
-            } else {
-              team2Champions.push(participant.championId);
+            const player = await server
+              .players()
+              .where("crawled", false)
+              .first();
+            if (!player) {
+              server.missing_players = true;
+              await server.save();
+              throw Error(`Missing players for server: ${server.name}`);
             }
-          });
-          const team1Roles = roleIdentification.getRoles(
-            championRoles,
-            team1Champions
-          );
-          const team2Roles = roleIdentification.getRoles(
-            championRoles,
-            team2Champions
-          );
-
-          const team1Win = data.teams[0].win === "Win";
-          const matchupData = utils.assignMatchupData(
-            team1Roles,
-            team2Roles,
-            team1Win
-          );
-
-          await storing.storeMatchup(matchupData);
-        }
+            const collected = await crawlHelpers.crawlPlayer(
+              player,
+              server,
+              championRoles
+            );
+            gamesCollected += collected;
+            console.log(collected, "games collected from server", server.name);
+          } catch (e) {}
+        })
       );
-      await Promise.all(promises);
       response.status(200).send({
         gamesCollected,
-        serverCrawled: serverNameToCrawl,
-        playerCrawled: serverPlayerToCrawl.summoner_name,
       });
     } catch (e) {
-      console.log(e);
       response.status(400).send({});
     }
   }

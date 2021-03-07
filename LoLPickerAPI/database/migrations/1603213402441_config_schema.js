@@ -1,20 +1,19 @@
-'use strict'
+"use strict";
 
 /** @type {import('@adonisjs/lucid/src/Schema')} */
-const Schema = use('Schema')
+const Schema = use("Schema");
 
 class ConfigSchema extends Schema {
-  up () {
-    this.create('configs', (table) => {
-      table.increments()
-      table.string("last_craweled_server_name").notNullable().defaultsTo("");
-      table.timestamps()
-    })
+  up() {
+    this.create("configs", (table) => {
+      table.increments();
+      table.boolean("running").notNullable().defaultsTo(false);
+    });
   }
 
-  down () {
-    this.drop('configs')
+  down() {
+    this.drop("configs");
   }
 }
 
-module.exports = ConfigSchema
+module.exports = ConfigSchema;

@@ -26,6 +26,8 @@ class ServerSeeder {
       const basePlayer = new Player()
       basePlayer.summoner_name = server.basePlayer;
       seededServer.players().save(basePlayer)
+      seededServer.missing_players = false;
+      await seededServer.save()
     })
   }
 }

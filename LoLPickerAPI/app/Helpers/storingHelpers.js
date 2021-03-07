@@ -47,7 +47,21 @@ async function storeMatch(matchupData) {
   }
 }
 
-async function storeDecaCombinationMatchups(matchupData) {
+async function storePlayersForCrawling(gameResponseData, server) {
+  await Promise.all(
+    gameResponseData.participantIdentities.map(async (identity) => {
+      const playerSummonerName = identity.player.summonerName;
+      try {
+        await server.players().create({ summoner_name: playerSummonerName });
+      } catch (e) {
+        console.log("ERROR: tried to add existing player:", playerSummonerName);
+        return;
+      }
+    })
+  );
+}
+
+async function storeMatchup(matchupData) {
   try {
     await storeMatch(matchupData);
   } catch (e) {
@@ -55,12 +69,4 @@ async function storeDecaCombinationMatchups(matchupData) {
   }
 }
 
-async function storeMatchup(matchupData) {
-  try {
-    await storeDecaCombinationMatchups(matchupData);
-  } catch (e) {
-    throw e;
-  }
-}
-
-module.exports = { storeMatchup };
+module.exports = { storeMatchup, storePlayersForCrawling };

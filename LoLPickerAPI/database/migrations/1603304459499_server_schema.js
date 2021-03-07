@@ -8,7 +8,7 @@ class ServerSchema extends Schema {
     this.create('servers', (table) => {
       table.increments()
       table.string("name").notNullable();
-      table.timestamps()
+      table.boolean("missing_players").notNullable().defaultsTo(true);
     })
   }
 
