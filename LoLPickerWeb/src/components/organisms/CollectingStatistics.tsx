@@ -10,7 +10,7 @@ interface CollectingStatisticsProps {
 
 const Container = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   width: 100%;
   height: 200px;
@@ -24,7 +24,6 @@ export const CollectingStatistics: React.FC<CollectingStatisticsProps> = ({
   return (
     <Container>
       <StatisticsBox text={`${totalCollected}`} title="Total games collected" />
-      <StatisticsBox text={`${collectedThisSession}`} title="Collected this session" />
     </Container>
   );
 };

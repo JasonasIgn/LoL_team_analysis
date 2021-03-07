@@ -84,7 +84,7 @@ export const CollectorPage = () => {
         collectedThisSession={matchupsCollected}
         lastPlayerCrawled={lastPlayerCrawled || "-"}
         totalCollected={
-          totalGamesCollected > 0 ? totalGamesCollected : "Loading..."
+          totalGamesCollected >= 0 ? totalGamesCollected : "Loading..."
         }
       />
       <ContentContainer>
