@@ -57,7 +57,7 @@ services:
       - ALLOW_EMPTY_PASSWORD=yes
     command: ["redis-server", "--appendonly", "yes"]
     volumes:
-      - redis-data:/data
+      - /data/redis-data:/data
   adonis-mysql:
     image: mysql:5.7
     restart: always
