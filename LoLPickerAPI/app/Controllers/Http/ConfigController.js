@@ -36,7 +36,7 @@ class ConfigController {
     const config = await Config.first();
     const flag = !config.running;
     if (flag) {
-      console.log("EVENT FIRED")
+      // console.log("EVENT FIRED")
       Event.fire("collect");
     }
     config.running = flag;

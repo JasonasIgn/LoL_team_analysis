@@ -43,7 +43,7 @@ async function crawlMatch(match, server, championRoles) {
       await server.crawledGames().create({ gameId: matchId });
     } catch (e) {
       //Game is already crawled
-      console.log("tried to add an existing game:", matchId)
+      // console.log("tried to add an existing game:", matchId)
       throw e;
     }
     const gameResponse = await requests.fetchMatchInfo(server.name, matchId);
@@ -103,7 +103,7 @@ async function crawlPlayer(player, server, championRoles) {
             await crawlMatch(match, server, championRoles);
             gamesCollected++;
           } catch (e) {
-            console.log("error in crawlMatch");
+            // console.log("error in crawlMatch");
             // throw e;
           }
         })

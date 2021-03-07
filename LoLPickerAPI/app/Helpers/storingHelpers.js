@@ -54,7 +54,7 @@ async function storePlayersForCrawling(gameResponseData, server) {
       try {
         await server.players().create({ summoner_name: playerSummonerName });
       } catch (e) {
-        console.log("ERROR: tried to add existing player:", playerSummonerName);
+        // console.log("ERROR: tried to add existing player:", playerSummonerName);
         return;
       }
     })

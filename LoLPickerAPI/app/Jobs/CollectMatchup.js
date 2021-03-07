@@ -10,7 +10,7 @@ const Config = use("App/Models/Config");
 class CollectMatchup extends Job {
   constructor() {
     super();
-    console.log("CONSTRUCTOR EXECUTED");
+    // console.log("CONSTRUCTOR EXECUTED");
     this.timeOut = 100000; // seconds: time out for queue
     this.retryCount = 0; // number of times to retry
     this.retryUntil = 200; // seconds: retry
@@ -22,7 +22,7 @@ class CollectMatchup extends Job {
   }
 
   async handle(link, done) {
-    console.log("HANDLE METHOD REACHED");
+    // console.log("HANDLE METHOD REACHED");
     try {
       let gamesCollected = 0;
       const championRoles = await roleIdentification.pullData();
@@ -52,14 +52,14 @@ class CollectMatchup extends Job {
               championRoles
             );
             gamesCollected += collected;
-            console.log(collected, "games collected from server", server.name);
+            // console.log(collected, "games collected from server", server.name);
           } catch (e) {
-            console.log(e);
+            // console.log(e);
           }
         })
       );
     } catch (e) {
-      console.log(e);
+      // console.log(e);
       throw e;
     }
   }
