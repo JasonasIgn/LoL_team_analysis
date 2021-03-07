@@ -59,7 +59,8 @@ class MatchupController {
             );
             gamesCollected += collected;
             console.log(collected, "games collected from server", server.name);
-          } catch (e) {}
+          } catch (e) {
+          }
         })
       );
       response.status(200).send({

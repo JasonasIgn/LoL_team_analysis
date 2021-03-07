@@ -1,4 +1,5 @@
 const Axios = use("axios");
+const Env = use("Env");
 
 async function fetchPlayerMatchlist(serverName, accountId) {
   return await Axios.get(
@@ -7,7 +8,7 @@ async function fetchPlayerMatchlist(serverName, accountId) {
     )}&endIndex=15&beginIndex=0`,
     {
       headers: {
-        "X-Riot-Token": process.env.LOL_API_KEY,
+        "X-Riot-Token": Env.get("LOL_API_KEY"),
       },
     }
   );
@@ -20,7 +21,7 @@ async function fetchPlayerInfo(serverName, summonerName) {
     )}`,
     {
       headers: {
-        "X-Riot-Token": process.env.LOL_API_KEY,
+        "X-Riot-Token": Env.get("LOL_API_KEY"),
       },
     }
   );
@@ -31,7 +32,7 @@ async function fetchMatchInfo(serverName, matchId) {
     `https://${serverName}.api.riotgames.com/lol/match/v4/matches/${matchId}`,
     {
       headers: {
-        "X-Riot-Token": process.env.LOL_API_KEY,
+        "X-Riot-Token": Env.get("LOL_API_KEY"),
       },
     }
   );

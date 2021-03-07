@@ -19,10 +19,10 @@ services:
     environment:
       - LOL_API_KEY=${LOL_API_KEY}
       - APP_KEY=${APP_KEY}
-      - DB_HOST=adonis-mysql 
-      - REDIS_HOST=adonis-redis 
+      - DB_HOST=adonis-mysql
+      - REDIS_HOST=adonis-redis
       - MYSQL_DATABASE=lolpickerdb
-      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
       - PORT=8080
       - HOST=0.0.0.0
   adonis-web:
@@ -68,7 +68,7 @@ services:
     environment:
       - MYSQL_USER=root
       - MYSQL_DATABASE=lolpickerdb
-      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
     command: ['mysqld', '--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci']
 networks:
   app-network:
