@@ -1,5 +1,6 @@
 "use strict";
 const Config = use("App/Models/Config");
+const Event = use("Event");
 
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
@@ -23,7 +24,7 @@ class ConfigController {
     response.status(200).send(config);
   }
 
-   /**
+  /**
    * Toggle running flag
    * get /config/toggle-running
    *
@@ -33,7 +34,12 @@ class ConfigController {
    */
   async toggleRunningFlag({ request, response }) {
     const config = await Config.first();
-    config.running = !config.running;
+    const flag = !config.running;
+    if (flag) {
+      console.log("EVENT FIRED")
+      Event.fire("collect");
+    }
+    config.running = flag;
     await config.save();
     response.status(204);
   }

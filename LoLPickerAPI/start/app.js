@@ -15,7 +15,10 @@ const providers = [
   '@adonisjs/bodyparser/providers/BodyParserProvider',
   '@adonisjs/cors/providers/CorsProvider',
   '@adonisjs/lucid/providers/LucidProvider',
-  '@adonisjs/validator/providers/ValidatorProvider'
+  '@adonisjs/validator/providers/ValidatorProvider',
+  '@adonisjs/redis/providers/RedisProvider',
+  'adonisjs-queue/providers/QueueProvider',
+  'adonisjs-queue/providers/JobProvider',
 ]
 
 /*
@@ -29,7 +32,8 @@ const providers = [
 */
 const aceProviders = [
   '@adonisjs/lucid/providers/MigrationsProvider',
-  '@adonisjs/vow/providers/VowProvider'
+  '@adonisjs/vow/providers/VowProvider',
+  'adonisjs-queue/providers/JobCommandsProvider'
 ]
 
 /*
