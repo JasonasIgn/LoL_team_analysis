@@ -9,6 +9,6 @@ const Queue = use("Queue");
 const CollectMatchup = use("App/Jobs/CollectMatchup");
 
 Event.on("collect", async () => {
-    console.log("EVENT CATCHED ")
+    // console.log("EVENT CATCHED ")
   await Queue.dispatch(new CollectMatchup());
 });
