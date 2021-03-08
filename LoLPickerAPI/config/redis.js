@@ -34,7 +34,7 @@ module.exports = {
   local: {
     host: Env.get('REDIS_HOST', 'adonis-redis'),
     port: 6379,
-    password: null,
+    password: Env.get('REDIS_PASSWORD'),
     db: 0,
     keyPrefix: ''
   },
@@ -51,13 +51,13 @@ module.exports = {
     clusters: [{
       host: Env.get('REDIS_HOST', 'adonis-redis'),
       port: 6379,
-      password: null,
+      password: Env.get('REDIS_PASSWORD'),
       db: 0
     },
     {
       host: Env.get('REDIS_HOST', 'adonis-redis'),
       port: 6380,
-      password: null,
+      password: Env.get('REDIS_PASSWORD'),
       db: 0
     }]
   }

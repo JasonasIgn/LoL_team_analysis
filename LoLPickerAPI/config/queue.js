@@ -14,6 +14,7 @@ module.exports = {
       redis: {
         host: Env.get("REDIS_HOST", "127.0.0.1"),
         port: Env.get("REDIS_PORT", "6379"),
+        password: Env.get("REDIS_PASSWORD"),
         db: 1,
         options: { attempt: 20 },
         retry_strategy(options) {
