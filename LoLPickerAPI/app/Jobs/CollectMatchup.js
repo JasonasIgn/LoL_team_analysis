@@ -60,7 +60,7 @@ class CollectMatchup extends Job {
       );
     } catch (e) {
       // console.log(e);
-      throw e;
+      // throw e;
     }
   }
 
@@ -77,6 +77,7 @@ class CollectMatchup extends Job {
       `Job [${this.constructor.name}] - status:failed; id=${this.id} `,
       error.message
     );
+    Event.fire("collect");
   }
 
   retrying(error) {
