@@ -14,4 +14,9 @@ module.exports = {
     TR: { name: "tr1", basePlayer: "Jan Ken Ponn" },
     RU: { name: "ru", basePlayer: "unkn0wab1e" },
   },
+  picksType: {
+    COUNTER: "COUNTER",
+    SYNERGY: "SYNERGY",
+    OVERALL: "OVERALL",
+  }
 };

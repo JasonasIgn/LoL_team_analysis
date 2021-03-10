@@ -148,6 +148,42 @@ async function fetchSynergyTeamPicks(data, team2 = false) {
     .fetch();
 }
 
+function getWantedRole(data) {
+  const top1 = Number(data.top1);
+  const jgl1 = Number(data.jungle1);
+  const mid1 = Number(data.middle1);
+  const adc1 = Number(data.bottom1);
+  const sup1 = Number(data.utility1);
+  const top2 = Number(data.top2);
+  const jgl2 = Number(data.jungle2);
+  const mid2 = Number(data.middle2);
+  const adc2 = Number(data.bottom2);
+  const sup2 = Number(data.utility2);
+  if (top1 === 0 || top2 === 0) {
+    return "top";
+  }
+  if (jgl1 === 0 || jgl2 === 0) {
+    return "jungle";
+  }
+  if (mid1 === 0 || mid2 === 0) {
+    return "mid";
+  }
+  if (adc1 === 0 || adc2 === 0) {
+    return "adc";
+  }
+  if (sup1 === 0 || sup2 === 0) {
+    return "support";
+  }
+}
+
+async function fetchOverallTeamPicks(data, team2 = false) {
+  const role = getWantedRole(data);
+  console.log(role)
+  return await Matchup.query()
+    .where(`team${team2 ? "2" : "1"}_${role}`, ">", 0)
+    .fetch();
+}
+
 async function fetchWinrateMatchups(
   roles = [0, 0, 0, 0, 0],
   matchupData,
@@ -233,6 +269,17 @@ function proccessMatches(data, mutableResults, foundMatches, reverseTeams) {
   return gamesObject.total;
 }
 
+function excludeWeakPicks(picks) {
+  Object.keys(picks).forEach((pickId) => {
+    if (
+      picks[pickId].wins === 0 ||
+      picks[pickId].wins === picks[pickId].totalGames / 2
+    ) {
+      delete picks[pickId];
+    }
+  });
+}
+
 function getMatchesWithWinrates(matches, totalGames) {
   return Object.values(matches).map((match) => {
     const winrate = Number(((match.wins / match.totalGames) * 100).toFixed(2));
@@ -259,4 +306,6 @@ module.exports = {
   proccessMatches,
   getMatchesWithWinrates,
   fetchWinrateMatchups,
+  excludeWeakPicks,
+  fetchOverallTeamPicks,
 };

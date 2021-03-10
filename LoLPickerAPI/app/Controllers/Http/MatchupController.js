@@ -1,18 +1,12 @@
 "use strict";
 
-const { match } = require("@adonisjs/framework/src/Route/Manager");
-
 const Database = use("Database");
 const Server = use("App/Models/Server");
-const Player = use("App/Models/Player");
-const CrawledGame = use("App/Models/CrawledGame");
 const crawlHelpers = use("App/Helpers/crawlHelpers");
 const pickHelpers = use("App/Helpers/pickHelpers");
 const roleIdentification = use("App/Helpers/roleIdentification");
-const storing = use("App/Helpers/storingHelpers");
-const utils = use("App/Helpers/utils");
-const requests = use("App/Helpers/requests");
-const Config = use("App/Models/Config");
+const Config = use("Config");
+const picksType = Config.get("constants").picksType;
 
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
@@ -59,8 +53,7 @@ class MatchupController {
             );
             gamesCollected += collected;
             console.log(collected, "games collected from server", server.name);
-          } catch (e) {
-          }
+          } catch (e) {}
         })
       );
       response.status(200).send({
@@ -72,6 +65,7 @@ class MatchupController {
   }
 
   async whatDoIPlay({ request, response }) {
+    let type = picksType.COUNTER;
     const data = request.only([
       "top1",
       "jungle1",
@@ -96,8 +90,9 @@ class MatchupController {
       matchesTeam2,
       true
     );
-
-    if (Object.keys(matches).length < 3) {
+    pickHelpers.excludeWeakPicks(matches);
+    //If these's no counter matches get synergy
+    if (Object.keys(matches).length === 0) {
       if (
         Number(data.top1) === 0 ||
         Number(data.jungle1) === 0 ||
@@ -105,6 +100,7 @@ class MatchupController {
         Number(data.bottom1) === 0 ||
         Number(data.utility1) === 0
       ) {
+        type = picksType.SYNERGY;
         const synergyMatches = await pickHelpers.fetchSynergyTeamPicks(data);
         totalGames += pickHelpers.proccessMatches(
           data,
@@ -123,7 +119,18 @@ class MatchupController {
           true
         );
       }
+      pickHelpers.excludeWeakPicks(matches);
     }
+    //If there's no synergy matches get overall
+    if (Object.keys(matches).length === 0) {
+      type = picksType.OVERALL;
+      const matchesTeam1 = await pickHelpers.fetchOverallTeamPicks(data);
+      const matchesTeam2 = await pickHelpers.fetchOverallTeamPicks(data, true);
+      totalGames += pickHelpers.proccessMatches(data, matches, matchesTeam1);
+      totalGames += pickHelpers.proccessMatches(data, matches, matchesTeam2);
+      pickHelpers.excludeWeakPicks(matches);
+    }
+
     const matchesWithWinrate = pickHelpers.getMatchesWithWinrates(
       matches,
       totalGames
@@ -134,7 +141,9 @@ class MatchupController {
     const best3Picks = sortedMatches.slice(0, 3);
     const allMatchupsCount = await Database.from("matchups").count();
     const count = allMatchupsCount[0]["count(*)"];
-    response.status(200).send({ matchups: best3Picks, totalRecords: count });
+    response
+      .status(200)
+      .send({ matchups: best3Picks, totalRecords: count, type: type });
   }
 
   async getTotalGames({ request, response }) {
