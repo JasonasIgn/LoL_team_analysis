@@ -7,6 +7,7 @@ const pickHelpers = use("App/Helpers/pickHelpers");
 const roleIdentification = use("App/Helpers/roleIdentification");
 const Config = use("Config");
 const picksType = Config.get("constants").picksType;
+const Env = use("Env");
 
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
@@ -124,11 +125,11 @@ class MatchupController {
     //If there's no synergy matches get overall
     if (Object.keys(matches).length === 0) {
       type = picksType.OVERALL;
-      const matchesTeam1 = await pickHelpers.fetchOverallTeamPicks(data);
-      const matchesTeam2 = await pickHelpers.fetchOverallTeamPicks(data, true);
-      totalGames += pickHelpers.proccessMatches(data, matches, matchesTeam1);
-      totalGames += pickHelpers.proccessMatches(data, matches, matchesTeam2);
-      pickHelpers.excludeWeakPicks(matches);
+      // const matchesTeam1 = await pickHelpers.fetchOverallTeamPicks(data);
+      // const matchesTeam2 = await pickHelpers.fetchOverallTeamPicks(data, true);
+      // totalGames += pickHelpers.proccessMatches(data, matches, matchesTeam1);
+      // totalGames += pickHelpers.proccessMatches(data, matches, matchesTeam2);
+      // pickHelpers.excludeWeakPicks(matches);
     }
 
     const matchesWithWinrate = pickHelpers.getMatchesWithWinrates(
