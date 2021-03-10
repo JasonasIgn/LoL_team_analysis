@@ -7,7 +7,6 @@ const pickHelpers = use("App/Helpers/pickHelpers");
 const roleIdentification = use("App/Helpers/roleIdentification");
 const Config = use("Config");
 const picksType = Config.get("constants").picksType;
-const Env = use("Env");
 
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
@@ -144,7 +143,7 @@ class MatchupController {
     const count = allMatchupsCount[0]["count(*)"];
     response
       .status(200)
-      .send({ matchups: best3Picks, totalRecords: count, type: Env.get("MYSQL_ROOT_PASSWORD") });
+      .send({ matchups: best3Picks, totalRecords: count, type: type });
   }
 
   async getTotalGames({ request, response }) {
