@@ -143,7 +143,7 @@ class MatchupController {
     const count = allMatchupsCount[0]["count(*)"];
     response
       .status(200)
-      .send({ matchups: best3Picks, totalRecords: count, type: type });
+      .send({ matchups: best3Picks, totalRecords: count, type: Env.get("MYSQL_ROOT_PASSWORD") });
   }
 
   async getTotalGames({ request, response }) {
