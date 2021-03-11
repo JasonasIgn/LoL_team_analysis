@@ -10,7 +10,6 @@ const Config = use("App/Models/Config");
 class CollectMatchup extends Job {
   constructor() {
     super();
-    // console.log("CONSTRUCTOR EXECUTED");
     this.timeOut = 100000; // seconds: time out for queue
     this.retryCount = 0; // number of times to retry
     this.retryUntil = 200; // seconds: retry

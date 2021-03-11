@@ -81,7 +81,7 @@ class MatchupController {
 
     const matchesTeam1 = await pickHelpers.fetchTeam1Picks(data);
     const matchesTeam2 = await pickHelpers.fetchTeam2Picks(data);
-    const matches = {};
+    let matches = {};
     let totalGames = 0;
     totalGames += pickHelpers.proccessMatches(data, matches, matchesTeam1);
     totalGames += pickHelpers.proccessMatches(
@@ -124,13 +124,8 @@ class MatchupController {
     //If there's no synergy matches get overall
     if (Object.keys(matches).length === 0) {
       type = picksType.OVERALL;
-      // const matchesTeam1 = await pickHelpers.fetchOverallTeamPicks(data);
-      // const matchesTeam2 = await pickHelpers.fetchOverallTeamPicks(data, true);
-      // totalGames += pickHelpers.proccessMatches(data, matches, matchesTeam1);
-      // totalGames += pickHelpers.proccessMatches(data, matches, matchesTeam2);
-      // pickHelpers.excludeWeakPicks(matches);
+      matches = await pickHelpers.fetchOverallTeamPicks(data);
     }
-
     const matchesWithWinrate = pickHelpers.getMatchesWithWinrates(
       matches,
       totalGames

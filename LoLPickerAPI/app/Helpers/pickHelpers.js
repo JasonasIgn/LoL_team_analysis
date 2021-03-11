@@ -2,6 +2,9 @@
 
 const Matchup = use("App/Models/Matchup");
 const utils = use("App/Helpers/utils");
+const Config = use("Config");
+const queries = Config.get("queries");
+const Database = use("Database");
 
 async function fetchTeam1Picks(data) {
   return await Matchup.query()
@@ -176,12 +179,21 @@ function getWantedRole(data) {
   }
 }
 
-async function fetchOverallTeamPicks(data, team2 = false) {
-  const role = getWantedRole(data);
-  console.log(role)
-  return await Matchup.query()
-    .where(`team${team2 ? "2" : "1"}_${role}`, ">", 0)
-    .fetch();
+async function fetchOverallTeamPicks(requestData) {
+  const role = getWantedRole(requestData);
+  const roleWins = (await Database.raw(queries.getRoleWinsByRole(role)))[0];
+  let matches = {};
+  const roleTotalGames = (
+    await Database.raw(queries.getRoleTotalGamesByRole(role))
+  )[0];
+  roleWins.forEach((roleWin, idx) => {
+    matches[roleWin.championId] = {
+      pick: roleWin.championId,
+      wins: roleWin.totalWins,
+      totalGames: roleTotalGames[idx].totalGames,
+    };
+  });
+  return matches;
 }
 
 async function fetchWinrateMatchups(
@@ -290,7 +302,6 @@ function getMatchesWithWinrates(matches, totalGames) {
       pickQuality: Number(
         (
           winrate *
-          (match.totalGames / totalGames) *
           utils.getPickQualityMultiplier(winrate) *
           utils.getQuantityMultiplier(match.totalGames)
         ).toFixed(2)

@@ -90,21 +90,24 @@ module.exports = {
       return 0.2;
     }
     if (count < 10) {
-      return 0.5;
+      return 0.3;
     }
     if (count < 20) {
-      return 0.9;
+      return 0.4;
     }
     if (count < 30) {
-      return 0.95;
+      return 0.5;
     }
     if (count < 40) {
+      return 0.7;
+    }
+    if (count < 50) {
+      return 0.9;
+    }
+    if (count <= 100) {
       return 1;
     }
-    if (count <= 50) {
-      return 1.3;
-    }
-    return 1.5;
+    return 1.3;
   },
 
   assignMatchupData(team1Roles, team2Roles, team1Win) {
