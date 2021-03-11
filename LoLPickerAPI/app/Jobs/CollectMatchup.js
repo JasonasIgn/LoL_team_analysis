@@ -22,7 +22,6 @@ class CollectMatchup extends Job {
   }
 
   async handle(link, done) {
-    // console.log("HANDLE METHOD REACHED");
     try {
       let gamesCollected = 0;
       const championRoles = await roleIdentification.pullData();
@@ -52,9 +51,7 @@ class CollectMatchup extends Job {
               championRoles
             );
             gamesCollected += collected;
-            // console.log(collected, "games collected from server", server.name);
           } catch (e) {
-            // console.log(e);
           }
         })
       );
@@ -65,14 +62,12 @@ class CollectMatchup extends Job {
   }
 
   progress(progress) {
-    // ...
     console.log(
       `Job [${this.constructor.name}] - progress:${progress}%: status=running; id=${this.id} `
     );
   }
 
   failed(error) {
-    // ...
     console.log(
       `Job [${this.constructor.name}] - status:failed; id=${this.id} `,
       error.message
@@ -81,7 +76,6 @@ class CollectMatchup extends Job {
   }
 
   retrying(error) {
-    // ...
     console.log(
       `Job [${this.constructor.name}] - status:retrying; id=${this.id} `,
       error.message
@@ -89,7 +83,6 @@ class CollectMatchup extends Job {
   }
 
   succeeded(result) {
-    // ...
     console.log(
       `Job [${this.constructor.name}] - status:succeeded; id=${this.id} `,
       result

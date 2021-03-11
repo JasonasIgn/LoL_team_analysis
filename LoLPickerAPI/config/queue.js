@@ -8,9 +8,9 @@ module.exports = {
     url: "_",
     high: {
       prefix: "mainh-",
-      stallInterval: 1,
+      stallInterval: 5000,
       nearTermWindow: 1200000,
-      delayedDebounce: 1,
+      delayedDebounce: 1000,
       redis: {
         host: Env.get("REDIS_HOST", "127.0.0.1"),
         port: Env.get("REDIS_PORT", "6379"),
@@ -29,7 +29,7 @@ module.exports = {
       maxConcurrencyJobs: 4,
       activateDelayedJobs: true,
       removeOnSuccess: true,
-      removeOnFailure: false,
+      removeOnFailure: true,
       redisScanCount: 100,
     },
     low: {
