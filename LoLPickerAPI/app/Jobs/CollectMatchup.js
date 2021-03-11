@@ -23,6 +23,7 @@ class CollectMatchup extends Job {
 
   async handle(link, done) {
     try {
+      console.time('Collecting')
       let gamesCollected = 0;
       const championRoles = await roleIdentification.pullData();
       const config = await Config.first();
@@ -58,6 +59,9 @@ class CollectMatchup extends Job {
     } catch (e) {
       // console.log(e);
       // throw e;
+    }
+    finally {
+      console.timeEnd('Collecting')
     }
   }
 
